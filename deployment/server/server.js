@@ -50,6 +50,7 @@ app.post('/webhook', function (req, res) {
             subject += " ✘";
         }
 
+        var duration = start - new Date().getMilliseconds();
 
         // NB! No need to recreate the transporter object. You can use
         // the same transporter object for all e-mails
@@ -58,8 +59,8 @@ app.post('/webhook', function (req, res) {
             from: config.userName + " <" + config.user + ">", // sender address
             to: config.to, // list of receivers
             subject: subject, // Subject line
-            text: '<b>stdout</b><br>' + stdout + "<br><b>stderr</b><br>" + stderr + "<br><span style='color:red'><b>error</b><br>" + error, // plaintext body 'Hello world ✔'
-            html: '<pre><b>stdout</b><br>' + stdout + "<br><br><b>stderr</b><br>" + stderr + "<br><br><span style='color:red'><b>error</b><br></span>" + error + "<br><br><b>server log: req.body</b><br>" + reqBody + "</pre>",// html body
+            text: '<b>stdout</b><br>' + stdout + "<br><b>stderr</b><br>" + stderr + "<br><span style='color:red'><b>error</b><br>" + error + "<br>\n<br>\nDuration: " + duration, // plaintext body 'Hello world ✔'
+            html: '<pre><b>stdout</b><br>' + stdout + "<br><br><b>stderr</b><br>" + stderr + "<br><br><span style='color:red'><b>error</b><br></span>" + error  + "<br>\n<br>\nDuration: " + duration+ "<br><br><b>server log: req.body</b><br>" + reqBody + "</pre>",// html body
             attachments: [
                 {
                     filename: "unit-tests-results.log",
@@ -82,10 +83,11 @@ app.post('/webhook', function (req, res) {
 
 
         //
-        var duration = new Date().getMilliseconds() - start;
         res.send({
-            meta: {duration: duration,
-                reqBody: reqBody},
+            meta: {
+                duration: duration,
+                reqBody: reqBody
+            },
             doc: {
                 stdout: stdout,
                 stderr: stderr
