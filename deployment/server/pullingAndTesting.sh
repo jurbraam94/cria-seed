@@ -242,7 +242,8 @@ echo "`date` No need to kill Selenium. It keeps on running with id=$selenium_PID
 export TEST_FAILURUES=`grep -ci ', 0 failures' end-to-end-results.log`
 
 if [ -z "$TEST_FAILURUES" ]; then
-    echo "`date` >>>>> ERRORS ERRORS ERRORS" | tee -a "$DIR/$CUR_SCRIPT"
+    echo "`date` Result of wget on port phantomjs port 4444 = `wget -qO- 'http://server3.tezzt.nl:4444/wd/hub'`"
+	echo "`date` >>>>> ERRORS ERRORS ERRORS" | tee -a "$DIR/$CUR_SCRIPT"
 	echo "`date`   Could not execute the tests. Variable TEST_FAILURUES=$TEST_FAILURUES (is not set)" | tee -a "$DIR/$CUR_SCRIPT"
 	git checkout $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
     exit 1
