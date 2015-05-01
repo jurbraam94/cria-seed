@@ -21,6 +21,8 @@ app.use(bodyParser.urlencoded({extended: true}));     // Notice because option d
 app.post('/webhook', function (req, res) {
     var reqBody;
 
+    var start = new Date().getMilliseconds();
+
     var cb = function (error, stdout, stderr) {
         sys.print('stdout: ' + stdout);
         sys.print('stderr: ' + stderr);
@@ -80,8 +82,10 @@ app.post('/webhook', function (req, res) {
 
 
         //
+        var duration = new Date().getMilliseconds() - start;
         res.send({
-            meta: {reqBody: reqBody},
+            meta: {duration: duration,
+                reqBody: reqBody},
             doc: {
                 stdout: stdout,
                 stderr: stderr
