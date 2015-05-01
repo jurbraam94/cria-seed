@@ -86,7 +86,7 @@ app.post('/webhook', function (req, res) {
         res.send({
             meta: {
                 duration: duration,
-                reqBody: reqBody
+                payload: reqBody
             },
             doc: {
                 stdout: stdout,
