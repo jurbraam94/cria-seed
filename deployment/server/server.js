@@ -4,7 +4,6 @@
 
 var express = require('express'),
     bodyParser = require('body-parser'),
-    bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
     sys = require('sys'),
     exec = require('child_process').exec,
@@ -79,6 +78,17 @@ app.post('/webhook', function (req, res) {
             ]
         };
 
+
+        //
+        res.send({
+            meta: {reqBody: reqBody},
+            doc: {
+                stdout: stdout,
+                stderr: stderr
+            },
+            err: error
+        });
+
         // send mail with defined transport object
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
@@ -98,7 +108,7 @@ app.post('/webhook', function (req, res) {
         console.log(child);
 
     }
-    res.send({});
+
 });
 
 app.all('*', function (req, res) {
