@@ -95,14 +95,17 @@ app.post('/webhook', function (req, res) {
             err: error
         });
 
-        // send mail with defined transport object
-        transporter.sendMail(mailOptions, function (error, info) {
-            if (error) {
-                console.log(error);
-            } else {
-                console.log('Message sent: ' + info.response);
-            }
-        });
+        if(!subject.match(/†/)) {
+
+            // send mail with defined transport object
+            transporter.sendMail(mailOptions, function (error, info) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log('Message sent: ' + info.response);
+                }
+            });
+        }
     };
 
     if (req.body.repository.url === config.repoUrl) {
