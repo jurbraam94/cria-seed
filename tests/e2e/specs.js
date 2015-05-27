@@ -13,8 +13,8 @@ describe('Book test homepage', function () {
 
     it('should get the titles', function () {
 
-        expect(browser.getTitle()).toBe('Book demo');
-        expect(element(by.tagName('h1')).getText()).toBe('Book demo');
+        expect(browser.getTitle()).toBe('DOOD');
+        expect(element(by.tagName('h1')).getText()).toBe('DOOD');
         expect(element(by.tagName('h2')).getText()).toBe('Books');
 
         // Get CSS value
@@ -73,8 +73,8 @@ describe('CRUD on book', function () {
 
         browser.get('http://' + localConfig.host + ':' + config.port + '/#/books/new');
 
-        expect(browser.getTitle()).toBe('Book demo');
-        expect(element(by.tagName('h1')).getText()).toBe('Book demo');
+        expect(browser.getTitle()).toBe('DOOD');
+        expect(element(by.tagName('h1')).getText()).toBe('DOOD');
         expect(element(by.tagName('h2')).getText()).toBe('Book');
 
         // Get CSS value
