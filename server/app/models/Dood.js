@@ -20,7 +20,6 @@
         segment,
         modelName;
 
-
         algemeneGegevens = new Schema({
             voornaam: {type: String, required: true},
             achternaam: {type: String, required: true},
