@@ -5,7 +5,6 @@
     /**
      * Module dependencies.
      */
-    /*jshint unused: vars */
     var mongoose = require('mongoose'),
         Schema = mongoose.Schema,
         gebruiker,
@@ -19,6 +18,7 @@
         uitvaartSamenstellen,
         segment,
         modelName;
+    console.log(algemeneGegevens, aanvullendeGegevens, uitvaart, muziek, fotos, wishlist, notificatie, uitvaartSamenstellen, segment);
 
     algemeneGegevens = new Schema({
         voornaam: {type: String, required: false},
