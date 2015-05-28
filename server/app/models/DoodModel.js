@@ -1,7 +1,8 @@
-/*jslint unparam: true, node: true */
+/*jslin node: true */
 
 (function () {
     "use strict";
+    /*jslint unparam:true*/
     /**
      * Module dependencies.
      */
