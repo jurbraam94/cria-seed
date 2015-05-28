@@ -78,21 +78,21 @@
 
     uitvaartSamenstellen = new Schema({
         tijdsduur: {type: Number, required: false},
-        segment: [segment]
+        segment: segment.schema
     },
         { collection: 'uitvaartSamenstellen' });
 
     gebruiker = new Schema({
         gebruikersnaam: {type: String, required: true, unique: true},
         wachtwoord: {type: String, required: true},
-        algemeneGegevens: algemeneGegevens,
-        aanvullendeGegevens: aanvullendeGegevens,
-        uitvaart: uitvaart,
-        muziek: muziek,
-        fotos: fotos,
-        wishlist: wishlist,
-        notificatie: notificatie,
-        uitvaartSamenstellen: uitvaartSamenstellen
+        algemeneGegevens: algemeneGegevens.schema,
+        aanvullendeGegevens: aanvullendeGegevens.schema,
+        uitvaart: uitvaart.schema,
+        muziek: muziek.schema,
+        fotos: fotos.schema,
+        wishlist: wishlist.schema,
+        notificatie: notificatie.schema,
+        uitvaartSamenstellen: uitvaartSamenstellen.schema
     },
         { collection: 'gebruiker' });
 
