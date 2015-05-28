@@ -59,7 +59,7 @@ exports.list = function (req, res) {
  * @param res
  */
 exports.detail = function (req, res) {
-    var conditions = {_id: req.params._id}, fields = {};
+    var conditions = {gebruikersnaam: req.params._id}, fields = {};
 
     Dood.findOne(conditions, fields)
         .exec(function (err, doc) {
