@@ -59,7 +59,7 @@ exports.list = function (req, res) {
  * @param res
  */
 exports.detail = function (req, res) {
-    var conditions = {gebruikersnaam: req.params._id}, fields = {};
+    var conditions = {gebruikersnaam: req.params._gebruikersnaam}, fields = {};
 
     Dood.findOne(conditions, fields)
         .exec(function (err, doc) {
@@ -82,7 +82,7 @@ exports.detail = function (req, res) {
  * @param res
  */
 exports.updateOne = function (req, res) {
-    var conditions = {_id: req.params._id},
+    var conditions = {_gebruikersnaam: req.params._gebruikersnaam},
         update = {
             title: req.body.doc.title || '',
             author: req.body.doc.author || '',
@@ -116,7 +116,7 @@ exports.updateOne = function (req, res) {
 exports.deleteOne = function (req, res) {
     var conditions, callback, retObj;
 
-    conditions = {_id: req.params._id};
+    conditions = {_gebruikersnaam: req.params._gebruikersnaam};
     callback = function (err, doc) {
         retObj = {
             meta: {

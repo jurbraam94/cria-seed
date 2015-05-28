@@ -17,15 +17,15 @@ router
 // RETRIEVE
 router
     .get('/dood', controller.list)
-    .get('/dood/:_id', controller.detail);
+    .get('/dood/:_gebruikersnaam', controller.detail);
 
 // UPDATE
 router
-    .put('/dood/:_id', controller.updateOne);
+    .put('/dood/:_gebruikersnaam', controller.updateOne);
 
 // DELETE
 router
-    .delete('/dood/:_id', controller.deleteOne);
+    .delete('/dood/:_gebruikersnaam', controller.deleteOne);
 
 
 module.exports = router;
