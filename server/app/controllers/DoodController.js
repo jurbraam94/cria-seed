@@ -115,9 +115,7 @@ exports.updateOne = function (req, res) {
 exports.deleteOne = function (req, res) {
     var conditions, callback, retObj;
 
-    conditions = {_gebruikersnaam: req.params._gebruikersnaam};
-
-    Dood.remove(conditions, callback);
+    conditions = {_id: req.params._gebruikersnaam};
 
     callback = function (err, doc) {
         retObj = {
@@ -132,5 +130,5 @@ exports.deleteOne = function (req, res) {
         return res.send(retObj);
     };
 
-
+    Dood.remove(conditions, callback);
 };
