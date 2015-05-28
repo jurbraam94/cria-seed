@@ -1,11 +1,11 @@
-/*jslin node: true */
+/*jslint node: true */
 
 (function () {
     "use strict";
-    /*jslint unparam:true*/
     /**
      * Module dependencies.
      */
+    /*jshint unused: vars */
     var mongoose = require('mongoose'),
         Schema = mongoose.Schema,
         gebruiker,
