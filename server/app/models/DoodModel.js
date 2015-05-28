@@ -1,12 +1,10 @@
-/*jslint node:true*/
+/*jslint unparam: true, node: true */
 
 (function () {
     "use strict";
     /**
      * Module dependencies.
-     * Temporary unparam because of "unused" variables that are used as reference.
      */
-    /*jslint unparam: true*/
     var mongoose = require('mongoose'),
         Schema = mongoose.Schema,
         gebruiker,
@@ -20,8 +18,6 @@
         uitvaartSamenstellen,
         segment,
         modelName;
-
-    /*jslint unparam: false*/
 
     algemeneGegevens = new Schema({
         voornaam: {type: String, required: false},
