@@ -29,4 +29,8 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute'])
             redirectTo: "/books"
         });
 
+
+        //Samenstellen uitvaart
+       // $routeProvider.when('/samenstellen.html')
+
     }]);
