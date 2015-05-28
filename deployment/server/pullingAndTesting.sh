@@ -96,11 +96,6 @@ echo "`date` - STAGE1, static-analyzer" | tee -a "$DIR/$CUR_SCRIPT"
 echo "`date` -------------------------------------------------------------------------------" | tee -a "$DIR/$CUR_SCRIPT"
 echo | tee -a "$DIR/$CUR_SCRIPT"
 
-git checkout $STAGE1 | tee -a "$DIR/$CUR_SCRIPT"
-git merge --no-edit $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
-git commit -am "Merging from $STAGE0 to $STAGE1: `date`" | tee -a "$DIR/$CUR_SCRIPT"
-git push origin $STAGE1 | tee -a "$DIR/$CUR_SCRIPT"
-
 cd $BASEDIR/tests/static-analyzer
 ./run_lint.sh > static-analyzer-results.log
 
@@ -111,14 +106,14 @@ if [ -f $BASEDIR/tests/static-analyzer/error_log.txt ]; then
 	exit 1
 fi
 
+git checkout $STAGE1 | tee -a "$DIR/$CUR_SCRIPT"
+git merge --no-edit $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
+git commit -am "Merging from $STAGE0 to $STAGE1: `date`" | tee -a "$DIR/$CUR_SCRIPT"
+git push origin $STAGE1 | tee -a "$DIR/$CUR_SCRIPT"
+
 echo "`date` -------------------------------------------------------------------------------" | tee -a "$DIR/$CUR_SCRIPT"
 echo "`date` - STAGE2, unit-tests" | tee -a "$DIR/$CUR_SCRIPT"
 echo "`date` -------------------------------------------------------------------------------" | tee -a "$DIR/$CUR_SCRIPT"
-
-git checkout $STAGE2 | tee -a "$DIR/$CUR_SCRIPT"
-git fetch --all
-git reset --hard
-git pull
 
 # Set environment for stage
 export NODE_ENV=test
@@ -175,8 +170,13 @@ if [ -f ./test/static-analyzer/error_log.txt ]; then
 	exit 1
 fi
 
+git checkout $STAGE2 | tee -a "$DIR/$CUR_SCRIPT"
+git fetch --all
+git reset --hard
+git pull
+
 git merge --no-edit $STAGE1 | tee -a "$DIR/$CUR_SCRIPT"
-git commit -am "Merging from $STAGE2 to $STAGE2: `date`" | tee -a "$DIR/$CUR_SCRIPT"
+git commit -am "Merging from $STAGE1 to $STAGE2: `date`" | tee -a "$DIR/$CUR_SCRIPT"
 git push origin $STAGE2 | tee -a "$DIR/$CUR_SCRIPT"
 
 echo | tee -a "$DIR/$CUR_SCRIPT"
@@ -185,14 +185,8 @@ echo "`date` - STAGE3, end to end" | tee -a "$DIR/$CUR_SCRIPT"
 echo "`date` -------------------------------------------------------------------------------" | tee -a "$DIR/$CUR_SCRIPT"
 echo | tee -a "$DIR/$CUR_SCRIPT"
 
-git checkout $STAGE3 | tee -a "$DIR/$CUR_SCRIPT"
-git fetch --all
-git reset --hard
-git pull
-
 # Set environment for stage
 export NODE_ENV=acceptance
-
 
 # Check if node is already started
 
@@ -255,6 +249,11 @@ if [ $TEST_FAILURUES -ne 1 ]; then
 	git checkout $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
 	exit 1
 fi
+
+git checkout $STAGE3 | tee -a "$DIR/$CUR_SCRIPT"
+git fetch --all
+git reset --hard
+git pull
 
 git merge --no-edit $STAGE2 | tee -a "$DIR/$CUR_SCRIPT"
 git commit -am "Merging from $STAGE2 to $STAGE3: `date`" | tee -a "$DIR/$CUR_SCRIPT"
