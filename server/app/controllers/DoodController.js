@@ -115,7 +115,7 @@ exports.updateOne = function (req, res) {
 exports.deleteOne = function (req, res) {
     var conditions, callback, retObj;
 
-    conditions = {_id: req.params._gebruikersnaam};
+    conditions = {_gebruikersnaam: req.params._gebruikersnaam};
 
     callback = function (err, doc) {
         retObj = {
