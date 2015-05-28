@@ -97,7 +97,6 @@ echo "`date` -------------------------------------------------------------------
 echo | tee -a "$DIR/$CUR_SCRIPT"
 
 git checkout $STAGE1 | tee -a "$DIR/$CUR_SCRIPT"
-
 git merge --no-edit $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
 git commit -am "Merging from $STAGE0 to $STAGE1: `date`" | tee -a "$DIR/$CUR_SCRIPT"
 git push origin $STAGE1 | tee -a "$DIR/$CUR_SCRIPT"
