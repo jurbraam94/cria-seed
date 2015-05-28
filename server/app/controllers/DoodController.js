@@ -113,7 +113,7 @@ exports.updateOne = function (req, res) {
  * @param res
  */
 exports.deleteOne = function (req, res) {
-    var conditions, callback, retObj;
+    var conditions, fields = {}, callback, retObj;
 
     conditions = {_gebruikersnaam: req.params._gebruikersnaam};
 
@@ -129,6 +129,5 @@ exports.deleteOne = function (req, res) {
         };
         return res.send(retObj);
     };
-
-    Dood.remove(conditions, callback);
+    Dood.findOne(conditions, fields).remove();
 };
