@@ -31,59 +31,59 @@
         telefoon: {type: String, required: true},
         email: {type: String, required: true}
     },
-    { collection: 'algemeneGegevens' });
+        { collection: 'algemeneGegevens' });
 
     aanvullendeGegevens = new Schema({
         religie: {type: String, required: false},
         Donor: {type: String, required: true}
     },
-    { collection: 'aanvullendeGegevens' });
+        { collection: 'aanvullendeGegevens' });
 
     muziek = new Schema({
         playlistId: {type: String, required: false}
     },
-    { collection: 'muziek' });
+        { collection: 'muziek' });
 
     fotos = new Schema({
         bestandsnaam: {type: String, required: true},
         volgnummer: {type: Number, required: true}
     },
-    { collection: 'fotos' });
+        { collection: 'fotos' });
 
     uitvaart = new Schema({
         locatie: {type: String, required: true},
         duurOpbaring: {type: Number, required: true},
         beschrijvingOpbaring: {type: Number, required: true}
     },
-    { collection: 'uitvaart' });
+        { collection: 'uitvaart' });
 
     wishlist = new Schema({
         bestandsnaam: {type: String, required: true},
         beschrijving: {type: String, required: true},
         content: {type: String, required: true}
     },
-    { collection: 'wishlist' });
+        { collection: 'wishlist' });
 
     notificatie = new Schema({
         naam: {type: String, required: true},
         email: {type: String, required: true},
         bericht: {type: String, required: true}
     },
-    { collection: 'notificatie' });
+        { collection: 'notificatie' });
 
     segment = new Schema({
         object: {type: String, required: true},
         percentage: {type: String, required: true},
         volgnummer: {type: String, required: true}
     },
-    { collection: 'segment' });
+        { collection: 'segment' });
 
 
     uitvaartSamenstellen = new Schema({
         tijdsduur: {type: Number, required: true},
         segment: [segment]
     },
-    { collection: 'uitvaartSamenstellen' });
+        { collection: 'uitvaartSamenstellen' });
 
 
     gebruiker = new Schema({
@@ -98,12 +98,12 @@
         notificatie: [notificatie],
         uitvaartSamenstellen: [uitvaartSamenstellen]
     },
-    { collection: 'gebruiker' });
+        { collection: 'gebruiker' });
 
     dood = new Schema({
         gebruiker: [gebruiker]
     },
-    { collection: 'dood' });
+        { collection: 'dood' });
 
     modelName = "Dood";
     module.exports = mongoose.model(modelName, dood);
