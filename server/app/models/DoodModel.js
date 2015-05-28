@@ -87,14 +87,14 @@
     gebruiker = new Schema({
         gebruikersnaam: {type: String, required: true, unique: true},
         wachtwoord: {type: String, required: true},
-        algemeneGegevens: [algemeneGegevens],
-        aanvullendeGegevens: [aanvullendeGegevens],
-        uitvaart: [uitvaart],
-        muziek: [muziek],
-        fotos: [fotos],
-        wishlist: [wishlist],
-        notificatie: [notificatie],
-        uitvaartSamenstellen: [uitvaartSamenstellen]
+        algemeneGegevens: algemeneGegevens,
+        aanvullendeGegevens: aanvullendeGegevens,
+        uitvaart: uitvaart,
+        muziek: muziek,
+        fotos: fotos,
+        wishlist: wishlist,
+        notificatie: notificatie,
+        uitvaartSamenstellen: uitvaartSamenstellen
     },
         { collection: 'gebruiker' });
 
