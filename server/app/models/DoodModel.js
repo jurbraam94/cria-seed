@@ -18,8 +18,9 @@
         uitvaartSamenstellen,
         segment,
         modelName;
-        console.log(algemeneGegevens, aanvullendeGegevens, uitvaart, muziek, fotos, wishlist, notificatie, uitvaartSamenstellen, segment);
         
+    console.log(algemeneGegevens, aanvullendeGegevens, uitvaart, muziek, fotos, wishlist, notificatie, uitvaartSamenstellen, segment);
+    
     algemeneGegevens = new Schema({
         voornaam: {type: String, required: false},
         achternaam: {type: String, required: false},
