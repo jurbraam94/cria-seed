@@ -93,7 +93,7 @@
         fotos: [{type: mongoose.Schema.Types.ObjectId, ref: 'fotos'}],
         wishlist: [{type: mongoose.Schema.Types.ObjectId, ref: 'wishlist'}],
         notificatie: [{type: mongoose.Schema.Types.ObjectId, ref: 'notificatie'}],
-        uitvaartSamenstellen: {tijdsduur: {type: Number, required: false}}
+        uitvaartSamenstellen: [{type: mongoose.Schema.Types.ObjectId, ref: 'uitvaartSamenstellen'}]
     },
         { collection: 'gebruiker' });
 
