@@ -1,5 +1,5 @@
 // Load configuration
-/*
+
 var env = process.env.NODE_ENV || 'development',
     config = require('../../../server/config/config.js')[env],
     localConfig = require('../../config-test.json')
@@ -192,4 +192,3 @@ describe('API Routing for CRUD operations on books', function () {
     });
 
 });
-    */
