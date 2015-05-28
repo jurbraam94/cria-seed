@@ -77,8 +77,6 @@ cd $BASEDIR/data
 ./restoreDatabases.sh  | tee -a "$DIR/$CUR_SCRIPT"
 cd -
 
-
-
 echo | tee -a "$DIR/$CUR_SCRIPT"
 echo "`date` -------------------------------------------------------------------------------" | tee -a "$DIR/$CUR_SCRIPT"
 echo "`date` - STAGE0, development" | tee -a "$DIR/$CUR_SCRIPT"
