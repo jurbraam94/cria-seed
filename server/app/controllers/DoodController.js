@@ -116,6 +116,9 @@ exports.deleteOne = function (req, res) {
     var conditions, callback, retObj;
 
     conditions = {_gebruikersnaam: req.params._gebruikersnaam};
+
+    Dood.remove(conditions, callback);
+
     callback = function (err, doc) {
         retObj = {
             meta: {
@@ -129,5 +132,5 @@ exports.deleteOne = function (req, res) {
         return res.send(retObj);
     };
 
-    Dood.remove(conditions, callback);
+
 };
