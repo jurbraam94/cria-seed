@@ -7,7 +7,6 @@
      */
     var mongoose = require('mongoose'),
         Schema = mongoose.Schema,
-        dood,
         gebruiker,
         algemeneGegevens,
         aanvullendeGegevens,
@@ -99,11 +98,6 @@
     },
         { collection: 'gebruiker' });
 
-    dood = new Schema({
-        gebruiker: [gebruiker]
-    },
-        { collection: 'dood' });
-
     modelName = "Dood";
-    module.exports = mongoose.model(modelName, dood);
+    module.exports = mongoose.model(modelName, gebruiker);
 }());
