@@ -76,13 +76,11 @@
     },
         { collection: 'segment' });
 
-
     uitvaartSamenstellen = new Schema({
         tijdsduur: {type: Number, required: false},
         segment: [segment]
     },
         { collection: 'uitvaartSamenstellen' });
-
 
     gebruiker = new Schema({
         gebruikersnaam: {type: String, required: true, unique: true},
