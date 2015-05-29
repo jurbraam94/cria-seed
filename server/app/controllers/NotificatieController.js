@@ -36,7 +36,7 @@ exports.notificatieAanmaken = function (req, res) {
  * @param res
  */
 exports.alleNotificaties = function (req, res) {
-    var conditions = {}, fields = {}, sort = {'modificationDate': -1};
+    var conditions = {gebruikersnaam: req.params._gebruikersnaam}, fields = {}, sort = {'modificationDate': -1};
 
     Notificatie.find(conditions, fields)
         .sort(sort)

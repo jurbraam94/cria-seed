@@ -36,7 +36,7 @@ exports.fotoUploaden = function (req, res) {
  * @param res
  */
 exports.alleFotos = function (req, res) {
-    var conditions = {}, fields = {}, sort = {'modificationDate': -1};
+    var conditions = {gebruikersnaam: req.params._gebruikersnaam}, fields = {}, sort = {'modificationDate': -1};
 
     Fotos.find(conditions, fields)
         .sort(sort)
