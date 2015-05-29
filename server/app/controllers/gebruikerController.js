@@ -2,15 +2,15 @@
 "use strict";
 
 var mongoose = require('mongoose'),
-    Dood = mongoose.model('Dood');
+    Gebruiker = mongoose.model('Dood');
 
 /**
  * create function
  * @param req
  * @param res
  */
-exports.create = function (req, res) {
-    var doc = new Dood(req.body);
+exports.gebruikerAanmaken = function (req, res) {
+    var doc = new Gebruiker(req.body);
 
     doc.save(function (err) {
         var retObj = {
@@ -32,10 +32,10 @@ exports.create = function (req, res) {
  * @param req
  * @param res
  */
-exports.list = function (req, res) {
+exports.alleGebruikers = function (req, res) {
     var conditions = {}, fields = {}, sort = {'modificationDate': -1};
 
-    Dood.find(conditions, fields)
+    Gebruiker.find(conditions, fields)
         .sort(sort)
         .exec(function (err, doc) {
 
@@ -58,10 +58,10 @@ exports.list = function (req, res) {
  * @param req
  * @param res
  */
-exports.detail = function (req, res) {
+exports.gebruikerDetails = function (req, res) {
     var conditions = {gebruikersnaam: req.params._gebruikersnaam}, fields = {};
 
-    Dood.findOne(conditions, fields)
+    Gebruiker.findOne(conditions, fields)
         .exec(function (err, doc) {
             var retObj = {
                 meta: {
@@ -81,7 +81,7 @@ exports.detail = function (req, res) {
  * @param req
  * @param res
  */
-exports.updateOne = function (req, res) {
+exports.updateWachtwoord = function (req, res) {
     var conditions = {gebruikersnaam: req.params._gebruikersnaam},
         update = {
             wachtwoord: req.body.wachtwoord
@@ -103,7 +103,7 @@ exports.updateOne = function (req, res) {
             return res.send(retObj);
         };
 
-    Dood.findOneAndUpdate(conditions, update, options, callback);
+    Gebruiker.findOneAndUpdate(conditions, update, options, callback);
 };
 
 /**
@@ -111,7 +111,7 @@ exports.updateOne = function (req, res) {
  * @param req
  * @param res
  */
-exports.deleteOne = function (req, res) {
+exports.gebruikerVerwijderen = function (req, res) {
     var conditions, callback, retObj;
 
     conditions = {gebruikersnaam: req.params._gebruikersnaam};
@@ -128,5 +128,5 @@ exports.deleteOne = function (req, res) {
         };
         return res.send(retObj);
     };
-    Dood.remove(conditions, callback);
+    Gebruiker.remove(conditions, callback);
 };
