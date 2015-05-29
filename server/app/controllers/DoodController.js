@@ -84,8 +84,7 @@ exports.detail = function (req, res) {
 exports.updateOne = function (req, res) {
     var conditions = {gebruikersnaam: req.params._gebruikersnaam},
         update = {
-            gebruikersnaam: req.body.gebruikersnaam || '',
-            wachtwoord: req.body.wachtwoord || ''
+            wachtwoord: req.body.wachtwoord
         },
         options = {multi: false},
         callback = function (err, doc) {
