@@ -21,8 +21,8 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
             request
                 .post('/gebruiker')
                 .send({
-                    "gebruikersnaam": "jur",
-                    "wachtwoord": "jur"
+                    "gebruikersnaam": "Createusertest",
+                    "wachtwoord": "Createusertest"
                 })
                 .expect(200)                                                // supertest
                 .expect('Content-Type', /application.json/)                 // supertest
@@ -41,9 +41,9 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
                     res.charset.should.be.exactly('utf-8');
                     JSON.parse(res.text)
                         .should.have.property('doc')
-                        .and.have.property('gebruikersnaam')
+                        .and.have.property('Createusertest')
                         .be.exactly('jur')
-                        .and.have.property('wachtwoord')
+                        .and.have.property('Createusertest')
                         .be.exactly('jur');
 
                     done();
