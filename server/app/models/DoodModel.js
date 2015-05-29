@@ -78,21 +78,21 @@
 
     uitvaartSamenstellen = new Schema({
         tijdsduur: {type: Number, required: false},
-        segment: [{type: mongoose.Schema.Types.ObjectId, ref: 'Dood.segment'}]
+        segment: [{type: Schema.ObjectId, ref: 'Dood.segment'}]
     },
         { collection: 'uitvaartSamenstellen' });
 
     gebruiker = new Schema({
         gebruikersnaam: {type: String, required: true, unique: true},
         wachtwoord: {type: String, required: true},
-        algemeneGegevens: {type: mongoose.Schema.Types.ObjectId, ref: 'Dood.algemeneGegevens'},
-        aanvullendeGegevens: {type: mongoose.Schema.Types.ObjectId, ref: 'Dood.aanvullendeGegevens'},
-        uitvaart: {type: mongoose.Schema.Types.ObjectId, ref: 'Dood.uitvaart'},
-        muziek: [{type: mongoose.Schema.Types.ObjectId, ref: 'Dood.muziek'}],
-        fotos: [{type: mongoose.Schema.Types.ObjectId, ref: 'Dood.fotos'}],
-        wishlist: [{type: mongoose.Schema.Types.ObjectId, ref: 'Dood.wishlist'}],
-        notificatie: [{type: mongoose.Schema.Types.ObjectId, ref: 'Dood.notificatie'}],
-        uitvaartSamenstellen: {type: mongoose.Schema.Types.ObjectId, ref: 'Dood.uitvaartSamenstellen'}
+        algemeneGegevens: {type: Schema.ObjectId, ref: 'Dood.algemeneGegevens'},
+        aanvullendeGegevens: {type: Schema.ObjectId, ref: 'Dood.aanvullendeGegevens'},
+        uitvaart: {type: Schema.ObjectId, ref: 'Dood.uitvaart'},
+        muziek: [{type: Schema.ObjectId, ref: 'Dood.muziek'}],
+        fotos: [{type: Schema.ObjectId, ref: 'Dood.fotos'}],
+        wishlist: [{type: Schema.ObjectId, ref: 'Dood.wishlist'}],
+        notificatie: [{type: Schema.ObjectId, ref: 'Dood.notificatie'}],
+        uitvaartSamenstellen: {type: Schema.ObjectId, ref: 'Dood.uitvaartSamenstellen'}
     },
         { collection: 'gebruiker' });
 
