@@ -14,7 +14,7 @@
         gebruikersnaam: {type: String, required: true, unique: true},
         locatie: {type: String, required: true},
         duurOpbaring: {type: Number, required: true},
-        beschrijvingOpbaring: {type: Number, required: false}
+        beschrijvingOpbaring: {type: String, required: false}
     },
         { collection: 'Uitvaart' });
     module.exports = mongoose.model(modelName, uitvaart);

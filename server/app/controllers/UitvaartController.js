@@ -64,7 +64,7 @@ exports.UitvaartUpdaten = function (req, res) {
             gebruikersnaam: req.body.gebruikersnaam,
             locatie: req.body.locatie,
             duurOpbaring: req.body.duurOpbaring,
-            beschrijvingOpbaring: req.body.beschrijvingOpbaring
+            beschrijvingOpbaring: req.body.beschrijvingOpbaring || ''
         },
         options = {multi: false},
         callback = function (err, doc) {
