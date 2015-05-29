@@ -84,8 +84,8 @@ exports.detail = function (req, res) {
 exports.updateOne = function (req, res) {
     var conditions = {_gebruikersnaam: req.params._gebruikersnaam},
         update = {
-            gebruikersnaam: req.body.doc.gebruikersnaam || '',
-            wachtwoord: req.body.doc.wachtwoord || ''
+            gebruikersnaam: req.body.gebruikersnaam || '',
+            wachtwoord: req.body.wachtwoord || ''
         },
         options = {multi: false},
         callback = function (err, doc) {
@@ -129,5 +129,5 @@ exports.deleteOne = function (req, res) {
         };
         return res.send(retObj);
     };
-    Dood.findOne(conditions, fields).remove(callback);
+    Dood.remove(conditions, callback);
 };
