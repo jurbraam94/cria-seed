@@ -96,6 +96,6 @@
     },
         { collection: 'gebruiker' });
 
-    console.log(algemeneGegevens, aanvullendeGegevens, uitvaart, muziek, fotos, wishlist, notificatie, segment);
+    console.log(algemeneGegevens, aanvullendeGegevens, uitvaart, muziek, fotos, wishlist, notificatie, segment, uitvaartSamenstellen);
     module.exports = mongoose.model(modelName, gebruiker);
 }());
