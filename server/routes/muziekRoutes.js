@@ -16,5 +16,5 @@ router
 
 // RETRIEVE
 router
-    .get('/Muziek/:_gebruikersnaam', controller.playlistDetails());
+    .get('/Muziek/:_gebruikersnaam', controller.playlistDetails);
 module.exports = router;
