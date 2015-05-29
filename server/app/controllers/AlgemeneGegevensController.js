@@ -5,14 +5,14 @@
 "use strict";
 
 var mongoose = require('mongoose'),
-    Dood = mongoose.model('Dood').algemeneGegevens;
+    Dood = mongoose.model('Dood');
 
 /**
  * retrieve one function
  * @param req
  * @param res
  */
-exports.detail = function (req, res) {
+exports.algGegevensDetail = function (req, res) {
     var conditions = {gebruikersnaam: req.params._gebruikersnaam}, fields = {};
 
     Dood.findOne(conditions, fields)
@@ -35,10 +35,17 @@ exports.detail = function (req, res) {
  * @param req
  * @param res
  */
-exports.updateOne = function (req, res) {
+exports.updateAlgGegevens = function (req, res) {
     var conditions = {gebruikersnaam: req.params._gebruikersnaam},
         update = {
-            wachtwoord: req.body.wachtwoord
+            voornaam: req.body.voornaam,
+            achternaam: req.body.achternaam,
+            woonplaats: req.body.woonplaats,
+            postcode: req.body.postcode,
+            adres: req.body.adres,
+            huisnummer: req.body.huisnummer,
+            telefoon: req.body.telefoon,
+            email: req.body.email
         },
         options = {multi: false},
         callback = function (err, doc) {

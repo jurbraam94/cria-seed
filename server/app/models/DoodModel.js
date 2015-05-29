@@ -80,21 +80,21 @@
 
     uitvaartSamenstellen = new Schema({
         tijdsduur: {type: Number, required: false},
-        segment: [{type: mongoose.Schema.Types.ObjectId, ref: 'segment'}]
+        segment: [segment]
     },
         { collection: 'uitvaartSamenstellen' });
 
     gebruiker = new Schema({
         gebruikersnaam: {type: String, required: true, unique: true},
         wachtwoord: {type: String, required: true},
-        algemeneGegevens: {type: mongoose.Schema.Types.ObjectId, ref: 'algemeneGegevens'},
-        aanvullendeGegevens: {type: mongoose.Schema.Types.ObjectId, ref: 'aanvullendeGegevens'},
-        uitvaart: {type: mongoose.Schema.Types.ObjectId, ref: 'uitvaart'},
-        muziek: [{type: mongoose.Schema.Types.ObjectId, ref: 'muziek'}],
-        fotos: [{type: mongoose.Schema.Types.ObjectId, ref: 'fotos'}],
-        wishlist: [{type: mongoose.Schema.Types.ObjectId, ref: 'wishlist'}],
-        notificatie: [{type: mongoose.Schema.Types.ObjectId, ref: 'notificatie'}],
-        uitvaartSamenstellen: {type: mongoose.Schema.Types.ObjectId, ref: 'uitvaartSamenstellen'}
+        algemeneGegevens: algemeneGegevens,
+        aanvullendeGegevens: aanvullendeGegevens,
+        uitvaart: uitvaart,
+        muziek: [muziek],
+        fotos: [fotos],
+        wishlist: [wishlist],
+        notificatie: [notificatie],
+        uitvaartSamenstellen: uitvaartSamenstellen
     },
         { collection: 'gebruiker' });
 
