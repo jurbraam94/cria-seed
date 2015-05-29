@@ -82,7 +82,7 @@ exports.detail = function (req, res) {
  * @param res
  */
 exports.updateOne = function (req, res) {
-    var conditions = {_gebruikersnaam: req.params._gebruikersnaam},
+    var conditions = {gebruikersnaam: req.params._gebruikersnaam},
         update = {
             gebruikersnaam: req.body.gebruikersnaam || '',
             wachtwoord: req.body.wachtwoord || ''
@@ -115,7 +115,7 @@ exports.updateOne = function (req, res) {
 exports.deleteOne = function (req, res) {
     var conditions, callback, retObj;
 
-    conditions = {_gebruikersnaam: req.params._gebruikersnaam};
+    conditions = {gebruikersnaam: req.params._gebruikersnaam};
 
     callback = function (err, doc) {
         retObj = {
