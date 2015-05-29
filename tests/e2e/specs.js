@@ -4,7 +4,7 @@ var config = require('../../server/config/config.js')[env],
     localConfig = require('./../config-test.json');
 
 console.log('>>>>>', env, '<<<<<');
-
+/*
 describe('Book test homepage', function () {
 
     beforeEach(function () {
@@ -84,10 +84,12 @@ describe('CRUD on book', function () {
             });
 
     });
+    */
 
     /**
      * @see https://docs.angularjs.org/api/ng/directive/form
      */
+    /*
     it('should display an empty form', function () {
 
         browser.get('http://' + localConfig.host + ':' + config.port + '/#/books/new');
@@ -100,10 +102,11 @@ describe('CRUD on book', function () {
     });
 
     it('should create a book', function () {
-
+/*
         /**
          * First we create the new book
          */
+/*
         browser.get('http://' + localConfig.host + ':' + config.port + '/#/books/new');
 
         element(by.model('books.doc.title')).sendKeys('ALL THE LIGHT WE CANNOT SEE');
@@ -205,4 +208,4 @@ describe('CRUD on book', function () {
 
 
 });
-
+*/
