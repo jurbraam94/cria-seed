@@ -19,7 +19,7 @@ router
 
 // RETRIEVE
 router
-    .get('/gebruiker', controller.alleGebruikers)
+    .get('/gebruiker', controller.alleFotos)
     .get('/gebruiker/:_gebruikersnaam', controller.fotoDetails());
 
 // DELETE

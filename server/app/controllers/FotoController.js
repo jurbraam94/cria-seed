@@ -31,6 +31,32 @@ exports.fotoUploaden = function (req, res) {
 };
 
 /**
+ * retrieve all function
+ * @param req
+ * @param res
+ */
+exports.alleFotos = function (req, res) {
+    var conditions = {}, fields = {}, sort = {'modificationDate': -1};
+
+    Fotos.find(conditions, fields)
+        .sort(sort)
+        .exec(function (err, doc) {
+
+            var retObj = {
+                meta: {
+                    "action": "list",
+                    'timestamp': new Date(),
+                    filename: __filename
+                },
+                doc: doc, // array
+                err: err
+            };
+
+            return res.send(retObj);
+        });
+};
+
+/**
  * retrieve one function
  * @param req
  * @param res
