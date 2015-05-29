@@ -125,8 +125,8 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
                         .be.exactly(null);
                     JSON.parse(res.text)
                         .should.have.property('doc')
-                        .and.have.property('wachtwoord')
-                        .be.exactly('testwachtwoord');
+                        .and.have.property('testwachtwoord')
+                        .be.exactly('wachtwoord');
                     res.statusCode.should.be.exactly(200);
                     done();
                 });
