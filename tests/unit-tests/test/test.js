@@ -104,7 +104,7 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
             request
                 .put('/gebruiker/' + 'jur')
                 .send({
-                    "doc": {
+                    "body": {
                         "wachtwoord": "wachtwoord"
                     }
                 })
