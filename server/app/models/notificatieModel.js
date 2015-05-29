@@ -11,10 +11,10 @@
         modelName = "Notificatie";
 
     notificatie = new Schema({
-        gebruiker: [{type: Schema.ObjectId, ref: 'Gebruiker'}],
-        naam: {type: String, required: false},
-        email: {type: String, required: false},
-        bericht: {type: String, required: false}
+        gebruikersnaam: {type: String, required: true},
+        naam: {type: String, required: true},
+        email: {type: String, required: true},
+        bericht: {type: String, required: true}
     },
         { collection: 'Notificatie' });
     module.exports = mongoose.model(modelName, notificatie);

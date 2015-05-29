@@ -11,10 +11,10 @@
         modelName = "Segment";
 
     segment = new Schema({
-        gebruiker: [{type: Schema.ObjectId, ref: 'Gebruiker'}],
-        object: {type: String, required: false},
-        percentage: {type: String, required: false},
-        volgnummer: {type: String, required: false}
+        gebruikersnaam: {type: String, required: true},
+        object: {type: String, required: true},
+        percentage: {type: String, required: true},
+        volgnummer: {type: String, required: true}
     },
         { collection: 'Segment' });
     module.exports = mongoose.model(modelName, segment);

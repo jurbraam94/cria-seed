@@ -11,9 +11,8 @@
         modelName = "UitvaartSamenstellen";
 
     uitvaartSamenstellen = new Schema({
-        gebruiker: [{type: Schema.ObjectId, ref: 'Gebruiker'}],
-        tijdsduur: {type: Number, required: false},
-        segment: [{type: Schema.ObjectId, ref: 'Segment'}]
+        gebruikersnaam: {type: String, required: true, unique: true},
+        tijdsduur: {type: Number, required: true},
     },
         { collection: 'uitvaartSamenstellen' });
 
