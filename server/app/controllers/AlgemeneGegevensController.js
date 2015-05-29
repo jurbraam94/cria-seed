@@ -8,11 +8,34 @@ var mongoose = require('mongoose'),
     Dood = mongoose.model('AlgemeneGegevens');
 
 /**
+ * create function
+ * @param req
+ * @param res
+ */
+exports.algGegevensAanmaken = function (req, res) {
+    var doc = new Gebruiker(req.body);
+
+    doc.save(function (err) {
+        var retObj = {
+            meta: {
+                "action": "create",
+                'timestamp': new Date(),
+                filename: __filename
+            },
+            doc: doc,
+            err: err
+        };
+
+        return res.send(retObj);
+    });
+};
+
+/**
  * retrieve one function
  * @param req
  * @param res
  */
-exports.algGegevensDetail = function (req, res) {
+exports.algGegevensDetails = function (req, res) {
     var conditions = {gebruikersnaam: req.params._gebruikersnaam}, fields = {};
 
     Dood.findOne(conditions, fields)
