@@ -102,10 +102,10 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
     describe('UPDATE 1 gebruiker', function () {
         it('Should PUT /gebruiker/{gebruikersnaam}', function (done) {
             request
-                .put('/gebruiker/' + 'Createusertest')
+                .put('/gebruiker/' + 'jur')
                 .send({
                     "doc": {
-                        "wachtwoord": "testwachtwoord"
+                        "wachtwoord": "wachtwoord"
                     }
                 })
                 .expect(200)                                                // supertest
@@ -125,7 +125,7 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
                         .be.exactly(null);
                     JSON.parse(res.text)
                         .should.have.property('doc')
-                        .and.have.property('testwachtwoord')
+                        .and.have.property('wachtwoord')
                         .be.exactly('wachtwoord');
                     res.statusCode.should.be.exactly(200);
                     done();
