@@ -21,7 +21,7 @@ router
 
 // UPDATE
 router
-    .put('/gebruiker/:_gebruikersnaam', controller.updateWachtwoord());
+    .put('/gebruiker/:_gebruikersnaam', controller.updateWachtwoord);
 
 // DELETE
 router
