@@ -14,8 +14,9 @@
         gebruikersnaam: {type: String, required: true},
         naam: {type: String, required: true},
         email: {type: String, required: true},
-        bericht: {type: String, required: true}
-    },
+        bericht: {type: String, required: true},
+        volgnummer: {type: Number, required: true}
+        },
         { collection: 'Notificatie' });
     module.exports = mongoose.model(modelName, notificatie);
 }());

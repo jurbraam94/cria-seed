@@ -62,7 +62,7 @@ exports.alleNotificaties = function (req, res) {
  * @param res
  */
 exports.notificatieDetails = function (req, res) {
-    var conditions = {gebruikersnaam: req.params._gebruikersnaam}, fields = {};
+    var conditions = {gebruikersnaam: req.params._gebruikersnaam, volgnummer: req.params._volgnummer}, fields = {};
 
     Notificatie.findOne(conditions, fields)
         .exec(function (err, doc) {
@@ -85,7 +85,7 @@ exports.notificatieDetails = function (req, res) {
  * @param res
  */
 exports.updateNotificatie = function (req, res) {
-    var conditions = {gebruikersnaam: req.params._gebruikersnaam},
+    var conditions = {gebruikersnaam: req.params._gebruikersnaam, volgnummer: req.params._volgnummer},
         update = {
             naam: req.body.naam,
             email: req.body.email,
@@ -119,7 +119,7 @@ exports.updateNotificatie = function (req, res) {
 exports.notificatieVerwijderen = function (req, res) {
     var conditions, callback, retObj;
 
-    conditions = {gebruikersnaam: req.params._gebruikersnaam};
+    conditions = {gebruikersnaam: req.params._gebruikersnaam, volgnummer: req.params._volgnummer};
 
     callback = function (err, doc) {
         retObj = {

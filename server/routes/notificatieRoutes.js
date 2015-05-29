@@ -19,11 +19,15 @@ router
 
 // RETRIEVE
 router
-    .get('/notificatie', controller.alleNotificaties)
-    .get('/notificatie/:_gebruikersnaam', controller.notificatieDetails);
+    .get('/notificatie/:_gebruikersnaam', controller.alleNotificaties)
+    .get('/notificatie/:_gebruikersnaam/:_volgnummer', controller.notificatieDetails);
+
+// UPDATE
+router
+    .put('/notificatie/:_gebruikersnaam/:_volgnummer', controller.updateNotificatie);
 
 // DELETE
 router
-    .delete('/notificatie/:_gebruikersnaam', controller.notificatieVerwijderen);
+    .delete('/notificatie/:_gebruikersnaam/:_volgnummer', controller.notificatieVerwijderen);
 
 module.exports = router;

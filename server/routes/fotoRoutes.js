@@ -19,8 +19,8 @@ router
 
 // RETRIEVE
 router
-    .get('/foto', controller.alleFotos)
-    .get('/foto/:_gebruikersnaam', controller.fotoDetails);
+    .get('/foto/:_gebruikersnaam', controller.alleFotos)
+    .get('/foto/:_gebruikersnaam/:_volgnummer', controller.fotoDetails);
 
 // DELETE
 router

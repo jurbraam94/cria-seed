@@ -62,7 +62,7 @@ exports.alleFotos = function (req, res) {
  * @param res
  */
 exports.fotoDetails = function (req, res) {
-    var conditions = {gebruikersnaam: req.params._gebruikersnaam}, fields = {};
+    var conditions = {gebruikersnaam: req.params._gebruikersnaam, volgnummer: req.params._volgnummer}, fields = {};
 
     Fotos.findOne(conditions, fields)
         .exec(function (err, doc) {
@@ -87,7 +87,7 @@ exports.fotoDetails = function (req, res) {
 exports.fotoVerwijderen = function (req, res) {
     var conditions, callback, retObj;
 
-    conditions = {gebruikersnaam: req.params._gebruikersnaam};
+    conditions = {gebruikersnaam: req.params._gebruikersnaam, volgnummer: req.params._volgnummer};
 
     callback = function (err, doc) {
         retObj = {
