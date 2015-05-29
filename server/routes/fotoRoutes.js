@@ -24,6 +24,6 @@ router
 
 // DELETE
 router
-    .delete('/foto/:_gebruikersnaam', controller.fotoVerwijderen);
+    .delete('/foto/:_gebruikersnaam/:_volgnummer', controller.fotoVerwijderen);
 
 module.exports = router;
