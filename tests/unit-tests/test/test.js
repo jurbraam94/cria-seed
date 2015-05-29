@@ -99,6 +99,69 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
         });
     });
 
+    describe('UPDATE 1 gebruiker', function () {
+        it('Should PUT /gebruiker/{gebruikersnaam}', function (done) {
+            request
+                .put('/gebruiker/' + 'Createusertest')
+                .send({
+                    "doc": {
+                        "wachtwoord": "testwachtwoord"
+                    }
+                })
+                .expect(200)                                                // supertest
+                .expect('Content-Type', /application.json/)                 // supertest
+                .expect('Content-Type', 'utf-8')                            // supertest
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+
+                    JSON.parse(res.text)
+                        .should.have.property('meta')
+                        .and.have.property('action')
+                        .be.exactly('update');
+                    JSON.parse(res.text)
+                        .should.have.property('err')
+                        .be.exactly(null);
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('wachtwoord')
+                        .be.exactly('testwachtwoord');
+                    res.statusCode.should.be.exactly(200);
+                    done();
+                });
+        });
+    });
+
+    describe('DELETE 1 gebruiker', function () {
+        it('Should DELETE /gebruiker/{gebruikersnaam}', function (done) {
+            request
+                .del('/gebruiker/' + 'Createusertest')
+                .expect(200)                                                // supertest
+                .expect('Content-Type', /application.json/)                 // supertest
+                .expect('Content-Type', 'utf-8')                            // supertest
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+                    JSON.parse(res.text)
+                        .should.have.property('meta')
+                        .and.have.property('action').be.exactly('delete');
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('ok')
+                        .be.exactly(1);
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('n')
+                        .be.exactly(1);
+                    JSON.parse(res.text).should.have.property('err').be.exactly(null);
+                    res.statusCode.should.be.exactly(200);
+                    done();
+                });
+        });
+    });
+
 });
 
 describe('API Routing for CRUD operations on Books', function () {
@@ -257,28 +320,6 @@ describe('API Routing for CRUD operations on Books', function () {
                         .be.exactly(1);
                     JSON.parse(res.text).should.have.property('err').be.exactly(null);
                     res.statusCode.should.be.exactly(200);
-                    done();
-                });
-        });
-    });
-
-    describe('RETRIEVE all books to verify that the original collection is restored.', function () {
-        it('Should GET /books', function (done) {
-            request
-                .get('/books')
-                .expect(200)                                                // supertest
-                .expect('Content-Type', /application.json/)                 // supertest
-                .expect('Content-Type', 'utf-8')                            // supertest
-                .end(function (err, res) {
-                    if (err) {
-                        throw err;
-                    }
-
-                    JSON.parse(res.text)
-                        .should.have.property('meta')
-                        .and.have.property('action').be.exactly('list');
-                    res.statusCode.should.be.exactly(200);
-
                     done();
                 });
         });
