@@ -14,7 +14,7 @@
         gebruikersnaam: {type: String, required: true},
         object: {type: String, required: true},
         percentage: {type: String, required: true},
-        volgnummer: {type: Number, required: true}
+        volgnummer: {type: Number, required: true, unique: true}
     },
         { collection: 'Segment' });
     module.exports = mongoose.model(modelName, segment);

@@ -16,7 +16,7 @@
     foto = new Schema({
         gebruikersnaam: {type: String, required: true},
         bestandsnaam: {type: String, required: true},
-        volgnummer: {type: Number, required: true}
+        volgnummer: {type: Number, required: true, unique: true}
     },
         { collection: 'Foto' });
 

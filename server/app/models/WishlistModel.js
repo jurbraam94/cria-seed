@@ -14,7 +14,8 @@
         gebruikersnaam: {type: String, required: true},
         bestandsnaam: {type: String, required: true},
         beschrijving: {type: String, required: true},
-        content: {type: String, required: true}
+        content: {type: String, required: true},
+        volgnummer: {type: Number, required: true, unique: true}
     },
         { collection: 'wishlist' });
     module.exports = mongoose.model(modelName, wishlist);
