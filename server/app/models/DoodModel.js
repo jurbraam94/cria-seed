@@ -88,7 +88,7 @@
         gebruikersnaam: {type: String, required: true, unique: true},
         wachtwoord: {type: String, required: true},
         algemeneGegevens: [{type: mongoose.Schema.Types.ObjectId, ref: 'algemeneGegevens'}],
-        aanvullendeGegevens: {type: mongoose.Schema.Types.ObjectId, ref: 'aanvullendeGegevens'},
+        aanvullendeGegevens: [{type: mongoose.Schema.Types.ObjectId, ref: 'aanvullendeGegevens'}],
         uitvaart: [{type: mongoose.Schema.Types.ObjectId, ref: 'uitvaart'}],
         muziek: [{type: mongoose.Schema.Types.ObjectId, ref: 'muziek'}],
         fotos: [{type: mongoose.Schema.Types.ObjectId, ref: 'fotos'}],
