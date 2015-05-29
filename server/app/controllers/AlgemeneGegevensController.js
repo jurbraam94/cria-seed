@@ -5,7 +5,7 @@
 "use strict";
 
 var mongoose = require('mongoose'),
-    Dood = mongoose.model('AlgemeneGegevens');
+    AlgemeneGegevens = mongoose.model('AlgemeneGegevens');
 
 /**
  * create function
@@ -13,7 +13,7 @@ var mongoose = require('mongoose'),
  * @param res
  */
 exports.algGegevensAanmaken = function (req, res) {
-    var doc = new Gebruiker(req.body);
+    var doc = new AlgemeneGegevens(req.body);
 
     doc.save(function (err) {
         var retObj = {
@@ -38,7 +38,7 @@ exports.algGegevensAanmaken = function (req, res) {
 exports.algGegevensDetails = function (req, res) {
     var conditions = {gebruikersnaam: req.params._gebruikersnaam}, fields = {};
 
-    Dood.findOne(conditions, fields)
+    AlgemeneGegevens.findOne(conditions, fields)
         .exec(function (err, doc) {
             var retObj = {
                 meta: {
@@ -87,5 +87,5 @@ exports.updateAlgGegevens = function (req, res) {
             return res.send(retObj);
         };
 
-    Dood.findOneAndUpdate(conditions, update, options, callback);
+    AlgemeneGegevens.findOneAndUpdate(conditions, update, options, callback);
 };
