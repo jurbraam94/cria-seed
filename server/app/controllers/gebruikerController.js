@@ -9,7 +9,7 @@ var mongoose = require('mongoose'),
  * @param req
  * @param res
  */
-exports.create = function (req, res) {
+exports.createUser = function (req, res) {
     var doc = new Dood(req.body);
 
     doc.save(function (err) {
@@ -32,7 +32,7 @@ exports.create = function (req, res) {
  * @param req
  * @param res
  */
-exports.list = function (req, res) {
+exports.allUsers = function (req, res) {
     var conditions = {}, fields = {}, sort = {'modificationDate': -1};
 
     Dood.find(conditions, fields)
@@ -58,7 +58,7 @@ exports.list = function (req, res) {
  * @param req
  * @param res
  */
-exports.detail = function (req, res) {
+exports.userDetails = function (req, res) {
     var conditions = {gebruikersnaam: req.params._gebruikersnaam}, fields = {};
 
     Dood.findOne(conditions, fields)
@@ -81,7 +81,7 @@ exports.detail = function (req, res) {
  * @param req
  * @param res
  */
-exports.updateOne = function (req, res) {
+exports.updatePassword = function (req, res) {
     var conditions = {gebruikersnaam: req.params._gebruikersnaam},
         update = {
             wachtwoord: req.body.wachtwoord
@@ -111,7 +111,7 @@ exports.updateOne = function (req, res) {
  * @param req
  * @param res
  */
-exports.deleteOne = function (req, res) {
+exports.deleteUser = function (req, res) {
     var conditions, callback, retObj;
 
     conditions = {gebruikersnaam: req.params._gebruikersnaam};
