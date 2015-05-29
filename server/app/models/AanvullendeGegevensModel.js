@@ -14,7 +14,7 @@
         modelName = "AanvullendeGegevens";
 
     aanvullendeGegevens = new Schema({
-        gebruikersnaam: {type: String, ref: 'Gebruiker.gebruikersnaam', required: true},
+        gebruikersnaam: {type: Schema.ObjectId, ref: 'Gebruiker', required: true},
         religie: {type: String, required: true},
         donor: {type: String, required: true}
     },
