@@ -90,9 +90,8 @@ exports.segmentDetails = function (req, res) {
 exports.updateSegment = function (req, res) {
     var conditions = {gebruikersnaam: req.params._gebruikersnaam, volgnummer: req.params._volgnummer},
         update = {
-            naam: req.body.naam,
-            email: req.body.email,
-            bericht: req.body.bericht
+            object: req.body.object,
+            percentage: req.body.percentage
         },
         options = {multi: false},
         callback = function (err, doc) {
