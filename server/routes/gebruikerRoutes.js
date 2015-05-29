@@ -16,7 +16,7 @@ router
 
 // RETRIEVE
 router
-    .get('/gebruiker', controller.allUsers)
+    .get('/gebruiker', controller.alleGebruikers())
     .get('/gebruiker/:_gebruikersnaam', controller.gebruikerDetails);
 
 // UPDATE
