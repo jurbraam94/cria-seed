@@ -67,7 +67,7 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
 
                     JSON.parse(res.text)
                         .should.have.property('gebruikersnaam')
-                        .and.have.property('wachtwoord').be.exactly('Createusertest');
+                        .and.have.property('wachtwoord');
                     res.statusCode.should.be.exactly(200);
 
                     done();
