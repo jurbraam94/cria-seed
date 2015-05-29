@@ -5,7 +5,7 @@
 "use strict";
 
 var mongoose = require('mongoose'),
-    AlgemeneGegevens = mongoose.model('UitvaartSamenstellen');
+    UitvaartSamenstellen = mongoose.model('UitvaartSamenstellen');
 
 /**
  * create function
@@ -13,7 +13,7 @@ var mongoose = require('mongoose'),
  * @param res
  */
 exports.UitvaartSamenstellenMaken = function (req, res) {
-    var doc = new AlgemeneGegevens(req.body);
+    var doc = new UitvaartSamenstellen(req.body);
 
     doc.save(function (err) {
         var retObj = {
@@ -38,7 +38,7 @@ exports.UitvaartSamenstellenMaken = function (req, res) {
 exports.UitvaartSamenstellenDetails = function (req, res) {
     var conditions = {gebruikersnaam: req.params._gebruikersnaam}, fields = {};
 
-    AlgemeneGegevens.findOne(conditions, fields)
+    UitvaartSamenstellen.findOne(conditions, fields)
         .exec(function (err, doc) {
             var retObj = {
                 meta: {
@@ -80,5 +80,5 @@ exports.UitvaartSamenstellenUpdaten = function (req, res) {
             return res.send(retObj);
         };
 
-    AlgemeneGegevens.findOneAndUpdate(conditions, update, options, callback);
+    UitvaartSamenstellen.findOneAndUpdate(conditions, update, options, callback);
 };

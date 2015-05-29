@@ -14,7 +14,7 @@
         gebruikersnaam: {type: String, required: true, unique: true},
         tijdsduur: {type: Number, required: true},
     },
-        { collection: 'uitvaartSamenstellen' });
+        { collection: 'UitvaartSamenstellen' });
 
     module.exports = mongoose.model(modelName, uitvaartSamenstellen);
 }());
