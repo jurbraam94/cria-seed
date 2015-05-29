@@ -17,6 +17,6 @@
         content: {type: String, required: true},
         volgnummer: {type: Number, required: true, unique: true}
     },
-        { collection: 'wishlist' });
+        { collection: 'Wishlist' });
     module.exports = mongoose.model(modelName, wishlist);
 }());
