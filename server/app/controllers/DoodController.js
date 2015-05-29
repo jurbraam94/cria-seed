@@ -83,9 +83,11 @@ exports.detail = function (req, res) {
  */
 exports.updateOne = function (req, res) {
     var conditions = {gebruikersnaam: req.params._gebruikersnaam},
+        fields = {},
+        gebruiker = Dood.find(conditions, fields),
         update = {
-            gebruikersnaam: req.body.gebruikersnaam || '',
-            wachtwoord: req.body.wachtwoord || ''
+            gebruikersnaam: req.body.gebruikersnaam || gebruiker.gebruikersnaam,
+            wachtwoord: req.body.wachtwoord || gebruiker.wachtwoord
         },
         options = {multi: false},
         callback = function (err, doc) {
