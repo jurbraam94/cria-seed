@@ -2,7 +2,7 @@
 "use strict";
 
 var mongoose = require('mongoose'),
-    Gebruiker = mongoose.model('Dood');
+    Gebruiker = mongoose.model('Gebruiker');
 
 /**
  * create function

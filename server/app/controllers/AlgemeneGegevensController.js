@@ -5,7 +5,7 @@
 "use strict";
 
 var mongoose = require('mongoose'),
-    Dood = mongoose.model('Dood');
+    Dood = mongoose.model('AlgemeneGegevens');
 
 /**
  * retrieve one function

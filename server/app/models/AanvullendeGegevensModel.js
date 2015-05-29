@@ -11,14 +11,14 @@
     var mongoose = require('mongoose'),
         Schema = mongoose.Schema,
         aanvullendeGegevens,
-        modelName = "AanvullendeGegevensModel";
+        modelName = "AanvullendeGegevens";
 
     aanvullendeGegevens = new Schema({
             gebruikersnaam: {type: Schema.ObjectId, ref: 'Gebruiker.gebruiker'},
             religie: {type: String, required: false},
             Donor: {type: String, required: false}
         },
-        { collection: 'aanvullendeGegevens' });
+        { collection: 'AanvullendeGegevens' });
 
     module.exports = mongoose.model(modelName, aanvullendeGegevens);
 }());

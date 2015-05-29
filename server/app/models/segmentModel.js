@@ -16,6 +16,6 @@
         percentage: {type: String, required: false},
         volgnummer: {type: String, required: false}
     },
-        { collection: 'segment' });
+        { collection: 'Segment' });
     module.exports = mongoose.model(modelName, segment);
 }());

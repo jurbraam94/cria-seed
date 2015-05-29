@@ -11,13 +11,13 @@
     var mongoose = require('mongoose'),
         Schema = mongoose.Schema,
         muziek,
-        modelName = "MuziekModel";
+        modelName = "Muziek";
 
     muziek = new Schema({
             gebruikersnaam: {type: Schema.ObjectId, ref: 'Gebruiker.gebruiker'},
             playlistId: {type: String, required: false}
         },
-        { collection: 'muziek' });
+        { collection: 'Muziek' });
 
     module.exports = mongoose.model(modelName, muziek);
 }());

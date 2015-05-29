@@ -14,6 +14,6 @@
         gebruikersnaam: {type: String, required: true, unique: true},
         wachtwoord: {type: String, required: true}
     },
-        { collection: 'gebruiker' });
+        { collection: 'Gebruiker' });
     module.exports = mongoose.model(modelName, gebruiker);
 }());

@@ -16,6 +16,6 @@
         duurOpbaring: {type: Number, required: false},
         beschrijvingOpbaring: {type: Number, required: false}
     },
-        { collection: 'uitvaart' });
+        { collection: 'Uitvaart' });
     module.exports = mongoose.model(modelName, uitvaart);
 }());

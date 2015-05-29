@@ -16,6 +16,6 @@
         email: {type: String, required: false},
         bericht: {type: String, required: false}
     },
-        { collection: 'notificatie' });
+        { collection: 'Notificatie' });
     module.exports = mongoose.model(modelName, notificatie);
 }());

@@ -10,15 +10,15 @@
      */
     var mongoose = require('mongoose'),
         Schema = mongoose.Schema,
-        fotos,
-        modelName = "FotoModel";
+        foto,
+        modelName = "Foto";
 
-    fotos = new Schema({
+    foto = new Schema({
             gebruikersnaam: {type: Schema.ObjectId, ref: 'Gebruiker.gebruiker'},
             bestandsnaam: {type: String, required: false},
             volgnummer: {type: Number, required: false}
         },
-        { collection: 'fotos' });
+        { collection: 'Foto' });
 
-    module.exports = mongoose.model(modelName, fotos);
+    module.exports = mongoose.model(modelName, foto);
 }());

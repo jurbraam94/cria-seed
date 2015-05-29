@@ -2,7 +2,7 @@
 "use strict";
 
 var mongoose = require('mongoose'),
-    Dood = mongoose.model('Dood');
+    Dood = mongoose.model('AanvullendeGegevens');
 
 /**
  * retrieve one function
@@ -20,7 +20,7 @@ exports.aanvullendeGegevens = function (req, res) {
                     'timestamp': new Date(),
                     filename: __filename
                 },
-                doc: doc.aanvullendeGegevens, // only the first document, not an array when using "findOne"
+                doc: doc, // only the first document, not an array when using "findOne"
                 err: err
             };
             return res.send(retObj);

@@ -11,7 +11,7 @@
     var mongoose = require('mongoose'),
         Schema = mongoose.Schema,
         algemeneGegevens,
-        modelName = "AlgemeneGegevensModel";
+        modelName = "AlgemeneGegevens";
 
     algemeneGegevens = new Schema({
             gebruikersnaam: {type: Schema.ObjectId, ref: 'Gebruiker.gebruiker'},
@@ -24,7 +24,7 @@
             telefoon: {type: String, required: false},
             email: {type: String, required: false}
         },
-        { collection: 'algemeneGegevens' });
+        { collection: 'AlgemeneGegevens' });
 
     module.exports = mongoose.model(modelName, algemeneGegevens);
 }());
