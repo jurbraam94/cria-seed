@@ -61,7 +61,6 @@ exports.UitvaartDetails = function (req, res) {
 exports.UitvaartUpdaten = function (req, res) {
     var conditions = {gebruikersnaam: req.params._gebruikersnaam},
         update = {
-            gebruikersnaam: req.body.gebruikersnaam,
             locatie: req.body.locatie,
             duurOpbaring: req.body.duurOpbaring,
             beschrijvingOpbaring: req.body.beschrijvingOpbaring || ''
