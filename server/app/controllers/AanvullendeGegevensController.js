@@ -58,7 +58,7 @@ exports.updateAanvullendeGegevens = function (req, res) {
     var conditions = {gebruikersnaam: req.params._gebruikersnaam},
         update = {
             religie: req.body.religie,
-            Donor: req.body.donor
+            donor: req.body.donor
         },
         options = {multi: false},
         callback = function (err, doc) {
