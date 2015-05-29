@@ -14,15 +14,15 @@
         modelName = "AlgemeneGegevens";
 
     algemeneGegevens = new Schema({
-        gebruikersnaam: {type: Schema.ObjectId, ref: 'Gebruiker.gebruiker'},
-        voornaam: {type: String, required: false},
-        achternaam: {type: String, required: false},
-        woonplaats: {type: String, required: false},
-        postcode: {type: String, required: false},
-        adres: {type: String, required: false},
-        huisnummer: {type: Number, required: false},
-        telefoon: {type: String, required: false},
-        email: {type: String, required: false}
+        gebruikersnaam: {type: String, required: true, unique: true},
+        voornaam: {type: String, required: true},
+        achternaam: {type: String, required: true},
+        woonplaats: {type: String, required: true},
+        postcode: {type: String, required: true},
+        adres: {type: String, required: true},
+        huisnummer: {type: Number, required: true},
+        telefoon: {type: String, required: true},
+        email: {type: String, required: true}
     },
         { collection: 'AlgemeneGegevens' });
 

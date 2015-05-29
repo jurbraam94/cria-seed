@@ -14,9 +14,9 @@
         modelName = "Foto";
 
     foto = new Schema({
-        gebruikersnaam: {type: Schema.ObjectId, ref: 'Gebruiker.gebruiker'},
-        bestandsnaam: {type: String, required: false},
-        volgnummer: {type: Number, required: false}
+        gebruikersnaam: {type: String, required: true},
+        bestandsnaam: {type: String, required: true},
+        volgnummer: {type: Number, required: true}
     },
         { collection: 'Foto' });
 
