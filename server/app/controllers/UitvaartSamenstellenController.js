@@ -61,7 +61,7 @@ exports.UitvaartSamenstellenDetails = function (req, res) {
 exports.UitvaartSamenstellenUpdaten = function (req, res) {
     var conditions = {gebruikersnaam: req.params._gebruikersnaam},
         update = {
-            tijdsduur: req.body.voornaam
+            tijdsduur: req.body.tijdsduur
         },
         options = {multi: false},
         callback = function (err, doc) {
