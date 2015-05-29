@@ -92,11 +92,11 @@
         fotos: [{type: mongoose.Schema.Types.ObjectId, ref: 'fotos'}],
         wishlist: [{type: mongoose.Schema.Types.ObjectId, ref: 'wishlist'}],
         notificatie: [{type: mongoose.Schema.Types.ObjectId, ref: 'notificatie'}],
-        uitvaartSamenstellen: {type: mongoose.Schema.Types.ObjectId, ref: 'uitvaartSamenstellen'}
+        uitvaartSamenstellen: {type: uitvaartSamenstellen, ref: 'uitvaartSamenstellen'}
     },
         { collection: 'gebruiker' });
 
-    console.log(algemeneGegevens, aanvullendeGegevens, uitvaart, muziek, fotos, wishlist, notificatie, uitvaartSamenstellen, segment);
+    console.log(algemeneGegevens, aanvullendeGegevens, uitvaart, muziek, fotos, wishlist, notificatie, segment);
     modelName = "Dood";
     module.exports = mongoose.model(modelName, gebruiker);
 }());
