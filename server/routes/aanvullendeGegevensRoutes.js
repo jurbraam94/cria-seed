@@ -8,7 +8,7 @@ var router = express.Router();
 /**
  * Aanvullende gegevens routes
  */
-var controller = require('../app/controllers/aanvullendeGegevensController.js');
+var controller = require('../app/controllers/AanvullendeGegevensController.js');
 
 /** CREATE route for books */
 router
