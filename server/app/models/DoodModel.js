@@ -87,14 +87,14 @@
     gebruiker = new Schema({
         gebruikersnaam: {type: String, required: true, unique: true},
         wachtwoord: {type: String, required: true},
-        algemeneGegevens: [{type: mongoose.Schema.Types.ObjectId, ref: 'algemeneGegevens'}],
-        aanvullendeGegevens: [{type: mongoose.Schema.Types.ObjectId, ref: 'aanvullendeGegevens'}],
-        uitvaart: [{type: mongoose.Schema.Types.ObjectId, ref: 'uitvaart'}],
+        algemeneGegevens: {type: mongoose.Schema.Types.ObjectId, ref: 'algemeneGegevens'},
+        aanvullendeGegevens: {type: mongoose.Schema.Types.ObjectId, ref: 'aanvullendeGegevens'},
+        uitvaart: {type: mongoose.Schema.Types.ObjectId, ref: 'uitvaart'},
         muziek: [{type: mongoose.Schema.Types.ObjectId, ref: 'muziek'}],
         fotos: [{type: mongoose.Schema.Types.ObjectId, ref: 'fotos'}],
         wishlist: [{type: mongoose.Schema.Types.ObjectId, ref: 'wishlist'}],
         notificatie: [{type: mongoose.Schema.Types.ObjectId, ref: 'notificatie'}],
-        uitvaartSamenstellen: [{type: mongoose.Schema.Types.ObjectId, ref: 'uitvaartSamenstellen'}]
+        uitvaartSamenstellen: {type: mongoose.Schema.Types.ObjectId, ref: 'uitvaartSamenstellen'}
     },
         { collection: 'gebruiker' });
 
