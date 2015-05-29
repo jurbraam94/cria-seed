@@ -2,17 +2,39 @@
 "use strict";
 
 var mongoose = require('mongoose'),
-    Dood = mongoose.model('AanvullendeGegevens');
+    AanvullendeGegevens = mongoose.model('AanvullendeGegevens');
 
 /**
  * retrieve one function
  * @param req
  * @param res
  */
+exports.aanvullendeGegevensAanmaken = function (req, res) {
+
+    var doc = new AanvullendeGegevens(req.body);
+
+    doc.save(function (err) {
+
+        var retObj = {
+            meta: {
+                "action": "create",
+                'timestamp': new Date(),
+                filename: __filename
+            },
+            doc: doc,
+            err: err
+        };
+
+        return res.send(retObj);
+
+    });
+
+};
+
 exports.aanvullendeGegevens = function (req, res) {
     var conditions = {gebruikersnaam: req.params._gebruikersnaam}, fields = {};
 
-    Dood.findOne(conditions, fields)
+    AanvullendeGegevens.findOne(conditions, fields)
         .exec(function (err, doc) {
             var retObj = {
                 meta: {
@@ -55,5 +77,5 @@ exports.updateAanvullendeGegevens = function (req, res) {
             return res.send(retObj);
         };
 
-    Dood.findOneAndUpdate(conditions, update, options, callback);
+    AanvullendeGegevens.findOneAndUpdate(conditions, update, options, callback);
 };

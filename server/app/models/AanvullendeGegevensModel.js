@@ -16,7 +16,7 @@
     aanvullendeGegevens = new Schema({
         gebruikersnaam: {type: Schema.ObjectId, ref: 'Gebruiker.gebruiker'},
         religie: {type: String, required: false},
-        Donor: {type: String, required: false}
+        donor: {type: String, required: false}
     },
         { collection: 'AanvullendeGegevens' });
 
