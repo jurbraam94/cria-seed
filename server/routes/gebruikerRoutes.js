@@ -8,7 +8,7 @@ var router = express.Router();
 /**
  * Gebruiker routes
  */
-var controller = require('../app/controllers/gebruikerController.js');
+var controller = require('../app/controllers/GebruikerController.js');
 
 /** CREATE route for Gebruiker */
 router
