@@ -9,11 +9,11 @@ var express = require('express');
 var router = express.Router();
 
 /**
- * Gebruiker routes
+ * Algemene gegevens routes
  */
 var controller = require('../app/controllers/AlgemeneGegevensController.js');
 
-/** CREATE route for Gebruiker */
+/** CREATE route for Algemene gegevens */
 router
     .post('/algemeneGegevens', controller.algGegevensAanmaken);
 
