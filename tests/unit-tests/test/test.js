@@ -41,10 +41,10 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
                     res.charset.should.be.exactly('utf-8');
                     JSON.parse(res.text)
                         .should.have.property('doc')
-                        .and.have.property('Createusertest')
-                        .be.exactly('jur')
-                        .and.have.property('Createusertest')
-                        .be.exactly('jur');
+                        .and.have.property('gebruikersnaam')
+                        .be.exactly('Createusertest')
+                        .and.have.property('wachtwoord')
+                        .be.exactly('Createusertest');
 
                     done();
                 });
