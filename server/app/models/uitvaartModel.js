@@ -11,9 +11,9 @@
         modelName = "Uitvaart";
 
     uitvaart = new Schema({
-        gebruiker: [{type: Schema.ObjectId, ref: 'Gebruiker'}],
-        locatie: {type: String, required: false},
-        duurOpbaring: {type: Number, required: false},
+        gebruikersnaam: {type: String, required: true, unique: true},
+        locatie: {type: String, required: true},
+        duurOpbaring: {type: Number, required: true},
         beschrijvingOpbaring: {type: Number, required: false}
     },
         { collection: 'Uitvaart' });

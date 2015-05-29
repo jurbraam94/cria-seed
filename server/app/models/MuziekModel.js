@@ -14,8 +14,8 @@
         modelName = "Muziek";
 
     muziek = new Schema({
-        gebruikersnaam: {type: Schema.ObjectId, ref: 'Gebruiker.gebruiker'},
-        playlistId: {type: String, required: false}
+        gebruikersnaam: {type: String, required: true, unique: true},
+        playlistId: {type: String, required: true}
     },
         { collection: 'Muziek' });
 
