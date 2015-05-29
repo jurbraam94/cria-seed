@@ -104,9 +104,7 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
             request
                 .put('/gebruiker/' + 'jur')
                 .send({
-                    "body": {
-                        "wachtwoord": "wachtwoord"
-                    }
+                    "wachtwoord": "wachtwoord"
                 })
                 .expect(200)                                                // supertest
                 .expect('Content-Type', /application.json/)                 // supertest
