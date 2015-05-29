@@ -52,6 +52,53 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
         });
     });
 
+    describe('RETRIEVE all gebruikers', function () {
+
+        it('Should GET /gebruiker', function (done) {
+            request
+                .get('/gebruiker')
+                .expect(200)                                                // supertest
+                .expect('Content-Type', /application.json/)                 // supertest
+                .expect('Content-Type', 'utf-8')                            // supertest
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+
+                    JSON.parse(res.text)
+                        .should.have.property('gebruikersnaam')
+                        .and.have.property('wachtwoord').be.exactly('Createusertest');
+                    res.statusCode.should.be.exactly(200);
+
+                    done();
+                });
+        });
+    });
+
+    describe('RETRIEVE 1 gebruiker', function () {
+        it('Should GET /gebruiker/{gebruikersnaam}', function (done) {
+            request
+                .get('/gebruiker/' + 'Createusertest')
+                .expect('Content-Type', /application.json/)
+                .expect(200)
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('gebruikersnaam')
+                        .be.exactly('Createusertest');
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('wachtwoord')
+                        .be.exactly('Createusertest');
+                    res.statusCode.should.be.exactly(200);
+                    done();
+                });
+        });
+    });
+
 });
 
 describe('API Routing for CRUD operations on Books', function () {
