@@ -16,12 +16,12 @@ router
 
 // RETRIEVE
 router
-    .get('/gebruiker', controller.allUsers)
+    .get('/gebruiker', controller.alleGebruikers)
     .get('/gebruiker/:_gebruikersnaam', controller.gebruikerDetails);
 
 // UPDATE
 router
-    .put('/gebruiker/:_gebruikersnaam', controller.updateWachtwoord());
+    .put('/gebruiker/:_gebruikersnaam', controller.updateWachtwoord);
 
 // DELETE
 router
