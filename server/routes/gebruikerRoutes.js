@@ -1,31 +1,31 @@
 /*jslint node:true */
 
-/** @module Routes for Dood */
+/** @module Routes for Gebruiker */
 /** @class */
 var express = require('express');
 var router = express.Router();
 
 /**
- * Dood routes
+ * Gebruiker routes
  */
 var controller = require('../app/controllers/gebruikerController.js');
 
-/** CREATE route for Dood */
+/** CREATE route for Gebruiker */
 router
-    .post('/gebruiker', controller.createUser);
+    .post('/gebruiker', controller.gebruikerAanmaken);
 
 // RETRIEVE
 router
     .get('/gebruiker', controller.allUsers)
-    .get('/gebruiker/:_gebruikersnaam', controller.userDetails);
+    .get('/gebruiker/:_gebruikersnaam', controller.gebruikerDetails);
 
 // UPDATE
 router
-    .put('/gebruiker/:_gebruikersnaam', controller.updatePassword);
+    .put('/gebruiker/:_gebruikersnaam', controller.updateWachtwoord());
 
 // DELETE
 router
-    .delete('/gebruiker/:_gebruikersnaam', controller.deleteUser);
+    .delete('/gebruiker/:_gebruikersnaam', controller.gebruikerVerwijderen);
 
 
 module.exports = router;
