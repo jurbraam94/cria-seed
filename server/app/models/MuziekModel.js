@@ -14,9 +14,9 @@
         modelName = "Muziek";
 
     muziek = new Schema({
-            gebruikersnaam: {type: Schema.ObjectId, ref: 'Gebruiker.gebruiker'},
-            playlistId: {type: String, required: false}
-        },
+        gebruikersnaam: {type: Schema.ObjectId, ref: 'Gebruiker.gebruiker'},
+        playlistId: {type: String, required: false}
+    },
         { collection: 'Muziek' });
 
     module.exports = mongoose.model(modelName, muziek);
