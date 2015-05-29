@@ -15,15 +15,15 @@ var controller = require('../app/controllers/FotoController.js');
 
 /** CREATE route for Foto */
 router
-    .post('/gebruiker', controller.fotoUploaden());
+    .post('/foto', controller.fotoUploaden);
 
 // RETRIEVE
 router
-    .get('/gebruiker', controller.alleFotos)
-    .get('/gebruiker/:_gebruikersnaam', controller.fotoDetails());
+    .get('/foto', controller.alleFotos)
+    .get('/foto/:_gebruikersnaam', controller.fotoDetails);
 
 // DELETE
 router
-    .delete('/gebruiker/:_gebruikersnaam', controller.fotoVerwijderen());
+    .delete('/foto/:_gebruikersnaam', controller.fotoVerwijderen);
 
 module.exports = router;
