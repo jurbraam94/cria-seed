@@ -559,7 +559,7 @@ describe('API Routing for CRUD operations on Muziek', function () {
                     JSON.parse(res.text)
                         .should.have.property('doc')
                         .and.have.property('playlistId')
-                        .be.exactly(1);
+                        .be.exactly(3);
                     res.statusCode.should.be.exactly(200);
                     done();
                 });
