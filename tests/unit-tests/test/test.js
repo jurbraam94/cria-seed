@@ -416,7 +416,7 @@ describe('API Routing for CRUD operations on Foto', function () {
                     JSON.parse(res.text)
                         .should.have.property('doc')
                         .and.have.property('volgnummer')
-                        .be.exactly('1337')
+                        .be.exactly(1337)
                     done();
                 });
         });
