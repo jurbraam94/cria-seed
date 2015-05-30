@@ -887,9 +887,9 @@ describe('API Routing for CRUD operations on Uitvaart samenstellen', function ()
     });
 
     describe('CREATE Uitvaart samenstellen', function () {
-        it('Should POST /segment', function (done) {
+        it('Should POST /uitvaartSamenstellen', function (done) {
             request
-                .post('/segment')
+                .post('/uitvaartSamenstellen')
                 .send({
                     "gebruikersnaam": "Createusertest",
                     "tijdsduur" : 40
@@ -922,10 +922,10 @@ describe('API Routing for CRUD operations on Uitvaart samenstellen', function ()
         });
     });
 
-    describe('RETRIEVE 1 Segment', function () {
-        it('Should GET /segment/{gebruikersnaam}', function (done) {
+    describe('RETRIEVE 1 uitvaart samenstellen', function () {
+        it('Should GET /uitvaartSamenstellen/{gebruikersnaam}', function (done) {
             request
-                .get('/segment/' + 'jur')
+                .get('/uitvaartSamenstellen/' + 'jur')
                 .expect('Content-Type', /application.json/)
                 .expect(200)
                 .end(function (err, res) {
@@ -947,9 +947,9 @@ describe('API Routing for CRUD operations on Uitvaart samenstellen', function ()
     });
 
     describe('UPDATE 1 Uitvaart samenstellen', function () {
-        it('Should PUT /segment/{gebruikersnaam}', function (done) {
+        it('Should PUT /uitvaartSamenstellen/{gebruikersnaam}', function (done) {
             request
-                .put('/segment/' + 'jur')
+                .put('/uitvaartSamenstellen/' + 'jur')
                 .send({
                     "tijdsduur" : 30
                 })
