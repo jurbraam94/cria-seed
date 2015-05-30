@@ -500,7 +500,71 @@ describe('API Routing for CRUD operations on Foto', function () {
 });
 
 describe('API Routing for CRUD operations on Muziek', function () {
-    // Hier de Aanvullende gegevens API tests
+    var request = supertest(localConfig.host + ":" + config.port + "/" + localConfig.api_path);
+
+    before(function (done) {
+        done();
+    });
+
+    describe('CREATE music playlist', function () {
+        it('Should POST /muziek', function (done) {
+            request
+                .post('/muziek')
+                .send({
+                    "gebruikersnaam": "Createusertest",
+                    "playlistId": "1337"
+                })
+                .expect(200)                                                // supertest
+                .expect('Content-Type', /application.json/)                 // supertest
+                .expect('Content-Type', 'utf-8')                            // supertest
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+                    JSON.parse(res.text)
+                        .should.have.property('meta')
+                        .and.have.property('action').be.exactly('create');
+                    JSON.parse(res.text)
+                        .should.have.property('err').be.exactly(null);
+                    res.statusCode.should.be.exactly(200);
+                    res.type.should.be.exactly('application/json');
+                    res.charset.should.be.exactly('utf-8');
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('gebruikersnaam')
+                        .be.exactly('Createusertest')
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('playlistId')
+                        .be.exactly(1337)
+                    done();
+                });
+        });
+    });
+
+    describe('RETRIEVE playlist of a user', function () {
+        it('Should GET /muziek/{gebruikersnaam}', function (done) {
+            request
+                .get('/foto/' + 'jur')
+                .expect('Content-Type', /application.json/)
+                .expect(200)
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('gebruikersnaam')
+                        .be.exactly('jur');
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('playlistId')
+                        .be.exactly(1);
+                    res.statusCode.should.be.exactly(200);
+                    done();
+                });
+        });
+    });
 });
 
 describe('API Routing for CRUD operations on Notificatie', function () {
