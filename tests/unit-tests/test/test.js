@@ -880,7 +880,103 @@ describe('API Routing for CRUD operations on Segment', function () {
 });
 
 describe('API Routing for CRUD operations on Uitvaart samenstellen', function () {
-    // Hier de Aanvullende gegevens API tests
+    var request = supertest(localConfig.host + ":" + config.port + "/" + localConfig.api_path);
+
+    before(function (done) {
+        done();
+    });
+
+    describe('CREATE Uitvaart samenstellen', function () {
+        it('Should POST /segment', function (done) {
+            request
+                .post('/segment')
+                .send({
+                    "gebruikersnaam": "Createusertest",
+                    "tijdsduur" : 40
+                })
+                .expect(200)                                                // supertest
+                .expect('Content-Type', /application.json/)                 // supertest
+                .expect('Content-Type', 'utf-8')                            // supertest
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+                    JSON.parse(res.text)
+                        .should.have.property('meta')
+                        .and.have.property('action').be.exactly('create');
+                    JSON.parse(res.text)
+                        .should.have.property('err').be.exactly(null);
+                    res.statusCode.should.be.exactly(200);
+                    res.type.should.be.exactly('application/json');
+                    res.charset.should.be.exactly('utf-8');
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('gebruikersnaam')
+                        .be.exactly('Createusertest')
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('tijdsduur')
+                        .be.exactly(40)
+                    done();
+                });
+        });
+    });
+
+    describe('RETRIEVE 1 Segment', function () {
+        it('Should GET /segment/{gebruikersnaam}', function (done) {
+            request
+                .get('/segment/' + 'jur')
+                .expect('Content-Type', /application.json/)
+                .expect(200)
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('gebruikersnaam')
+                        .be.exactly('jur');
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('tijdsduur')
+                        .be.exactly(60);
+                    res.statusCode.should.be.exactly(200);
+                    done();
+                });
+        });
+    });
+
+    describe('UPDATE 1 Uitvaart samenstellen', function () {
+        it('Should PUT /segment/{gebruikersnaam}', function (done) {
+            request
+                .put('/segment/' + 'jur')
+                .send({
+                    "tijdsduur" : 30
+                })
+                .expect(200)                                                // supertest
+                .expect('Content-Type', /application.json/)                 // supertest
+                .expect('Content-Type', 'utf-8')                            // supertest
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+
+                    JSON.parse(res.text)
+                        .should.have.property('meta')
+                        .and.have.property('action')
+                        .be.exactly('update');
+                    JSON.parse(res.text)
+                        .should.have.property('err')
+                        .be.exactly(null);
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('tijdsduur')
+                        .be.exactly(30);
+                    res.statusCode.should.be.exactly(200);
+                    done();
+                });
+        });
+    });
 });
 
 describe('API Routing for CRUD operations on Uitvaart', function () {
