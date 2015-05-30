@@ -277,7 +277,105 @@ describe('API Routing for CRUD operations on Algemene gegevens', function () {
 });
 
 describe('API Routing for CRUD operations on Aanvullende gegevens', function () {
-    // Hier de Aanvullende gegevens API tests
+    var request = supertest(localConfig.host + ":" + config.port + "/" + localConfig.api_path);
+
+    before(function (done) {
+        done();
+    });
+
+    describe('CREATE Aanvullende gegevens', function () {
+        it('Should POST /aanvullendeGegevens', function (done) {
+            request
+                .post('/aanvullendeGegevens')
+                .send({
+                    "gebruikersnaam": "test",
+                    "religie": "Christelijk",
+                    "donor": "Ja"
+                })
+                .expect(200)                                                // supertest
+                .expect('Content-Type', /application.json/)                 // supertest
+                .expect('Content-Type', 'utf-8')                            // supertest
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+                    JSON.parse(res.text)
+                        .should.have.property('meta')
+                        .and.have.property('action').be.exactly('create');
+                    JSON.parse(res.text)
+                        .should.have.property('err').be.exactly(null);
+                    res.statusCode.should.be.exactly(200);
+                    res.type.should.be.exactly('application/json');
+                    res.charset.should.be.exactly('utf-8');
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('gebruikersnaam')
+                        .be.exactly('test')
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('donor')
+                        .be.exactly('Ja')
+                    done();
+                });
+        });
+    });
+
+    describe('RETRIEVE 1 Aanvullende gegevens', function () {
+        it('Should GET /aanvullendeGegevens/{gebruikersnaam}', function (done) {
+            request
+                .get('/aanvullendeGegevens/' + 'jur')
+                .expect('Content-Type', /application.json/)
+                .expect(200)
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('gebruikersnaam')
+                        .be.exactly('jur');
+                    JSON.parse(res.text)
+                        .should.have.property('religie')
+                        .and.have.property('Christelijk')
+                        .be.exactly(20);
+                    res.statusCode.should.be.exactly(200);
+                    done();
+                });
+        });
+    });
+
+    describe('UPDATE 1 Aanvullende gegevens', function () {
+        it('Should PUT /aanvullendeGegevens/{gebruikersnaam}', function (done) {
+            request
+                .put('/aanvullendeGegevens/' + 'jur')
+                .send({
+                    "religie": "Joods",
+                    "donor": "Nee"
+                })
+                .expect(200)                                                // supertest
+                .expect('Content-Type', /application.json/)                 // supertest
+                .expect('Content-Type', 'utf-8')                            // supertest
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+
+                    JSON.parse(res.text)
+                        .should.have.property('meta')
+                        .and.have.property('action')
+                        .be.exactly('update');
+                    JSON.parse(res.text)
+                        .should.have.property('err')
+                        .be.exactly(null);
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('religie')
+                        .be.exactly('Joods');
+                    res.statusCode.should.be.exactly(200);
+                    done();
+                });
+        });
+    });
 });
 
 describe('API Routing for CRUD operations on Foto', function () {
