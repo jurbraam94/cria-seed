@@ -161,3 +161,39 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
     });
 
 });
+
+describe('API Routing for CRUD operations on Algemene gegevens', function () {
+    // Hier de Aanvullende gegevens API tests
+});
+
+describe('API Routing for CRUD operations on Aanvullende gegevens', function () {
+    // Hier de Aanvullende gegevens API tests
+});
+
+describe('API Routing for CRUD operations on Foto', function () {
+    // Hier de Aanvullende gegevens API tests
+});
+
+describe('API Routing for CRUD operations on Muziek', function () {
+    // Hier de Aanvullende gegevens API tests
+});
+
+describe('API Routing for CRUD operations on Notificatie', function () {
+    // Hier de Aanvullende gegevens API tests
+});
+
+describe('API Routing for CRUD operations on Segment', function () {
+    // Hier de Aanvullende gegevens API tests
+});
+
+describe('API Routing for CRUD operations on Uitvaart samenstellen', function () {
+    // Hier de Aanvullende gegevens API tests
+});
+
+describe('API Routing for CRUD operations on Uitvaart', function () {
+    // Hier de Aanvullende gegevens API tests
+});
+
+describe('API Routing for CRUD operations on Wishlist', function () {
+    // Hier de Aanvullende gegevens API tests
+});
