@@ -392,7 +392,7 @@ describe('API Routing for CRUD operations on Foto', function () {
                 .send({
                     "gebruikersnaam": "Createusertest",
                     "bestandsnaam": "testfoto.JPG",
-                    "volgnummer": "1337"
+                    "volgnummer": 1337
                 })
                 .expect(200)                                                // supertest
                 .expect('Content-Type', /application.json/)                 // supertest
@@ -615,9 +615,9 @@ describe('API Routing for CRUD operations on Notificatie', function () {
 
     describe('RETRIEVE all notificatie', function () {
 
-        it('Should GET /notificatie', function (done) {
+        it('Should GET all /notificatie', function (done) {
             request
-                .get('/notificatie')
+                .get('/notificatie/' + 'jur')
                 .expect(200)                                                // supertest
                 .expect('Content-Type', /application.json/)                 // supertest
                 .expect('Content-Type', 'utf-8')                            // supertest
@@ -639,7 +639,7 @@ describe('API Routing for CRUD operations on Notificatie', function () {
     describe('RETRIEVE 1 notificatie', function () {
         it('Should GET /notificatie/{gebruikersnaam}', function (done) {
             request
-                .get('/gebruiker/' + 'Createusertest')
+                .get('/notificatie/' + 'jur/' + 1)
                 .expect('Content-Type', /application.json/)
                 .expect(200)
                 .end(function (err, res) {
@@ -649,11 +649,11 @@ describe('API Routing for CRUD operations on Notificatie', function () {
                     JSON.parse(res.text)
                         .should.have.property('doc')
                         .and.have.property('gebruikersnaam')
-                        .be.exactly('Createusertest');
+                        .be.exactly('jur');
                     JSON.parse(res.text)
                         .should.have.property('doc')
-                        .and.have.property('wachtwoord')
-                        .be.exactly('Createusertest');
+                        .and.have.property('bericht')
+                        .be.exactly('hoi');
                     res.statusCode.should.be.exactly(200);
                     done();
                 });
@@ -663,9 +663,11 @@ describe('API Routing for CRUD operations on Notificatie', function () {
     describe('UPDATE 1 notificatie', function () {
         it('Should PUT /notificatie/{gebruikersnaam}', function (done) {
             request
-                .put('/notificatie/' + 'jur')
+                .put('/notificatie/' + 'jur/' + 1)
                 .send({
-                    "wachtwoord": "wachtwoord"
+                    "email": "jur_braam@hotmail.com",
+                    "naam" : "jur",
+                    "bericht" :"niks"
                 })
                 .expect(200)                                                // supertest
                 .expect('Content-Type', /application.json/)                 // supertest
@@ -684,8 +686,8 @@ describe('API Routing for CRUD operations on Notificatie', function () {
                         .be.exactly(null);
                     JSON.parse(res.text)
                         .should.have.property('doc')
-                        .and.have.property('wachtwoord')
-                        .be.exactly('wachtwoord');
+                        .and.have.property('bericht')
+                        .be.exactly('niks');
                     res.statusCode.should.be.exactly(200);
                     done();
                 });
@@ -695,7 +697,7 @@ describe('API Routing for CRUD operations on Notificatie', function () {
     describe('DELETE 1 notificatie', function () {
         it('Should DELETE /notificatie/{gebruikersnaam}', function (done) {
             request
-                .del('/notificatie/' + 'Createusertest')
+                .del('/notificatie/' + 'Createusertest/' + 1337)
                 .expect(200)                                                // supertest
                 .expect('Content-Type', /application.json/)                 // supertest
                 .expect('Content-Type', 'utf-8')                            // supertest
