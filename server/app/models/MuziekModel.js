@@ -15,7 +15,7 @@
 
     muziek = new Schema({
         gebruikersnaam: {type: String, required: true, unique: true},
-        playlistId: {type: String, required: true}
+        playlistId: {type: Number, required: true}
     },
         { collection: 'Muziek' });
 

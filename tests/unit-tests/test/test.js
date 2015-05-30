@@ -545,7 +545,7 @@ describe('API Routing for CRUD operations on Muziek', function () {
     describe('RETRIEVE playlist of a user', function () {
         it('Should GET /muziek/{gebruikersnaam}', function (done) {
             request
-                .get('/foto/' + 'jur')
+                .get('/muziek/' + 'jur')
                 .expect('Content-Type', /application.json/)
                 .expect(200)
                 .end(function (err, res) {
