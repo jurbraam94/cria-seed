@@ -215,7 +215,7 @@ describe('API Routing for CRUD operations on Algemene gegevens', function () {
     describe('RETRIEVE 1 algemeneGegevens', function () {
         it('Should GET /algemeneGegevens/{gebruikersnaam}', function (done) {
             request
-                .get('/gebruiker/' + 'test')
+                .get('/algemeneGegevens/' + 'test')
                 .expect('Content-Type', /application.json/)
                 .expect(200)
                 .end(function (err, res) {
@@ -267,8 +267,8 @@ describe('API Routing for CRUD operations on Algemene gegevens', function () {
                         .be.exactly(null);
                     JSON.parse(res.text)
                         .should.have.property('doc')
-                        .and.have.property('wachtwoord')
-                        .be.exactly('wachtwoord');
+                        .and.have.property('woonplaats')
+                        .be.exactly('Dodewaard');
                     res.statusCode.should.be.exactly(200);
                     done();
                 });
