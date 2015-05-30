@@ -512,7 +512,7 @@ describe('API Routing for CRUD operations on Muziek', function () {
                 .post('/muziek')
                 .send({
                     "gebruikersnaam": "Createusertest",
-                    "playlistId": "1337"
+                    "playlistId": 1337
                 })
                 .expect(200)                                                // supertest
                 .expect('Content-Type', /application.json/)                 // supertest
@@ -568,7 +568,158 @@ describe('API Routing for CRUD operations on Muziek', function () {
 });
 
 describe('API Routing for CRUD operations on Notificatie', function () {
-    // Hier de Aanvullende gegevens API tests
+    var request = supertest(localConfig.host + ":" + config.port + "/" + localConfig.api_path);
+
+    before(function (done) {
+        done();
+    });
+
+    describe('CREATE Notificatie', function () {
+        it('Should POST /notificatie', function (done) {
+            request
+                .post('/notificatie')
+                .send({
+                    "gebruikersnaam": "Createusertest",
+                    "email": "Createusertest",
+                    "naam" : "jur",
+                    "bericht" :"boodschap" ,
+                    "volgnummer" : 1337
+                })
+                .expect(200)                                                // supertest
+                .expect('Content-Type', /application.json/)                 // supertest
+                .expect('Content-Type', 'utf-8')                            // supertest
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+                    JSON.parse(res.text)
+                        .should.have.property('meta')
+                        .and.have.property('action').be.exactly('create');
+                    JSON.parse(res.text)
+                        .should.have.property('err').be.exactly(null);
+                    res.statusCode.should.be.exactly(200);
+                    res.type.should.be.exactly('application/json');
+                    res.charset.should.be.exactly('utf-8');
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('gebruikersnaam')
+                        .be.exactly('Createusertest')
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('bericht')
+                        .be.exactly('boodschap')
+                    done();
+                });
+        });
+    });
+
+    describe('RETRIEVE all notificatie', function () {
+
+        it('Should GET /notificatie', function (done) {
+            request
+                .get('/notificatie')
+                .expect(200)                                                // supertest
+                .expect('Content-Type', /application.json/)                 // supertest
+                .expect('Content-Type', 'utf-8')                            // supertest
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+
+                    JSON.parse(res.text)
+                        .should.have.property('meta')
+                        .and.have.property('action').be.exactly('list');
+                    res.statusCode.should.be.exactly(200);
+
+                    done();
+                });
+        });
+    });
+
+    describe('RETRIEVE 1 notificatie', function () {
+        it('Should GET /notificatie/{gebruikersnaam}', function (done) {
+            request
+                .get('/gebruiker/' + 'Createusertest')
+                .expect('Content-Type', /application.json/)
+                .expect(200)
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('gebruikersnaam')
+                        .be.exactly('Createusertest');
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('wachtwoord')
+                        .be.exactly('Createusertest');
+                    res.statusCode.should.be.exactly(200);
+                    done();
+                });
+        });
+    });
+
+    describe('UPDATE 1 notificatie', function () {
+        it('Should PUT /notificatie/{gebruikersnaam}', function (done) {
+            request
+                .put('/notificatie/' + 'jur')
+                .send({
+                    "wachtwoord": "wachtwoord"
+                })
+                .expect(200)                                                // supertest
+                .expect('Content-Type', /application.json/)                 // supertest
+                .expect('Content-Type', 'utf-8')                            // supertest
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+
+                    JSON.parse(res.text)
+                        .should.have.property('meta')
+                        .and.have.property('action')
+                        .be.exactly('update');
+                    JSON.parse(res.text)
+                        .should.have.property('err')
+                        .be.exactly(null);
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('wachtwoord')
+                        .be.exactly('wachtwoord');
+                    res.statusCode.should.be.exactly(200);
+                    done();
+                });
+        });
+    });
+
+    describe('DELETE 1 notificatie', function () {
+        it('Should DELETE /notificatie/{gebruikersnaam}', function (done) {
+            request
+                .del('/notificatie/' + 'Createusertest')
+                .expect(200)                                                // supertest
+                .expect('Content-Type', /application.json/)                 // supertest
+                .expect('Content-Type', 'utf-8')                            // supertest
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+                    JSON.parse(res.text)
+                        .should.have.property('meta')
+                        .and.have.property('action').be.exactly('delete');
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('ok')
+                        .be.exactly(1);
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('n')
+                        .be.exactly(1);
+                    JSON.parse(res.text).should.have.property('err').be.exactly(null);
+                    res.statusCode.should.be.exactly(200);
+                    done();
+                });
+        });
+    });
 });
 
 describe('API Routing for CRUD operations on Segment', function () {
