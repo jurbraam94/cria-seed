@@ -379,7 +379,124 @@ describe('API Routing for CRUD operations on Aanvullende gegevens', function () 
 });
 
 describe('API Routing for CRUD operations on Foto', function () {
-    // Hier de Aanvullende gegevens API tests
+    var request = supertest(localConfig.host + ":" + config.port + "/" + localConfig.api_path);
+
+    before(function (done) {
+        done();
+    });
+
+    describe('CREATE Foto', function () {
+        it('Should POST /foto', function (done) {
+            request
+                .post('/foto')
+                .send({
+                    "gebruikersnaam": "Createusertest",
+                    "bestandsnaam": "testfoto.JPG",
+                    "volgnummer": "1337"
+                })
+                .expect(200)                                                // supertest
+                .expect('Content-Type', /application.json/)                 // supertest
+                .expect('Content-Type', 'utf-8')                            // supertest
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+                    JSON.parse(res.text)
+                        .should.have.property('meta')
+                        .and.have.property('action').be.exactly('create');
+                    JSON.parse(res.text)
+                        .should.have.property('err').be.exactly(null);
+                    res.statusCode.should.be.exactly(200);
+                    res.type.should.be.exactly('application/json');
+                    res.charset.should.be.exactly('utf-8');
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('gebruikersnaam')
+                        .be.exactly('Createusertest')
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('volgnummer')
+                        .be.exactly('1337')
+                    done();
+                });
+        });
+    });
+
+    describe('RETRIEVE all Fotos for a user, function () {
+
+        it('Should GET ALL /foto/{gebruikersnaam}', function (done) {
+            request
+                .get('/foto' + 'jur')
+                .expect(200)                                                // supertest
+                .expect('Content-Type', /application.json/)                 // supertest
+                .expect('Content-Type', 'utf-8')                            // supertest
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+
+                    JSON.parse(res.text)
+                        .should.have.property('meta')
+                        .and.have.property('action').be.exactly('list');
+                    res.statusCode.should.be.exactly(200);
+
+                    done();
+                });
+        });
+    });
+
+    describe('RETRIEVE 1 Foto of a user', function () {
+        it('Should GET /foto/{gebruikersnaam}/{volgnummer}', function (done) {
+            request
+                .get('/foto/' + 'Createusertest/' + 1)
+                .expect('Content-Type', /application.json/)
+                .expect(200)
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('gebruikersnaam')
+                        .be.exactly('jur');
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('volgnummer')
+                        .be.exactly(1);
+                    res.statusCode.should.be.exactly(200);
+                    done();
+                });
+        });
+    });
+
+    describe('DELETE 1 Foto of a user', function () {
+        it('Should DELETE /foto/{gebruikersnaam}/{volgnummer}', function (done) {
+            request
+                .del('/foto/' + 'Createusertest' + 1337)
+                .expect(200)                                                // supertest
+                .expect('Content-Type', /application.json/)                 // supertest
+                .expect('Content-Type', 'utf-8')                            // supertest
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+                    JSON.parse(res.text)
+                        .should.have.property('meta')
+                        .and.have.property('action').be.exactly('delete');
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('ok')
+                        .be.exactly(1);
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('n')
+                        .be.exactly(1);
+                    JSON.parse(res.text).should.have.property('err').be.exactly(null);
+                    res.statusCode.should.be.exactly(200);
+                    done();
+                });
+        });
+    });
 });
 
 describe('API Routing for CRUD operations on Muziek', function () {
