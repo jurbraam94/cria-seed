@@ -163,7 +163,117 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
 });
 
 describe('API Routing for CRUD operations on Algemene gegevens', function () {
-    // Hier de Aanvullende gegevens API tests
+    var request = supertest(localConfig.host + ":" + config.port + "/" + localConfig.api_path);
+
+    before(function (done) {
+        done();
+    });
+
+    describe('CREATE Algemene gegevens', function () {
+        it('Should POST /algemeneGegevens', function (done) {
+            request
+                .post('/algemeneGegevens')
+                .send({
+                    "gebruikersnaam": "test",
+                    "voornaam": "jur",
+                    "achternaam": "braam",
+                    "woonplaats": "oosterhout",
+                    "postcode": "6678AX",
+                    "adres": "Dijkstraat",
+                    "huisnummer": "20",
+                    "telefoon": "0610524507",
+                    "email": "jur_braam@hotmail.com"
+                })
+                .expect(200)                                                // supertest
+                .expect('Content-Type', /application.json/)                 // supertest
+                .expect('Content-Type', 'utf-8')                            // supertest
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+                    JSON.parse(res.text)
+                        .should.have.property('meta')
+                        .and.have.property('action').be.exactly('create');
+                    JSON.parse(res.text)
+                        .should.have.property('err').be.exactly(null);
+                    res.statusCode.should.be.exactly(200);
+                    res.type.should.be.exactly('application/json');
+                    res.charset.should.be.exactly('utf-8');
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('gebruikersnaam')
+                        .be.exactly('test')
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('adres')
+                        .be.exactly('Dijkstraat')
+                    done();
+                });
+        });
+    });
+
+    describe('RETRIEVE 1 algemeneGegevens', function () {
+        it('Should GET /algemeneGegevens/{gebruikersnaam}', function (done) {
+            request
+                .get('/gebruiker/' + 'test')
+                .expect('Content-Type', /application.json/)
+                .expect(200)
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('gebruikersnaam')
+                        .be.exactly('test');
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('huisnummer')
+                        .be.exactly('20');
+                    res.statusCode.should.be.exactly(200);
+                    done();
+                });
+        });
+    });
+
+    describe('UPDATE 1 gebruiker', function () {
+        it('Should PUT /algemeneGegevens/{gebruikersnaam}', function (done) {
+            request
+                .put('/algemeneGegevens/' + 'test')
+                .send({
+                    "voornaam": "jur",
+                    "achternaam": "braam",
+                    "woonplaats": "Dodewaard",
+                    "postcode": "6696GS",
+                    "adres": "Jasappel",
+                    "huisnummer": "1",
+                    "telefoon": "0610524507",
+                    "email": "jur_braam@hotmail.com"
+                })
+                .expect(200)                                                // supertest
+                .expect('Content-Type', /application.json/)                 // supertest
+                .expect('Content-Type', 'utf-8')                            // supertest
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+
+                    JSON.parse(res.text)
+                        .should.have.property('meta')
+                        .and.have.property('action')
+                        .be.exactly('update');
+                    JSON.parse(res.text)
+                        .should.have.property('err')
+                        .be.exactly(null);
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('wachtwoord')
+                        .be.exactly('wachtwoord');
+                    res.statusCode.should.be.exactly(200);
+                    done();
+                });
+        });
+    });
 });
 
 describe('API Routing for CRUD operations on Aanvullende gegevens', function () {
