@@ -422,7 +422,7 @@ describe('API Routing for CRUD operations on Foto', function () {
         });
     });
 
-    describe('RETRIEVE all Fotos for a user, function () {
+    describe('RETRIEVE all Fotos for a user', function () {
 
         it('Should GET ALL /foto/{gebruikersnaam}', function (done) {
             request
