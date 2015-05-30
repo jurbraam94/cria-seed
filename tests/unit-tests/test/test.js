@@ -426,7 +426,7 @@ describe('API Routing for CRUD operations on Foto', function () {
 
         it('Should GET ALL /foto/{gebruikersnaam}', function (done) {
             request
-                .get('/foto' + 'jur')
+                .get('/foto/' + 'jur')
                 .expect(200)                                                // supertest
                 .expect('Content-Type', /application.json/)                 // supertest
                 .expect('Content-Type', 'utf-8')                            // supertest
@@ -472,7 +472,7 @@ describe('API Routing for CRUD operations on Foto', function () {
     describe('DELETE 1 Foto of a user', function () {
         it('Should DELETE /foto/{gebruikersnaam}/{volgnummer}', function (done) {
             request
-                .del('/foto/' + 'Createusertest' + 1337)
+                .del('/foto/' + 'Createusertest/' + 1337)
                 .expect(200)                                                // supertest
                 .expect('Content-Type', /application.json/)                 // supertest
                 .expect('Content-Type', 'utf-8')                            // supertest
