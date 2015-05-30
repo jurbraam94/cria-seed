@@ -335,9 +335,9 @@ describe('API Routing for CRUD operations on Aanvullende gegevens', function () 
                         .and.have.property('gebruikersnaam')
                         .be.exactly('jur');
                     JSON.parse(res.text)
-                        .should.have.property('religie')
-                        .and.have.property('Christelijk')
-                        .be.exactly(20);
+                        .should.have.property('doc')
+                        .and.have.property('religie')
+                        .be.exactly('Christelijk');
                     res.statusCode.should.be.exactly(200);
                     done();
                 });
