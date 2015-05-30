@@ -448,7 +448,7 @@ describe('API Routing for CRUD operations on Foto', function () {
     describe('RETRIEVE 1 Foto of a user', function () {
         it('Should GET /foto/{gebruikersnaam}/{volgnummer}', function (done) {
             request
-                .get('/foto/' + 'Createusertest/' + 1)
+                .get('/foto/' + 'jur/' + 1)
                 .expect('Content-Type', /application.json/)
                 .expect(200)
                 .end(function (err, res) {
