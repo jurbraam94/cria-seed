@@ -12,7 +12,7 @@
 
     uitvaartSamenstellen = new Schema({
         gebruikersnaam: {type: String, required: true, unique: true},
-        tijdsduur: {type: Number, required: true},
+        tijdsduur: {type: Number, required: true, min: 10}
     },
         { collection: 'UitvaartSamenstellen' });
 
