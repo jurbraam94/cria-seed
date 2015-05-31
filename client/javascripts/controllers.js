@@ -8,46 +8,46 @@
  * @param booksService
  * @constructor
  */
-function BookListCtrl($scope, booksService) {
+function BookListCtrl($scope, gebruikersnaamService) {
     "use strict";
-    // GET all books
-    $scope.books = booksService.books.get();
+    // GET all gebruiker
+    $scope.gebruiker = gebruikersnaamService.gebruiker.get();
 }
 
 /**
  * TODO: create controller for retrieving 1 book, create and delete
  * @param $scope
  * @param $routeParams
- * @param booksService
+ * @param gebruikersnaamService
  * @constructor
  */
-function BookDetailCtrl($scope, $routeParams, $location, booksService) {
+function BookDetailCtrl($scope, $routeParams, $location, gebruikersnaamService) {
     "use strict";
     // GET 1 book
 
-    if ($routeParams._id !== 'new') {
-        $scope.books = booksService.books.get({_id: $routeParams._id}, function () {
+    if ($routeParams._gebruikersnaam !== 'new') {
+        $scope.gebruiker = gebruikersnaamService.gebruiker.get({_gebruikersnaam: $routeParams._gebruikersnaam}, function () {
             console.log('$scope.requests ', $scope.requests);
         });
     }
 
     // DELETE book
     $scope.delete = function () {
-        booksService.books.delete({_id: $routeParams._id});
-        $location.path("/books");
+        gebruikersnaamService.gebruiker.delete({_gebruikersnaam: $routeParams._gebruikersnaam});
+        $location.path("/gebruiker");
     };
 
     // CREATE, UPDATE book
     $scope.save = function () {
 
-        if ($scope.books.doc && $scope.books.doc._id !== undefined) {
+        if ($scope.gebruiker.doc && $scope.gebruiker.doc._gebruikersnaam !== undefined) {
             console.log('Entering update');
-            booksService.books.update({_id: $scope.books.doc._id}, $scope.books, function (res) {
+            gebruikersnaamService.gebruiker.update({_gebruikersnaam: $scope.gebruiker.doc._gebruikersnaam}, $scope.gebruiker, function (res) {
                 console.log(res);
             });
         } else {
             console.log('Entering save');
-            booksService.books.save({}, $scope.books.doc, function (res) {
+            gebruikersnaamService.gebruiker.save({}, $scope.gebruiker.doc, function (res) {
                 console.log(res);
             });
         }

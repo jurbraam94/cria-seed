@@ -10,7 +10,7 @@ var router = express.Router();
  */
 var controller = require('../app/controllers/AanvullendeGegevensController.js');
 
-/** CREATE route for books */
+/** CREATE route for gebruiker */
 router
     .post('/aanvullendeGegevens', controller.aanvullendeGegevensAanmaken);
 

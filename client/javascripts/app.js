@@ -12,21 +12,21 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute'])
     .config(['$routeProvider', function ($routeProvider) {
         "use strict";
 
-        // Get all books
-        $routeProvider.when('/books', {
+        // Get all gebruiker
+        $routeProvider.when('/gebruiker', {
             templateUrl: 'partials/book-list.html',
             controller: BookListCtrl
         });
 
         // Get 1 book
-        $routeProvider.when('/books/:_id', {
+        $routeProvider.when('/gebruiker/:_id', {
             templateUrl: 'partials/book-detail.html',
             controller: BookDetailCtrl
         });
 
         // When no valid route is provided
         $routeProvider.otherwise({
-            redirectTo: "/books"
+            redirectTo: "/gebruiker"
         });
 
 
