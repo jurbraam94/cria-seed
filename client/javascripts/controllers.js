@@ -13,7 +13,7 @@ function gebruikerLoginCtrl($scope, $routeParams, $location, gebruikersnaamServi
     // LOGIN
     $scope.login = function () {
         $scope.gebruiker = gebruikersnaamService.gebruiker.get({_gebruikersnaam: $routeParams._gebruikersnaam, wachtwoord: $routeParams._wachtwoord}, function () {
-            console.log('$scope.requests ', $scope.requests);
+            console.log($scope.gebruiker);
         });
     };
 }
