@@ -10,6 +10,7 @@
                     'get': {method: 'GET'},
                     'save': {method: 'POST'},
                     'query': {method: 'GET', isArray: true},
+                    'login': { method: 'GET'},
                     'update': {method: 'PUT'},
                     'delete': {method: 'DELETE'}
                 },
