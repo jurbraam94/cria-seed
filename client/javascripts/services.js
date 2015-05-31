@@ -10,7 +10,7 @@
                     'get': {method: 'GET'},
                     'save': {method: 'POST'},
                     'query': {method: 'GET', isArray: true},
-                    'login': { method: 'GET', url: '/api/gebruiker/_gebruikersnaam/_wachtwoord'},
+                    'login': { method: 'GET', url: '/api/gebruiker/:_gebruikersnaam/:_wachtwoord'},
                     'update': {method: 'PUT'},
                     'delete': {method: 'DELETE'}
                 },
