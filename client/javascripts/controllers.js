@@ -21,6 +21,6 @@ function gebruikerLoginCtrl($scope, $routeParams, $location, gebruikersnaamServi
 myApp.controller('myCtrl', function ($scope) {
     "use strict";
     // TODO: bind settings with whoami
-    $scope.whomai = "theotheu";
+    $scope.whomai = "DOOD";
 });
 
