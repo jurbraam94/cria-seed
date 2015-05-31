@@ -27,7 +27,6 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
                     }
                     JSON.parse(res.text)
                         .should.have.property('doc')
-                        .and.have.property('gebruikersnaam')
                         .be.exactly('jur');
                     res.statusCode.should.be.exactly(200);
                     done();
