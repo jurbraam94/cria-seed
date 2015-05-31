@@ -17,7 +17,8 @@ router
 // RETRIEVE
 router
     .get('/gebruiker', controller.alleGebruikers)
-    .get('/gebruiker/:_gebruikersnaam', controller.gebruikerDetails);
+    .get('/gebruiker/:_gebruikersnaam', controller.gebruikerDetails)
+    .get('/gebruiker/:_gebruikersnaam/:_wachtwoord', controller.login);
 
 // UPDATE
 router

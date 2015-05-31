@@ -15,6 +15,25 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
     before(function (done) {
         done();
     });
+    describe('LOGIN gebruiker', function () {
+        it('Should LOGIN /gebruiker/{gebruikersnaam}/{wachtwoord}', function (done) {
+            request
+                .get('/gebruiker/' + 'jur/' + 'jur')
+                .expect('Content-Type', /application.json/)
+                .expect(200)
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('gebruikersnaam')
+                        .be.exactly('jur');
+                    res.statusCode.should.be.exactly(200);
+                    done();
+                });
+        });
+    });
 
     describe('CREATE gebruiker', function () {
         it('Should POST /gebruiker', function (done) {
