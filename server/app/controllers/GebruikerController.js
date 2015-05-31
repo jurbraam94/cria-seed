@@ -21,7 +21,9 @@ exports.login = function (req, res) {
                     'timestamp': new Date(),
                     filename: __filename
                 },
-                doc: doc.gebruikersnaam, // only the first document, not an array when using "findOne"
+                doc: {
+                    "gebruikersnaam": doc.gebruikersnaam
+                }, // only the first document, not an array when using "findOne"
                 err: err
             };
             return res.send(retObj);
