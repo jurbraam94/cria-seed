@@ -20,8 +20,8 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute'])
 
         // Get 1 book
         $routeProvider.when('/gebruiker/:_id', {
-            templateUrl: 'partials/book-detail.html',
-            controller: BookDetailCtrl
+            templateUrl: 'partials/Login.html',
+            controller: bookLoginCtrl
         });
 
         // When no valid route is provided

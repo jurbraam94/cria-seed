@@ -1,0 +1,14 @@
+<h2>Login</h2>
+<body  data-ng-controller="gebruikerLoginCtrl">
+
+<form name="loginForm">
+
+    <p>Gebruikersnaam: <input type="text" data-ng-model="gebruiker.doc.gebruikersnaam" readonly></p>
+
+    <p>Wachtwoord: <input type="text" data-ng-model="gebruiker.doc.wachtwoord"></p>
+
+    <button type="button" data-ng-click="login()" id="loginBtn">Login
+    </button>
+
+
+</form>
