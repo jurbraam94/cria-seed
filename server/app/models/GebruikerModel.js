@@ -10,10 +10,9 @@
         gebruiker,
         modelName = "Gebruiker";
 
-    function stringLengteValidatie(envy) {
-        return (v.length > 2 && v.length < 256);
+  function stringLengteValidatie(val) {
+        return (val !== undefined && val !== null && val.length > 2 && val.length < 256);
     }
-
     gebruiker = new Schema({
         gebruikersnaam: {type: String, required: true, unique: true},
         wachtwoord: {type: String, required: true}
