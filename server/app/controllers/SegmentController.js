@@ -1,16 +1,22 @@
+/**
+ * Created by Erik-Jan on 29-5-2015.
+ */
+/**
+ * Created by Erik-Jan on 29-5-2015.
+ */
 /*jslint node: true */
 "use strict";
 
 var mongoose = require('mongoose'),
-    Dood = mongoose.model('Dood');
+    Segment = mongoose.model('Segment');
 
 /**
  * create function
  * @param req
  * @param res
  */
-exports.create = function (req, res) {
-    var doc = new Dood(req.body);
+exports.segmentAanmaken = function (req, res) {
+    var doc = new Segment(req.body);
 
     doc.save(function (err) {
         var retObj = {
@@ -32,10 +38,10 @@ exports.create = function (req, res) {
  * @param req
  * @param res
  */
-exports.list = function (req, res) {
-    var conditions = {}, fields = {}, sort = {'modificationDate': -1};
+exports.alleSegmenten = function (req, res) {
+    var conditions = {gebruikersnaam: req.params._gebruikersnaam}, fields = {}, sort = {'modificationDate': -1};
 
-    Dood.find(conditions, fields)
+    Segment.find(conditions, fields)
         .sort(sort)
         .exec(function (err, doc) {
 
@@ -58,10 +64,10 @@ exports.list = function (req, res) {
  * @param req
  * @param res
  */
-exports.detail = function (req, res) {
-    var conditions = {_id: req.params._id}, fields = {};
+exports.segmentDetails = function (req, res) {
+    var conditions = {gebruikersnaam: req.params._gebruikersnaam, volgnummer: req.params._volgnummer}, fields = {};
 
-    Dood.findOne(conditions, fields)
+    Segment.findOne(conditions, fields)
         .exec(function (err, doc) {
             var retObj = {
                 meta: {
@@ -81,12 +87,11 @@ exports.detail = function (req, res) {
  * @param req
  * @param res
  */
-exports.updateOne = function (req, res) {
-    var conditions = {_id: req.params._id},
+exports.updateSegment = function (req, res) {
+    var conditions = {gebruikersnaam: req.params._gebruikersnaam, volgnummer: req.params._volgnummer},
         update = {
-            title: req.body.doc.title || '',
-            author: req.body.doc.author || '',
-            description: req.body.doc.description || ''
+            object: req.body.object,
+            percentage: req.body.percentage
         },
         options = {multi: false},
         callback = function (err, doc) {
@@ -105,7 +110,7 @@ exports.updateOne = function (req, res) {
             return res.send(retObj);
         };
 
-    Dood.findOneAndUpdate(conditions, update, options, callback);
+    Segment.findOneAndUpdate(conditions, update, options, callback);
 };
 
 /**
@@ -113,10 +118,11 @@ exports.updateOne = function (req, res) {
  * @param req
  * @param res
  */
-exports.deleteOne = function (req, res) {
+exports.segmentVerwijderen = function (req, res) {
     var conditions, callback, retObj;
 
-    conditions = {_id: req.params._id};
+    conditions = {gebruikersnaam: req.params._gebruikersnaam, volgnummer: req.params._volgnummer};
+
     callback = function (err, doc) {
         retObj = {
             meta: {
@@ -129,6 +135,5 @@ exports.deleteOne = function (req, res) {
         };
         return res.send(retObj);
     };
-
-    Dood.remove(conditions, callback);
+    Segment.remove(conditions, callback);
 };
