@@ -31,8 +31,8 @@ myApp.controller('samenstellenController', function ($scope, $routeParams, $loca
 
 
     $scope.getAllImages = function () {
-        var imgArray = new Array();
-        var padNaam = "style/images/icons/";
+        var imgArray = [],
+            padNaam = "style/images/icons/";
         imgArray[0] = padNaam + "muziek.png";
         imgArray[1] = padNaam + "STILTE.png";
         imgArray[2] = padNaam + "TEKST.png";
