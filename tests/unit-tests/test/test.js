@@ -63,10 +63,6 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
                         .should.have.property('doc')
                         .and.have.property('gebruikersnaam')
                         .be.exactly('Createusertest')
-                    JSON.parse(res.text)
-                        .should.have.property('doc')
-                        .and.have.property('wachtwoord')
-                        .be.exactly('Createusertest')
                     done();
                 });
         });
