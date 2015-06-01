@@ -24,21 +24,10 @@
         gebruikersnaam: {type: String, required: true},
         naam: {type: String, required: true, validator: [stringLengteValidatie, 'Naam is niet lang genoeg']},
         email: {type: String, required: true, match: [emailRegex, 'E-mail adres is onjuist']},
-        bericht: {type: String, required: true, validator: [stringLengteValidatie, 'Naam is niet lang genoeg']},
+        bericht: {type: String, required: true, validator: [stringLengteValidatie, 'Bericht is niet lang genoeg']},
         volgnummer: {type: Number, required: true, unique: true, min: 0}
     },
         { collection: 'Notificatie' });
-
-
-    ///**
-    // * Valideert ingevoerde e-mail adres m.b.v. emailRegex:
-    // * /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
-    // * @param email
-    // * @returns {boolean}
-    // */
-    //notificatie.path('email').validate(function (email) {
-    //    return emailRegex.test(email.text);
-    //}, 'E-mail adres is onjuist');
 
     module.exports = mongoose.model(modelName, notificatie);
 }());
