@@ -81,8 +81,8 @@ exports.gebruikerAanmaken = function (req, res) {
         doc;
 
     hashPassword(req.body.wachtwoord, salt, function (err, passwordHash) {
-        console.log(passwordHash);
-        doc = new Gebruiker({gebruikersnaam: req.body.gebruikersnaam, passwordHash: passwordHash, passwordSalt: salt});
+        console.log(passwordHash.toString());
+        doc = new Gebruiker({gebruikersnaam: req.body.gebruikersnaam, passwordHash: passwordHash.toString(), passwordSalt: salt});
         console.log(doc);
         doc.save(function (err) {
             var retObj = {
