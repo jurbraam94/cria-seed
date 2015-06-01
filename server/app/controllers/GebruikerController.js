@@ -70,8 +70,7 @@ exports.login = function (req, res) {
 
 exports.gebruikerAanmaken = function (req, res) {
     var salt = uuid.v4(),
-        doc = new Gebruiker("hoi", "hoi", "hoi");
-    doc.save();
+        doc;
 
     hashPassword(req.body.wachtwoord, salt, function (err, passwordHash) {
         doc = new Gebruiker(req.body.gebruikersnaam, passwordHash, salt);
