@@ -2,7 +2,12 @@
 
 <form name="loginForm" novalidate class="css-form">
 
-    <p>Gebruikersnaam: <input type="text" ng-model="gebruiker.gebruikersnaam" required/></p>
+    <p>
+    Gebruikersnaam: <input type="text" ng-model="gebruiker.gebruikersnaam" name="gebruikersnaam" required/>
+    <div ng-show="form.$submitted || form.gebruikersnaam.$touched">
+        <div ng-show="form.gebruikersnaam.$error.required">Vul alstublieft een gebruikersnaam in.</div>
+    </div>
+    </p>
     <p>Wachtwoord: <input type="password" ng-model="gebruiker.wachtwoord" required/></p>
 
     <button type="button" data-ng-click="login()" id="loginBtn">Login
