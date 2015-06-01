@@ -11,14 +11,8 @@
     var mongoose = require('mongoose'),
         Schema = mongoose.Schema,
         algemeneGegevens,
-        modelName = "AlgemeneGegevens";
-
-    var gebruiker = require('')
-
-    function validatePostcode(postcode){
-        var re = "/^[1-9]\d{3}[A-Z]{2}$/";
-        return re.test(postcode);
-    };
+        modelName = "AlgemeneGegevens",
+        gebruiker = require('');
 
     algemeneGegevens = new Schema({
         gebruikersnaam: {type: String, required: true, unique: true},

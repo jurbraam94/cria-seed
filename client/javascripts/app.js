@@ -21,7 +21,7 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute'])
         // Get all gebruiker
         $routeProvider.when('/samenstellen', {
             templateUrl: 'Samenstellen.html',
-            controller: SamenstellenController
+            controller: samenstellenController
         });
 
         // When no valid route is provided
