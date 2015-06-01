@@ -10,7 +10,7 @@
                     'get': {method: 'GET'},
                     'save': {method: 'POST'},
                     'query': {method: 'GET', isArray: true},
-                    'login': { method: 'GET', params: {gebruikersnaam : '_gebruikersnaam'}},
+                    'login': { method: 'GET', params: {gebruikersnaam : 'gebruikersnaam'}},
                     'update': {method: 'PUT'},
                     'delete': {method: 'DELETE'}
                 },
