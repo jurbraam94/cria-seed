@@ -34,6 +34,7 @@ exports.login = function (req, res) {
 
             hashPassword(req.params._wachtwoord, gebruiker.passwordSalt, function (err, passwordHash) {
                 console.log("password gehasht");
+                console.log(passwordHash);
                 if (gebruiker.passwordHash === passwordHash) {
                     console.log("juist wachtwoord");
                     retObj = {
@@ -68,8 +69,8 @@ exports.login = function (req, res) {
                 },
                 err: "Gebruiker niet gevonden"
             };
+            return res.send(retObj);
         }
-        return res.send(retObj);
     });
 };
 
