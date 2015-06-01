@@ -33,7 +33,9 @@ exports.login = function (req, res) {
         if (gebruiker) {
 
             hashPassword(req.params._wachtwoord, gebruiker.passwordSalt, function (err, passwordHash) {
+                console.log("password gehasht")
                 if (gebruiker.passwordHash === passwordHash) {
+                    console.log("juist wachtwoord")
                     retObj = {
                         meta: {
                             "action": "detail",
