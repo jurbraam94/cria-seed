@@ -14,7 +14,7 @@ exports.login = function (req, res) {
     var conditions = {gebruikersnaam: req.params._gebruikersnaam}, fields = {},
         retObj;
 
-    Gebruiker.findone(conditions, fields, function (err, gebruiker) {
+    Gebruiker.findOne(conditions, fields, function (err, gebruiker) {
         if (err) {
             retObj = {
                 meta: {
