@@ -2,8 +2,9 @@
 "use strict";
 
 var mongoose = require('mongoose'),
-    Gebruiker = mongoose.model('Gebruiker');
-var crypto = require('crypto');
+    Gebruiker = mongoose.model('Gebruiker'),
+    crypto = require('crypto'),
+    uuid = require('node-uuid');
 
 var hashPassword = function (password, salt, callback) {
     // We use pbkdf2 to hash and iterate 10k times by default
@@ -68,21 +69,27 @@ exports.login = function (req, res) {
 
 
 exports.gebruikerAanmaken = function (req, res) {
-    var doc = new Gebruiker(req.body);
+    var salt = uuid.v4();
 
-    doc.save(function (err) {
-        var retObj = {
-            meta: {
-                "action": "create",
-                'timestamp': new Date(),
-                filename: __filename
-            },
-            doc: doc,
-            err: err
-        };
+    hashPassword(req.body.wachtwoord, salt, function (err, passwordHash) {
+        var doc = new Gebruiker(req.body.gebruikersnaam, passwordHash, salt);
+        doc.save(function (err) {
+            var retObj = {
+                meta: {
+                    "action": "create",
+                    'timestamp': new Date(),
+                    filename: __filename
+                },
+                doc: doc,
+                err: err
+            };
 
-        return res.send(retObj);
+            return res.send(retObj);
+        });
     });
+
+
+
 };
 
 /**
