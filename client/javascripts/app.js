@@ -18,6 +18,12 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute'])
             controller: gebruikerLoginCtrl
         });
 
+        // Get all gebruiker
+        $routeProvider.when('/samenstellen', {
+            templateUrl: 'Samenstellen.html',
+            controller: SamenstellenController
+        });
+
         // When no valid route is provided
         $routeProvider.otherwise({
             redirectTo: "/login"

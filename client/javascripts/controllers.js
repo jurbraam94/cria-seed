@@ -18,6 +18,12 @@ function gebruikerLoginCtrl($scope, $routeParams, $location, gebruikersnaamServi
     };
 }
 
+function SamenstellenController($scope, $routeParams, $location, gebruikersnaamService) {
+    "use strict";
+    var images;
+    $scope.plaatje = 'style/images/icons/muziek.png';
+}
+
 myApp.controller('myCtrl', function ($scope) {
     "use strict";
     // TODO: bind settings with whoami
