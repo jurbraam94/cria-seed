@@ -10,13 +10,13 @@
                     'get': {method: 'GET'},
                     'save': {method: 'POST'},
                     'query': {method: 'GET', isArray: true},
-                    'login': { method: 'GET', params: {gebruikersnaam: 'gebruikersnaam', wachtwoord: 'wachtwoord'}},
+                    'login': { method: 'GET'},
                     'update': {method: 'PUT'},
                     'delete': {method: 'DELETE'}
                 },
                 db = {};
             // REST url to server
-            db.gebruiker = $resource('/api/gebruiker/:gebruikersnaam/:wachtwoord', {}, actions);
+            db.gebruiker = $resource('/api/gebruiker/:_gebruikersnaam/:_wachtwoord', {}, actions);
             return db;
         }]);
 }());
