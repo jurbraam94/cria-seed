@@ -14,7 +14,7 @@ myApp.controller('GebruikerLoginController', function ($scope, $routeParams, $lo
     if ($cookieStore.get('sessionCookie') !== undefined) {
         $scope.loggedIn = true;
     } else {
-        $scope.loggedIn = false
+        $scope.loggedIn = false;
     }
 
     // LOGIN
