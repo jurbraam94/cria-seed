@@ -2,9 +2,9 @@
 
 <form name="loginForm">
 
-    <p>Gebruikersnaam: <input type="text" data-ng-model="gebruiker.doc.gebruikersnaam"></p>
+    <p>Gebruikersnaam: <input type="text" ng-model="gebruiker.gebruikersnaam" required/></p>
 
-    <p>Wachtwoord: <input type="text" data-ng-model="gebruiker.doc.wachtwoord"></p>
+    <p>Wachtwoord: <input type="text" ng-model="gebruiker.wachtwoord" required/></p>
 
     <button type="button" data-ng-click="login()" id="loginBtn">Login
     </button>
