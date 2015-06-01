@@ -9,7 +9,7 @@
  * @see http://docs.angularjs.org/guide/concepts
  */
 var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies'])
-    .config(['$routeProvider', '$cookieStore', '$location', '$rootScope', function ($routeProvider, $cookieStore, $location, $rootScope) {
+    .config(['$routeProvider', function ($routeProvider) {
         "use strict";
 
         // Get all gebruiker
@@ -31,14 +31,18 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies'])
             redirectTo: "/login"
         });
 
+        //Samenstellen uitvaart
+       // $routeProvider.when('/samenstellen.html')
+
+    }]).
+    run(function ($rootScope, $location, $cookieStore) {
+        "use strict";
         $rootScope.$on("$routeChangeStart", function (event, next) {
+            var session = $cookieStore.get('sessionCookie');
             if (next.security) {
-                if ($cookieStore.get('sessionCookie') === undefined) {
+                if (session === undefined) {
                     $location.path('/login');
                 }
             }
         });
-        //Samenstellen uitvaart
-       // $routeProvider.when('/samenstellen.html')
-
-    }]);
+    });
