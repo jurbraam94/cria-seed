@@ -71,38 +71,6 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
         });
     });
 
-    describe('UPDATE 1 gebruiker', function () {
-        it('Should PUT /gebruiker/{gebruikersnaam}', function (done) {
-            request
-                .put('/gebruiker/' + 'jur')
-                .send({
-                    "wachtwoord": "wachtwoord"
-                })
-                .expect(200)                                                // supertest
-                .expect('Content-Type', /application.json/)                 // supertest
-                .expect('Content-Type', 'utf-8')                            // supertest
-                .end(function (err, res) {
-                    if (err) {
-                        throw err;
-                    }
-
-                    JSON.parse(res.text)
-                        .should.have.property('meta')
-                        .and.have.property('action')
-                        .be.exactly('update');
-                    JSON.parse(res.text)
-                        .should.have.property('err')
-                        .be.exactly(null);
-                    JSON.parse(res.text)
-                        .should.have.property('doc')
-                        .and.have.property('wachtwoord')
-                        .be.exactly('wachtwoord');
-                    res.statusCode.should.be.exactly(200);
-                    done();
-                });
-        });
-    });
-
     describe('DELETE 1 gebruiker', function () {
         it('Should DELETE /gebruiker/{gebruikersnaam}', function (done) {
             request
