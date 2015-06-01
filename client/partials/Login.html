@@ -10,8 +10,8 @@
     </p>
     <p>Wachtwoord: <input type="password" ng-model="gebruiker.wachtwoord" name="wachtwoord" required=""/></p>
     <div ng-show="loginForm.$submitted || loginForm.wachtwoord.$touched">
-        <div ng-show="loginForm.gebruikersnaam.$error.required">Vul alstublieft een gebruikersnaam in.</div>
+        <div ng-show="loginForm.gebruikersnaam.$error.required">Vul alstublieft een wachtwoord in.</div>
     </div>
-    <input type="submit" ng-click="login()" value="Login" />
+    <input type="submit" ng-click="login(gebruiker)" value="Login" />
     </button>
 </form>
