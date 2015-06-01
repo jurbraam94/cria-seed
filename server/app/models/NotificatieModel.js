@@ -8,7 +8,7 @@
     var mongoose = require('mongoose'),
         Schema = mongoose.Schema,
         notificatie,
-        emailRegex = /^([\w-]+\.]+@([\w-]+\.)+[\w-]{2,4})?$/,
+        emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
         modelName = "Notificatie";
 
     /**
@@ -32,7 +32,7 @@
 
     ///**
     // * Valideert ingevoerde e-mail adres m.b.v. emailRegex:
-    // * /^([\w-]+\.]+@([\w-]+\.)+[\w-]{2,4})?$/
+    // * /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
     // * @param email
     // * @returns {boolean}
     // */
