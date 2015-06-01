@@ -35,10 +35,10 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies'])
        // $routeProvider.when('/samenstellen.html')
 
     }]).
-    run(function ($rootScope, $location) {
+    run(function ($rootScope, $location, $cookieStore) {
         "use strict";
-        $rootScope.$on("$routeChangeStart", function (event, next, $cookieStore) {
-            var session = $cookieStore.get('sessionCookie');
+        $rootScope.$on("$routeChangeStart", function (event, next) {
+            var session = $cookieStore.get('sessionCookie').toString();
             if (next.security) {
                 if (session === undefined) {
                     $location.path('/login');
