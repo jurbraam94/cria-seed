@@ -35,6 +35,7 @@ exports.login = function (req, res) {
             hashPassword(req.params._wachtwoord, gebruiker.passwordSalt, function (err, passwordHash) {
                 console.log("password gehasht");
                 console.log(passwordHash);
+                console.log(gebruiker.passwordHash);
                 if (gebruiker.passwordHash === passwordHash) {
                     console.log("juist wachtwoord");
                     retObj = {
