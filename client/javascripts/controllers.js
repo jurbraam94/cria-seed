@@ -12,8 +12,7 @@ myApp.controller('gebruikerLoginCtrl', function ($scope, $routeParams, $location
     "use strict";
     // LOGIN
     $scope.login = function () {
-        console.log($scope.gebruiker.doc.gebruikersnaam, $scope.gebruiker.doc.wachtwoord);
-        $scope.gebruiker = gebruikersnaamService.gebruiker.login({gebruikersnaam: $scope.gebruiker.doc.gebruikersnaam});
+        $scope.gebruiker = gebruikersnaamService.gebruiker.login({gebruikersnaam: $scope.gebruiker.doc.gebruikersnaam, wachtwoord: $scope.gebruiker.doc.wachtwoord});
         console.log($scope.gebruiker);
     };
 });
