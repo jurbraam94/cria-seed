@@ -309,7 +309,7 @@ describe('API Routing for CRUD operations on Aanvullende gegevens', function () 
                 .send({
                     "gebruikersnaam": "test",
                     "religie": "Christelijk",
-                    "donor": "Ja"
+                    "donor": "ja"
                 })
                 .expect(200)                                                // supertest
                 .expect('Content-Type', /application.json/)                 // supertest
