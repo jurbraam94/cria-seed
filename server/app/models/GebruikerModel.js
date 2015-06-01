@@ -21,7 +21,8 @@
 
     gebruiker = new Schema({
         gebruikersnaam: {type: String, required: true, unique: true, validator: [stringLengteValidatie, 'Gebruikersnaam is niet lang genoeg'], validate: /[a-z]/},
-        wachtwoord: {type: String, required: true}
+        passwordHash: {type: String, required: true},
+        passwordSalt: {type: String, required: true}
     },
         { collection: 'Gebruiker' });
     module.exports = mongoose.model(modelName, gebruiker);

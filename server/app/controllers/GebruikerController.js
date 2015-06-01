@@ -3,12 +3,14 @@
 
 var mongoose = require('mongoose'),
     Gebruiker = mongoose.model('Gebruiker');
+var crypto = require('crypto');
 
-/**
- * create function
- * @param req
- * @param res
- */
+var hashPassword = function (password, salt, callback) {
+    // We use pbkdf2 to hash and iterate 10k times by default
+    var iterations = 10000,
+        keyLen = 64; // 64 bit.
+    crypto.pbkdf2(password, salt, iterations, keyLen, callback);
+};
 
 exports.login = function (req, res) {
     var conditions = {gebruikersnaam: req.params._gebruikersnaam}, fields = {},
