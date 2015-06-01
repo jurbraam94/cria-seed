@@ -8,7 +8,7 @@
  * @param gebruikersnaamService
  * @constructor
  */
-myApp.controller('gebruikerLoginCtrl', ['$cookies', function ($scope, $routeParams, $location, gebruikersnaamService, $cookies) {
+myApp.controller('GebruikerLoginController', function ($scope, $routeParams, $location, gebruikersnaamService, $cookies) {
     "use strict";
     // LOGIN
     $scope.login = function (gebruiker) {
@@ -19,7 +19,7 @@ myApp.controller('gebruikerLoginCtrl', ['$cookies', function ($scope, $routePara
             }
         });
     };
-}]);
+});
 
 /**
  * TODO: maken cirkeltje en het maken van boxen.
@@ -28,7 +28,7 @@ myApp.controller('gebruikerLoginCtrl', ['$cookies', function ($scope, $routePara
  * @param gebruikersnaamService
  * @constructor
  */
-myApp.controller('samenstellenController', function ($scope, $routeParams, $location, gebruikersnaamService) {
+myApp.controller('SamenstellenController', function ($scope, $routeParams, $location, gebruikersnaamService) {
     "use strict";
 
 
@@ -54,11 +54,3 @@ myApp.controller('samenstellenController', function ($scope, $routeParams, $loca
     };
     init();
 });
-
-
-myApp.controller('myCtrl', function ($scope) {
-    "use strict";
-    // TODO: bind settings with whoami
-    $scope.whomai = "DOOD";
-});
-

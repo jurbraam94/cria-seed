@@ -15,13 +15,13 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies'])
         // Get all gebruiker
         $routeProvider.when('/login', {
             templateUrl: 'partials/Login.html',
-            controller: 'gebruikerLoginCtrl'
+            controller: 'GebruikerLoginController'
         });
 
         // Get all gebruiker
         $routeProvider.when('/samenstellen', {
             templateUrl: 'Samenstellen.html',
-            controller: 'samenstellenController'
+            controller: 'SamenstellenController'
         });
 
         // When no valid route is provided
