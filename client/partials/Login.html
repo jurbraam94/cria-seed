@@ -2,8 +2,8 @@
 
 <form name="loginForm" novalidate class="loginForm">
 
-    <label>Gebruikersnaam:</label> <input type="text" ng-model="gebruiker.gebruikersnaam" name="gebruikersnaam" required=""/>
-    <label>Wachtwoord:</label> <input type="password" ng-model="gebruiker.wachtwoord" name="wachtwoord" required=""/>
+    <span><label>Gebruikersnaam:</label> <input type="text" ng-model="gebruiker.gebruikersnaam" name="gebruikersnaam" required=""/></span>
+    <span><label>Wachtwoord:</label> <input type="password" ng-model="gebruiker.wachtwoord" name="wachtwoord" required=""/></span>
 
     <input ng-disabled="loginForm.$invalid" type="submit" ng-click="login(gebruiker)" value="Login" />
     </button>
