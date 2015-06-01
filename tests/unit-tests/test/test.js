@@ -828,7 +828,7 @@ describe('API Routing for CRUD operations on Segment', function () {
                     JSON.parse(res.text)
                         .should.have.property('doc')
                         .and.have.property('percentage')
-                        .be.exactly('80');
+                        .be.exactly(80);
                     res.statusCode.should.be.exactly(200);
                     done();
                 });
