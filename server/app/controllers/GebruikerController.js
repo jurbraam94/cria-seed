@@ -48,7 +48,7 @@ exports.login = function (req, res) {
                     'timestamp': new Date(),
                     filename: __filename
                 },
-                err: "Wachtwoord onjuist"
+                err: err
             };
             return res.send(retObj);
         }
@@ -58,7 +58,7 @@ exports.login = function (req, res) {
                 'timestamp': new Date(),
                 filename: __filename
             },
-            err: "Gebruiker niet gevonden"
+            err: err
         };
         return res.send(retObj);
     });
