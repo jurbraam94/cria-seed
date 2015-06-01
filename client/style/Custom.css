@@ -10,6 +10,10 @@ css-form input.ng-invalid {
     border: 1px solid #FA787E;
 }
 
+.css-form input.ng-dirty {
+    border: 1px solid #FA787E;
+}
+
 .leftmenubar {
     position: absolute;
     flex-direction: row;
