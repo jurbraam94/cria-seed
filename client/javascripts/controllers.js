@@ -18,9 +18,38 @@ myApp.controller('gebruikerLoginCtrl', function ($scope, $routeParams, $location
     };
 });
 
+/**
+ * TODO: maken cirkeltje en het maken van boxen.
+ * @param $scope
+ * @param $routeParams
+ * @param gebruikersnaamService
+ * @constructor
+ */
 myApp.controller('samenstellenController', function ($scope, $routeParams, $location, gebruikersnaamService) {
     "use strict";
-    $scope.plaatje = 'style/images/icons/muziek.png';
+
+
+
+    $scope.getAllImages = function () {
+        var imgArray = new Array();
+        var padNaam = "style/images/icons/";
+        imgArray[0] = padNaam + "muziek.png";
+        imgArray[1] = padNaam + "STILTE.png";
+        imgArray[2] = padNaam + "TEKST.png";
+        imgArray[3] = padNaam + "CAMERA.png";
+        imgArray[4] = padNaam + "VIDEO.png";
+        imgArray[5] = padNaam + "BLOEMEN.png";
+        imgArray[6] = padNaam + "SPREKER.png";
+        imgArray[7] = padNaam + "ETEN.png";
+        imgArray[8] = padNaam + "WAGEN.png";
+        imgArray[9] = padNaam + "GEENINVULLING.png";
+
+        $scope.afbeeldingen = imgArray;
+    };
+    var init = function () {
+        $scope.getAllImages();
+    };
+    init();
 });
 
 

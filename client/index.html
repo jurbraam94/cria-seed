@@ -2,18 +2,19 @@
 <html data-ng-app="myApp">
 <head>
     <title>DOOD</title>
+    <link rel="stylesheet" href="style/Custom.css">
+    <link rel="stylesheet" href="style/bootstrap-3.3.4-dist/css/bootstrap.min.css">
 </head>
 <body>
 
-<h1>DOOD</h1>
-<p> hoi </p>
-
-<a id="homeLink" href="/#/">Home</a> | <a id="newLink" href="/#/books/new">New</a>
-
-<div data-ng-view=""></div>
+<div>
+    <div class="topMenu">
+        <div class="brandName"> </div>
+    </div>
+    <div data-ng-view="Samenstellen"></div>
+</div>
 
 <hr>
-<div id="myCtrl" data-ng-controller="myCtrl as Settings">{{ whomai }}</div>
 
 <!-- Lib -->
 <script src="./javascripts/lib/angular.min.js"></script>
