@@ -599,7 +599,7 @@ describe('API Routing for CRUD operations on Notificatie', function () {
                 .post('/notificatie')
                 .send({
                     "gebruikersnaam": "Createusertest",
-                    "email": "Createusertest",
+                    "email": "Createusertest@createusertest.com",
                     "naam" : "jur",
                     "bericht" :"boodschap" ,
                     "volgnummer" : 1337
@@ -757,7 +757,7 @@ describe('API Routing for CRUD operations on Segment', function () {
                 .send({
                     "gebruikersnaam": "Createusertest",
                     "object": "video",
-                    "percentage" : "10",
+                    "percentage" : 10,
                     "volgnummer" : 1337
                 })
                 .expect(200)                                                // supertest
@@ -782,7 +782,7 @@ describe('API Routing for CRUD operations on Segment', function () {
                     JSON.parse(res.text)
                         .should.have.property('doc')
                         .and.have.property('percentage')
-                        .be.exactly('10')
+                        .be.exactly(10)
                     done();
                 });
         });
@@ -1115,7 +1115,7 @@ describe('API Routing for CRUD operations on Wishlist', function () {
                     "gebruikersnaam": "Createusertest",
                     "bestandsnaam": "plaatje.JPG",
                     "beschrijving" : "Mooi plaatje",
-                    "content" : "Plaatje",
+                    "content" : "mp4",
                     "volgnummer" : 1337
                 })
                 .expect(200)                                                // supertest
@@ -1140,7 +1140,7 @@ describe('API Routing for CRUD operations on Wishlist', function () {
                     JSON.parse(res.text)
                         .should.have.property('doc')
                         .and.have.property('content')
-                        .be.exactly('Plaatje')
+                        .be.exactly('mp4')
                     done();
                 });
         });
