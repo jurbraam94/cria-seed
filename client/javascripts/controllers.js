@@ -23,6 +23,7 @@ myApp.controller('GebruikerLoginController', function ($scope, $routeParams, $lo
             console.log($scope.gebruiker.doc.gebruikersnaam + ' is ingelogd.');
             if ($scope.gebruiker !== null) {
                 $cookieStore.put('sessionCookie', $scope.gebruiker.doc.gebruikersnaam);
+                $scope.loggedIn = true;
             }
         });
     };
