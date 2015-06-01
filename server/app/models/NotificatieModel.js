@@ -8,7 +8,7 @@
     var mongoose = require('mongoose'),
         Schema = mongoose.Schema,
         notificatie,
-        //emailRegex = /^([\w-]+\.]+@([\w-]+\.)+[\w-]{2,4})?$/,
+        emailRegex = /^([\w-]+\.]+@([\w-]+\.)+[\w-]{2,4})?$/,
         modelName = "Notificatie";
 
     /**
@@ -23,7 +23,7 @@
     notificatie = new Schema({
         gebruikersnaam: {type: String, required: true},
         naam: {type: String, required: true, validator: [stringLengteValidatie, 'Naam is niet lang genoeg']},
-        email: {type: String, required: true, match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'E-mail adres is onjuist']},
+        email: {type: String, required: true, match: [emailRegex, 'E-mail adres is onjuist']},
         bericht: {type: String, required: true, validator: [stringLengteValidatie, 'Naam is niet lang genoeg']},
         volgnummer: {type: Number, required: true, unique: true, min: 0}
     },
