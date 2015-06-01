@@ -11,6 +11,15 @@
         //emailRegex = /^([\w-]+\.]+@([\w-]+\.)+[\w-]{2,4})?$/,
         modelName = "Notificatie";
 
+    /**
+     * Controleerd of de lengte van string val tussen de 2 en 255 ligt
+     * @param val
+     * @returns {boolean}
+     */
+    function stringLengteValidatie(val) {
+        return (val !== undefined && val !== null && val.length >= 2 && val.length <= 255);
+    }
+
     notificatie = new Schema({
         gebruikersnaam: {type: String, required: true},
         naam: {type: String, required: true, validator: [stringLengteValidatie, 'Naam is niet lang genoeg']},
@@ -20,14 +29,6 @@
     },
         { collection: 'Notificatie' });
 
-    /**
-     * Controleerd of de lengte van string val tussen de 2 en 255 ligt
-     * @param val
-     * @returns {boolean}
-     */
-    function stringLengteValidatie(val) {
-        return (val !== undefined && val !== null && val.length >= 2 && val.length <= 255);
-    }
 
     ///**
     // * Valideert ingevoerde e-mail adres m.b.v. emailRegex:

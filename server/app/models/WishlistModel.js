@@ -11,6 +11,10 @@
         wishlist,
         modelName = "Wishlist";
 
+    function stringLengteValidatie(val) {
+        return (val !== undefined && val !== null && val.length >= 2 && val.length <= 255);
+    }
+
     wishlist = new Schema({
         gebruikersnaam: {type: String, required: true},
         bestandsnaam: {type: String, required: true, validator: [stringLengteValidatie, 'Bestandsnaam is niet lang genoeg']},
@@ -19,10 +23,6 @@
         volgnummer: {type: Number, required: true, unique: true, min: 0} //TODO: auto increment?
     },
         { collection: 'Wishlist' });
-
-    function stringLengteValidatie(val) {
-        return (val !== undefined && val !== null && val.length >= 2 && val.length <= 255);
-    }
 
     module.exports = mongoose.model(modelName, wishlist);
 }());
