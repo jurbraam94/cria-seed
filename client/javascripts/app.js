@@ -15,7 +15,7 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute'])
         // Get all gebruiker
         $routeProvider.when('/login', {
             templateUrl: 'partials/Login.html',
-            controller: gebruikerLoginCtrl
+            controller: 'gebruikerLoginCtrl'
         });
 
         // Get all gebruiker
