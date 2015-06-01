@@ -34,9 +34,9 @@ exports.login = function (req, res) {
 
             hashPassword(req.params._wachtwoord, gebruiker.passwordSalt, function (err, passwordHash) {
                 console.log("password gehasht");
-                console.log(passwordHash);
+                console.log(passwordHash.toString());
                 console.log(gebruiker.passwordHash);
-                if (gebruiker.passwordHash === passwordHash) {
+                if (gebruiker.passwordHash === passwordHash.toString()) {
                     console.log("juist wachtwoord");
                     retObj = {
                         meta: {
@@ -81,7 +81,6 @@ exports.gebruikerAanmaken = function (req, res) {
         doc;
 
     hashPassword(req.body.wachtwoord, salt, function (err, passwordHash) {
-        console.log(passwordHash.toString());
         doc = new Gebruiker({gebruikersnaam: req.body.gebruikersnaam, passwordHash: passwordHash.toString(), passwordSalt: salt});
         console.log(doc);
         doc.save(function (err) {
