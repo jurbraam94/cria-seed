@@ -8,15 +8,18 @@
  * @param gebruikersnaamService
  * @constructor
  */
-myApp.controller('gebruikerLoginCtrl', function ($scope, $routeParams, $location, gebruikersnaamService) {
+myApp.controller('gebruikerLoginCtrl', ['$cookies', function ($scope, $routeParams, $location, gebruikersnaamService, $cookies) {
     "use strict";
     // LOGIN
     $scope.login = function (gebruiker) {
         $scope.gebruiker = gebruikersnaamService.gebruiker.login({gebruikersnaam: gebruiker.gebruikersnaam, wachtwoord: gebruiker.wachtwoord}, function () {
             console.log($scope.gebruiker);
+            if ($scope.gebruiker !== null) {
+                $cookies.put('sessionCookie', $scope.gebruiker);
+            }
         });
     };
-});
+}]);
 
 /**
  * TODO: maken cirkeltje en het maken van boxen.
