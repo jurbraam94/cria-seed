@@ -1,17 +1,8 @@
-css-form input.ng-invalid {
-    border: 1px solid #FA787E;
+.loginForm .ng-dirty.ng-valid {
+    border:1px solid Green;
 }
-
-.css-form input.ng-valid {
-    border: 1px solid #78FA89;
-}
-
-.css-form input.ng-pristine {
-    border: 1px solid #FA787E;
-}
-
-.css-form input.ng-dirty {
-    border: 1px solid #FA787E;
+.loginForm .ng-dirty.ng-invalid {
+    border:1px solid Red;
 }
 
 .leftmenubar {
