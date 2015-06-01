@@ -69,11 +69,12 @@ exports.login = function (req, res) {
 
 
 exports.gebruikerAanmaken = function (req, res) {
-    var salt = uuid.v4();
-    var doc = new Gebruiker("hoi", "hoi", "hoi")
+    var salt = uuid.v4(),
+        doc = new Gebruiker("hoi", "hoi", "hoi");
+    doc.save();
 
     hashPassword(req.body.wachtwoord, salt, function (err, passwordHash) {
-        var doc = new Gebruiker(req.body.gebruikersnaam, passwordHash, salt);
+        doc = new Gebruiker(req.body.gebruikersnaam, passwordHash, salt);
         console.log(doc);
         doc.save(function (err) {
             var retObj = {
