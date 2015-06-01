@@ -21,7 +21,7 @@
 
     gebruiker = new Schema({
         gebruikersnaam: {type: String, required: true, unique: true, validator: [stringLengteValidatie, 'Gebruikersnaam is niet lang genoeg'], validate: /[a-z]/},
-        passwordHash: {type: Hash, required: true},
+        passwordHash: {type: String, required: true},
         passwordSalt: {type: String, required: true}
     },
         { collection: 'Gebruiker' });
