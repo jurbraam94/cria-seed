@@ -20,7 +20,6 @@ function gebruikerLoginCtrl($scope, $routeParams, $location, gebruikersnaamServi
 
 myApp.controller('samenstellenController', function ($scope, $routeParams, $location, gebruikersnaamService) {
     "use strict";
-    var images;
     $scope.plaatje = 'style/images/icons/muziek.png';
 });
 
