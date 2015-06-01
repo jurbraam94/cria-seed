@@ -8,7 +8,7 @@
  * @param gebruikersnaamService
  * @constructor
  */
-function gebruikerLoginCtrl($scope, $routeParams, $location, gebruikersnaamService) {
+myApp.controller('gebruikerLoginCtrl', function ($scope, $routeParams, $location, gebruikersnaamService) {
     "use strict";
     // LOGIN
     $scope.login = function () {
@@ -16,7 +16,13 @@ function gebruikerLoginCtrl($scope, $routeParams, $location, gebruikersnaamServi
             console.log($scope.gebruiker);
         });
     };
-}
+});
+
+myApp.controller('samenstellenController', function ($scope, $routeParams, $location, gebruikersnaamService) {
+    "use strict";
+    $scope.plaatje = 'style/images/icons/muziek.png';
+});
+
 
 myApp.controller('myCtrl', function ($scope) {
     "use strict";

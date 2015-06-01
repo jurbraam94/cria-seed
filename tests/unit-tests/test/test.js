@@ -309,7 +309,7 @@ describe('API Routing for CRUD operations on Aanvullende gegevens', function () 
                 .send({
                     "gebruikersnaam": "test",
                     "religie": "Christelijk",
-                    "donor": "Ja"
+                    "donor": "ja"
                 })
                 .expect(200)                                                // supertest
                 .expect('Content-Type', /application.json/)                 // supertest
@@ -333,7 +333,7 @@ describe('API Routing for CRUD operations on Aanvullende gegevens', function () 
                     JSON.parse(res.text)
                         .should.have.property('doc')
                         .and.have.property('donor')
-                        .be.exactly('Ja')
+                        .be.exactly('ja')
                     done();
                 });
         });

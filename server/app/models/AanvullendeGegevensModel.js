@@ -15,8 +15,8 @@
 
     aanvullendeGegevens = new Schema({
         gebruikersnaam: {type: String, required: true, unique: true},
-        religie: {type: String, required: true},
-        donor: {type: String, required: true}
+        religie: {type: String, required: true, min: 2, max: 20},
+        donor: {type: String, required: true, enum: [ 'ja', 'nee'] }
     },
         { collection: 'AanvullendeGegevens' });
 

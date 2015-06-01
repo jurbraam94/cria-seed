@@ -1,5 +1,5 @@
 .leftmenubar {
-    position: relative;
+    position: absolute;
     width: 20%;
     height: 700px;
     background-color: #48cec2;
@@ -7,7 +7,35 @@
 
 
 .topMenu {
-    height: 20%;
-    background-color: #48cec2;
+    z-index: 0;
+    height: 75px;
+    background-color: #3e464f;
+}
 
+.brandName {
+    height: 100px;
+    width: 500px;
+    background-image: url("../style/images/DOOD%20logo.png");
+    background-repeat: no-repeat;
+    background-size: 45%;
+}
+.brandName img{
+    z-index: 1;
+    display: block;
+    width: auto;
+    height: auto;
+}
+
+.boxje {
+    flex-direction: column;
+    position: relative;
+    background-color: #3e464f;
+    width: 40%;
+    height: 17.6%;
+    margin-right: 2%;
+    margin-top: 2%;
+}
+
+.boxje  image {
+    z-index: 2;
 }
