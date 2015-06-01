@@ -333,7 +333,7 @@ describe('API Routing for CRUD operations on Aanvullende gegevens', function () 
                     JSON.parse(res.text)
                         .should.have.property('doc')
                         .and.have.property('donor')
-                        .be.exactly('Ja')
+                        .be.exactly('ja')
                     done();
                 });
         });
