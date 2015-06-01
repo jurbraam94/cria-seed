@@ -1,8 +1,11 @@
+.loginForm .ng-pristine {
+    border:2px solid Red;
+}
 .loginForm .ng-dirty.ng-valid {
-    border:1px solid Green;
+    border:2px solid Green;
 }
 .loginForm .ng-dirty.ng-invalid {
-    border:1px solid Red;
+    border:2px solid Red;
 }
 
 .leftmenubar {
