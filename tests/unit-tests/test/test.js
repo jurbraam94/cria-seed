@@ -15,7 +15,7 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
     before(function (done) {
         done();
     });
-    describe('LOGIN gebruiker', function () {
+    /*describe('LOGIN gebruiker', function () {
         it('Should LOGIN /gebruiker/{gebruikersnaam}/{wachtwoord}', function (done) {
             request
                 .get('/gebruiker/' + 'jur/' + 'jur')
@@ -33,7 +33,7 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
                     done();
                 });
         });
-    });
+    });*/
 
     describe('CREATE gebruiker', function () {
         it('Should POST /gebruiker', function (done) {
@@ -70,7 +70,38 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
                 });
         });
     });
-});
+
+    describe('UPDATE 1 gebruiker', function () {
+        it('Should PUT /gebruiker/{gebruikersnaam}', function (done) {
+            request
+                .put('/gebruiker/' + 'jur')
+                .send({
+                    "wachtwoord": "wachtwoord"
+                })
+                .expect(200)                                                // supertest
+                .expect('Content-Type', /application.json/)                 // supertest
+                .expect('Content-Type', 'utf-8')                            // supertest
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+
+                    JSON.parse(res.text)
+                        .should.have.property('meta')
+                        .and.have.property('action')
+                        .be.exactly('update');
+                    JSON.parse(res.text)
+                        .should.have.property('err')
+                        .be.exactly(null);
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('wachtwoord')
+                        .be.exactly('wachtwoord');
+                    res.statusCode.should.be.exactly(200);
+                    done();
+                });
+        });
+    });
 
     describe('DELETE 1 gebruiker', function () {
         it('Should DELETE /gebruiker/{gebruikersnaam}', function (done) {
@@ -1058,11 +1089,11 @@ describe('API Routing for CRUD operations on Wishlist', function () {
                     JSON.parse(res.text)
                         .should.have.property('doc')
                         .and.have.property('gebruikersnaam')
-                        .be.exactly('Createusertest');
+                        .be.exactly('Createusertest')
                     JSON.parse(res.text)
                         .should.have.property('doc')
                         .and.have.property('content')
-                        .be.exactly('mp4');
+                        .be.exactly('mp4')
                     done();
                 });
         });
