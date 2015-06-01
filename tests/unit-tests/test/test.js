@@ -15,7 +15,7 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
     before(function (done) {
         done();
     });
-
+/*
     describe('LOGIN gebruiker', function () {
         it('Should LOGIN /gebruiker/{gebruikersnaam}/{wachtwoord}', function (done) {
             request
@@ -34,7 +34,7 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
                     done();
                 });
         });
-    });
+    });*/
 
     describe('CREATE gebruiker', function () {
         it('Should POST /gebruiker', function (done) {
