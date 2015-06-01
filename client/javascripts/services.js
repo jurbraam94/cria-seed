@@ -16,7 +16,7 @@
                 },
                 db = {};
             // REST url to server
-            db.gebruiker = $resource('/api/gebruiker/:_gebruikersnaam/:_wachtwoord', {}, actions);
+            db.gebruiker = $resource('/api/gebruiker/:gebruikersnaam/:wachtwoord', {}, actions);
             return db;
         }]);
 }());
