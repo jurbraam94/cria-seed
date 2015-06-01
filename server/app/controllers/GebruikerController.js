@@ -11,23 +11,59 @@ var mongoose = require('mongoose'),
  */
 
 exports.login = function (req, res) {
-    var conditions = {gebruikersnaam: req.params._gebruikersnaam, wachtwoord: req.params._wachtwoord}, fields = {};
+    var conditions = {gebruikersnaam: req.params._gebruikersnaam}, fields = {},
+        retObj;
 
-    Gebruiker.findOne(conditions, fields)
-        .exec(function (err, doc) {
-            var retObj = {
+    Gebruiker.findone(conditions, fields, function (err, gebruiker) {
+        if (err) {
+            retObj = {
                 meta: {
                     "action": "detail",
                     'timestamp': new Date(),
                     filename: __filename
                 },
-                doc: {
-                    "gebruikersnaam": doc.gebruikersnaam
-                }, // only the first document, not an array when using "findOne"
                 err: err
             };
             return res.send(retObj);
-        });
+        }
+
+        if (gebruiker) {
+            if (gebruiker.wachtwoord === req.params._wachtwoord) {
+                retObj = {
+                    meta: {
+                        "action": "detail",
+                        'timestamp': new Date(),
+                        filename: __filename
+                    },
+                    doc: {
+                        "gebruikersnaam": gebruiker.gebruikersnaam
+                    }, // only the first document, not an array when using "findOne"
+                    err: err
+                };
+                return res.send(retObj);
+            } else {
+                retObj = {
+                    meta: {
+                        "action": "detail",
+                        'timestamp': new Date(),
+                        filename: __filename
+                    },
+                    err: "Wachtwoord onjuist"
+                };
+                return res.send(retObj);
+            }
+        } else {
+            retObj = {
+                meta: {
+                    "action": "detail",
+                    'timestamp': new Date(),
+                    filename: __filename
+                },
+                err: "Gebruiker niet gevonden"
+            };
+            return res.send(retObj);
+        }
+    });
 };
 
 
