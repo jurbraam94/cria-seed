@@ -10,6 +10,13 @@
  */
 myApp.controller('GebruikerLoginController', function ($scope, $routeParams, $location, gebruikersnaamService, $cookieStore) {
     "use strict";
+
+    if ($cookieStore.get('sessionCookie') !== undefined) {
+        $scope.loggedIn = true;
+    } else {
+        $scope.loggedIn = false
+    }
+
     // LOGIN
     $scope.login = function (gebruiker) {
         $scope.gebruiker = gebruikersnaamService.gebruiker.login({gebruikersnaam: gebruiker.gebruikersnaam, wachtwoord: gebruiker.wachtwoord}, function () {
