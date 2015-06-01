@@ -57,15 +57,16 @@ exports.login = function (req, res) {
                 };
                 return res.send(retObj);
             });
+        } else {
+            retObj = {
+                meta: {
+                    "action": "detail",
+                    'timestamp': new Date(),
+                    filename: __filename
+                },
+                err: "Gebruiker niet gevonden"
+            };
         }
-        retObj = {
-            meta: {
-                "action": "detail",
-                'timestamp': new Date(),
-                filename: __filename
-            },
-            err: "Gebruiker niet gevonden"
-        };
         return res.send(retObj);
     });
 };
