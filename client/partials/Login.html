@@ -12,6 +12,6 @@
     <div ng-show="loginForm.$submitted || loginForm.wachtwoord.$touched">
         <div ng-show="loginForm.gebruikersnaam.$error.required">Vul alstublieft een wachtwoord in.</div>
     </div>
-    <input type="submit" ng-click="login(gebruiker)" value="Login" />
+    <input ng-disabled="myForm.$invalid" type="submit" ng-click="login(gebruiker)" value="Login" />
     </button>
 </form>
