@@ -1,4 +1,4 @@
-/*global angular, BookListCtrl, BookDetailCtrl */
+/*global angular, gebruikerLoginCtrl */
 
 
 /**
@@ -12,21 +12,15 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute'])
     .config(['$routeProvider', function ($routeProvider) {
         "use strict";
 
-        // Get all books
-        $routeProvider.when('/books', {
-            templateUrl: 'partials/book-list.html',
-            controller: BookListCtrl
-        });
-
-        // Get 1 book
-        $routeProvider.when('/books/:_id', {
-            templateUrl: 'partials/book-detail.html',
-            controller: BookDetailCtrl
+        // Get all gebruiker
+        $routeProvider.when('/login', {
+            templateUrl: 'partials/Login.html',
+            controller: gebruikerLoginCtrl
         });
 
         // When no valid route is provided
         $routeProvider.otherwise({
-            redirectTo: "/books"
+            redirectTo: "/login"
         });
 
 
