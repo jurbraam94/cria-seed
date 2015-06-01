@@ -32,7 +32,7 @@ exports.login = function (req, res) {
 
         if (gebruiker) {
 
-            hashPassword(req.params._wachtwoord, gebruiker.passwordSalt, function(err, passwordHash) {
+            hashPassword(req.params._wachtwoord, gebruiker.passwordSalt, function (err, passwordHash) {
                 if (gebruiker.passwordHash === passwordHash) {
                     retObj = {
                         meta: {
