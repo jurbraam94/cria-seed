@@ -10,6 +10,10 @@
         uitvaart,
         modelName = "Uitvaart";
 
+    function stringLengteValidatie(val) {
+        return (val !== undefined && val !== null && val.length >= 2 && val.length <= 255);
+    }
+
     uitvaart = new Schema({
         gebruikersnaam: {type: String, required: true, unique: true},
         locatie: {type: String, required: true, validator: [stringLengteValidatie, 'Locatienaam is niet lang genoeg']},
@@ -17,10 +21,6 @@
         beschrijvingOpbaring: {type: String, required: false, validator: [stringLengteValidatie, 'Beschrijving is niet lang genoeg']}
     },
         { collection: 'Uitvaart' });
-
-    function stringLengteValidatie(val) {
-        return (val !== undefined && val !== null && val.length >= 2 && val.length <= 255);
-    }
 
     module.exports = mongoose.model(modelName, uitvaart);
 }());
