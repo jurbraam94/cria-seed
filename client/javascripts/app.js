@@ -38,9 +38,8 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies'])
     run(function ($rootScope, $location, $cookieStore) {
         "use strict";
         $rootScope.$on("$routeChangeStart", function (event, next) {
-            var session = $cookieStore.get('sessionCookie').toString();
             if (next.security) {
-                if (session === undefined) {
+                if ($cookieStore.get('sessionCookie') === undefined) {
                     $location.path('/login');
                 }
             }
