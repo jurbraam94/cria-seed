@@ -31,29 +31,32 @@ exports.login = function (req, res) {
         }
 
         if (gebruiker) {
-            if (gebruiker.wachtwoord === req.params._wachtwoord) {
+
+            hashPassword(req.params._wachtwoord, gebruiker.passwordSalt, function(err, passwordHash) {
+                if (gebruiker.passwordHash === passwordHash) {
+                    retObj = {
+                        meta: {
+                            "action": "detail",
+                            'timestamp': new Date(),
+                            filename: __filename
+                        },
+                        doc: {
+                            "gebruikersnaam": gebruiker.gebruikersnaam
+                        }, // only the first document, not an array when using "findOne"
+                        err: err
+                    };
+                    return res.send(retObj);
+                }
                 retObj = {
                     meta: {
                         "action": "detail",
                         'timestamp': new Date(),
                         filename: __filename
                     },
-                    doc: {
-                        "gebruikersnaam": gebruiker.gebruikersnaam
-                    }, // only the first document, not an array when using "findOne"
-                    err: err
+                    err: "Wachtwoord onjuist"
                 };
                 return res.send(retObj);
-            }
-            retObj = {
-                meta: {
-                    "action": "detail",
-                    'timestamp': new Date(),
-                    filename: __filename
-                },
-                err: "Wachtwoord onjuist"
-            };
-            return res.send(retObj);
+            });
         }
         retObj = {
             meta: {
