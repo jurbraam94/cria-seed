@@ -1,9 +1,11 @@
 <h2>Login</h2>
 
+<div ng-if="$cookieStore.get('sessionCookie)">
+    <p>Welkom <code>$cookieStore.get('sessionCookie')</code></p>
+</div>
 <form name="loginForm" novalidate class="loginForm">
-
-    <span><label>Gebruikersnaam:</label> <input type="text" ng-model="gebruiker.gebruikersnaam" name="gebruikersnaam" required=""/></span>
-    <span><label>Wachtwoord:</label> <input type="password" ng-model="gebruiker.wachtwoord" name="wachtwoord" required=""/></span>
+    <p><label>Gebruikersnaam:</label> <input type="text" ng-model="gebruiker.gebruikersnaam" name="gebruikersnaam" required=""/></p>
+    <p><label>Wachtwoord:</label> <input type="password" ng-model="gebruiker.wachtwoord" name="wachtwoord" required=""/></p>
 
     <input ng-disabled="loginForm.$invalid" type="submit" ng-click="login(gebruiker)" value="Login" />
     </button>

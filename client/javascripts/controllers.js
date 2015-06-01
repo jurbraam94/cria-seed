@@ -14,7 +14,7 @@ myApp.controller('GebruikerLoginController', function ($scope, $routeParams, $lo
     $scope.login = function (gebruiker) {
         $scope.gebruiker = gebruikersnaamService.gebruiker.login({gebruikersnaam: gebruiker.gebruikersnaam, wachtwoord: gebruiker.wachtwoord}, function () {
             console.log($scope.gebruiker);
-            if ($scope.gebruiker !== null) {
+            if ($scope.gebruiker.err === null) {
                 $cookieStore.put('sessionCookie', $scope.gebruiker);
             }
         });
