@@ -1058,11 +1058,11 @@ describe('API Routing for CRUD operations on Wishlist', function () {
                     JSON.parse(res.text)
                         .should.have.property('doc')
                         .and.have.property('gebruikersnaam')
-                        .be.exactly('Createusertest')
+                        .be.exactly('Createusertest');
                     JSON.parse(res.text)
                         .should.have.property('doc')
                         .and.have.property('content')
-                        .be.exactly('mp4')
+                        .be.exactly('mp4');
                     done();
                 });
         });
