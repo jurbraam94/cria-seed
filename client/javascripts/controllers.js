@@ -8,14 +8,14 @@
  * @param gebruikersnaamService
  * @constructor
  */
-myApp.controller('GebruikerLoginController', function ($scope, $routeParams, $location, gebruikersnaamService, $cookies) {
+myApp.controller('GebruikerLoginController', function ($scope, $routeParams, $location, gebruikersnaamService, $cookieStore) {
     "use strict";
     // LOGIN
     $scope.login = function (gebruiker) {
         $scope.gebruiker = gebruikersnaamService.gebruiker.login({gebruikersnaam: gebruiker.gebruikersnaam, wachtwoord: gebruiker.wachtwoord}, function () {
             console.log($scope.gebruiker);
             if ($scope.gebruiker !== null) {
-                $cookies.put('sessionCookie', $scope.gebruiker);
+                $cookieStore.put('sessionCookie', $scope.gebruiker);
             }
         });
     };
