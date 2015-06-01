@@ -41,28 +41,26 @@ exports.login = function (req, res) {
                     err: err
                 };
                 return res.send(retObj);
-            } else {
-                retObj = {
-                    meta: {
-                        "action": "detail",
-                        'timestamp': new Date(),
-                        filename: __filename
-                    },
-                    err: "Wachtwoord onjuist"
-                };
-                return res.send(retObj);
             }
-        } else {
             retObj = {
                 meta: {
                     "action": "detail",
                     'timestamp': new Date(),
                     filename: __filename
                 },
-                err: "Gebruiker niet gevonden"
+                err: "Wachtwoord onjuist"
             };
             return res.send(retObj);
         }
+        retObj = {
+            meta: {
+                "action": "detail",
+                'timestamp': new Date(),
+                filename: __filename
+            },
+            err: "Gebruiker niet gevonden"
+        };
+        return res.send(retObj);
     });
 };
 
