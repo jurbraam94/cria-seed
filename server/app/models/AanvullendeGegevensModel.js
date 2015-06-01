@@ -1,6 +1,3 @@
-/**
- * Created by Erik-Jan on 29-5-2015.
- */
 /*jslint node: true */
 
 (function () {
@@ -13,10 +10,19 @@
         aanvullendeGegevens,
         modelName = "AanvullendeGegevens";
 
+    /**
+     * Controleerd of de lengte van string val tussen de 2 en 255 ligt
+     * @param val
+     * @returns {boolean}
+     */
+    function stringLengteValidatie(val) {
+        return (val !== undefined && val !== null && val.length >= 2 && val.length <= 255);
+    }
+
     aanvullendeGegevens = new Schema({
         gebruikersnaam: {type: String, required: true, unique: true},
-        religie: {type: String, required: true, min: 2, max: 20},
-        donor: {type: String, required: true, enum: [ 'ja', 'nee'] }
+        religie: {type: String, required: true, validator: [stringLengteValidatie, 'De naam van uw religie is niet lang genoeg']},
+        donor: {type: String, required: true, enum: ['ja', 'nee']}
     },
         { collection: 'AanvullendeGegevens' });
 

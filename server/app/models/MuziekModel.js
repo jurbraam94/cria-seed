@@ -1,6 +1,3 @@
-/**
- * Created by Erik-Jan on 29-5-2015.
- */
 /*jslint node: true */
 
 (function () {
@@ -15,7 +12,7 @@
 
     muziek = new Schema({
         gebruikersnaam: {type: String, required: true, unique: true},
-        playlistId: {type: Number, required: true}
+        playlistId: {type: Number, required: true, min: 0}
     },
         { collection: 'Muziek' });
 
