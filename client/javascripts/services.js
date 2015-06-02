@@ -11,13 +11,34 @@
                     'get': {method: 'GET'},
                     'save': {method: 'POST'},
                     'query': {method: 'GET', isArray: true},
-                    'login': { method: 'GET', params: {gebruikersnaam : 'gebruikersnaam', wachtwoord: 'wachtwoord'}},
+                    'login': { method: 'GET', params: {gebruikersnaam: 'gebruikersnaam', wachtwoord: 'wachtwoord'}},
                     'update': {method: 'PUT'},
                     'delete': {method: 'DELETE'}
                 },
                 db = {};
             // REST url to server
             db.gebruiker = $resource('/api/gebruiker/:gebruikersnaam/:wachtwoord', {}, actions);
+            db.uitvaartSamenstellen = $resource('/api/uitvaartSamenstellen', {}, actions);
             return db;
         }]);
 }());
+
+    angular.module('myApp.services', ['ngResource']).factory('Api', ['$resource', '$http',
+        function ($resource) {
+                return {
+                    gebruiker: $resource('/api/gebruiker/:gebruikersnaam/:wachtwoord',
+                        {
+                            'login': {
+                                method: 'GET',
+                                params: {gebruikersnaam: 'gebruikersnaam', wachtwoord: 'wachtwoord'}
+                            }
+                        }),
+                    uitvaartSamenstellen: $resource('/api/uitvaartSamenstellen',
+                                {
+                                    'save': {
+                                        method: 'POST',
+                                        params: {gebruikersnaam: 'gebruikersnaam', tijdsduur: 'tijdsduur'}
+                                    }
+                                })
+                        };
+        }]);
