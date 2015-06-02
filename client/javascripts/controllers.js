@@ -40,7 +40,7 @@ myApp.controller('GebruikerLoginController', function ($scope, $routeParams, $lo
 
     // LOGUIT
     $scope.loguit = function () {
-        $cookieStore.remove('sessionCookie', $scope.gebruiker.doc.gebruikersnaam);
+        $cookieStore.remove('sessionCookie');
     };
 });
 
