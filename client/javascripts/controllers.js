@@ -38,6 +38,7 @@ myApp.controller('GebruikerLoginController', function ($scope, $window, Api, $co
                     $cookieStore.put('sessionCookie', $scope.gebruiker.doc.gebruikersnaam);
                     $window.location.reload();
                 } else if ($scope.gebruiker.err) {
+                    console.log($scope.gebruiker.err);
                     $scope.error = $scope.gebruiker.err;
                 }
             });
