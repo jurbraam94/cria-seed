@@ -30,14 +30,14 @@ myApp.controller('GebruikerLoginController', function ($scope, $window, gebruike
     // LOGIN / LOGUIT
     $scope.inEnUitloggen = function (gebruiker) {
         if ($cookieStore.get('sessionCookie')) {
-            console.log("uitgelogd")
+            console.log("uitgelogd");
             $cookieStore.remove('sessionCookie');
         } else {
             $scope.gebruiker = gebruikersnaamService.gebruiker.login({gebruikersnaam: gebruiker.gebruikersnaam, wachtwoord: gebruiker.wachtwoord}, function () {
                 if ($scope.gebruiker !== null) {
                     $cookieStore.put('sessionCookie', $scope.gebruiker.doc.gebruikersnaam);
                     $scope.loggedIn = true;
-                    console.log("ingelogd")
+                    console.log("ingelogd");
                 }
             });
         }
