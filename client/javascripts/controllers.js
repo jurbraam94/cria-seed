@@ -32,16 +32,17 @@ myApp.controller('GebruikerLoginController', function ($scope, $window, gebruike
         if ($cookieStore.get('sessionCookie')) {
             console.log("uitgelogd");
             $cookieStore.remove('sessionCookie');
+            $window.location.reload();
         } else {
             $scope.gebruiker = gebruikersnaamService.gebruiker.login({gebruikersnaam: gebruiker.gebruikersnaam, wachtwoord: gebruiker.wachtwoord}, function () {
                 if ($scope.gebruiker !== null) {
                     $cookieStore.put('sessionCookie', $scope.gebruiker.doc.gebruikersnaam);
                     $scope.loggedIn = true;
                     console.log("ingelogd");
+                    $window.location.reload();
                 }
             });
         }
-        $window.location.reload();
     };
 });
 
