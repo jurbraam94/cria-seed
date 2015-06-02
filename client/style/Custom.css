@@ -20,25 +20,12 @@
     padding-left: 0.4%;
 }
 
-.topMenu {
-    z-index: 0;
-    height: 75px;
-    background-color: #3e464f;
+.logo{
+    width:100px;
 }
 
-.brandName {
-    height: 100px;
-    width: 500px;
-    background-image: url("../style/images/DOOD%20logo.png");
-    background-repeat: no-repeat;
-    background-size: 45%;
-}
-
-.brandName img{
-    z-index: 1;
-    display: block;
-    width: auto;
-    height: auto;
+.Content {
+    margin-top:100px;
 }
 
 .boxje {
