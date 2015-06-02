@@ -32,7 +32,7 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies'])
         });
 
     }]).
-    run(function ($rootScope, $location, $cookieStore) {
+    run(function ($rootScope, $location, $cookieStore, $scope) {
         "use strict";
         $rootScope.$on("$routeChangeStart", function (event, next) {
             if (next.security) {
@@ -40,5 +40,6 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies'])
                     $location.path('/login');
                 }
             }
+            $scope.menuActive = $location.path();
         });
     });
