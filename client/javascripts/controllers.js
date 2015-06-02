@@ -3,11 +3,17 @@
 
 myApp.controller('MainController', function ($scope, $rootScope, $location, $cookieStore) {
     "use strict";
-
     $scope.gebruikersNaam = $cookieStore.get('sessionCookie');
 
+    if ($scope.gebruikersNaam) {
+        $scope.login = "Welkom" + $scope.gebruikersNaam;
+    } else {
+        $scope.login = "Inloggen";
+    }
+
+
     $rootScope.$on('$routeChangeSuccess', function (e, curr, prev) {
-        $scope.menuActive = $location.path();
+        $scope.menuActive = $location.path().substring(1);
     });
 
 });
