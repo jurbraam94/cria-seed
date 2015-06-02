@@ -9,7 +9,7 @@
  * @see http://docs.angularjs.org/guide/concepts
  */
 var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies'])
-    .config(['$routeProvider', '$cookieStore', '$scope', function ($routeProvider, $cookieStore, $scope) {
+    .config(['$routeProvider', function ($routeProvider, $cookieStore, $scope) {
         "use strict";
 
         // Get all gebruiker
