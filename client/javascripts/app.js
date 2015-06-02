@@ -9,7 +9,7 @@
  * @see http://docs.angularjs.org/guide/concepts
  */
 var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies'])
-    .config(['$routeProvider', function ($routeProvider) {
+    .config(['$routeProvider', '$cookieStore', '$scope', function ($routeProvider, $cookieStore, $scope) {
         "use strict";
 
         // Get all gebruiker
@@ -30,6 +30,7 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies'])
         $routeProvider.otherwise({
             redirectTo: "/login"
         });
+        $scope.gebruikersNaam = $cookieStore.get('sessionCookie');
 
     }]).
     run(function ($rootScope, $location, $cookieStore) {

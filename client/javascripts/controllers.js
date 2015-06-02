@@ -13,7 +13,6 @@ myApp.controller('GebruikerLoginController', function ($scope, $routeParams, $lo
 
     if ($cookieStore.get('sessionCookie') !== undefined) {
         $scope.loggedIn = true;
-        $scope.gebruikersNaam = $cookieStore.get('sessionCookie');
     } else {
         $scope.loggedIn = false;
     }
