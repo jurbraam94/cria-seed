@@ -52,7 +52,8 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
             ['Sleep',    7]
         ]),
             options = {
-                title: 'My Daily Activities'
+                chartArea: { left: '5%', right: '0', width:'90%',height:'90%' },
+                legend: { position: 'none' }
             },
             chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
