@@ -23,22 +23,23 @@
         }]);
 }());
 
-    angular.module('myApp.services', ['ngResource']).factory('Api', ['$resource', '$http',
+angular.module('myApp.services', ['ngResource']).factory('Api', ['$resource', '$http',
         function ($resource) {
-                return {
-                    gebruiker: $resource('/api/gebruiker/:gebruikersnaam/:wachtwoord',
-                        {
-                            'login': {
-                                method: 'GET',
-                                params: {gebruikersnaam: 'gebruikersnaam', wachtwoord: 'wachtwoord'}
-                            }
-                        }),
-                    uitvaartSamenstellen: $resource('/api/uitvaartSamenstellen',
-                                {
-                                    'save': {
-                                        method: 'POST',
-                                        params: {gebruikersnaam: 'gebruikersnaam', tijdsduur: 'tijdsduur'}
-                                    }
-                                })
-                        };
-        }]);
+        "use strict";
+        return {
+            gebruiker: $resource('/api/gebruiker/:gebruikersnaam/:wachtwoord',
+                {
+                    'login': {
+                        method: 'GET',
+                        params: {gebruikersnaam: 'gebruikersnaam', wachtwoord: 'wachtwoord'}
+                    }
+                }),
+            uitvaartSamenstellen: $resource('/api/uitvaartSamenstellen',
+                    {
+                    'save': {
+                        method: 'POST',
+                        params: {gebruikersnaam: 'gebruikersnaam', tijdsduur: 'tijdsduur'}
+                    }
+                })
+        };
+    }]);

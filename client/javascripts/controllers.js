@@ -33,7 +33,7 @@ myApp.controller('GebruikerLoginController', function ($scope, $window, Api, $co
             $window.location.reload();
         } else {
          //   $scope.gebruiker = gebruikersnaamService.gebruiker.login({gebruikersnaam: gebruiker.gebruikersnaam, wachtwoord: gebruiker.wachtwoord}, function () {
-        $scope.gebruiker = Api.gebruiker.login({gebruikersnaam: gebruikers.gebruikersnaam, wachtwoord: gebruiker.wachtwoord}, function () {
+            $scope.gebruiker = Api.gebruiker.login({gebruikersnaam: gebruiker.gebruikersnaam, wachtwoord: gebruiker.wachtwoord}, function () {
                 if ($scope.gebruiker.err === undefined) {
                     $cookieStore.put('sessionCookie', $scope.gebruiker.doc.gebruikersnaam);
                     $window.location.reload();
@@ -55,7 +55,6 @@ myApp.controller('GebruikerLoginController', function ($scope, $window, Api, $co
 myApp.controller('SamenstellenController', function ($scope, $routeParams, $location, gebruikersnaamService) {
     "use strict";
     var init;
-
     google.setOnLoadCallback(drawChart());
 
     function drawChart() {
