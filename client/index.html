@@ -37,7 +37,7 @@
             <ul class="nav navbar-nav">
                 <li ng-class="{active: Home == menuActive }"><a href="#">Home</a></li>
                 <li ng-class="{active: About == menuActive }"><a href="#about">About</a></li>
-                <li ng-class="{active: Samenstellen == menuActive }"><a href="#/Samenstellen">Samenstellen</a></li>
+                <li ng-class="{active: samenstellen == menuActive }"><a href="#/Samenstellen">Samenstellen</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#/login"> Inloggen <span class="sr-only">(current)</span></a></li>
@@ -47,7 +47,7 @@
 </nav>
 
     <div class="container-fluid">
-            <div class="Content" data-ng-view="Content"></div>
+            <div ng-class="Content {active: login == menuActive }" data-ng-view="Content"></div>
         <hr>
 
 <footer>
