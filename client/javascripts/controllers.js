@@ -55,7 +55,6 @@ myApp.controller('GebruikerLoginController', function ($scope, $window, Api, $co
 myApp.controller('SamenstellenController', function ($scope, $routeParams, $location, gebruikersnaamService) {
     "use strict";
     var init;
-    google.setOnLoadCallback(drawChart());
 
     function drawChart() {
         var data = google.visualization.arrayToDataTable([
@@ -74,6 +73,8 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
 
         chart.draw(data, options);
     }
+    drawChart();
+    google.setOnLoadCallback(drawChart());
 
     $scope.getAllImages = function () {
         var imgArray = [],
