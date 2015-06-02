@@ -1,19 +1,22 @@
 /*jslint node: true */
 /*globals myApp, google, drawChart*/
 
-/**
- * TODO: create controller for retrieving 1 book, create and delete
- * @param $scope
- * @param $routeParams
- * @param gebruikersnaamService
- * @constructor
- */
+myApp.controller('MainController', function ($scope, $rootScope, $location, $cookieStore) {
+    "use strict";
+
+    $scope.gebruikersNaam = $cookieStore.get('sessionCookie');
+
+    $rootScope.$on('$routeChangeSuccess', function (e, curr, prev) {
+        $scope.menuActive = $location.path();
+    });
+
+});
+
 myApp.controller('GebruikerLoginController', function ($scope, $routeParams, $location, gebruikersnaamService, $cookieStore) {
     "use strict";
 
     if ($cookieStore.get('sessionCookie') !== undefined) {
         $scope.loggedIn = true;
-        $scope.gebruikersNaam = $cookieStore.get('sessionCookie');
     } else {
         $scope.loggedIn = false;
     }
