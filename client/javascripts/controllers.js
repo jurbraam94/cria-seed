@@ -41,7 +41,6 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
     "use strict";
     var init;
 
-    google.setOnLoadCallback(drawChart);
     function drawChart() {
 
         var data = google.visualization.arrayToDataTable([
@@ -59,6 +58,8 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
 
         chart.draw(data, options);
     }
+
+    google.setOnLoadCallback(drawChart);
 
     $scope.getAllImages = function () {
         var imgArray = [],
