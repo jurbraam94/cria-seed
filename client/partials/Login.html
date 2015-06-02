@@ -1,9 +1,9 @@
 <h2>Login</h2>
 
-<div ng-if="loggedIn">
-    <p>Welkom</p>
+<div ng-show="loggedIn">
+    <p>Welkom {{gebruikersnaam}}.</p>
 </div>
-<form ng-if="!loggedIn" name="loginForm" novalidate class="loginForm">
+<form ng-show="!loggedIn" name="loginForm" novalidate class="loginForm">
     <p><label>Gebruikersnaam:</label> <input type="text" ng-model="gebruiker.gebruikersnaam" name="gebruikersnaam" required=""/></p>
     <p><label>Wachtwoord:</label> <input type="password" ng-model="gebruiker.wachtwoord" name="wachtwoord" required=""/></p>
 
