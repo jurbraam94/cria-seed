@@ -1,6 +1,6 @@
 <h2>Login</h2>
 
-<div class="jumbotron">
+<div class="panel panel-primary">
 
 <div ng-show="loggedIn">
     <p>Welkom, u bent ingelogd als {{gebruikersNaam}}.</p>
@@ -13,8 +13,11 @@
     <p><label>Gebruikersnaam:</label> <input type="text" ng-model="gebruiker.gebruikersnaam" name="gebruikersnaam" required=""/></p>
     <p><label>Wachtwoord:</label> <input type="password" ng-model="gebruiker.wachtwoord" name="wachtwoord" required=""/></p>
 
-    <input ng-disabled="loginForm.$invalid" type="submit" ng-click="inEnUitloggen(gebruiker)" value="Login" />
+
+    <button ng-disabled="loginForm.$invalid" type="button" ng-click="inEnUitloggen(gebruiker)" class="btn btn-default btn-lg">
+        <spa aria-hidden="true"></spa> LOG IN
     </button>
+
 </form>
 
     <div ng-show="error" class="alert alert-danger" role="alert">
