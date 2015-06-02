@@ -1,5 +1,5 @@
 /*jslint node: true */
-/*globals myApp */
+/*globals myApp, google, drawChart*/
 
 /**
  * TODO: create controller for retrieving 1 book, create and delete
