@@ -34,7 +34,7 @@ myApp.controller('GebruikerLoginController', function ($scope, $window, gebruike
         } else {
             $scope.gebruiker = gebruikersnaamService.gebruiker.login({gebruikersnaam: gebruiker.gebruikersnaam, wachtwoord: gebruiker.wachtwoord}, function () {
                 console.log($scope.gebruiker);
-                if ($scope.gebruiker.err === null) {
+                if ($scope.gebruiker.err === undefined) {
                     $cookieStore.put('sessionCookie', $scope.gebruiker.doc.gebruikersnaam);
                     $window.location.reload();
                 }
