@@ -39,8 +39,28 @@ myApp.controller('GebruikerLoginController', function ($scope, $routeParams, $lo
  */
 myApp.controller('SamenstellenController', function ($scope, $routeParams, $location, gebruikersnaamService) {
     "use strict";
+    var init;
 
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
 
+        var data = google.visualization.arrayToDataTable([
+            ['Task', 'Hours per Day'],
+            ['Work',     11],
+            ['Eat',      2],
+            ['Commute',  2],
+            ['Watch TV', 2],
+            ['Sleep',    7]
+        ]);
+
+        var options = {
+            title: 'My Daily Activities'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+    }
 
     $scope.getAllImages = function () {
         var imgArray = [],
@@ -58,8 +78,10 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
 
         $scope.afbeeldingen = imgArray;
     };
-    var init = function () {
+
+    init = function () {
         $scope.getAllImages();
     };
+
     init();
 });
