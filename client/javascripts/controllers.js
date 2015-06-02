@@ -3,14 +3,19 @@
 
 myApp.controller('MainController', function ($scope, $rootScope, $location, $cookieStore) {
     "use strict";
-    $scope.gebruikersNaam = $cookieStore.get('sessionCookie');
+
+    if ($cookieStore.get('sessionCookie')) {
+        $scope.loggedIn = true;
+        $scope.gebruikersNaam = $cookieStore.get('sessionCookie');
+    } else {
+        $scope.loggedIn = false;
+    }
 
     if ($scope.gebruikersNaam) {
         $scope.login = "Welkom " + $scope.gebruikersNaam;
     } else {
         $scope.login = "Inloggen";
     }
-
 
     $rootScope.$on('$routeChangeSuccess', function (e, curr, prev) {
         $scope.menuActive = $location.path().substring(1);
@@ -21,24 +26,15 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, $coo
 myApp.controller('GebruikerLoginController', function ($scope, $window, gebruikersnaamService, $cookieStore) {
     "use strict";
 
-    if ($cookieStore.get('sessionCookie')) {
-        $scope.loggedIn = true;
-    } else {
-        $scope.loggedIn = false;
-    }
-
     // LOGIN / LOGUIT
     $scope.inEnUitloggen = function (gebruiker) {
-        if ($cookieStore.get('sessionCookie')) {
-            console.log("uitgelogd");
+        if ($scope.loggedIn) {
             $cookieStore.remove('sessionCookie');
             $window.location.reload();
         } else {
             $scope.gebruiker = gebruikersnaamService.gebruiker.login({gebruikersnaam: gebruiker.gebruikersnaam, wachtwoord: gebruiker.wachtwoord}, function () {
                 if ($scope.gebruiker !== null) {
                     $cookieStore.put('sessionCookie', $scope.gebruiker.doc.gebruikersnaam);
-                    $scope.loggedIn = true;
-                    console.log("ingelogd");
                     $window.location.reload();
                 }
             });
