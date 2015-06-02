@@ -12,10 +12,10 @@ myApp.controller('GebruikerLoginController', function ($scope, $routeParams, $lo
     "use strict";
 
     if ($cookieStore.get('sessionCookie') !== undefined) {
-        console.log('ingelogd')
+        console.log('ingelogd');
         $scope.loggedIn = true;
     } else {
-        console.log('niet ingelogd')
+        console.log('niet ingelogd');
         $scope.loggedIn = false;
     }
 
