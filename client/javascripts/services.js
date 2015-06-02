@@ -27,7 +27,7 @@ angular.module('myApp.services', ['ngResource']).factory('Api', ['$resource', '$
         function ($resource) {
         "use strict";
         return {
-            gebruiker: $resource('/api/gebruiker/:gebruikersnaam/:wachtwoord',
+            gebruiker: $resource('/api/gebruiker/:gebruikersnaam/:wachtwoord', {},
                 {
                     'login': {
                         method: 'GET',
