@@ -18,10 +18,10 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, $coo
 
 });
 
-myApp.controller('GebruikerLoginController', function ($scope, $state, gebruikersnaamService, $cookieStore) {
+myApp.controller('GebruikerLoginController', function ($scope, $route, gebruikersnaamService, $cookieStore) {
     "use strict";
 
-    if ($cookieStore.get('sessionCookie') !== undefined) {
+    if ($cookieStore.get('sessionCookie')) {
         $scope.loggedIn = true;
     } else {
         $scope.loggedIn = false;
@@ -39,7 +39,7 @@ myApp.controller('GebruikerLoginController', function ($scope, $state, gebruiker
                 }
             });
         }
-        $state.reload();
+        $route.reload();
     };
 });
 
