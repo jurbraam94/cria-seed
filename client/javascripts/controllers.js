@@ -53,7 +53,7 @@ myApp.controller('GebruikerLoginController', function ($scope, $window, Api, $co
  * @param gebruikersnaamService
  * @constructor
  */
-myApp.controller('SamenstellenController', function ($scope, $routeParams, $location, gebruikersnaamService) {
+myApp.controller('SamenstellenController', function ($scope, $routeParams, $location) {
     "use strict";
     var init;
 
