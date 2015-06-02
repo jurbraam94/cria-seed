@@ -39,7 +39,7 @@
     margin-top: 2%;
 }
 
-.boxje  img {
+.boxje img {
     z-index: 2;
     position: absolute;
     margin: auto;
@@ -47,4 +47,13 @@
     bottom: 0;
     left: 0;
     right: 0;
+}
+
+#piechart {
+    position: absolute;
+    float: right;
+    margin-top: 3%;
+    margin-left: 35%;
+    width: 50%;
+    height: 90%;
 }
