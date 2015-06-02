@@ -51,13 +51,11 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
             ['Commute',  2],
             ['Watch TV', 2],
             ['Sleep',    7]
-        ]);
-
-        var options = {
-            title: 'My Daily Activities'
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        ]),
+            options = {
+                title: 'My Daily Activities'
+            },
+            chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
         chart.draw(data, options);
     }

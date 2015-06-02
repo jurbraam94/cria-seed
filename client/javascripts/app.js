@@ -31,9 +31,6 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies'])
             redirectTo: "/login"
         });
 
-        //Samenstellen uitvaart
-       // $routeProvider.when('/samenstellen.html')
-
     }]).
     run(function ($rootScope, $location, $cookieStore) {
         "use strict";
