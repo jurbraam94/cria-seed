@@ -2,12 +2,12 @@
 
 <div ng-show="loggedIn">
     <p>Welkom, u bent ingelogd als {{gebruikersNaam}}.</p>
-    <p>Klik <a href="#" ng-click="loguit()">hier</a> om uit te loggen.</p>
+    <p>Klik <a href="#" ng-click="inEnUitloggen()">hier</a> om uit te loggen.</p>
 </div>
 <form ng-show="!loggedIn" name="loginForm" novalidate class="loginForm">
     <p><label>Gebruikersnaam:</label> <input type="text" ng-model="gebruiker.gebruikersnaam" name="gebruikersnaam" required=""/></p>
     <p><label>Wachtwoord:</label> <input type="password" ng-model="gebruiker.wachtwoord" name="wachtwoord" required=""/></p>
 
-    <input ng-disabled="loginForm.$invalid" type="submit" ng-click="login(gebruiker)" value="Login" />
+    <input ng-disabled="loginForm.$invalid" type="submit" ng-click="inEnUitloggen(gebruiker)" value="Login" />
     </button>
 </form>

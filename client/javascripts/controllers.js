@@ -18,7 +18,7 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, $coo
 
 });
 
-myApp.controller('GebruikerLoginController', function ($scope, $routeParams, $location, gebruikersnaamService, $cookieStore) {
+myApp.controller('GebruikerLoginController', function ($scope, $route, gebruikersnaamService, $cookieStore) {
     "use strict";
 
     if ($cookieStore.get('sessionCookie') !== undefined) {
@@ -27,20 +27,19 @@ myApp.controller('GebruikerLoginController', function ($scope, $routeParams, $lo
         $scope.loggedIn = false;
     }
 
-    // LOGIN
-    $scope.login = function (gebruiker) {
-        $scope.gebruiker = gebruikersnaamService.gebruiker.login({gebruikersnaam: gebruiker.gebruikersnaam, wachtwoord: gebruiker.wachtwoord}, function () {
-            console.log($scope.gebruiker.doc.gebruikersnaam + ' is ingelogd.');
-            if ($scope.gebruiker !== null) {
-                $cookieStore.put('sessionCookie', $scope.gebruiker.doc.gebruikersnaam);
-                $scope.loggedIn = true;
-            }
-        });
-    };
-
-    // LOGUIT
-    $scope.loguit = function () {
-        $cookieStore.remove('sessionCookie');
+    // LOGIN / LOGUIT
+    $scope.inEnUitloggen = function (gebruiker) {
+        if ($cookieStore.get('sessionCookie')) {
+            $cookieStore.remove('sessionCookie');
+        } else {
+            $scope.gebruiker = gebruikersnaamService.gebruiker.login({gebruikersnaam: gebruiker.gebruikersnaam, wachtwoord: gebruiker.wachtwoord}, function () {
+                if ($scope.gebruiker !== null) {
+                    $cookieStore.put('sessionCookie', $scope.gebruiker.doc.gebruikersnaam);
+                    $scope.loggedIn = true;
+                }
+            });
+        }
+        $route.reload();
     };
 });
 
