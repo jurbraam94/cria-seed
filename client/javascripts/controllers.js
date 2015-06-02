@@ -56,8 +56,9 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
     "use strict";
     var init;
 
-    function drawChart() {
+    google.setOnLoadCallback(drawChart());
 
+    function drawChart() {
         var data = google.visualization.arrayToDataTable([
             ['Task', 'Hours per Day'],
             ['Work',     11],
@@ -74,8 +75,6 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
 
         chart.draw(data, options);
     }
-
-    google.setOnLoadCallback(drawChart);
 
     $scope.getAllImages = function () {
         var imgArray = [],
