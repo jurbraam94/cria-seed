@@ -18,6 +18,7 @@
     background-color: #48cec2;
     justify-content: center;
     padding-left: 0.4%;
+    left: 0;
 }
 
 .logo{
@@ -25,7 +26,7 @@
 }
 
 .Content {
-    margin-top:100px;
+    margin-top:50px;
 }
 
 .boxje {
@@ -43,6 +44,8 @@
     z-index: 2;
     position: absolute;
     margin: auto;
+    width: 80%;
+    height: 75%;
     top: 0;
     bottom: 0;
     left: 0;
