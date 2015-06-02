@@ -6,7 +6,7 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, $coo
     $scope.gebruikersNaam = $cookieStore.get('sessionCookie');
 
     if ($scope.gebruikersNaam) {
-        $scope.login = "Welkom" + $scope.gebruikersNaam;
+        $scope.login = "Welkom " + $scope.gebruikersNaam;
     } else {
         $scope.login = "Inloggen";
     }
@@ -36,6 +36,11 @@ myApp.controller('GebruikerLoginController', function ($scope, $routeParams, $lo
                 $scope.loggedIn = true;
             }
         });
+    };
+
+    // LOGUIT
+    $scope.loguit = function () {
+        $cookieStore.remove('sessionCookie', $scope.gebruiker.doc.gebruikersnaam);
     };
 });
 

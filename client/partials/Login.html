@@ -2,6 +2,7 @@
 
 <div ng-show="loggedIn">
     <p>Welkom, u bent ingelogd als {{gebruikersNaam}}.</p>
+    <p>Klik <a href="loguit()">hier</a> om uit te loggen.</p>
 </div>
 <form ng-show="!loggedIn" name="loginForm" novalidate class="loginForm">
     <p><label>Gebruikersnaam:</label> <input type="text" ng-model="gebruiker.gebruikersnaam" name="gebruikersnaam" required=""/></p>
