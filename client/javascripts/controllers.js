@@ -1,31 +1,45 @@
 /*jslint node: true */
 /*globals myApp, google, drawChart*/
 
-/**
- * TODO: create controller for retrieving 1 book, create and delete
- * @param $scope
- * @param $routeParams
- * @param gebruikersnaamService
- * @constructor
- */
-myApp.controller('GebruikerLoginController', function ($scope, $routeParams, $location, gebruikersnaamService, $cookieStore) {
+myApp.controller('MainController', function ($scope, $rootScope, $location, $cookieStore) {
     "use strict";
 
-    if ($cookieStore.get('sessionCookie') !== undefined) {
+    if ($cookieStore.get('sessionCookie')) {
         $scope.loggedIn = true;
+        $scope.gebruikersNaam = $cookieStore.get('sessionCookie');
     } else {
         $scope.loggedIn = false;
     }
 
-    // LOGIN
-    $scope.login = function (gebruiker) {
-        $scope.gebruiker = gebruikersnaamService.gebruiker.login({gebruikersnaam: gebruiker.gebruikersnaam, wachtwoord: gebruiker.wachtwoord}, function () {
-            console.log($scope.gebruiker.doc.gebruikersnaam + ' is ingelogd.');
-            if ($scope.gebruiker !== null) {
-                $cookieStore.put('sessionCookie', $scope.gebruiker.doc.gebruikersnaam);
-                $scope.loggedIn = true;
-            }
-        });
+    if ($scope.gebruikersNaam) {
+        $scope.login = "Welkom " + $scope.gebruikersNaam;
+    } else {
+        $scope.login = "Inloggen";
+    }
+
+    $rootScope.$on('$routeChangeSuccess', function (e, curr, prev) {
+        $scope.menuActive = $location.path().substring(1);
+    });
+
+});
+
+myApp.controller('GebruikerLoginController', function ($scope, $window, gebruikersnaamService, $cookieStore) {
+    "use strict";
+
+    // LOGIN / LOGUIT
+    $scope.inEnUitloggen = function (gebruiker) {
+        if ($scope.loggedIn) {
+            $cookieStore.remove('sessionCookie');
+            $window.location.reload();
+        } else {
+            $scope.gebruiker = gebruikersnaamService.gebruiker.login({gebruikersnaam: gebruiker.gebruikersnaam, wachtwoord: gebruiker.wachtwoord}, function () {
+                console.log($scope.gebruiker);
+                if ($scope.gebruiker.err === null) {
+                    $cookieStore.put('sessionCookie', $scope.gebruiker.doc.gebruikersnaam);
+                    $window.location.reload();
+                }
+            });
+        }
     };
 });
 
