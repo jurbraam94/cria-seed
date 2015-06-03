@@ -10,8 +10,13 @@ var router = express.Router();
  */
 var controller = require('../app/controllers/emailController.js');
 
+
+router
+    .get('/foto/:_gebruikersnaam', controller.alleFotos)
+
 /** POST for sending email */
 router
-    .post('/mail', controller.sendMail);
+    .post('/email', controller.sendMail);
+
 
 module.exports = router;
