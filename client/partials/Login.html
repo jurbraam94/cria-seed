@@ -1,50 +1,52 @@
 <hr>
-<div class="panel inlogContainer">
-    <div class="panel-body">
+<div class="inlogContainer">
 
-    <div ng-show="!loggedIn" class="alert alert-warning" role="alert"><img class="InformatieTeken" src="style/images/I.jpg"> U gaat inloggen met <b>DigiD</b>.</div>
-
-<div ng-show="loggedIn">
-    <p>Welkom, u bent ingelogd als {{gebruikersNaam}}.</p>
-    <p>Klik <a href="#" ng-click="inEnUitloggen()">hier</a> om uit te loggen.</p>
-</div>
-
-<form ng-show="!loggedIn" name="loginForm" novalidate class="loginForm">
-
-    <div class="inputBlok">
-        <div class ="form-group form-inline">
-            <label class="inputLabel">Gebruikersnaam*</label>
-            <div class="input-group">
-                <input placeholder="Gebruikersnaam" class="form-control" type="text" ng-model="gebruiker.gebruikersnaam" id="gebruikersnaam" required=""/>
-            </div>
-        </div>
+    <div class="alert alert-warning" role="alert"><img class="InformatieTeken"
+                                                                           src="style/images/I.jpg">
+        <text ng-show="!loggedIn">U gaat inloggen met <b>DigiD</b>.</text>
+        <text ng-show="loggedIn">Welkom, u bent ingelogd als <b>{{gebruikersNaam}}</b>.</text>
     </div>
-
-    <div class="inputBlok">
-        <div class ="form-group form-inline">
-            <label class="inputLabel">Wachtwoord*</label>
-            <div class="input-group">
-                <input placeholder="Wachtwoord" class="form-control" type="password" ng-model="gebruiker.wachtwoord" id="wachtwoord" required=""/>
-            </div>
-        </div>
-    </div>
-
-    <br>
-
-    <button ng-disabled="loginForm.$invalid" type="button" ng-click="inEnUitloggen(gebruiker)" class="center-block btn btn-primary btn-lg">
-        <spa aria-hidden="true"></spa> LOG IN
+    <button ng-show="loggedIn" type="button" ng-click="inEnUitloggen()"
+            class="center-block btn btn-primary btn-lg">
+        LOG UIT
     </button>
 
 
+    <form ng-show="!loggedIn" name="loginForm" novalidate class="loginForm">
 
-</form>
-        <form class="form-inline">
+        <div class="inputBlok">
+            <div class="form-group form-inline">
+                <label class="inputLabel">Gebruikersnaam*</label>
 
-        </form>
+                <div class="input-group">
+                    <input placeholder="Gebruikersnaam" class="form-control" type="text"
+                           ng-model="gebruiker.gebruikersnaam" id="gebruikersnaam" required=""/>
+                </div>
+            </div>
+        </div>
+
+        <div class="inputBlok">
+            <div class="form-group form-inline">
+                <label class="inputLabel">Wachtwoord*</label>
+
+                <div class="input-group">
+                    <input placeholder="Wachtwoord" class="form-control" type="password" ng-model="gebruiker.wachtwoord"
+                           id="wachtwoord" required=""/>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <button ng-disabled="loginForm.$invalid" type="button" ng-click="inEnUitloggen(gebruiker)"
+                class="center-block btn btn-primary btn-lg">
+            LOG IN
+        </button>
+    </form>
+
     <div ng-show="error" class="alert alert-danger" role="alert">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
         <span class="sr-only">Error:</span>
         {{error}}
     </div>
-</div>
 </div>

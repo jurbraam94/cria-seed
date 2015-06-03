@@ -31,8 +31,9 @@
 
 .inlogContainer {
     max-width: 600px;
-    padding: 15px;
+    padding: 30px;
     margin: 0 auto;
+    background: #3d454e;
 }
 
 .inputBlok {
