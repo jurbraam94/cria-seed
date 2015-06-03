@@ -26,7 +26,7 @@ body {
     color: #E44A4E;
 }
 
-.menuActive {
+.menuActive, a:visited{
     color: black;
 }
 
