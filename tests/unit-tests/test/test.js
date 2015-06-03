@@ -21,9 +21,9 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
             request
                 .post('/gebruiker/mail')
                 .send({
-                    "naam": "mailtest",
+                    "naam": "unittestmailtje",
                     "email": "mailtest@gmail.com",
-                    bericht: "Unit Test mail"
+                    bericht: "unittestmailtje"
                 })
                 .expect(200)                                                // supertest
                 .expect('Content-Type', /application.json/)                 // supertest
