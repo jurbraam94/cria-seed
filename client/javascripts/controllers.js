@@ -103,7 +103,7 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
         //console.log("muisOverIndex: ", muisOverIndex);
 
         //check index != gelijk aan oude
-        if(nieuweIndex !== oudeIndex) {
+        if (nieuweIndex !== oudeIndex) {
             redrawNaHerordenen(oudeIndex, nieuweIndex);
         }
     }
@@ -118,7 +118,7 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
             },
             chartParentNode = document.getElementById('piechart').parentNode;
 
-        if(chart !== null) {
+        if (chart !== null) {
             document.getElementById('piechart').remove();
             chart = document.createElement('div');
             chart.id = "piechart";
