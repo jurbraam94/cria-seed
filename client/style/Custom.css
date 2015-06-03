@@ -2,6 +2,18 @@ body {
     background-color:#48CEC2;
 }
 
+.nav.navbar-nav.navbar-right a {
+    color:#FFFFFF;
+}
+
+.nav.navbar-nav.navbar-right a:hover, a:visited {
+    color: #ffffff;
+}
+
+.nav.navbar-nav.navbar-right a:hover, a:active {
+    color: #E44A4E;
+}
+
 .nav.navbar-nav a {
     color:#FFFFFF;
 }
@@ -11,7 +23,7 @@ body {
 }
 
 .nav.navbar-nav a:hover, a:active {
-color: #E44A4E;
+    color: #E44A4E;
 }
 
 .menuActive {
