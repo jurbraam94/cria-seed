@@ -26,8 +26,16 @@ body {
     color: #E44A4E;
 }
 
-.menuActive, a:visited{
+.menuActive > li > a {
+    color:black;
+}
+
+.menuActive > li > a:visited {
     color: black;
+}
+
+.menuActive  > li > a:hover, a:active{
+    color: #E44A4E;
 }
 
 footer {
