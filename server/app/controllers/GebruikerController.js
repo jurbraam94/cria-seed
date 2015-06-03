@@ -28,7 +28,6 @@ var hashPassword = function (password, salt, callback) {
 
 
 exports.sendMail = function (req, res) {
-    console.log(req.body.email);
     var mailOptions = {
         from: req.body.naam + " <" + req.body.email + ">", // sender address
         to: 'criaprojectgroep7@gmail.com', // list of receivers
@@ -42,9 +41,10 @@ exports.sendMail = function (req, res) {
         if (error) {
             retObj = {
                 meta: {
-                    "action": "create",
+                    "action": "mail",
                     'timestamp': new Date(),
-                    filename: __filename
+                    filename: __filename,
+                    doc: {naam: req.body.naam, email: req.body.email, bericht: req.body.bericht}
                 },
                 err: error
             };
