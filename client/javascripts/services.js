@@ -18,7 +18,8 @@ angular.module('myApp.services', ['ngResource']).factory('Api', ['$resource', '$
                     'save': {
                         method: 'POST',
                         params: {
-                            gebruikersnaam: 'gebruikersnaam', tijdsduur: 'tijdsduur'
+                            gebruikersnaam: 'gebruikersnaam',
+                            tijdsduur: 'tijdsduur'
                         }
                     }
                 }),
