@@ -28,8 +28,9 @@ var hashPassword = function (password, salt, callback) {
 
 
 exports.sendMail = function (req, res) {
+    console.log(req.body.email)
     var mailOptions = {
-        from: req.body.naam + ' <' + req.body.email + '>', // sender address
+        from: req.body.naam + " <" + req.body.email + ">", // sender address
         to: 'criaprojectgroep7@gmail.com', // list of receivers
         subject: 'DOOD Contact', // Subject line
         text: req.body.bericht, // plaintext body
@@ -39,7 +40,6 @@ exports.sendMail = function (req, res) {
 // send mail with defined transport object
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
-            console.log(error);
             retObj = {
                 meta: {
                     "action": "create",
@@ -51,7 +51,6 @@ exports.sendMail = function (req, res) {
 
             return res.send(retObj);
         }
-        console.log(info);
         retObj = {
             meta: {
                 "action": "create",
