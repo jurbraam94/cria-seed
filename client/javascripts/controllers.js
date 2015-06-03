@@ -57,23 +57,48 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
     "use strict";
     var init;
 
+    function logger(slice) {
+        console.log("Geselecteerde slice: ", slice.innerHTML);
+    }
+
+    function addChartHandlers(chart) {
+        //google.visualization.events.addListener(chart, 'select', function() {
+        //    console.log("Geselecteerde slice: ", chart.getSelection());
+        //});
+        var slices, i;
+
+        slices = document.getElementsByTagName("g");
+
+        for (i = 1; i < slices.length; i += 1) {
+            slices[i].addEventListener("click", logger(slices[i]));
+        }
+    }
+
     function drawChart() {
         var data = google.visualization.arrayToDataTable([
-            ['Task', 'Hours per Day'],
-            ['Work',     11],
-            ['Eat',      2],
-            ['Commute',  2],
-            ['Watch TV', 2],
-            ['Sleep',    7]
+            ['Segment', 'Minuten'], //minuten in variabelen?
+            ['Muziek', 11],
+            ['Stilte', 2],
+            ['Berichten', 2],
+            ["Foto's", 2],
+            ["Video's", 7],
+            ['Bloemen', 2],
+            ['Spreker', 2],
+            ['Eten', 2],
+            ['Rouwstoet', 2],
+            ['Overig', 2]
         ]),
             options = {
-                chartArea: { left: '5%', right: '0', width: '90%', height: '90%' },
-                legend: { position: 'none' }
+                chartArea: { left: '5%', right: '0', width: '100%', height: '100%' },
+                legend: { position: 'right', alignment: 'center' }
             },
             chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
+        addChartHandlers(chart);
+
         chart.draw(data, options);
     }
+
     drawChart();
     google.setOnLoadCallback(drawChart());
 
