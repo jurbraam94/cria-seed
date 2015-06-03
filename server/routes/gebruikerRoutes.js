@@ -12,8 +12,10 @@ var controller = require('../app/controllers/GebruikerController.js');
 
 /** CREATE route for Gebruiker */
 router
-    .post('/gebruiker', controller.gebruikerAanmaken).
-    post('/gebruiker/mail', controller.sendMail);
+    .post('/gebruiker', controller.gebruikerAanmaken);
+
+router.
+    post('/gebruiker', controller.sendMail);
 
 // RETRIEVE
 router

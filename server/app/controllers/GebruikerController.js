@@ -23,7 +23,6 @@ var hashPassword = function (password, salt, callback) {
 
 
 exports.sendMail = function (req, res) {
-    console.log("starting to send mail");
     var mailOptions = {
         from: req.body.naam + ' <' + req.body.email + '>', // sender address
         to: 'criaprojectgroep7@gmail.com', // list of receivers
@@ -57,6 +56,7 @@ exports.sendMail = function (req, res) {
 
         return res.send(retObj);
     });
+    return res.send("hoi");
 };
 
 exports.login = function (req, res) {
