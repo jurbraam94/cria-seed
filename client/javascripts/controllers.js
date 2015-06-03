@@ -55,46 +55,82 @@ myApp.controller('GebruikerLoginController', function ($scope, $window, Api, $co
  */
 myApp.controller('SamenstellenController', function ($scope, $routeParams, $location) {
     "use strict";
-    var init;
+    var init,
+        dataTable = [
+            ['Segment', 'Minuten'],
+            ['Muziek', 11],
+            ['Stilte', 2],
+            ['Berichten', 5],
+            ["Foto's", 3],
+            ["Video's", 7],
+            ['Bloemen', 6],
+            ['Spreker', 1],
+            ['Eten', 8],
+            ['Rouwstoet', 4],
+            ['Overig', 9]
+        ],
+        kleuren = ['#000099', '#ef4338', '#639d41', '#ff853d', '#6be7fe', '#ffbbee', '#1e3e4a', '#92183a', '#c30a55', '#4f9d97'],
+        chart = null,
+        muisOverIndex;
 
-    function logger(slice) {
-        console.log("Geselecteerde slice: ", slice.innerHTML);
+    function getSliceIndex(e) {
+        muisOverIndex = e.row;
     }
 
-    function addChartHandlers(chart) {
-        //google.visualization.events.addListener(chart, 'select', function() {
-        //    console.log("Geselecteerde slice: ", chart.getSelection());
-        //});
-        var slices, i;
+    function mouseDownOnSlice(e) {
+        chart.setSelection([{ row: muisOverIndex, column: null }]);
+        //console.log("Geselecteerde slice: ", chart.getSelection()[0].row);
+    }
 
-        slices = document.getElementsByTagName("g");
+    function redrawNaHerordenen(oudeIndex, nieuweIndex) {
+        var temp, temp2;
+        //swap indexen in array
+        //$scope.segmenten
+        temp = dataTable[oudeIndex];
+        dataTable[oudeIndex] = dataTable[nieuweIndex];
+        dataTable[nieuweIndex] = temp;
 
-        for (i = 1; i < slices.length; i += 1) {
-            slices[i].addEventListener("click", logger(slices[i]));
+        //kleuren meenemen
+        temp2 = kleuren[oudeIndex - 1];
+        kleuren[oudeIndex - 1] = kleuren[nieuweIndex - 1];
+        kleuren[nieuweIndex - 1] = temp2;
+
+        //chart opnieuw tekenen
+        drawChart();
+    }
+
+    function verplaatsSlice(e) {
+        var oudeIndex = chart.getSelection()[0].row + 1, nieuweIndex = muisOverIndex + 1;
+        //console.log("muisOverIndex: ", muisOverIndex);
+
+        //check index != gelijk aan oude
+        if(nieuweIndex !== oudeIndex) {
+            redrawNaHerordenen(oudeIndex, nieuweIndex);
         }
     }
 
     function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-            ['Segment', 'Minuten'], //minuten in variabelen?
-            ['Muziek', 11],
-            ['Stilte', 2],
-            ['Berichten', 2],
-            ["Foto's", 2],
-            ["Video's", 7],
-            ['Bloemen', 2],
-            ['Spreker', 2],
-            ['Eten', 2],
-            ['Rouwstoet', 2],
-            ['Overig', 2]
-        ]),
+        var data = google.visualization.arrayToDataTable(dataTable),
             options = {
                 chartArea: { left: '5%', right: '0', width: '100%', height: '100%' },
-                legend: { position: 'right', alignment: 'center' }
+                legend: { position: 'right', alignment: 'center' },
+                colors: kleuren
             },
-            chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            chartParentNode = document.getElementById('piechart').parentNode;
 
-        addChartHandlers(chart);
+        if(chart !== null) {
+            document.getElementById('piechart').remove();
+            chart = document.createElement('div');
+            chart.id = "piechart";
+            chartParentNode.appendChild(chart);
+        }
+
+        chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        // Event listeners
+        google.visualization.events.addListener(chart, 'onmousedown', mouseDownOnSlice);
+        google.visualization.events.addListener(chart, 'onmouseover', getSliceIndex);
+        google.visualization.events.addListener(chart, 'onmouseup', verplaatsSlice);
 
         chart.draw(data, options);
     }
