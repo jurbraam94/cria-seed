@@ -2,10 +2,39 @@ body {
     background-color:#48CEC2;
 }
 
+.nav.navbar-nav.navbar-right a {
+    color:#FFFFFF;
+}
+
+.nav.navbar-nav.navbar-right a:hover, a:visited {
+    color: #ffffff;
+}
+
+.nav.navbar-nav.navbar-right a:hover, a:active {
+color: #E44A4E;
+}
+
+.menuActive {
+    color: black;
+}
+
 footer {
     padding-top:15px;
     padding-bottom:10px;
     color:#FFFFFF;
+}
+
+footer a {
+    color:#FFFFFF;
+    text-decoration: underline;
+}
+
+footer a:visited {
+    color: #ffffff;
+}
+
+footer a:hover, a:active{
+    color: #E44A4E;
 }
 
 .loginForm .ng-pristine {
