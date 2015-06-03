@@ -34,6 +34,17 @@ angular.module('myApp.services', ['ngResource']).factory('Api', ['$resource', '$
                             volgnummer: 'volgnummer'
                         }
                     }
+                }),
+            contact: $resource('/api/gebruiker/mail',
+                {
+                    'mail': {
+                        method: 'POST',
+                        params: {
+                            naam: 'naam',
+                            email: 'email',
+                            bericht: 'bericht'
+                        }
+                    }
                 })
         };
     }]);
