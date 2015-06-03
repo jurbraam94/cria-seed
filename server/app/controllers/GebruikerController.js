@@ -56,7 +56,6 @@ exports.sendMail = function (req, res) {
 
         return res.send(retObj);
     });
-    return res.send("hoi");
 };
 
 exports.login = function (req, res) {
