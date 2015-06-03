@@ -40,9 +40,9 @@ angular.module('myApp.services', ['ngResource']).factory('Api', ['$resource', '$
                     'mail': {
                         method: 'POST',
                         params: {
-                            naam: 'naam',
-                            email: 'email',
-                            bericht: 'bericht'
+                            naam: '@naam',
+                            email: '@email',
+                            bericht: '@bericht'
                         }
                     }
                 })
