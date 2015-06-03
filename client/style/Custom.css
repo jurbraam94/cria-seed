@@ -26,15 +26,13 @@ body {
     color: #E44A4E;
 }
 
-.menuActive a {
-    color:black;
-}
-
-.menuActive a:visited {
+.navbar-nav > .active > a {
     color: black;
 }
-
-.menuActive a:hover, a:active{
+.navbar-nav > .active > a:visited {
+    color: black;
+}
+.navbar-nav > .active > a:hover, a:active{
     color: #E44A4E;
 }
 
