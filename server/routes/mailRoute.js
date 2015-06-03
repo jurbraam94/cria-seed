@@ -8,7 +8,7 @@ var router = express.Router();
 /**
  * Email routes
  */
-var controller = require('../app/controllers/mailController.js');
+var controller = require('../app/controllers/emailController.js');
 
 /** POST for sending email */
 router
