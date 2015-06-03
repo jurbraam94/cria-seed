@@ -14,19 +14,25 @@ angular.module('myApp.services', ['ngResource']).factory('Api', ['$resource', '$
                     }
                 }),
             uitvaartSamenstellen: $resource('/api/uitvaartSamenstellen',
-                    {
+                {
                     'save': {
                         method: 'POST',
-                        params: {gebruikersnaam: 'gebruikersnaam', tijdsduur: 'tijdsduur'}
+                        params: {
+                            gebruikersnaam: 'gebruikersnaam', tijdsduur: 'tijdsduur'
+                        }
                     }
-                })/*,
+                }),
             uitvaartSegmentToevoegen: $resource('/api/segment',
                 {
                     'Create': {
                         method: 'POST',
-                        params
+                        params: {
+                            gebruikersnaam: 'gebruikersnaam',
+                            object: 'object',
+                            percentage: 'percentage',
+                            volgnummer: 'volgnummer'
+                        }
                     }
-
-                })*/
+                })
         };
     }]);
