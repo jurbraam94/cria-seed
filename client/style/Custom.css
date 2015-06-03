@@ -2,27 +2,19 @@ body {
     background-color:#48CEC2;
 }
 
+.navbar .nav > li > a {
+    color:#FFFFFF;
+}
+
 .nav.navbar-nav.navbar-right a {
     color:#FFFFFF;
 }
 
-.nav.navbar-nav.navbar-right a:hover, a:visited {
+.nav.navbar-nav.navbar-right a:visited {
     color: #ffffff;
 }
 
 .nav.navbar-nav.navbar-right a:hover, a:active {
-    color: #E44A4E;
-}
-
-.nav.navbar-nav a {
-    color:#FFFFFF;
-}
-
-.nav.navbar-nav a:hover, a:visited {
-    color: #ffffff;
-}
-
-.nav.navbar-nav a:hover, a:active {
     color: #E44A4E;
 }
 
