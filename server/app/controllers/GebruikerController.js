@@ -43,8 +43,7 @@ exports.sendMail = function (req, res) {
                 meta: {
                     "action": "mail",
                     'timestamp': new Date(),
-                    filename: __filename,
-                    doc: {naam: req.body.naam, email: req.body.email, bericht: req.body.bericht}
+                    filename: __filename
                 },
                 err: error
             };
