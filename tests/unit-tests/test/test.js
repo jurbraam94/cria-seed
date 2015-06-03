@@ -34,16 +34,12 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
                     }
                     JSON.parse(res.text)
                         .should.have.property('meta')
-                        .and.have.property('action').be.exactly('create');
+                        .and.have.property('action').be.exactly('mail');
                     JSON.parse(res.text)
                         .should.have.property('err').be.exactly(null);
                     res.statusCode.should.be.exactly(200);
                     res.type.should.be.exactly('application/json');
                     res.charset.should.be.exactly('utf-8');
-                    JSON.parse(res.text)
-                        .should.have.property('action')
-                        .be.exactly('mail')
-                    done();
                 });
         });
     });
