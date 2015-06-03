@@ -3,7 +3,15 @@ body {
 }
 
 .navbar .nav > li > a {
-    color:#FFFFFF;
+     color:#FFFFFF;
+ }
+
+.navbar .nav > li > a:visited {
+    color: #FFFFFF;
+}
+
+.navbar .nav > li > a:hover, a:active{
+    color: #E44A4E;
 }
 
 .nav.navbar-nav.navbar-right a {
