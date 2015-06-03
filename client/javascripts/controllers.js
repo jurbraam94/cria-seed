@@ -19,7 +19,7 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, $coo
 
 myApp.controller('ContactController', function () {
     "use strict";
-    sendMail
+    console.log('Send mail now');
 });
 
 myApp.controller('GebruikerLoginController', function ($scope, $window, Api, $cookieStore) {
