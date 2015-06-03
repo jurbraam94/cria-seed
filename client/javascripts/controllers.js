@@ -11,16 +11,15 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, $coo
         $scope.loggedIn = false;
     }
 
-    if ($scope.gebruikersNaam) {
-        $scope.login = "Welkom " + $scope.gebruikersNaam;
-    } else {
-        $scope.login = "Inloggen";
-    }
-
     $rootScope.$on('$routeChangeSuccess', function (e, curr, prev) {
         $scope.menuActive = $location.path().substring(1);
     });
 
+});
+
+myApp.controller('ContactController', function () {
+    "use strict";
+    console.log('Send mail now');
 });
 
 myApp.controller('GebruikerLoginController', function ($scope, $window, Api, $cookieStore) {

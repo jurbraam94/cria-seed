@@ -10,7 +10,12 @@ html {
 }
 
 body {
-    margin: 0
+    margin: 0;
+}
+
+footer {
+    bottom:0;
+    background-color: #406367;
 }
 
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
@@ -96,7 +101,7 @@ hr {
     height: 0;
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
-    box-sizing: content-box
+    box-sizing: content-box;
 }
 
 pre {
@@ -174,7 +179,8 @@ legend {
 }
 
 textarea {
-    overflow: auto
+    overflow: auto;
+    min-width: 320px;
 }
 
 optgroup {
@@ -4747,7 +4753,6 @@ select[multiple].input-group-sm > .form-control, select[multiple].input-group-sm
 
 .navbar-default {
     background-color: #3e464f;
-    border-color: #e7e7e7
 }
 
 .navbar-default .navbar-brand {
@@ -4760,7 +4765,7 @@ select[multiple].input-group-sm > .form-control, select[multiple].input-group-sm
 }
 
 .navbar-default .navbar-text {
-    color: #777
+    color: #FFFFFF
 }
 
 .navbar-default .navbar-nav > li > a {
@@ -5345,9 +5350,8 @@ a.thumbnail.active, a.thumbnail:focus, a.thumbnail:hover {
 }
 
 .alert-info {
-    color: #31708f;
-    background-color: #d9edf7;
-    border-color: #bce8f1
+    color: #3E464F;
+    background-color: #F3F3F3;
 }
 
 .alert-info hr {

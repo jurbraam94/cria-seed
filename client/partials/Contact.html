@@ -1,0 +1,50 @@
+<hr>
+<div class="formContainer">
+    <div class="alert alert-warning" role="alert"><img class="Tekentje"
+                                                       src="style/images/I.jpg">
+        Als u vragen heeft kunt u onderstaand form invullen en helpen we u zo spoedig mogelijk.
+    </div>
+
+    <form name="contactForm" novalidate class="contactForm">
+
+            <div class="form-group form-inline inputMargin">
+                <label class="inputLabel witteText">Naam *</label>
+
+                <div class="input-group">
+                    <input placeholder="Naam" class="form-control" type="text"
+                           ng-model="contact.naam" id="naam" required=""/>
+                </div>
+            </div>
+
+            <div class="form-group form-inline inputMargin">
+                <label class="inputLabel witteText">Email*</label>
+
+                <div class="input-group">
+                    <input placeholder="Email" class="form-control" type="email" ng-model="contact.email"
+                           id="email" required=""/>
+                </div>
+            </div>
+
+        <div class="form-group form-inline inputMargin">
+            <label class="inputLabel witteText">Bericht*</label>
+
+            <div class="input-group">
+                <textarea placeholder="Bericht" class="form-control" rows="4" type="text" ng-model="contact.bericht"
+                       id="bericht" required=""></textarea>
+            </div>
+        </div>
+
+        <br>
+
+        <button ng-disabled="contactForm.$invalid" type="button" ng-click="inEnUitloggen(gebruiker)"
+                class="center-block btn btn-primary btn-lg">
+            VERSTUREN
+        </button>
+    </form>
+
+    <div ng-show="succes" class="alert alert-success" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        {{error}}
+    </div>
+</div>

@@ -14,6 +14,9 @@ var controller = require('../app/controllers/GebruikerController.js');
 router
     .post('/gebruiker', controller.gebruikerAanmaken);
 
+router.
+    post('/gebruiker/mail', controller.sendMail);
+
 // RETRIEVE
 router
     .get('/gebruiker/:_gebruikersnaam/:_wachtwoord', controller.login);

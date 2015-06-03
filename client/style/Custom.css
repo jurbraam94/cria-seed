@@ -1,3 +1,48 @@
+body {
+    background-color:#48CEC2;
+}
+
+.navbar .nav > li > a:link {
+     color:#FFFFFF;
+ }
+
+.navbar .nav > li > a:visited {
+    color: #FFFFFF;
+}
+
+.navbar .nav > li > a:hover, a:active{
+    color: #E44A4E;
+}
+
+.nav.navbar-nav > .active > a:link {
+    color: black;
+}
+.nav.navbar-nav > .active > a:visited {
+    color: black;
+}
+.nav.navbar-nav > .active > a:hover, a:active{
+    color: #E44A4E;
+}
+
+footer {
+    padding-top:15px;
+    padding-bottom:10px;
+    color:#FFFFFF;
+}
+
+footer a {
+    color:#FFFFFF;
+    text-decoration: underline;
+}
+
+footer a:visited {
+    color: #ffffff;
+}
+
+footer a:hover, a:active{
+    color: #E44A4E;
+}
+
 .loginForm .ng-pristine {
     border:2px solid Red;
 }
@@ -29,10 +74,11 @@
     margin-top:50px;
 }
 
-.inlogContainer {
+.formContainer {
     max-width: 600px;
-    padding: 15px;
+    padding: 30px;
     margin: 0 auto;
+    background: #3d454e;
 }
 
 .inputBlok {
@@ -43,19 +89,20 @@
 }
 
 .inputLabel {
-    width: 40%;
+    width: 35%;
 }
 
-.InformatieTeken {
+.witteText {
+    color:#FFFFFF;
+}
+
+.inputMargin {
+    margin:5px;
+}
+
+.Tekentje {
     height: 20px;
     width: 20px;
-}
-
-
-.loginbtn {
-    color: black;
-    background-color: black;
-    border-color: black;
 }
 
 .boxje {

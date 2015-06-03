@@ -12,17 +12,24 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies'])
     .config(['$routeProvider', function ($routeProvider) {
         "use strict";
 
-        // Get all gebruiker
+        // Get Login
         $routeProvider.when('/login', {
             templateUrl: 'partials/Login.html',
             controller: 'GebruikerLoginController',
             security: false
         });
 
-        // Get all gebruiker
+        // Get Samenstellen
         $routeProvider.when('/samenstellen', {
             templateUrl: 'partials/Samenstellen.html',
             controller: 'SamenstellenController',
+            security: true
+        });
+
+        // Get all gebruiker
+        $routeProvider.when('/contact', {
+            templateUrl: 'partials/Contact.html',
+            controller: 'ContactController',
             security: false
         });
 
