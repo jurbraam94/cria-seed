@@ -14,18 +14,6 @@ body {
     color: #E44A4E;
 }
 
-.nav.navbar-nav.navbar-right a:link {
-    color:#FFFFFF;
-}
-
-.nav.navbar-nav.navbar-right a:visited {
-    color: #ffffff;
-}
-
-.nav.navbar-nav.navbar-right a:hover, a:active {
-    color: #E44A4E;
-}
-
 .nav.navbar-nav > .active > a:link {
     color: black;
 }
