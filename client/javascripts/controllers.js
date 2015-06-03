@@ -57,6 +57,23 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
     "use strict";
     var init;
 
+    function logger(slice) {
+        console.log("Geselecteerde slice: ", slice.innerHTML);
+    }
+
+    function addChartHandlers(chart) {
+        //google.visualization.events.addListener(chart, 'select', function() {
+        //    console.log("Geselecteerde slice: ", chart.getSelection());
+        //});
+        var slices, i;
+
+        slices = document.getElementsByTagName("g");
+
+        for (i = 1; i < slices.length; i += 1) {
+            slices[i].addEventListener("click", logger(slices[i]));
+        }
+    }
+
     function drawChart() {
         var data = google.visualization.arrayToDataTable([
             ['Segment', 'Minuten'], //minuten in variabelen?
@@ -80,21 +97,6 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
         addChartHandlers(chart);
 
         chart.draw(data, options);
-    }
-
-    function addChartHandlers(chart) {
-        //google.visualization.events.addListener(chart, 'select', function() {
-        //    console.log("Geselecteerde slice: ", chart.getSelection());
-        //});
-        var slices, i;
-
-        slices = document.getElementsByTagName("g");
-
-        for (i = 1; i < slices.length; i+=1) {
-            slices[i].addEventListener("click", function() {
-                console.log("Geselecteerde slice: ", slices[i].text);
-            });
-        }
     }
 
     drawChart();
