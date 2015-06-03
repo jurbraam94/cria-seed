@@ -42,7 +42,7 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
                     res.charset.should.be.exactly('utf-8');
                     JSON.parse(res.text)
                         .should.have.property('action')
-                        .be.exactly('create')
+                        .be.exactly('mail')
                     done();
                 });
         });
