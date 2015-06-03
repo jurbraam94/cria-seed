@@ -13,7 +13,7 @@ angular.module('myApp.services', ['ngResource']).factory('Api', ['$resource', '$
                         params: {gebruikersnaam: 'gebruikersnaam', wachtwoord: 'wachtwoord'}
                     }
                 }),
-            uitvaartSamenstellen: $resource('/api/uitvaartSamenstellen',
+            uitvaartSamenstellen: $resource('/api/uitvaartSamenstellen', {},
                 {
                     'save': {
                         method: 'POST',
@@ -23,7 +23,7 @@ angular.module('myApp.services', ['ngResource']).factory('Api', ['$resource', '$
                         }
                     }
                 }),
-            uitvaartSegmentToevoegen: $resource('/api/segment',
+            uitvaartSegmentToevoegen: $resource('/api/segment', {},
                 {
                     'Create': {
                         method: 'POST',
@@ -35,7 +35,7 @@ angular.module('myApp.services', ['ngResource']).factory('Api', ['$resource', '$
                         }
                     }
                 }),
-            contact: $resource('/api/gebruiker/mail',
+            contact: $resource('/api/gebruiker/mail', {},
                 {
                     'mail': {
                         method: 'POST',
