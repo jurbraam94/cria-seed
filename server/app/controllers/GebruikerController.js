@@ -56,7 +56,8 @@ exports.sendMail = function (req, res) {
                 'timestamp': new Date(),
                 filename: __filename
             },
-            doc: {naam: req.body.naam, email: req.body.email, bericht: req.body.bericht}
+            doc: {naam: req.body.naam, email: req.body.email, bericht: req.body.bericht},
+            err: null
         };
 
         return res.send(retObj);
