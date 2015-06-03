@@ -86,12 +86,12 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
         //google.visualization.events.addListener(chart, 'select', function() {
         //    console.log("Geselecteerde slice: ", chart.getSelection());
         //});
-        var slices;
+        var slices, i;
 
         slices = document.getElementsByTagName("g");
 
-        for(var i = 1; i < slices.length; i+=1) {
-            slices[i].addEventListener("click", function(){
+        for (i = 1; i < slices.length; i+=1) {
+            slices[i].addEventListener("click", function() {
                 console.log("Geselecteerde slice: ", slices[i].text);
             });
         }
