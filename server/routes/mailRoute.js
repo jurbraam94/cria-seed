@@ -12,7 +12,7 @@ var controller = require('../app/controllers/emailController.js');
 
 
 router
-    .get('/foto/:_gebruikersnaam', controller.alleFotos)
+    .get('/foto/:_gebruikersnaam', controller.alleFotos);
 
 /** POST for sending email */
 router
