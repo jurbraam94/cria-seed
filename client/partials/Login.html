@@ -1,18 +1,20 @@
 <hr>
 <div class="inlogContainer">
-    <div class="alert alert-info" role="alert">
+    <div ng-show="!loggedIn" class="alert alert-info" role="alert">
         <p><b>Welkom op de DOOD. app.</b></p>
+
         <p>Dit is een initiatief van Yarden om u de mogelijkheid te geven uw eigen uitvaart samen te stellen.
-            Via deze applicatie kunt u uw eigen wensen uitten, of een uitvaart samenstellen. U kunt ook mits u de machtigingen heeft
+            Via deze applicatie kunt u uw eigen wensen uitten, of een uitvaart samenstellen. U kunt ook mits u de
+            machtigingen heeft
             de uitvaart van een geliefde samenstellen.
         </p>
 
     </div>
 
-    <div class="alert alert-warning" role="alert"><img class="InformatieTeken"
-                                                                           src="style/images/I.jpg">
-        <text ng-show="!loggedIn">U gaat inloggen met <b>DigiD</b>.</text>
-        <text ng-show="loggedIn">Welkom, u bent ingelogd als <b>{{gebruikersNaam}}</b>.</text>
+    <div class="alert alert-warning" role="alert"><img class="Tekentje"
+                                                       src="style/images/I.jpg">
+        <span ng-show="!loggedIn">U gaat inloggen met <b>DigiD</b>.</span>
+        <span ng-show="loggedIn">Welkom, u bent ingelogd als <b>{{gebruikersNaam}}</b>.</span>
     </div>
     <button ng-show="loggedIn" type="button" ng-click="inEnUitloggen()"
             class="center-block btn btn-primary btn-lg">
