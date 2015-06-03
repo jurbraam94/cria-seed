@@ -39,6 +39,7 @@ exports.sendMail = function (req, res) {
 // send mail with defined transport object
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
+            console.log(error);
             retObj = {
                 meta: {
                     "action": "create",
@@ -50,6 +51,7 @@ exports.sendMail = function (req, res) {
 
             return res.send(retObj);
         }
+        console.log(info);
         retObj = {
             meta: {
                 "action": "create",
