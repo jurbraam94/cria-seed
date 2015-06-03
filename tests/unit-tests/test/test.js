@@ -16,6 +16,38 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
         done();
     });
 
+    describe('Send email', function () {
+        it('Should POST /gebruiker/mail', function (done) {
+            request
+                .post('/gebruiker/mail')
+                .send({
+                    "naam": "mailtest",
+                    "email": "mailtest@gmail.com",
+                    bericht: "Unit Test mail"
+                })
+                .expect(200)                                                // supertest
+                .expect('Content-Type', /application.json/)                 // supertest
+                .expect('Content-Type', 'utf-8')                            // supertest
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+                    JSON.parse(res.text)
+                        .should.have.property('meta')
+                        .and.have.property('action').be.exactly('create');
+                    JSON.parse(res.text)
+                        .should.have.property('err').be.exactly(null);
+                    res.statusCode.should.be.exactly(200);
+                    res.type.should.be.exactly('application/json');
+                    res.charset.should.be.exactly('utf-8');
+                    JSON.parse(res.text)
+                        .should.have.property('action')
+                        .be.exactly('create')
+                    done();
+                });
+        });
+    });
+
     describe('LOGIN gebruiker', function () {
         it('Should LOGIN /gebruiker/{gebruikersnaam}/{wachtwoord}', function (done) {
             request

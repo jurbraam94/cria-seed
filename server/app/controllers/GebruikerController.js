@@ -52,11 +52,11 @@ exports.sendMail = function (req, res) {
         }
         retObj = {
             meta: {
-                "action": "create",
+                "action": "mail",
                 'timestamp': new Date(),
                 filename: __filename
             },
-            doc: info.response
+            doc: {naam: req.body.naam, email: req.body.email, bericht: req.body.bericht}
         };
 
         return res.send(retObj);
