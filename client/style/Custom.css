@@ -43,13 +43,13 @@ footer a:hover, a:active{
     color: #E44A4E;
 }
 
-.loginForm .ng-pristine {
+.validatie .ng-pristine {
     border:2px solid Red;
 }
-.loginForm .ng-dirty.ng-valid {
+.validatie .ng-dirty.ng-valid {
     border:2px solid Green;
 }
-.loginForm .ng-dirty.ng-invalid {
+.validatie .ng-dirty.ng-invalid {
     border:2px solid Red;
 }
 
