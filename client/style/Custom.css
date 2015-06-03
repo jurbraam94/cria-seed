@@ -2,7 +2,7 @@ body {
     background-color:#48CEC2;
 }
 
-.navbar .nav > li > a {
+.navbar .nav > li > a:link {
      color:#FFFFFF;
  }
 
@@ -14,7 +14,7 @@ body {
     color: #E44A4E;
 }
 
-.nav.navbar-nav.navbar-right a {
+.nav.navbar-nav.navbar-right a:link {
     color:#FFFFFF;
 }
 
@@ -26,13 +26,13 @@ body {
     color: #E44A4E;
 }
 
-.navbar-nav > .active > a {
+.nav.navbar-nav > .active > a:link {
     color: black;
 }
-.navbar-nav > .active > a:visited {
+.nav.navbar-nav > .active > a:visited {
     color: black;
 }
-.navbar-nav > .active > a:hover, a:active{
+.nav.navbar-nav > .active > a:hover, a:active{
     color: #E44A4E;
 }
 
