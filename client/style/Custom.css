@@ -2,15 +2,15 @@ body {
     background-color:#48CEC2;
 }
 
-.nav.navbar-nav.navbar-right a {
+.nav.navbar-nav a {
     color:#FFFFFF;
 }
 
-.nav.navbar-nav.navbar-right a:hover, a:visited {
+.nav.navbar-nav a:hover, a:visited {
     color: #ffffff;
 }
 
-.nav.navbar-nav.navbar-right a:hover, a:active {
+.nav.navbar-nav a:hover, a:active {
 color: #E44A4E;
 }
 
