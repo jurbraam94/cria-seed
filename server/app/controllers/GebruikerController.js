@@ -28,7 +28,7 @@ var hashPassword = function (password, salt, callback) {
 
 
 exports.sendMail = function (req, res) {
-    console.log(req.body.email)
+    console.log(req.body.email);
     var mailOptions = {
         from: req.body.naam + " <" + req.body.email + ">", // sender address
         to: 'criaprojectgroep7@gmail.com', // list of receivers
