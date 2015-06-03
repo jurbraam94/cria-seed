@@ -14,5 +14,4 @@ var controller = require('../app/controllers/emailController.js');
 router
     .post('/mail', controller.sendMail);
 
-
 module.exports = router;

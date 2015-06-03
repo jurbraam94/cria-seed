@@ -12,8 +12,9 @@ var mongoose = require('mongoose'),
     });
 
 exports.sendMail = function (req, res) {
+    console.log("starting to send mail");
     var mailOptions = {
-        from: req.body.gebruikersnaam + ' <' + req.body.email + '>', // sender address
+        from: req.body.naam + ' <' + req.body.email + '>', // sender address
         to: 'criaprojectgroep7@gmail.com', // list of receivers
         subject: 'DOOD Contact', // Subject line
         text: req.body.bericht, // plaintext body
