@@ -74,7 +74,7 @@ footer a:hover, a:active{
     margin-top:50px;
 }
 
-.inlogContainer {
+.formContainer {
     max-width: 600px;
     padding: 30px;
     margin: 0 auto;
@@ -89,7 +89,15 @@ footer a:hover, a:active{
 }
 
 .inputLabel {
-    width: 40%;
+    width: 35%;
+}
+
+.witteText {
+    color:#FFFFFF;
+}
+
+.inputMargin {
+    margin:5px;
 }
 
 .Tekentje {

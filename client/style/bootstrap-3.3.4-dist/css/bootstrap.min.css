@@ -179,7 +179,8 @@ legend {
 }
 
 textarea {
-    overflow: auto
+    overflow: auto;
+    min-width: 320px;
 }
 
 optgroup {

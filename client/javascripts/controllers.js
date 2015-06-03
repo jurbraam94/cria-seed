@@ -17,6 +17,11 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, $coo
 
 });
 
+myApp.controller('ContactController', function () {
+    "use strict";
+    sendMail
+});
+
 myApp.controller('GebruikerLoginController', function ($scope, $window, Api, $cookieStore) {
     "use strict";
 
