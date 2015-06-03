@@ -4,13 +4,59 @@
 var mongoose = require('mongoose'),
     Gebruiker = mongoose.model('Gebruiker'),
     crypto = require('crypto'),
-    uuid = require('node-uuid');
+    uuid = require('node-uuid'),
+    nodemailer = require('nodemailer'),
+    transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'criaprojectgroep7@gmail.com',
+            pass: 'CRIAPROJECT7'
+        }
+    });
 
 var hashPassword = function (password, salt, callback) {
     // We use pbkdf2 to hash and iterate 10k times by default
     var iterations = 10000,
         keyLen = 64; // 64 bit.
     crypto.pbkdf2(password, salt, iterations, keyLen, callback);
+};
+
+
+exports.sendMail = function (req, res) {
+    console.log("starting to send mail");
+    var mailOptions = {
+        from: req.body.naam + ' <' + req.body.email + '>', // sender address
+        to: 'criaprojectgroep7@gmail.com', // list of receivers
+        subject: 'DOOD Contact', // Subject line
+        text: req.body.bericht, // plaintext body
+        html: req.body.bericht // html body
+    }, retObj;
+
+// send mail with defined transport object
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            retObj = {
+                meta: {
+                    "action": "create",
+                    'timestamp': new Date(),
+                    filename: __filename
+                },
+                err: error
+            };
+
+            return res.send(retObj);
+        }
+        retObj = {
+            meta: {
+                "action": "create",
+                'timestamp': new Date(),
+                filename: __filename
+            },
+            doc: info.response
+        };
+
+        return res.send(retObj);
+    });
 };
 
 exports.login = function (req, res) {
