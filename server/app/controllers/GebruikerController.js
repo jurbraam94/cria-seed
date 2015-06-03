@@ -6,11 +6,16 @@ var mongoose = require('mongoose'),
     crypto = require('crypto'),
     uuid = require('node-uuid'),
     nodemailer = require('nodemailer'),
-    transporter = nodemailer.createTransport({
-        service: 'Gmail',
+    transporter = nodemailer.createTransport("SMTP", {
+        service: "Gmail",
         auth: {
-            user: 'criaprojectgroep7@gmail.com',
-            pass: 'CRIAPROJECT7'
+            XOAuth2: {
+                user: "criaprojectgroep7@gmail.com", // Your gmail address.
+                                                      // Not @developer.gserviceaccount.com
+                clientId: "903231744304-lurk63llpb1lkkcbiq89n252ih7lvj2i.apps.googleusercontent.com",
+                clientSecret: "Xjnuy-xO9yF5E8YLthwsKCUT",
+                refreshToken: "1/4ZVwpqvPdfllwN4od8BnkHqlbilkzUGorCeQuz1xc4A"
+            }
         }
     });
 
