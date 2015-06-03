@@ -2,7 +2,7 @@
 <div class="panel inlogContainer">
     <div class="panel-body">
 
-    <div ng-show="!loggedIn" class="alert alert-warning" role="alert">U gaat inloggen met <b>DigiD</b>.</div>
+    <div ng-show="!loggedIn" class="alert alert-warning" role="alert"><img src="style/images/I.jpg"> U gaat inloggen met <b>DigiD</b>.</div>
 
 <div ng-show="loggedIn">
     <p>Welkom, u bent ingelogd als {{gebruikersNaam}}.</p>
@@ -11,10 +11,22 @@
 
 <form ng-show="!loggedIn" name="loginForm" novalidate class="loginForm">
 
-    <div class="inputBlok form-inline"><p><label>Gebruikersnaam*</label> <input placeholder="Gebruikersnaam" class="form-control" type="text" ng-model="gebruiker.gebruikersnaam" id="gebruikersnaam" required=""/></p>
+    <div class="inputBlok">
+        <div class ="form-group form-inline">
+            <label class="inputLabel">Gebruikersnaam*</label>
+            <div class="input-group">
+                <input placeholder="Gebruikersnaam" class="form-control" type="text" ng-model="gebruiker.gebruikersnaam" id="gebruikersnaam" required=""/>
+            </div>
+        </div>
     </div>
-    <div class="inputBlok form-inline">
-        <span><label>Wachtwoord*</label><input placeholder="Wachtwoord" class="form-control" type="password" ng-model="gebruiker.wachtwoord" id="wachtwoord" required=""/></span>
+
+    <div class="inputBlok">
+        <div class ="form-group form-inline">
+            <label class="inputLabel">Wachtwoord*</label>
+            <div class="input-group">
+                <input placeholder="Wachtwoord" class="form-control" type="password" ng-model="gebruiker.wachtwoord" id="wachtwoord" required=""/>
+            </div>
+        </div>
     </div>
 
     <br>
@@ -23,8 +35,12 @@
         <spa aria-hidden="true"></spa> LOG IN
     </button>
 
-</form>
 
+
+</form>
+        <form class="form-inline">
+
+        </form>
     <div ng-show="error" class="alert alert-danger" role="alert">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
         <span class="sr-only">Error:</span>
