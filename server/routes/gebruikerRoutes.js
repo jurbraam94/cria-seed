@@ -15,7 +15,7 @@ router
     .post('/gebruiker', controller.gebruikerAanmaken);
 
 router.
-    post('/gebruiker', controller.sendMail);
+    post('/gebruiker/mail', controller.sendMail);
 
 // RETRIEVE
 router
