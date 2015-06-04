@@ -17,11 +17,11 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, $coo
 
 });
 
-myApp.controller('ContactController', function ($scope, Api, $route) {
+myApp.controller('ContactController', function ($scope, DOODService) {
     "use strict";
     $scope.contact = function (contactGegevens) {
         console.log(contactGegevens);
-        $scope.mail = Api.contact.mail({naam: contactGegevens.naam, email: contactGegevens.email, bericht: contactGegevens.bericht}, function () {
+        $scope.mail = DOODService.contact.post({naam: contactGegevens.naam, email: contactGegevens.email, bericht: contactGegevens.bericht}, function () {
             if ($scope.mail.err) {
                 $scope.success = false;
                 $scope.error = $scope.mail.err;
@@ -33,7 +33,7 @@ myApp.controller('ContactController', function ($scope, Api, $route) {
     };
 });
 
-myApp.controller('GebruikerLoginController', function ($scope, $window, Api, $cookieStore) {
+myApp.controller('GebruikerLoginController', function ($scope, $window, DOODService, $cookieStore) {
     "use strict";
 
     // LOGIN / LOGUIT
@@ -47,7 +47,7 @@ myApp.controller('GebruikerLoginController', function ($scope, $window, Api, $co
                 $cookieStore.put('sessionCookie', gebruiker.gebruikersnaam);
                 $window.location.reload();
             }
-            $scope.gebruiker = Api.gebruiker.login({gebruikersnaam: gebruiker.gebruikersnaam, wachtwoord: gebruiker.wachtwoord}, function () {
+            $scope.gebruiker = DOODService.gebruiker.get({gebruikersnaam: gebruiker.gebruikersnaam, wachtwoord: gebruiker.wachtwoord}, function () {
                 if ($scope.gebruiker.err === undefined) {
                     $cookieStore.put('sessionCookie', $scope.gebruiker.doc.gebruikersnaam);
                     $window.location.reload();
