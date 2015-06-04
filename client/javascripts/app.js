@@ -39,6 +39,36 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies'])
             security: false
         });
 
+        // Get formulier
+        $routeProvider.when('/formulier', {
+            templateUrl: 'partials/formulier.html',
+            security: true
+        });
+
+        // Get Muziek
+        $routeProvider.when('/muziek', {
+            templateUrl: 'partials/muziek.html',
+            security: true
+        });
+
+        // Get Foto
+        $routeProvider.when('/foto', {
+            templateUrl: 'partials/foto.html',
+            security: true
+        });
+
+        // Get Notificatie
+        $routeProvider.when('/notificatie', {
+            templateUrl: 'partials/notificatie.html',
+            security: true
+        });
+
+        // Get Wishlist
+        $routeProvider.when('/wishlist', {
+            templateUrl: 'partials/wishlist.html',
+            security: true
+        });
+
         // When no valid route is provided
         $routeProvider.otherwise({
             redirectTo: "/login"
