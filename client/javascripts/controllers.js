@@ -200,4 +200,4 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
 });
 
 
-myApp.directive('draggable')
+//myApp.directive('draggable')
