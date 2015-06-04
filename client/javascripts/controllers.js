@@ -20,6 +20,7 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, $coo
 myApp.controller('ContactController', function ($scope, Api, $route) {
     "use strict";
     $scope.contact = function (contactGegevens) {
+        console.log(contactGegevens);
         $scope.mail = Api.contact.mail(contactGegevens, function () {
             if ($scope.mail.err) {
                 $scope.success = false;
