@@ -20,8 +20,12 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, $coo
 myApp.controller('ContactController', function ($scope, Api) {
     "use strict";
     $scope.contact = function (contact) {
-        Api.contact.mail(contact, function () {
-            console.log(contact);
+        $scope.mail = Api.contact.mail(contact, function () {
+            if ($scope.mail.err) {
+                $scope.return = $scope.mail.err;
+            } else if ($scope.mail.doc !== null) {
+                $scope.return = "Succes";
+            }
         });
     };
 });
@@ -41,7 +45,6 @@ myApp.controller('GebruikerLoginController', function ($scope, $window, Api, $co
                     $cookieStore.put('sessionCookie', $scope.gebruiker.doc.gebruikersnaam);
                     $window.location.reload();
                 } else if ($scope.gebruiker.err) {
-                    console.log($scope.gebruiker.err);
                     $scope.error = $scope.gebruiker.err;
                 }
             });
