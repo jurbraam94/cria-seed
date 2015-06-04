@@ -22,9 +22,10 @@ myApp.controller('ContactController', function ($scope, Api) {
     $scope.contact = function (contact) {
         $scope.mail = Api.contact.mail(contact, function () {
             if ($scope.mail.err) {
-                $scope.return = $scope.mail.err;
+                $scope.success = false;
+                $scope.error = $scope.mail.err;
             } else if ($scope.mail.doc !== null) {
-                $scope.return = "Succes";
+                $scope.success = true;
             }
         });
     };

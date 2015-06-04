@@ -42,13 +42,13 @@
         </button>
     </form>
 
-    <div ng-show="return != Succes" class="alert alert-success" role="alert">
+    <div ng-show="success" class="alert alert-success" role="alert">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
         <span class="sr-only">Error:</span>
         {{error}}
     </div>
 
-    <div ng-show="return == Succes" class="alert alert-success" role="alert">
+    <div ng-show="success" class="alert alert-success" role="alert">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
         <span class="sr-only">Bedankt, we hebben uw mail succesvol ontvangen.</span>
     </div>
