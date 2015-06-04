@@ -15,6 +15,7 @@
                 db = {};
             // REST url to server
             db.gebruiker = $resource('/api/gebruiker/:gebruikersnaam/:wachtwoord', {}, actions);
+            db.login = $resource('/api/gebruiker/login', {}, actions);
             db.uitvaartSamenstellen = $resource('/api/uitvaartSamenstellen', {}, actions);
             db.uitvaartSegmentToevoegen = $resource('/api/segment', {}, actions);
             db.contact = $resource('/api/gebruiker/mail', {}, actions);

@@ -47,7 +47,7 @@ myApp.controller('GebruikerLoginController', function ($scope, $window, DOODServ
                 $cookieStore.put('sessionCookie', gebruiker.gebruikersnaam);
                 $window.location.reload();
             }
-            $scope.gebruiker = DOODService.gebruiker.post(gebruiker, function () {
+            $scope.gebruiker = DOODService.login.post(gebruiker, function () {
                 if ($scope.gebruiker.err === undefined) {
                     $cookieStore.put('sessionCookie', $scope.gebruiker.doc.gebruikersnaam);
                     $window.location.reload();
