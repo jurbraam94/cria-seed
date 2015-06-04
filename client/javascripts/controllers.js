@@ -147,7 +147,7 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
                 chartArea: { left: '5%', right: '0', width: '100%', height: '100%' },
                 legend: { position: 'right', alignment: 'center' },
                 colors: kleuren,
-                backgroundColor: { fill: '#48cec2' }
+                backgroundColor: { fill: '#f0f0f0' }
             },
             chartParentNode = document.getElementById('piechart').parentNode;
 

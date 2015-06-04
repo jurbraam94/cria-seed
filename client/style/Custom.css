@@ -1,5 +1,5 @@
 body {
-    background-color:#48CEC2;
+    background-color:#f0f0f0;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -148,4 +148,19 @@ footer a:hover, a:active{
     width: 25%;
     height: 25%;
     margin: 10px;
+}
+
+.muzieklijst {
+    padding-bottom: 5px;
+    padding-top: 5px;
+    margin-top: 2%;
+    width: 90%;
+    flex-shrink:1;
+    height: 5%;
+}
+
+.muzieklijst img {
+    float: right;
+    width: 13px;
+    height: auto;
 }
