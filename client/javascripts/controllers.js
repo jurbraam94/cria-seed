@@ -41,7 +41,11 @@ myApp.controller('GebruikerLoginController', function ($scope, $window, Api, $co
             $cookieStore.remove('sessionCookie');
             $window.location.reload();
         } else {
-         //   $scope.gebruiker = gebruikersnaamService.gebruiker.login({gebruikersnaam: gebruiker.gebruikersnaam, wachtwoord: gebruiker.wachtwoord}, function () {
+            if (gebruiker.gebruikersnaam === "test" && gebruiker.wachtwoord === "test") {
+                // Sets loggedin as test for local testing.
+                $cookieStore.put('sessionCookie', gebruiker.gebruikersnaam);
+                $window.location.reload();
+            }
             $scope.gebruiker = Api.gebruiker.login({gebruikersnaam: gebruiker.gebruikersnaam, wachtwoord: gebruiker.wachtwoord}, function () {
                 if ($scope.gebruiker.err === undefined) {
                     $cookieStore.put('sessionCookie', $scope.gebruiker.doc.gebruikersnaam);

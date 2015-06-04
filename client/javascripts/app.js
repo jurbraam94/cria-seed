@@ -23,7 +23,7 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies'])
         $routeProvider.when('/samenstellen', {
             templateUrl: 'partials/Samenstellen.html',
             controller: 'SamenstellenController',
-            security: false
+            security: true
         });
 
         // Get all gebruiker
