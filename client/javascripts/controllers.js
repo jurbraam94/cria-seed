@@ -26,6 +26,7 @@ myApp.controller('ContactController', function ($scope, Api) {
                 $scope.error = $scope.mail.err;
             } else if ($scope.mail.doc !== null) {
                 $scope.success = true;
+                $scope.contactForm.$setPristine();
             }
         });
     };
