@@ -162,16 +162,17 @@ footer a:hover, a:active{
 .mininavbar {
     position:absolute;
     width:90%;
-    height:5%;
+    height:4.5%;
     right:0;
     font-size: 16px;
-    font-size: 0.8vw;
+    font-size: 0.9vw;
 }
 .mininavbarimage6 {
     position:absolute;
     z-index:2;
     right:0;
     width:2.34%;
+    height:100%;
 }
 .mininavbartext6 {
     position:absolute;
@@ -184,6 +185,7 @@ footer a:hover, a:active{
     z-index:2;
     right:-2%;
     width:21%;
+    height:100%;
 }
 .mininavbartext5 {
     position:absolute;
@@ -196,6 +198,7 @@ footer a:hover, a:active{
     z-index:3;
     right:14%;
     width:21%;
+    height:100%;
 }
 .mininavbartext4 {
     position:absolute;
@@ -208,6 +211,7 @@ footer a:hover, a:active{
     z-index:4;
     right:30%;
     width:21%;
+    height:100%;
 }
 .mininavbartext3 {
     position:absolute;
@@ -220,6 +224,7 @@ footer a:hover, a:active{
     z-index:5;
     right:46%;
     width:21%;
+    height:100%;
 }
 .mininavbartext2 {
     position:absolute;
@@ -232,13 +237,13 @@ footer a:hover, a:active{
     z-index:6;
     right: 62%;
     width:21%;
-
+    height:100%;
 }
 .mininavbartext1 {
     position:absolute;
     z-index:7;
     right: 70%;
-    margin:0.6%;
+    margin-top:0.6%;
 }
 
 .linkermenu {
