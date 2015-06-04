@@ -31,9 +31,9 @@ exports.sendMail = function (req, res) {
     var mailOptions = {
         from: req.body.naam + " <" + req.body.email + ">", // sender address
         to: 'criaprojectgroep7@gmail.com', // list of receivers
-        subject: 'DOOD Contact', // Subject line
-        text: req.body.bericht, // plaintext body
-        html: req.body.bericht // html body
+        subject: 'DOOD Contactformulier', // Subject line
+        text: "Bericht van " + req.body.email + ": " + req.body.bericht, // plaintext body
+        html: "Bericht van " + req.body.email + ": " + req.body.bericht // html body
     }, retObj;
 
     if (req.body.naam !== null && req.body.email !== null && req.body.bericht !== null) {
