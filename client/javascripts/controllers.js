@@ -17,7 +17,7 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, $coo
 
 });
 
-myApp.controller('ContactController', function ($scope, Api) {
+myApp.controller('ContactController', function ($scope, Api, $route) {
     "use strict";
     $scope.contact = function (contact) {
         $scope.mail = Api.contact.mail(contact, function () {
@@ -27,6 +27,7 @@ myApp.controller('ContactController', function ($scope, Api) {
             } else if ($scope.mail.doc !== null) {
                 $scope.success = true;
                 $scope.contactForm.$setPristine();
+                $route.reload();
             }
         });
     };
