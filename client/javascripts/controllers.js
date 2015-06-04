@@ -198,3 +198,6 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
 
     init();
 });
+
+
+myApp.directive('draggable')
