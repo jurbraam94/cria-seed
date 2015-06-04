@@ -8,6 +8,18 @@ body {
     user-select: none;
 }
 
+a:link {
+    color:#FFFFFF;
+}
+
+a:visited {
+    color: #FFFFFF;
+}
+
+a:hover, a:active{
+    color: #E44A4E;
+}
+
 .navbar .nav > li > a:link {
      color:#FFFFFF;
  }
@@ -148,4 +160,99 @@ footer a:hover, a:active{
     width: 25%;
     height: 25%;
     margin: 10px;
+}
+.mininavbar {
+    position:absolute;
+    width:90%;
+    height:5%;
+    right:0;
+    font-size: 16px;
+    font-size: 0.8vw;
+}
+.mininavbarimage6 {
+    position:absolute;
+    z-index:2;
+    right:0;
+    width:2.34%;
+}
+.mininavbartext6 {
+    position:absolute;
+    z-index:3;
+    right:0.5%;
+    margin:0.6%;
+}
+.mininavbarimage5 {
+    position:absolute;
+    z-index:2;
+    right:-2%;
+    width:21%;
+}
+.mininavbartext5 {
+    position:absolute;
+    z-index:3;
+    right:6%;
+    margin:0.6%;
+}
+.mininavbarimage4 {
+    position:absolute;
+    z-index:3;
+    right:14%;
+    width:21%;
+}
+.mininavbartext4 {
+    position:absolute;
+    z-index:4;
+    right:20%;
+    margin:0.6%;
+}
+.mininavbarimage3 {
+    position:absolute;
+    z-index:4;
+    right:30%;
+    width:21%;
+}
+.mininavbartext3 {
+    position:absolute;
+    z-index:5;
+    right:36%;
+    margin:0.6%;
+}
+.mininavbarimage2 {
+    position:absolute;
+    z-index:5;
+    right:46%;
+    width:21%;
+}
+.mininavbartext2 {
+    position:absolute;
+    z-index:6;
+    right:53%;
+    margin:0.6%;
+}
+.mininavbarimage1 {
+    position:absolute;
+    z-index:6;
+    right: 62%;
+    width:21%;
+
+}
+.mininavbartext1 {
+    position:absolute;
+    z-index:7;
+    right: 70%;
+    margin:0.6%;
+}
+
+.linkermenu {
+    position: absolute;
+    width: 10%;
+    background-color: #48cec2;
+}
+.minicontent {
+    background-color: #F3F3F3;
+    position:absolute;
+    width: 74.7%;
+    height: 90.38%;
+    right:0;
+    bottom:0;
 }
