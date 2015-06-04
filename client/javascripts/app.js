@@ -26,10 +26,16 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies'])
             security: true
         });
 
-        // Get all gebruiker
+        // Get contact
         $routeProvider.when('/contact', {
             templateUrl: 'partials/Contact.html',
             controller: 'ContactController',
+            security: false
+        });
+
+        // Get wie zijn wij
+        $routeProvider.when('/wiezijnwij', {
+            templateUrl: 'partials/wiezijnwij.html',
             security: false
         });
 
