@@ -3,7 +3,7 @@
 
 (function () {
     "use strict";
-    angular.module('guitarDesignApp.services', ['ngResource'])
+    angular.module('myApp.services', ['ngResource'])
         .factory('DOODService', ['$resource', '$http', function ($resource) {
             var actions = {
                     'get': {method: 'GET'},
