@@ -70,7 +70,7 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
     "use strict";
     var init,
         overigeTijd = 0,
-        totaleTijd = 60,
+       // totaleTijd = 60,
         dataTable = [
             ['Segment', 'Minuten'],
             ['Muziek', 11],
@@ -199,5 +199,3 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
     init();
 });
 
-
-//myApp.directive('draggable')
