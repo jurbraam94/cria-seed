@@ -70,8 +70,8 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', '
         });
 
         // Get Wishlist
-        $routeProvider.when('/slideshow', {
-            templateUrl: 'partials/slideshow.html',
+        $routeProvider.when('/foto', {
+            templateUrl: 'partials/foto.html',
             security: true
         });
 

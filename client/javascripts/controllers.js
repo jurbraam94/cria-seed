@@ -4,6 +4,8 @@
 myApp.controller('MainController', function ($scope, $rootScope, $location, $cookieStore) {
     "use strict";
 
+    $scope.pageName = function () { return $location.path(); };
+
     if ($cookieStore.get('sessionCookie')) {
         $scope.loggedIn = true;
         $scope.gebruikersNaam = $cookieStore.get('sessionCookie');
@@ -12,8 +14,9 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, $coo
     }
 
     $rootScope.$on('$routeChangeSuccess', function (e, curr, prev) {
-        $scope.menuActive = $location.path().substring(1);
+        $scope.menuActive = $scope.pageName().substring(1);
     });
+
 
 });
 
