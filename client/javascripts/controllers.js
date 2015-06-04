@@ -81,6 +81,23 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
         chart = null,
         muisOverIndex;
 
+
+    $scope.boxObjecten = {
+        src: "path/muziek.png",
+        object: "muziek",
+        percentage: 1
+    };
+
+    $scope.segmenten = [];
+
+    $scope.addSegment = function (segment) {
+        if (isObject(segment)) {
+            $scope.segmenten[$scope.segmenten.length + 1] = segment;
+        } else {
+            console.log("Je hebt geen object toegevoegd");
+        }
+    };
+
     function getSliceIndex(e) {
         muisOverIndex = e.row;
     }
@@ -147,19 +164,23 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
     drawChart();
     google.setOnLoadCallback(drawChart());
 
+    $scope.drag = function() {
+        console.log("nice je hebt erop geklikt");
+    }
+
     $scope.getAllImages = function () {
         var imgArray = [],
             padNaam = "style/images/icons/";
-        imgArray[0] = padNaam + "muziek.png";
-        imgArray[1] = padNaam + "STILTE.png";
-        imgArray[2] = padNaam + "TEKST.png";
-        imgArray[3] = padNaam + "CAMERA.png";
-        imgArray[4] = padNaam + "VIDEO.png";
-        imgArray[5] = padNaam + "BLOEMEN.png";
-        imgArray[6] = padNaam + "SPREKER.png";
-        imgArray[7] = padNaam + "ETEN.png";
-        imgArray[8] = padNaam + "WAGEN.png";
-        imgArray[9] = padNaam + "GEENINVULLING.png";
+        imgArray[0] = { src: padNaam + "muziek.png", id: "segment1" };
+        imgArray[1] = { src: padNaam + "STILTE.png", id: "segment2" };
+        imgArray[2] = { src: padNaam + "TEKST.png", id: "segment3" };
+        imgArray[3] = { src: padNaam + "CAMERA.png", id: "segment4" };
+        imgArray[4] = { src: padNaam + "VIDEO.png", id: "segment5" };
+        imgArray[5] = { src: padNaam + "BLOEMEN.png", id: "segment6" };
+        imgArray[6] = { src: padNaam + "SPREKER.png", id: "segment7" };
+        imgArray[7] = { src: padNaam + "ETEN.png", id: "segment8" };
+        imgArray[8] = { src: padNaam + "WAGEN.png", id: "segment9" };
+        imgArray[9] = { src: padNaam + "GEENINVULLING.png", id: "segment10" };
 
         $scope.afbeeldingen = imgArray;
     };

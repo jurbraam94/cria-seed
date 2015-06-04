@@ -1,9 +1,9 @@
 <body ng-init="init()">
-    <div class="leftmenubar">
-        <div  class="boxje" ng-repeat="afbeelding in afbeeldingen ">
-            <img data-ng-src="{{afbeelding}}" />
-        </div>
+<div class="leftmenubar">
+    <div  class="boxje" ng-repeat="afbeelding in afbeeldingen " sleepbaar="">
+        <img data-ng-src="{{afbeelding.src}}" id="{{afbeelding.id}}" ng-click= "drag()"  />
     </div>
+</div>
 
-    <div id="piechart"></div>
+<div id="piechart"></div>
 </body>
