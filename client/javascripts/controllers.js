@@ -21,7 +21,7 @@ myApp.controller('ContactController', function ($scope, Api, $route) {
     "use strict";
     $scope.contact = function (contactGegevens) {
         console.log(contactGegevens);
-        $scope.mail = Api.contact.mail(contactGegevens, function () {
+        $scope.mail = Api.contact.mail({naam: contactGegevens.naam, email: contactGegevens.email, bericht: contactGegevens.bericht}, function () {
             if ($scope.mail.err) {
                 $scope.success = false;
                 $scope.error = $scope.mail.err;
