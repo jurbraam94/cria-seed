@@ -36,32 +36,48 @@ exports.sendMail = function (req, res) {
         html: req.body.bericht // html body
     }, retObj;
 
-// send mail with defined transport object
-    transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
+    if (req.body.naam !== null && req.body.email !== null && req.body.bericht !== null) {
+     // send mail with defined transport object
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                retObj = {
+                    meta: {
+                        "action": "mail",
+                        'timestamp': new Date(),
+                        filename: __filename
+                    },
+                    err: error
+                };
+
+                return res.send(retObj);
+            }
             retObj = {
                 meta: {
                     "action": "mail",
                     'timestamp': new Date(),
                     filename: __filename
                 },
-                err: error
+                doc: {naam: req.body.naam, email: req.body.email, bericht: req.body.bericht},
+                err: null
             };
 
             return res.send(retObj);
-        }
+        });
+    } else {
         retObj = {
             meta: {
                 "action": "mail",
                 'timestamp': new Date(),
                 filename: __filename
             },
-            doc: {naam: req.body.naam, email: req.body.email, bericht: req.body.bericht},
-            err: null
+            doc: {},
+            err: "Vul alstublieft alle gegevens in"
         };
 
         return res.send(retObj);
-    });
+    }
+
+
 };
 
 exports.login = function (req, res) {
