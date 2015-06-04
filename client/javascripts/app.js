@@ -38,16 +38,6 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies'])
             redirectTo: "/login"
         });
 
-    }]).
-    config(['$httpProvider', function ($httpProvider) {
-        "use strict";
-        /*
-        $httpProvider.defaults.transformRequest = function (data) {
-            if (data === undefined) {
-                return data;
-            }
-            return $.param(data);
-        };*/
     }])
     .run(function ($rootScope, $location, $cookieStore) {
         "use strict";
