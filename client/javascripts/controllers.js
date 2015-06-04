@@ -1,5 +1,5 @@
 /*jslint node: true */
-/*globals myApp, google, drawChart*/
+/*globals myApp, google, drawChart, angular*/
 
 myApp.controller('MainController', function ($scope, $rootScope, $location, $cookieStore) {
     "use strict";
