@@ -68,6 +68,8 @@ myApp.controller('GebruikerLoginController', function ($scope, $window, Api, $co
 myApp.controller('SamenstellenController', function ($scope, $routeParams, $location) {
     "use strict";
     var init,
+        overigeTijd = 0,
+        totaleTijd = 60,
         dataTable = [
             ['Segment', 'Minuten'],
             ['Muziek', 11],
@@ -79,12 +81,12 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
             ['Spreker', 1],
             ['Eten', 8],
             ['Rouwstoet', 4],
-            ['Overig', 9]
+            ['Wishlist', 9],
+            ['Overige tijd', overigeTijd]
         ],
-        kleuren = ['#000099', '#ef4338', '#639d41', '#ff853d', '#6be7fe', '#ffbbee', '#1e3e4a', '#92183a', '#c30a55', '#4f9d97'],
+        kleuren = ['#000099', '#ef4338', '#639d41', '#ff853d', '#6be7fe', '#ffbbee', '#1e3e4a', '#92183a', '#c30a55', '#4f9d97', '#D3D3D3'],
         chart = null,
         muisOverIndex;
-
 
     $scope.boxObjecten = {
         src: "path/muziek.png",
