@@ -7,30 +7,30 @@
 
     <form name="contactForm" novalidate class="validatie">
 
-            <div class="form-group form-inline inputMargin">
-                <label class="inputLabel witteText">Naam *</label>
+        <div class="form-group form-inline inputMargin">
+            <label class="inputLabel witteText">Naam *</label>
 
-                <div class="input-group">
-                    <input placeholder="Naam" class="form-control" type="text"
-                           ng-model="contact.naam" id="naam" required=""/>
-                </div>
+            <div class="input-group">
+                <input placeholder="Naam" class="form-control" type="text"
+                       ng-model="contact.naam" id="naam" required=""/>
             </div>
+        </div>
 
-            <div class="form-group form-inline inputMargin">
-                <label class="inputLabel witteText">Email*</label>
+        <div class="form-group form-inline inputMargin">
+            <label class="inputLabel witteText">Email*</label>
 
-                <div class="input-group">
-                    <input placeholder="Email" class="form-control" type="email" ng-model="contact.email"
-                           id="email" required=""/>
-                </div>
+            <div class="input-group">
+                <input placeholder="Email" class="form-control" type="email" ng-model="contact.email"
+                       id="email" required=""/>
             </div>
+        </div>
 
         <div class="form-group form-inline inputMargin">
             <label class="inputLabel witteText">Bericht*</label>
 
             <div class="input-group">
                 <textarea placeholder="Bericht" class="form-control" rows="4" type="text" ng-model="contact.bericht"
-                       id="bericht" required=""></textarea>
+                          id="bericht" required=""></textarea>
             </div>
         </div>
 
@@ -42,22 +42,39 @@
         </button>
     </form>
 
-    <div ng-show="!success" class="alert alert-danger" role="alert">
+    <div ng-show="success == false" class="alert alert-danger" role="alert">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
         {{error}}
     </div>
 
-    <div ng-show="success" class="alert alert-success" role="alert">
+    <div ng-show="success == true" class="alert alert-success" role="alert">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
         <span>Bedankt, we hebben uw mail succesvol ontvangen.</span>
     </div>
 </div>
 
-<div class="formContainer text-left">
-    <b>
-    <p class="witteText">DOOD.</p>
-    <p class="witteText">Ruitenberglaan 27</p>
-    <p class="witteText">6828 CC Arnhem</p>
-    <p class="witteText">DOOD@uitvaart.nl</p>
-    </b>
+<div class="formContainer">
+    <div class="row">
+    <span class="col-xs-4 pull-left witteText">
+    <p><b>DOOD.</b></p>
+    Ruitenberglaan 26</br>
+    6882 BG Arnhem</br>
+    Mail: info@dood.nl</br>
+    Tel: 0645-225318</br>
+    KvK: 22546841612
+        </span>
+
+     <span class="col-xs-4 pull-right witteText">
+    <p><b>Yarden</b></p>
+    Hellingsstraat 33</br>
+    2254 HG Erickson</br>
+    Mail: info@yarden.com</br>
+    Tel: 0348-942973</br>
+    KvK: 25556486192
+        </span>
     </div>
+</div>
+
+
+
+
