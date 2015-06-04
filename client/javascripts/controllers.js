@@ -19,8 +19,8 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, $coo
 
 myApp.controller('ContactController', function ($scope, Api, $route) {
     "use strict";
-    $scope.contact = function (contact) {
-        $scope.mail = Api.contact.mail(contact, function () {
+    $scope.contact = function (contactGegevens) {
+        $scope.mail = Api.contact.mail(contactGegevens, function () {
             if ($scope.mail.err) {
                 $scope.success = false;
                 $scope.error = $scope.mail.err;

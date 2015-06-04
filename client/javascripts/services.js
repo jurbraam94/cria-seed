@@ -40,7 +40,7 @@ angular.module('myApp.services', ['ngResource']).factory('Api', ['$resource', '$
                     'mail': {
                         method: 'POST',
                         headers : {'Content-Type': 'application/x-www-form-urlencoded'},
-                        data: {
+                        params: {
                             naam: 'naam',
                             email: 'email',
                             bericht: 'bericht'
