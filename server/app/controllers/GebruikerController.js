@@ -81,7 +81,7 @@ exports.sendMail = function (req, res) {
 };
 
 exports.login = function (req, res) {
-    var conditions = {gebruikersnaam: req.params._gebruikersnaam}, fields = {},
+    var conditions = {gebruikersnaam: req.body.gebruikersnaam}, fields = {},
         retObj;
 
     Gebruiker.findOne(conditions, fields, function (err, gebruiker) {
@@ -98,11 +98,11 @@ exports.login = function (req, res) {
         }
 
         if (gebruiker) {
-            hashPassword(req.params._wachtwoord, gebruiker.passwordSalt, function (err, passwordHash) {
+            hashPassword(req.body.wachtwoord, gebruiker.passwordSalt, function (err, passwordHash) {
                 if (gebruiker.passwordHash === passwordHash.toString()) {
                     retObj = {
                         meta: {
-                            "action": "detail",
+                            "action": "login",
                             'timestamp': new Date(),
                             filename: __filename
                         },
@@ -115,7 +115,7 @@ exports.login = function (req, res) {
                 }
                 retObj = {
                     meta: {
-                        "action": "detail",
+                        "action": "login",
                         'timestamp': new Date(),
                         filename: __filename
                     },

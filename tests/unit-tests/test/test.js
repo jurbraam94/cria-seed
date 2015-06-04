@@ -18,6 +18,7 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
 
     describe('Send email', function () {
         it('Should POST /gebruiker/mail', function (done) {
+            this.timeout(10000);
             request
                 .post('/gebruiker/mail')
                 .send({
@@ -48,9 +49,14 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
     describe('LOGIN gebruiker', function () {
         it('Should LOGIN /gebruiker/{gebruikersnaam}/{wachtwoord}', function (done) {
             request
-                .get('/gebruiker/' + 'jur/' + 'jur')
-                .expect('Content-Type', /application.json/)
-                .expect(200)
+                .post('/gebruiker/login')
+                .send({
+                    "gebruikersnaam": "jur",
+                    "wachtwoord": "jur"
+                })
+                .expect(200)                                                // supertest
+                .expect('Content-Type', /application.json/)                 // supertest
+                .expect('Content-Type', 'utf-8')
                 .end(function (err, res) {
                     if (err) {
                         throw err;

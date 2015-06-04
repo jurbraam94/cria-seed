@@ -38,8 +38,8 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies'])
             redirectTo: "/login"
         });
 
-    }]).
-    run(function ($rootScope, $location, $cookieStore) {
+    }])
+    .run(function ($rootScope, $location, $cookieStore) {
         "use strict";
         $rootScope.$on("$routeChangeStart", function (event, next) {
             if (next.security) {

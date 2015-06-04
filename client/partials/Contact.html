@@ -12,7 +12,7 @@
 
             <div class="input-group">
                 <input placeholder="Naam" class="form-control" type="text"
-                       ng-model="contact.naam" id="naam" required=""/>
+                       ng-model="contactgegevens.naam" id="naam" required=""/>
             </div>
         </div>
 
@@ -20,7 +20,7 @@
             <label class="inputLabel witteText">Email*</label>
 
             <div class="input-group">
-                <input placeholder="Email" class="form-control" type="email" ng-model="contact.email"
+                <input placeholder="Email" class="form-control" type="email" ng-model="contactgegevens.email"
                        id="email" required=""/>
             </div>
         </div>
@@ -29,14 +29,14 @@
             <label class="inputLabel witteText">Bericht*</label>
 
             <div class="input-group">
-                <textarea placeholder="Bericht" class="form-control" rows="4" type="text" ng-model="contact.bericht"
+                <textarea placeholder="Bericht" class="form-control" rows="4" type="text" ng-model="contactgegevens.bericht"
                           id="bericht" required=""></textarea>
             </div>
         </div>
 
         <br>
 
-        <button ng-disabled="contactForm.$invalid" type="button" ng-click="contact(contact)"
+        <button ng-disabled="contactForm.$invalid" type="button" ng-click="contact(contactgegevens)"
                 class="center-block btn btn-primary btn-lg">
             VERSTUREN
         </button>
