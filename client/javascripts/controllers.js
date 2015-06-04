@@ -21,7 +21,7 @@ myApp.controller('ContactController', function ($scope, DOODService) {
     "use strict";
     $scope.contact = function (contactGegevens) {
         console.log(contactGegevens);
-        $scope.mail = DOODService.contact.post({naam: contactGegevens.naam, email: contactGegevens.email, bericht: contactGegevens.bericht}, function () {
+        $scope.mail = DOODService.contact.post(contactGegevens, function () {
             if ($scope.mail.err) {
                 $scope.success = false;
                 $scope.error = $scope.mail.err;
@@ -47,7 +47,7 @@ myApp.controller('GebruikerLoginController', function ($scope, $window, DOODServ
                 $cookieStore.put('sessionCookie', gebruiker.gebruikersnaam);
                 $window.location.reload();
             }
-            $scope.gebruiker = DOODService.gebruiker.get({gebruikersnaam: gebruiker.gebruikersnaam, wachtwoord: gebruiker.wachtwoord}, function () {
+            $scope.gebruiker = DOODService.gebruiker.post(gebruiker, function () {
                 if ($scope.gebruiker.err === undefined) {
                     $cookieStore.put('sessionCookie', $scope.gebruiker.doc.gebruikersnaam);
                     $window.location.reload();

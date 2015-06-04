@@ -19,7 +19,7 @@ router.
 
 // RETRIEVE
 router
-    .get('/gebruiker/:_gebruikersnaam/:_wachtwoord', controller.login);
+    .post('/gebruiker/login', controller.login);
 
 // DELETE
 router
