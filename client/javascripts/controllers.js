@@ -91,7 +91,7 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
     $scope.segmenten = [];
 
     $scope.addSegment = function (segment) {
-        if (isObject(segment)) {
+        if (angular.isObject(segment)) {
             $scope.segmenten[$scope.segmenten.length + 1] = segment;
         } else {
             console.log("Je hebt geen object toegevoegd");
@@ -164,9 +164,9 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
     drawChart();
     google.setOnLoadCallback(drawChart());
 
-    $scope.drag = function() {
+    $scope.drag = function () {
         console.log("nice je hebt erop geklikt");
-    }
+    };
 
     $scope.getAllImages = function () {
         var imgArray = [],
