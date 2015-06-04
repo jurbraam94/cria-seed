@@ -18,6 +18,7 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
 
     describe('Send email', function () {
         it('Should POST /gebruiker/mail', function (done) {
+            this.timeout(10000);
             request
                 .post('/gebruiker/mail')
                 .send({
