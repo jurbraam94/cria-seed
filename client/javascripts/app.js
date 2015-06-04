@@ -8,7 +8,7 @@
  * @see https://github.com/angular/angular.js/wiki/Writing-AngularJS-Documentation
  * @see http://docs.angularjs.org/guide/concepts
  */
-var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies'])
+var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', 'ngDragDrop'])
     .config(['$routeProvider', function ($routeProvider) {
         "use strict";
 
