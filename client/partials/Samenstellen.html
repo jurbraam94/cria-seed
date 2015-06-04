@@ -1,12 +1,8 @@
 <body ng-init="init()">
 <div class="leftmenubar">
     <div class="boxje" ng-repeat="afbeelding in afbeeldingen " sleepbaar="" data-drag="true" >
-        <img data-ng-src="{{afbeelding.src}}" id="{{afbeelding.id}}" ng-click= "drag()" />
+        <img data-ng-src="{{afbeelding.src}}" id="{{afbeelding.id}}" jqyoui-draggable="{animate:true}" />
     </div>
 </div>
-<span style="float: right" data-drag="true" draggable>So you think you can drag</span>
-
-<div draggable></div>
-
 <div id="piechart"></div>
 </body>
