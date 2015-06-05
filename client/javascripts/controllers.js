@@ -245,7 +245,6 @@ myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
         }
 
 
-
        /* Spotify.search('Nirvana', 'artist').then(function (data) {
             console.log(data);
         });*/

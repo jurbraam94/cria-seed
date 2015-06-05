@@ -1,7 +1,7 @@
 <hr>
 <div class="muziekZoeklijst">
     <form name="contactForm" novalidate class="validatie"> <input ng-model="zoekopdracht" type="text">
-    <input type="image" src="style/images/loep.png" class = "link searchButton" ng-click="test(zoekopdracht)" >
+    <input type="image" src="style/images/loep.png" id = "zoekKnop" ng-click="test(zoekopdracht)" >
     </form>
     <div class=" row" id ="rijLiedje" value="{{error}}" ng-repeat="item in zoekResultaat">
         <div class=" col-lg-6">
