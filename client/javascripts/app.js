@@ -75,9 +75,15 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', '
             security: true
         });
 
+        // Get Wishlist
+        $routeProvider.when('/overzicht', {
+            templateUrl: 'partials/Overzicht.html',
+            security: true
+        });
+
         // When no valid route is provided
         $routeProvider.otherwise({
-            redirectTo: "/login"
+            redirectTo: "/overzicht"
         });
 
     }])
