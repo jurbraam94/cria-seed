@@ -5,8 +5,8 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, $coo
     "use strict";
 
     $scope.goto = function (location) {
-        $location.url('/' + location);
         $window.location.reload();
+        $location.url('/' + location);
     };
 
     $scope.pageName = function () { return $location.path(); };
