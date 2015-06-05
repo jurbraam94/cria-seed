@@ -21,8 +21,6 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, $coo
     $rootScope.$on('$routeChangeSuccess', function (e, curr, prev) {
         $scope.menuActive = $scope.pageName().substring(1);
     });
-
-
 });
 
 myApp.controller('ContactController', function ($scope, DOODService) {

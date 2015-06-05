@@ -31,17 +31,18 @@
     <script src="./javascripts/lib/angular-dragdrop.min.js"></script>
     <script src="./javascripts/lib/jquery-ui.js"></script>
     <script src="./javascripts/lib/jquery-ui.min.js"></script>
+    <script src="./javascripts/lib/angular-animate.min.js"></script>
 
     <!-- App -->
     <script src="./javascripts/app.js"></script>
     <script src="./javascripts/controllers.js"></script>
     <script src="./javascripts/services.js"></script>
 </head>
-<body ng-controller="MainController" ng-init="init()">
+<body ng-controller="MainController">
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#/login">
+            <a class="navbar-brand" href="#/overzicht">
                 <img class="logo" alt="Brand" src="style/images/logo.png">
             </a>
         </div>
@@ -59,19 +60,19 @@
 <div class="container-fluid Content">
     <div ng-switch on="pageName()">
         <div ng-switch-when="/samenstellen">
-            <div data-ng-view="Content"></div>
+            <div ng-view></div>
         </div>
         <div ng-switch-when="/login">
-            <div data-ng-view="Content"></div>
+            <div ng-view></div>
         </div>
         <div ng-switch-when="/contact">
-            <div data-ng-view="Content"></div>
+            <div ng-view></div>
         </div>
         <div ng-switch-when="/wiezijnwij">
-            <div data-ng-view="Content"></div>
+            <div ng-view></div>
         </div>
         <div ng-switch-when="/overzicht">
-            <div data-ng-view="Content"></div>
+            <div ng-view></div>
         </div>
         <div ng-switch-default class="mainApp">
             <div class="row">
@@ -111,8 +112,9 @@
                     </div>
                 </div>
             </div>
-            <div class="row ">
-                <div data-ng-view="Content"></div>
+            <div class="row">
+                <div ng-view> </div>
+                </div>
             </div>
 
         </div>
