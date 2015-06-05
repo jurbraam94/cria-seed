@@ -229,3 +229,14 @@ footer a:hover, a:active{
     padding-right: 30px;
     padding-left:30px;
 }
+
+.overzichtbutton {
+    font-weight:bold;
+    font-size: 1.2vw;
+    padding: 2%;
+    color: #fff;
+    background-color: #3E464F;
+    border-color: #3E464F;
+    width:20%;
+    margin: 15% 1% 5% 1%;
+}
