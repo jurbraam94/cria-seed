@@ -60,7 +60,6 @@
 </nav>
 
 <div class="container-fluid Content">
-
     <div ng-switch on="pageName()">
         <div ng-switch-when="/samenstellen">
             <div data-ng-view="Content"></div>
@@ -74,42 +73,51 @@
         <div ng-switch-when="/wiezijnwij">
             <div data-ng-view="Content"></div>
         </div>
+        <div ng-switch-when="/overzicht">
+            <div data-ng-view="Content"></div>
+        </div>
         <div ng-switch-default class="mainApp">
-            <div class="linkermenu">
-
-            </div>
-            <div class="mininavbar witteText">
-                <b>
-                    <a href="#/formulier">
-                        <span ng-class="{rodeText: menuActive == 'formulier'}" class="mininavbartext1">1. FORMULIER</span>
-                        <img class="mininavbarimage1" src="style/images/mininavbar/pijl1.png">
-                    </a>
-                    <a href="#/muziek">
-                        <span ng-class="{rodeText: menuActive == 'muziek'}" class="mininavbartext2">2. MUZIEK</span>
-                        <img class="mininavbarimage2" src="style/images/mininavbar/pijl2.png">
-                    </a>
-                    <a href="#/foto">
-                        <span ng-class="{rodeText: menuActive == 'foto'}"  class="mininavbartext3">3. FOTO'S</span>
-                        <img class="mininavbarimage3" src="style/images/mininavbar/pijl3.png">
-                    </a>
-                    <a href="#/notificatie">
-                        <span ng-class="{rodeText: menuActive == 'notificatie'}"  class="mininavbartext4">4. NOTIFICATIE</span>
-                        <img class="mininavbarimage4" src="style/images/mininavbar/pijl4.png">
-                    </a>
-                    <a href="#/wishlist">
-                        <span ng-class="{rodeText: menuActive == 'wishlist'}"  class="mininavbartext5">5. WISHLIST</span>
-                        <img class="mininavbarimage5" src="style/images/mininavbar/pijl5.png">
-                    </a>
-                    <a href="#/samenstellen">
-                        <span ng-class="{rodeText: menuActive == 'samenstellen'}"  class="mininavbartext6">*</span>
-                        <img class="mininavbarimage6" src="style/images/mininavbar/blok.png">
-                    </a>
-                </b>
-            </div>
-            <div class="minicontent">
-                <div data-ng-view="Content">
+            <div class="row">
+                <div class="col-xs-2 col-md-2 col-lg-2" ></div>
+                <div class="col-xs-10 col-md-10 col-lg-10 pull-right">
+                    <div class="mininavbar witteText text-center mininavbartext pull-right">
+                            <div class="mininavbarbutton mininavbarbutton1 ">
+                                <a href="#/formulier">
+                                    <span ng-class="{rodeText: menuActive == 'formulier'}">formulier</span>
+                                </a>
+                            </div>
+                            <div class="mininavbarbutton mininavbarbutton2">
+                                <a href="#/muziek">
+                                    <span ng-class="{rodeText: menuActive == 'muziek'}">muziek</span>
+                                </a>
+                            </div>
+                            <div class="mininavbarbutton mininavbarbutton3">
+                                <a href="#/foto">
+                                    <span ng-class="{rodeText: menuActive == 'foto'}">foto</span>
+                                </a>
+                            </div>
+                            <div class="mininavbarbutton mininavbarbutton4">
+                                <a href="#/notificatie">
+                                    <span ng-class="{rodeText: menuActive == 'notificatie'}">notificatie</span>
+                                </a>
+                            </div>
+                            <div class="mininavbarbutton mininavbarbutton5">
+                                <a href="#/wishlist">
+                                    <span ng-class="{rodeText: menuActive == 'wishlist'}">wishlist</span>
+                                </a>
+                            </div>
+                            <div class="mininavbarbutton mininavbarbutton6">
+                                <a href="#/samenstellen">
+                                    <span ng-class="{rodeText: menuActive == 'samenstellen'}">*</span>
+                                </a>
+                            </div>
+                    </div>
                 </div>
             </div>
+            <div class="row ">
+                <div data-ng-view="Content"></div>
+            </div>
+
         </div>
     </div>
 </div>

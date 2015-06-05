@@ -1,8 +1,13 @@
 /*jslint node: true */
 /*globals myApp, google, drawChart, angular*/
 
-myApp.controller('MainController', function ($scope, $rootScope, $location, $cookieStore) {
+myApp.controller('MainController', function ($scope, $rootScope, $location, $cookieStore, $window) {
     "use strict";
+
+    $scope.goto = function (location) {
+        $window.location.assign('#/' + location);
+        $window.location.reload(true);
+    };
 
     $scope.pageName = function () { return $location.path(); };
 
@@ -43,17 +48,17 @@ myApp.controller('GebruikerLoginController', function ($scope, $window, DOODServ
     $scope.inEnUitloggen = function (gebruiker) {
         if ($scope.loggedIn) {
             $cookieStore.remove('sessionCookie');
-            $window.location.reload();
+            $scope.goto('login');
         } else {
             if (gebruiker.gebruikersnaam === "test" && gebruiker.wachtwoord === "test") {
                 // Sets loggedin as test for local testing.
                 $cookieStore.put('sessionCookie', gebruiker.gebruikersnaam);
-                $window.location.reload();
+                $scope.goto('overzicht');
             }
             $scope.gebruiker = DOODService.login.post(gebruiker, function () {
                 if ($scope.gebruiker.err === undefined) {
                     $cookieStore.put('sessionCookie', $scope.gebruiker.doc.gebruikersnaam);
-                    $window.location.reload();
+                    $scope.goto('overzicht');
                 } else if ($scope.gebruiker.err) {
                     $scope.error = $scope.gebruiker.err;
                 }

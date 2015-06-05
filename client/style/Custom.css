@@ -159,6 +159,12 @@ footer a:hover, a:active{
     height: 25%;
     margin: 10px;
 }
+.onderhoudplaatje {
+    width: 10%;
+    height: 10%;
+    margin: 10px;
+}
+
 .mininavbar {
     position:absolute;
     width:90%;
@@ -173,6 +179,8 @@ footer a:hover, a:active{
     right:0;
     width:2.34%;
     height:100%;
+    float: left;
+    width: 24%;
 }
 .mininavbartext6 {
     position:absolute;
@@ -246,10 +254,11 @@ footer a:hover, a:active{
     margin-top:0.6%;
 }
 
-.linkermenu {
-    position: absolute;
-    width: 10%;
-    background-color: #48cec2;
+
+.mininavbarbutton6 {
+    background-image: url("images/mininavbar/blok.png");
+    width: 3%;
+    z-index:2;
 }
 .minicontent {
     background-color: #F3F3F3;
@@ -257,6 +266,20 @@ footer a:hover, a:active{
     width: 74.7%;
     height: 90.38%;
     right:0;
+    padding-top:20px;
+    padding-right: 30px;
+    padding-left:30px;
+}
+
+.overzichtbutton {
+    font-weight:bold;
+    font-size: 1.2vw;
+    padding: 2%;
+    color: #fff;
+    background-color: #3E464F;
+    border-color: #3E464F;
+    width:20%;
+    margin: 17.5% 1% 5% 1%;
     bottom:0;
     padding: 25px;
 }
