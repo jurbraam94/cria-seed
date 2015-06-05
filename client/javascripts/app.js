@@ -8,7 +8,11 @@
  * @see https://github.com/angular/angular.js/wiki/Writing-AngularJS-Documentation
  * @see http://docs.angularjs.org/guide/concepts
  */
+<<<<<<< HEAD
 var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', 'spotify'])
+=======
+var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', 'ngDragDrop', 'ngAnimate'])
+>>>>>>> production
     .config(['$routeProvider', function ($routeProvider) {
         "use strict";
 
@@ -86,7 +90,6 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', '
         $routeProvider.otherwise({
             redirectTo: "/overzicht"
         });
-
     }])
     .run(function ($rootScope, $location, $cookieStore) {
         "use strict";
