@@ -267,11 +267,13 @@ footer a:hover, a:active{
     border: 5px;
     border-color: black;
     height: auto;
+
 }
 
 #rijLiedje {
     padding: auto;
     padding-top: 10px;
+    color: white;
 }
 
 
@@ -288,6 +290,17 @@ footer a:hover, a:active{
     outline: none;
 }
 .muziekZoeklijst img {
-    width: 15px;
+    width: 12px;
     height: auto;
     }
+
+.searchButton {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    position: relative;
+    left: -22px;
+    top: 3px;
+  /* Replace with your own image */
+}
+

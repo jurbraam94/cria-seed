@@ -1,15 +1,18 @@
 <hr>
 <div class="muziekZoeklijst">
-    <form name="contactForm" novalidate class="validatie"> <input type="text"> </form>
-        <div class=" row" id ="rijLiedje">
-         <div class=" col-lg-6">
-             Adaro - Natural Born Killer
-         </div>
-            <div class="muzieklijst col-lg-6">
-                 <button class = "link">+</button>
-            </div>
+    <form name="contactForm" novalidate class="validatie"> <input ng-model="zoekopdracht" type="text">
+    <input type="image" src="style/images/loep.png" class = "link searchButton" ng-click="test(zoekopdracht)" >
+    </form>
+    <div class=" row" id ="rijLiedje" value="{{error}}" ng-repeat="item in zoekResultaat">
+        <div class=" col-lg-6">
+            {{item.artiest}} - {{item.titel}}
         </div>
+        <div class="muzieklijst col-lg-6">
+            <button  class = "link">+</button>
+        </div>
+    </div>
 </div>
+
 
 <!-- <div class="customContainer witteText">
     <div class="row">

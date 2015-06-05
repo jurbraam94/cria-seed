@@ -202,3 +202,50 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
     init();
 });
 
+myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
+    "use strict"
+
+    $scope.muziekDb =  [
+        {artiest: "Coon", titel: "Million miles"},
+        {artiest: "Adele",titel:  "Rain"},
+        {artiest: "Diggy Dex", titel: "De vallende sterren"},
+        {artiest: "one republic", titel: "Counting stars"}
+    ];
+
+    $scope.zoekResultaat = [];
+    $scope.afspeellijst = [];
+
+    function voegLiedjeToe(titel, artiest){
+        $scope.zoekResultaat.push({artiest: artiest, titel: titel});
+    }
+
+    $scope.voegToeBijAfspeellijst = function (liedje) {
+        $scope.afspeellijst.push(liedje);
+    };
+
+    $scope.test = function(zoekopdracht) {
+        var i, log = [];
+        if (zoekopdracht !== "" ) {
+            if ($scope.zoekResultaat !== null) {
+                $scope.zoekResultaat = [];
+            }
+            Spotify.search(zoekopdracht, 'track', {limit: 20}).then(function (data) {
+                angular.forEach(data.tracks.items, function (items) {
+                    voegLiedjeToe(items.name, items.artists[0].name);
+                });
+            });
+            console.log($scope.zoekResultaat, "-------------");
+        } else {
+            $scope.error = "Vul een titel";
+        }
+
+
+
+       /* Spotify.search('Nirvana', 'artist').then(function (data) {
+            console.log(data);
+        });*/
+    };
+
+});
+
+
