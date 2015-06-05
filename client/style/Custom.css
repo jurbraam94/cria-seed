@@ -159,104 +159,73 @@ footer a:hover, a:active{
     height: 25%;
     margin: 10px;
 }
-.mininavbar {
-    position:absolute;
-    width:90%;
-    height:4.5%;
-    right:0;
-    font-size: 16px;
-    font-size: 0.9vw;
-}
-.mininavbarimage6 {
-    position:absolute;
-    z-index:2;
-    right:0;
-    width:2.34%;
-    height:100%;
-}
-.mininavbartext6 {
-    position:absolute;
-    z-index:3;
-    right:0.5%;
-    margin:0.6%;
-}
-.mininavbarimage5 {
-    position:absolute;
-    z-index:2;
-    right:-2%;
-    width:21%;
-    height:100%;
-}
-.mininavbartext5 {
-    position:absolute;
-    z-index:3;
-    right:6%;
-    margin:0.6%;
-}
-.mininavbarimage4 {
-    position:absolute;
-    z-index:3;
-    right:14%;
-    width:21%;
-    height:100%;
-}
-.mininavbartext4 {
-    position:absolute;
-    z-index:4;
-    right:20%;
-    margin:0.6%;
-}
-.mininavbarimage3 {
-    position:absolute;
-    z-index:4;
-    right:30%;
-    width:21%;
-    height:100%;
-}
-.mininavbartext3 {
-    position:absolute;
-    z-index:5;
-    right:37%;
-    margin:0.6%;
-}
-.mininavbarimage2 {
-    position:absolute;
-    z-index:5;
-    right:46%;
-    width:21%;
-    height:100%;
-}
-.mininavbartext2 {
-    position:absolute;
-    z-index:6;
-    right:53%;
-    margin:0.6%;
-}
-.mininavbarimage1 {
-    position:absolute;
-    z-index:6;
-    right: 62%;
-    width:21%;
-    height:100%;
-}
-.mininavbartext1 {
-    position:absolute;
-    z-index:7;
-    right: 70%;
-    margin-top:0.6%;
+.onderhoudplaatje {
+    width: 10%;
+    height: 10%;
+    margin: 10px;
 }
 
-.linkermenu {
-    position: absolute;
-    width: 10%;
-    background-color: #48cec2;
+.mininavbar {
+    position: relative;
+    font-size: 16px;
+    background-color:#ED5F54;
+    height:40px;
+    width:100%;
+
+}
+.mininavbarbutton {
+    position: relative;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    height:100%;
+    float: left;
+    width: 24%;
+}
+
+.mininavbartext {
+    line-height:40px;
+    font-weight: bold;
+}
+
+.mininavbarbutton1 {
+    background-image: url("images/mininavbar/pijl1.png");
+    z-index:7;
+    width:23%;
+}
+.mininavbarbutton2 {
+    background-image: url("images/mininavbar/pijl2.png");
+    margin-left:-4%;
+    z-index:6;
+}
+.mininavbarbutton3 {
+    background-image: url("images/mininavbar/pijl3.png");
+    margin-left:-4%;
+    z-index:5;
+
+}
+.mininavbarbutton4 {
+    background-image: url("images/mininavbar/pijl4.png");
+    margin-left:-4%;
+    z-index:4;
+}
+.mininavbarbutton5 {
+    background-image: url("images/mininavbar/pijl5.png");
+    margin-left:-4%;
+    width: 17.9%;
+    z-index:3;
+
+}
+.mininavbarbutton6 {
+    background-image: url("images/mininavbar/blok.png");
+    width: 3%;
+    z-index:2;
 }
 .minicontent {
     background-color: #F3F3F3;
     position:absolute;
-    width: 74.7%;
-    height: 90.38%;
+    height:100%;
     right:0;
+<<<<<<< HEAD
     bottom:0;
     padding: 25px;
 }
@@ -291,3 +260,9 @@ footer a:hover, a:active{
     width: 15px;
     height: auto;
     }
+=======
+    padding-top:20px;
+    padding-right: 30px;
+    padding-left:30px;
+}
+>>>>>>> production
