@@ -1,11 +1,9 @@
-<body ng-init="init()">
-<div class="leftmenubar">
-    <div class="boxje" ng-repeat="afbeelding in afbeeldingen " sleepbaar="" data-drag="true" >
-        <img data-ng-src="{{afbeelding.src}}" id="{{afbeelding.id}}" jqyoui-draggable="{animate:true}" />
+<div ng-controller="SamenstellenController">
+    <div class="leftmenubar">
+        <div class="boxje" ng-repeat="afbeelding in afbeeldingen " sleepbaar="" data-drag="true">
+            <img data-ng-src="{{afbeelding.src}}" id="{{afbeelding.id}}" jqyoui-draggable="{animate:true}"/>
+        </div>
     </div>
 </div>
-
-
-<div jqyoui-droppable="true"></div>
 <div id="piechart"></div>
 </body>

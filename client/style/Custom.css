@@ -1,11 +1,23 @@
 body {
-    background-color:#f0f0f0;
+    background-color:#48CEC2;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+a:link {
+    color:#FFFFFF;
+}
+
+a:visited {
+    color: #FFFFFF;
+}
+
+a:hover, a:active{
+    color: #E44A4E;
 }
 
 .navbar .nav > li > a:link {
@@ -80,6 +92,10 @@ footer a:hover, a:active{
     margin-top:50px;
 }
 
+.mainApp {
+    margin-top:-25px;
+}
+
 .customContainer {
     max-width: 600px;
     padding: 30px;
@@ -101,6 +117,10 @@ footer a:hover, a:active{
 
 .witteText {
     color:#FFFFFF;
+}
+
+.rodeText {
+    color:#E44A4E;
 }
 
 .inputMargin {
@@ -163,4 +183,106 @@ footer a:hover, a:active{
     float: right;
     width: 13px;
     height: auto;
+}
+}
+.mininavbar {
+    position:absolute;
+    width:90%;
+    height:4.5%;
+    right:0;
+    font-size: 16px;
+    font-size: 0.9vw;
+}
+.mininavbarimage6 {
+    position:absolute;
+    z-index:2;
+    right:0;
+    width:2.34%;
+    height:100%;
+}
+.mininavbartext6 {
+    position:absolute;
+    z-index:3;
+    right:0.5%;
+    margin:0.6%;
+}
+.mininavbarimage5 {
+    position:absolute;
+    z-index:2;
+    right:-2%;
+    width:21%;
+    height:100%;
+}
+.mininavbartext5 {
+    position:absolute;
+    z-index:3;
+    right:6%;
+    margin:0.6%;
+}
+.mininavbarimage4 {
+    position:absolute;
+    z-index:3;
+    right:14%;
+    width:21%;
+    height:100%;
+}
+.mininavbartext4 {
+    position:absolute;
+    z-index:4;
+    right:20%;
+    margin:0.6%;
+}
+.mininavbarimage3 {
+    position:absolute;
+    z-index:4;
+    right:30%;
+    width:21%;
+    height:100%;
+}
+.mininavbartext3 {
+    position:absolute;
+    z-index:5;
+    right:37%;
+    margin:0.6%;
+}
+.mininavbarimage2 {
+    position:absolute;
+    z-index:5;
+    right:46%;
+    width:21%;
+    height:100%;
+}
+.mininavbartext2 {
+    position:absolute;
+    z-index:6;
+    right:53%;
+    margin:0.6%;
+}
+.mininavbarimage1 {
+    position:absolute;
+    z-index:6;
+    right: 62%;
+    width:21%;
+    height:100%;
+}
+.mininavbartext1 {
+    position:absolute;
+    z-index:7;
+    right: 70%;
+    margin-top:0.6%;
+}
+
+.linkermenu {
+    position: absolute;
+    width: 10%;
+    background-color: #48cec2;
+}
+.minicontent {
+    background-color: #F3F3F3;
+    position:absolute;
+    width: 74.7%;
+    height: 90.38%;
+    right:0;
+    bottom:0;
+    padding: 25px;
 }
