@@ -203,7 +203,7 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
     drawChart();
     google.setOnLoadCallback(drawChart);
 
-    $scope.totaleTijdAanpassen = function(tijd) {
+    $scope.totaleTijdAanpassen = function (tijd) {
         totaleTijd = tijd;
         berekenTijden(getTotaleTijdEnIndexVanOverigeTijd());
         drawChart();
@@ -236,8 +236,7 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
 
     init();
 
-    window.onresize = function(){
+    window.onresize = function () {
         drawChart();
-    }
+    };
 });
-
