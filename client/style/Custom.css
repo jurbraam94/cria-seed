@@ -67,11 +67,13 @@ footer a:hover, a:active{
     flex-wrap: wrap;
     display: flex;
     /*width: 16.5%;*/ /*wordt nu met bootstrap columns geregeld*/
-    height: 41.5vw;
+    height: 41.9vw;
     background-color: #48cec2;
     justify-content: center;
     padding-left: 0.4%;
     padding-top: 0.2%;
+    padding-bottom: 0.1%;
+    margin-top: -25px;
     left: 0;
 }
 
@@ -246,7 +248,7 @@ footer a:hover, a:active{
 .tijdsduurForm {
     /*z-index: 0;*/
     position: absolute;
-    left: 15vw;
+    left: 17vw;
 }
 
 .samenstellenPagina {
