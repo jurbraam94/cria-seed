@@ -171,7 +171,7 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
         chart.setAction({
             id: id,
             text: id,
-            action: function() {
+            action: function () {
                 var index = chart.getSelection()[0].row + 1;
                 if (nieuweWaarde === 0) {
                     dataTable[index][1] = 0;
@@ -184,7 +184,7 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
     }
 
     function drawChart() {
-        var data, options, i;
+        var data, options;
 
         // data uit db laden
 
