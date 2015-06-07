@@ -1,9 +1,21 @@
-<div ng-controller="SamenstellenController" ng-init="init()">
-    <div class="leftmenubar">
-        <div class="boxje" ng-repeat="afbeelding in afbeeldingen " sleepbaar="" data-drag="true">
-            <img data-ng-src="{{afbeelding.src}}" id="{{afbeelding.id}}" jqyoui-draggable="{animate:true}"/>
+<div class="samenstellenPagina" ng-init="init()">
+    <div class="leftmenubar col-lg-2 col-md-2 col-xs-2">
+        <div class="boxje" ng-repeat="afbeelding in afbeeldingen " sleepbaar="">
+            <img data-ng-src="{{afbeelding.src}}" id="{{afbeelding.id}}" />
         </div>
     </div>
+
+    <div class="row">
+        <form name="tijdForm" novalidate class="col-lg-5 col-md-5 col-xs-5 tijdsduurForm">
+            <div class="form-group inputMargin">
+                <label class="inputLabel rodeText">Totale tijd in minuten</label>
+                <div class="input-group col-lg-2 col-md-2 col-xs-4">
+                    <input class="form-control" type="number"
+                           ng-model="totaleTijd" id="totaleTijdBox" required="" ng-change="totaleTijdAanpassen(totaleTijd)"/>
+                </div>
+            </div>
+        </form>
+
+        <div id="piechart" class="col-lg-7 col-md-7 col-xs-7"></div>
+    </div>
 </div>
-<div id="piechart"></div>
-</body>

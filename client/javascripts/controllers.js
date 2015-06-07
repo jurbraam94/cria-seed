@@ -66,7 +66,7 @@ myApp.controller('GebruikerLoginController', function ($scope, $window, DOODServ
 });
 
 /**
- * TODO: maken cirkeltje en het maken van boxen.
+ * Samenstellen controller
  * @param $scope
  * @param $routeParams
  * @param gebruikersnaamService
@@ -75,25 +75,48 @@ myApp.controller('GebruikerLoginController', function ($scope, $window, DOODServ
 myApp.controller('SamenstellenController', function ($scope, $routeParams, $location) {
     "use strict";
     var init,
-        overigeTijd = 0,
-       // totaleTijd = 60,
+        totaleTijd = 90,
         dataTable = [
             ['Segment', 'Minuten'],
             ['Muziek', 11],
             ['Stilte', 2],
             ['Berichten', 5],
-            ["Foto's", 3],
+            ["Foto's", 8],
             ["Video's", 7],
-            ['Bloemen', 6],
-            ['Spreker', 1],
-            ['Eten', 8],
-            ['Rouwstoet', 4],
-            ['Wishlist', 9],
-            ['Overige tijd', overigeTijd]
+            ['Bloemen', 3],
+            ['Spreker', 4],
+            ['Eten', 9],
+            ['Rouwstoet', 15],
+            ['Wishlist', 19],
+            ['Overige tijd', 13]
         ],
         kleuren = ['#000099', '#ef4338', '#639d41', '#ff853d', '#6be7fe', '#ffbbee', '#1e3e4a', '#92183a', '#c30a55', '#4f9d97', '#D3D3D3'],
         chart = null,
         muisOverIndex;
+
+    function getTotaleTijdEnIndexVanOverigeTijd() {
+        var i, overigeTijdIndex, echteTotaleTijd = 0;
+        for (i = 1; i < dataTable.length; i += 1) {
+            if (dataTable[i][0] !== "Overige tijd") {
+                echteTotaleTijd += dataTable[i][1];
+            } else {
+                overigeTijdIndex = i;
+            }
+        }
+
+        return [echteTotaleTijd, overigeTijdIndex];
+    }
+
+    // deze functie moet aangeroepen worden in drawChart en in $scope.totaleTijdAanpassen
+    // op deze manier: berekenTijden(getTotaleTijdEnIndexVanOverigeTijd());
+    function berekenTijden(tijden) {
+        dataTable[tijden[1]][1] = totaleTijd - tijden[0];
+
+        if (totaleTijd < tijden[0]) {
+            totaleTijd = tijden[0];
+        }
+        $scope.totaleTijd = totaleTijd;
+    }
 
     $scope.boxObjecten = {
         src: "path/muziek.png",
@@ -117,7 +140,6 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
 
     function mouseDownOnSlice(e) {
         chart.setSelection([{ row: muisOverIndex, column: null }]);
-        //console.log("Geselecteerde slice: ", chart.getSelection()[0].row);
     }
 
     function redrawNaHerordenen(oudeIndex, nieuweIndex) {
@@ -139,7 +161,6 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
 
     function verplaatsSlice(e) {
         var oudeIndex = chart.getSelection()[0].row + 1, nieuweIndex = muisOverIndex + 1;
-        //console.log("muisOverIndex: ", muisOverIndex);
 
         //check index != gelijk aan oude
         if (nieuweIndex !== oudeIndex) {
@@ -148,7 +169,7 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
     }
 
     function drawChart() {
-        var data = google.visualization.arrayToDataTable(dataTable),
+        var data,
             options = {
                 chartArea: { left: '5%', right: '0', width: '100%', height: '100%' },
                 legend: { position: 'right', alignment: 'center' },
@@ -156,6 +177,11 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
                 backgroundColor: { fill: '#f0f0f0' }
             },
             chartParentNode = document.getElementById('piechart').parentNode;
+
+        // data
+        //$scope.totaleTijd = totaleTijd; //staat nu in getTotaleTijdEnIndexVanOverigeTijd
+        berekenTijden(getTotaleTijdEnIndexVanOverigeTijd());
+        data = google.visualization.arrayToDataTable(dataTable);
 
         if (chart !== null) {
             document.getElementById('piechart').remove();
@@ -175,7 +201,13 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
     }
 
     drawChart();
-    google.setOnLoadCallback(drawChart());
+    google.setOnLoadCallback(drawChart);
+
+    $scope.totaleTijdAanpassen = function (tijd) {
+        totaleTijd = tijd;
+        berekenTijden(getTotaleTijdEnIndexVanOverigeTijd());
+        drawChart();
+    };
 
     $scope.drag = function () {
         console.log("nice je hebt erop geklikt");
@@ -203,8 +235,8 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
     };
 
     init();
-});
 
+<<<<<<< HEAD
 myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
     "use strict"
 
@@ -251,3 +283,9 @@ myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
 });
 
 
+=======
+    window.onresize = function () {
+        drawChart();
+    };
+});
+>>>>>>> production

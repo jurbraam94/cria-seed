@@ -1,5 +1,5 @@
 body {
-    background-color:#48CEC2;
+    background-color: #f0f0f0;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -66,11 +66,12 @@ footer a:hover, a:active{
     flex-direction: row;
     flex-wrap: wrap;
     display: flex;
-    width: 16.5%;
-    height: 85%;
+    /*width: 16.5%;*/ /*wordt nu met bootstrap columns geregeld*/
+    height: 41.5vw;
     background-color: #48cec2;
     justify-content: center;
     padding-left: 0.4%;
+    padding-top: 0.2%;
     left: 0;
 }
 
@@ -147,11 +148,12 @@ footer a:hover, a:active{
 
 #piechart {
     position: absolute;
-    float: right;
-    margin-top: -1%;
-    margin-left: 35%;
-    width: 50%;
-    height: 90%;
+    /*float: right;*/
+    /*margin-top: -1%;*/
+    /*margin-left: 35%;*/
+    width: 60vw;
+    left: 30vw;
+    height: 40vw;
 }
 
 .wiezijnwijplaatje {
@@ -238,6 +240,7 @@ footer a:hover, a:active{
     background-color: #3E464F;
     border-color: #3E464F;
     width:20%;
+<<<<<<< HEAD
     margin: 15% 1% 5% 1%;
 }
 
@@ -280,4 +283,21 @@ footer a:hover, a:active{
     position: relative;
     left: -22px;
     top: 3px;
+=======
+    margin: 17.5% 1% 5% 1%;
+}
+
+.tijdsduurForm {
+    /*z-index: 0;*/
+    position: absolute;
+    left: 15vw;
+}
+
+.samenstellenPagina {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    flex-shrink: 1;
+>>>>>>> production
 }

@@ -1,6 +1,5 @@
 /*global angular, gebruikerLoginCtrl */
 
-
 /**
  *
  * Writing AngularJS Documentation
@@ -9,9 +8,13 @@
  * @see http://docs.angularjs.org/guide/concepts
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', 'spotify'])
 =======
 var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', 'ngDragDrop', 'ngAnimate'])
+>>>>>>> production
+=======
+var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', 'ngAnimate'])
 >>>>>>> production
     .config(['$routeProvider', function ($routeProvider) {
         "use strict";
