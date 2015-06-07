@@ -64,11 +64,12 @@ footer a:hover, a:active{
     flex-direction: row;
     flex-wrap: wrap;
     display: flex;
-    width: 16.5%;
-    height: 85%;
+    /*width: 16.5%;*/ /*wordt nu met bootstrap columns geregeld*/
+    height: 41.5vw;
     background-color: #48cec2;
     justify-content: center;
     padding-left: 0.4%;
+    padding-top: 0.2%;
     left: 0;
 }
 
@@ -137,15 +138,30 @@ footer a:hover, a:active{
 
 #piechart {
     position: absolute;
-    float: right;
-    margin-top: -1%;
-    margin-left: 35%;
-    width: 50%;
-    height: 90%;
+    /*float: right;*/
+    /*margin-top: -1%;*/
+    /*margin-left: 35%;*/
+    width: 60vw;
+    left: 30vw;
+    height: 40vw;
 }
 
 .wiezijnwijplaatje {
     width: 25%;
     height: 25%;
     margin: 10px;
+}
+
+.tijdsduurForm {
+    /*z-index: 0;*/
+    position: absolute;
+    left: 15vw;
+}
+
+.samenstellenPagina {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    flex-shrink: 1;
 }
