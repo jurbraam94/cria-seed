@@ -9,12 +9,16 @@
  */
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', 'spotify'])
 =======
 var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', 'ngDragDrop', 'ngAnimate'])
 >>>>>>> production
 =======
 var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', 'ngAnimate'])
+>>>>>>> production
+=======
+var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', 'ngAnimate', 'ngDraggable'])
 >>>>>>> production
     .config(['$routeProvider', function ($routeProvider) {
         "use strict";

@@ -78,19 +78,9 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
         totaleTijd = 90,
         dataTable = [
             ['Segment', 'Minuten'],
-            ['Muziek', 11],
-            ['Stilte', 2],
-            ['Berichten', 5],
-            ["Foto's", 8],
-            ["Video's", 7],
-            ['Bloemen', 3],
-            ['Spreker', 4],
-            ['Eten', 9],
-            ['Rouwstoet', 15],
-            ['Wishlist', 19],
-            ['Overige tijd', 13]
+            ['Overige tijd', 1]
         ],
-        kleuren = ['#000099', '#ef4338', '#639d41', '#ff853d', '#6be7fe', '#ffbbee', '#1e3e4a', '#92183a', '#c30a55', '#4f9d97', '#D3D3D3'],
+        kleuren = ['#000099'],
         chart = null,
         muisOverIndex;
 
@@ -107,32 +97,16 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
         return [echteTotaleTijd, overigeTijdIndex];
     }
 
-    // deze functie moet aangeroepen worden in drawChart en in $scope.totaleTijdAanpassen
+    // deze functie aanroepen om de totale tijd en overige tijd te regelen
     // op deze manier: berekenTijden(getTotaleTijdEnIndexVanOverigeTijd());
     function berekenTijden(tijden) {
-        dataTable[tijden[1]][1] = totaleTijd - tijden[0];
-
         if (totaleTijd < tijden[0]) {
             totaleTijd = tijden[0];
         }
+
+        dataTable[tijden[1]][1] = totaleTijd - tijden[0];
         $scope.totaleTijd = totaleTijd;
     }
-
-    $scope.boxObjecten = {
-        src: "path/muziek.png",
-        object: "muziek",
-        percentage: 1
-    };
-
-    $scope.segmenten = [];
-
-    $scope.addSegment = function (segment) {
-        if (angular.isObject(segment)) {
-            $scope.segmenten[$scope.segmenten.length + 1] = segment;
-        } else {
-            console.log("Je hebt geen object toegevoegd");
-        }
-    };
 
     function getSliceIndex(e) {
         muisOverIndex = e.row;
@@ -142,18 +116,22 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
         chart.setSelection([{ row: muisOverIndex, column: null }]);
     }
 
-    function redrawNaHerordenen(oudeIndex, nieuweIndex) {
-        var temp, temp2;
-        //swap indexen in array
-        //$scope.segmenten
-        temp = dataTable[oudeIndex];
-        dataTable[oudeIndex] = dataTable[nieuweIndex];
-        dataTable[nieuweIndex] = temp;
+    function swapArrayIndexen(array, oudeIndex, nieuweIndex) {
+        var temp;
 
-        //kleuren meenemen
-        temp2 = kleuren[oudeIndex - 1];
-        kleuren[oudeIndex - 1] = kleuren[nieuweIndex - 1];
-        kleuren[nieuweIndex - 1] = temp2;
+        temp = array[oudeIndex];
+        array[oudeIndex] = array[nieuweIndex];
+        array[nieuweIndex] = temp;
+
+        return array;
+    }
+
+    function redrawNaHerordenen(oudeIndex, nieuweIndex) {
+        //swap indexen in dataTable
+        dataTable = swapArrayIndexen(dataTable, oudeIndex, nieuweIndex);
+
+        //kleuren ook swappen
+        kleuren = swapArrayIndexen(kleuren, oudeIndex - 1, nieuweIndex - 1);
 
         //chart opnieuw tekenen
         drawChart();
@@ -162,32 +140,70 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
     function verplaatsSlice(e) {
         var oudeIndex = chart.getSelection()[0].row + 1, nieuweIndex = muisOverIndex + 1;
 
-        //check index != gelijk aan oude
+        //check index != gelijk aan oude index
         if (nieuweIndex !== oudeIndex) {
             redrawNaHerordenen(oudeIndex, nieuweIndex);
         }
     }
 
+    // bron: https://github.com/fatlinesofcode/ngDraggable
+    // wordt aangeroepen als er een segment op de piechart word gedropt:
+    $scope.onDropComplete = function (data, event) {
+        var i, standaardTijd = 10;
+        for (i = 0; i < $scope.afbeeldingen.length; i += 1) {
+            if (data === $scope.afbeeldingen[i].id) {
+                dataTable.push([data, standaardTijd]);
+            }
+        }
+        redrawNaHerordenen(dataTable.length - 1, dataTable.length - 2);
+    };
+
+    function genereerKleurcodes() {
+        var i;
+        for (i = 0; i < (dataTable.length - 1); i += 1) {
+            if (kleuren[i] === null || kleuren[i] === undefined) {
+                kleuren[i] = '#' + Math.random().toString(16).slice(2, 8);
+            }
+        }
+    }
+
+    function chartActies(id, nieuweWaarde) {
+        chart.setAction({
+            id: id,
+            text: id,
+            action: function () {
+                var index = chart.getSelection()[0].row + 1;
+                if (nieuweWaarde === 0) {
+                    dataTable[index][1] = 0;
+                } else {
+                    dataTable[index][1] += nieuweWaarde;
+                }
+                drawChart();
+            }
+        });
+    }
+
     function drawChart() {
-        var data,
-            options = {
-                chartArea: { left: '5%', right: '0', width: '100%', height: '100%' },
-                legend: { position: 'right', alignment: 'center' },
-                colors: kleuren,
-                backgroundColor: { fill: '#f0f0f0' }
-            },
-            chartParentNode = document.getElementById('piechart').parentNode;
+        var data, options;
+
+        // data uit db laden
+
+        genereerKleurcodes();
+        options = {
+            chartArea: { left: '5%', right: '0', width: '100%', height: '100%' },
+            legend: { position: 'right', alignment: 'center' },
+            colors: kleuren,
+            tooltip: { trigger: 'selection' },
+            backgroundColor: { fill: '#48CEC2' }
+        };
 
         // data
-        //$scope.totaleTijd = totaleTijd; //staat nu in getTotaleTijdEnIndexVanOverigeTijd
         berekenTijden(getTotaleTijdEnIndexVanOverigeTijd());
         data = google.visualization.arrayToDataTable(dataTable);
 
         if (chart !== null) {
-            document.getElementById('piechart').remove();
-            chart = document.createElement('div');
-            chart.id = "piechart";
-            chartParentNode.appendChild(chart);
+            chart = document.getElementById("piechart");
+            chart.removeChild(chart.firstChild);
         }
 
         chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -197,41 +213,41 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
         google.visualization.events.addListener(chart, 'onmouseover', getSliceIndex);
         google.visualization.events.addListener(chart, 'onmouseup', verplaatsSlice);
 
+        chartActies("verhoog", 1);
+        chartActies("verlaag", -1);
+        chartActies("verwijder", 0);
+
         chart.draw(data, options);
     }
 
-    drawChart();
+    // Dit moet van google. Waarom? Goeie vraag
     google.setOnLoadCallback(drawChart);
 
     $scope.totaleTijdAanpassen = function (tijd) {
         totaleTijd = tijd;
-        berekenTijden(getTotaleTijdEnIndexVanOverigeTijd());
         drawChart();
-    };
-
-    $scope.drag = function () {
-        console.log("nice je hebt erop geklikt");
     };
 
     $scope.getAllImages = function () {
         var imgArray = [],
             padNaam = "style/images/icons/";
-        imgArray[0] = { src: padNaam + "muziek.png", id: "segment1" };
-        imgArray[1] = { src: padNaam + "STILTE.png", id: "segment2" };
-        imgArray[2] = { src: padNaam + "TEKST.png", id: "segment3" };
-        imgArray[3] = { src: padNaam + "CAMERA.png", id: "segment4" };
-        imgArray[4] = { src: padNaam + "VIDEO.png", id: "segment5" };
-        imgArray[5] = { src: padNaam + "BLOEMEN.png", id: "segment6" };
-        imgArray[6] = { src: padNaam + "SPREKER.png", id: "segment7" };
-        imgArray[7] = { src: padNaam + "ETEN.png", id: "segment8" };
-        imgArray[8] = { src: padNaam + "WAGEN.png", id: "segment9" };
-        imgArray[9] = { src: padNaam + "GEENINVULLING.png", id: "segment10" };
+        imgArray[0] = { src: padNaam + "muziek.png", id: "Muziek" };
+        imgArray[1] = { src: padNaam + "STILTE.png", id: "Stilte" };
+        imgArray[2] = { src: padNaam + "TEKST.png", id: "Berichten" };
+        imgArray[3] = { src: padNaam + "CAMERA.png", id: "Foto's" };
+        imgArray[4] = { src: padNaam + "VIDEO.png", id: "Video's" };
+        imgArray[5] = { src: padNaam + "BLOEMEN.png", id: "Bloemen" };
+        imgArray[6] = { src: padNaam + "SPREKER.png", id: "Spreker" };
+        imgArray[7] = { src: padNaam + "ETEN.png", id: "Eten" };
+        imgArray[8] = { src: padNaam + "WAGEN.png", id: "Rouwstoet" };
+        imgArray[9] = { src: padNaam + "GEENINVULLING.png", id: "Wishlist" };
 
         $scope.afbeeldingen = imgArray;
     };
 
     init = function () {
         $scope.getAllImages();
+        drawChart();
     };
 
     init();
