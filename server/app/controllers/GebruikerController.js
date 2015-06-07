@@ -81,9 +81,8 @@ exports.sendMail = function (req, res) {
 };
 
 exports.login = function (req, res) {
-    var conditions = {gebruikersnaam: req.body.gebruikersnaam}, fields = {},
+    var conditions = { "gebruikersnaam" : { $regex : new RegExp(req.body.gebruikersnaam, "i") } }, fields = {},
         retObj;
-
     Gebruiker.findOne(conditions, fields, function (err, gebruiker) {
         if (err) {
             retObj = {

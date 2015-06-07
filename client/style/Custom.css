@@ -8,25 +8,27 @@ body {
     user-select: none;
 }
 
+a:link {
+    color:#FFFFFF;
+}
+
+a:visited {
+    color: #FFFFFF;
+}
+
+a:hover, a:active{
+    color: #E44A4E;
+}
+
 .navbar .nav > li > a:link {
-     color:#FFFFFF;
- }
+    color:#FFFFFF;
+}
 
 .navbar .nav > li > a:visited {
     color: #FFFFFF;
 }
 
 .navbar .nav > li > a:hover, a:active{
-    color: #E44A4E;
-}
-
-.nav.navbar-nav > .active > a:link {
-    color: black;
-}
-.nav.navbar-nav > .active > a:visited {
-    color: black;
-}
-.nav.navbar-nav > .active > a:hover, a:active{
     color: #E44A4E;
 }
 
@@ -78,7 +80,11 @@ footer a:hover, a:active{
 }
 
 .Content {
-    margin-top:50px;
+    margin-top:75px;
+}
+
+.mainApp {
+    margin-top:-25px;
 }
 
 .customContainer {
@@ -102,6 +108,10 @@ footer a:hover, a:active{
 
 .witteText {
     color:#FFFFFF;
+}
+
+.rodeText {
+    color:#E44A4E;
 }
 
 .inputMargin {
@@ -150,6 +160,87 @@ footer a:hover, a:active{
     width: 25%;
     height: 25%;
     margin: 10px;
+}
+.onderhoudplaatje {
+    width: 10%;
+    height: 10%;
+    margin: 10px;
+}
+
+.mininavbar {
+    position: relative;
+    font-size: 16px;
+    background-color:#ED5F54;
+    height:40px;
+    width:100%;
+
+}
+.mininavbarbutton {
+    position: relative;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    height:100%;
+    float: left;
+    width: 24%;
+}
+
+.mininavbartext {
+    line-height:40px;
+    font-weight: bold;
+}
+
+.mininavbarbutton1 {
+    background-image: url("images/mininavbar/pijl1.png");
+    z-index:7;
+    width:23%;
+}
+.mininavbarbutton2 {
+    background-image: url("images/mininavbar/pijl2.png");
+    margin-left:-4%;
+    z-index:6;
+}
+.mininavbarbutton3 {
+    background-image: url("images/mininavbar/pijl3.png");
+    margin-left:-4%;
+    z-index:5;
+
+}
+.mininavbarbutton4 {
+    background-image: url("images/mininavbar/pijl4.png");
+    margin-left:-4%;
+    z-index:4;
+}
+.mininavbarbutton5 {
+    background-image: url("images/mininavbar/pijl5.png");
+    margin-left:-4%;
+    width: 17.9%;
+    z-index:3;
+
+}
+.mininavbarbutton6 {
+    background-image: url("images/mininavbar/blok.png");
+    width: 3%;
+    z-index:2;
+}
+.minicontent {
+    background-color: #F3F3F3;
+    position:absolute;
+    height:100%;
+    right:0;
+    padding-top:20px;
+    padding-right: 30px;
+    padding-left:30px;
+}
+
+.overzichtbutton {
+    font-weight:bold;
+    font-size: 1.2vw;
+    padding: 2%;
+    color: #fff;
+    background-color: #3E464F;
+    border-color: #3E464F;
+    width:20%;
+    margin: 17.5% 1% 5% 1%;
 }
 
 .tijdsduurForm {

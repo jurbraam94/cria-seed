@@ -8,7 +8,7 @@
  * @see https://github.com/angular/angular.js/wiki/Writing-AngularJS-Documentation
  * @see http://docs.angularjs.org/guide/concepts
  */
-var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies'])
+var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', 'ngDragDrop', 'ngAnimate'])
     .config(['$routeProvider', function ($routeProvider) {
         "use strict";
 
@@ -69,11 +69,22 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies'])
             security: true
         });
 
-        // When no valid route is provided
-        $routeProvider.otherwise({
-            redirectTo: "/login"
+        // Get Wishlist
+        $routeProvider.when('/foto', {
+            templateUrl: 'partials/foto.html',
+            security: true
         });
 
+        // Get Wishlist
+        $routeProvider.when('/overzicht', {
+            templateUrl: 'partials/Overzicht.html',
+            security: true
+        });
+
+        // When no valid route is provided
+        $routeProvider.otherwise({
+            redirectTo: "/overzicht"
+        });
     }])
     .run(function ($rootScope, $location, $cookieStore) {
         "use strict";

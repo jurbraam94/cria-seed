@@ -1,4 +1,3 @@
-<hr>
 <div class="customContainer">
     <div ng-show="!loggedIn" class="alert alert-info" role="alert">
         <p><b>Welkom op de DOOD. app.</b></p>
@@ -16,7 +15,7 @@
         <span ng-show="!loggedIn">U gaat inloggen met <b>DigiD</b>.</span>
         <span ng-show="loggedIn">Welkom, u bent ingelogd als <b>{{gebruikersNaam}}</b>.</span>
     </div>
-    <button ng-show="loggedIn" type="button" ng-click="inEnUitloggen()"
+    <button ng-show="loggedIn" type="submit" ng-click="inEnUitloggen()"
             class="center-block btn btn-primary btn-lg">
         LOG UIT
     </button>
@@ -48,7 +47,7 @@
 
         <br>
 
-        <button ng-disabled="loginForm.$invalid" type="button" ng-click="inEnUitloggen(gebruiker)"
+        <button ng-disabled="loginForm.$invalid" type="submit" ng-click="inEnUitloggen(gebruiker)"
                 class="center-block btn btn-primary btn-lg">
             LOG IN
         </button>

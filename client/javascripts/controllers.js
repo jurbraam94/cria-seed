@@ -1,8 +1,15 @@
 /*jslint node: true */
 /*globals myApp, google, drawChart, angular*/
 
-myApp.controller('MainController', function ($scope, $rootScope, $location, $cookieStore) {
+myApp.controller('MainController', function ($scope, $rootScope, $location, $cookieStore, $window) {
     "use strict";
+
+    $scope.goto = function (location) {
+        $window.location.assign('#/' + location);
+        $window.location.reload(true);
+    };
+
+    $scope.pageName = function () { return $location.path(); };
 
     if ($cookieStore.get('sessionCookie')) {
         $scope.loggedIn = true;
@@ -12,9 +19,8 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, $coo
     }
 
     $rootScope.$on('$routeChangeSuccess', function (e, curr, prev) {
-        $scope.menuActive = $location.path().substring(1);
+        $scope.menuActive = $scope.pageName().substring(1);
     });
-
 });
 
 myApp.controller('ContactController', function ($scope, DOODService) {
@@ -40,17 +46,17 @@ myApp.controller('GebruikerLoginController', function ($scope, $window, DOODServ
     $scope.inEnUitloggen = function (gebruiker) {
         if ($scope.loggedIn) {
             $cookieStore.remove('sessionCookie');
-            $window.location.reload();
+            $scope.goto('login');
         } else {
             if (gebruiker.gebruikersnaam === "test" && gebruiker.wachtwoord === "test") {
                 // Sets loggedin as test for local testing.
                 $cookieStore.put('sessionCookie', gebruiker.gebruikersnaam);
-                $window.location.reload();
+                $scope.goto('overzicht');
             }
             $scope.gebruiker = DOODService.login.post(gebruiker, function () {
                 if ($scope.gebruiker.err === undefined) {
                     $cookieStore.put('sessionCookie', $scope.gebruiker.doc.gebruikersnaam);
-                    $window.location.reload();
+                    $scope.goto('overzicht');
                 } else if ($scope.gebruiker.err) {
                     $scope.error = $scope.gebruiker.err;
                 }
@@ -168,7 +174,7 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
                 chartArea: { left: '5%', right: '0', width: '100%', height: '100%' },
                 legend: { position: 'right', alignment: 'center' },
                 colors: kleuren,
-                backgroundColor: { fill: '#48cec2' }
+                backgroundColor: { fill: '#f0f0f0' }
             },
             chartParentNode = document.getElementById('piechart').parentNode;
 
