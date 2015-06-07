@@ -194,7 +194,7 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
             legend: { position: 'right', alignment: 'center' },
             colors: kleuren,
             tooltip: { trigger: 'selection' },
-            backgroundColor: { fill: '#f0f0f0' }
+            backgroundColor: { fill: '#48CEC2' }
         };
 
         // data
