@@ -73,7 +73,6 @@ footer a:hover, a:active{
     padding-left: 0.4%;
     padding-top: 0.2%;
     padding-bottom: 0.1%;
-    margin-top: -25px;
     left: 0;
 }
 
@@ -257,4 +256,5 @@ footer a:hover, a:active{
     flex-wrap: wrap;
     flex-grow: 1;
     flex-shrink: 1;
+    margin-top: -25px;
 }

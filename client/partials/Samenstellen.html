@@ -1,7 +1,7 @@
 <div class="samenstellenPagina" ng-init="init()">
     <div class="leftmenubar col-lg-2 col-md-2 col-xs-2">
-        <div class="boxje" ng-repeat="afbeelding in afbeeldingen " sleepbaar="">
-            <img data-ng-src="{{afbeelding.src}}" id="{{afbeelding.id}}" />
+        <div class="boxje" ng-repeat="afbeelding in afbeeldingen">
+            <img data-ng-src="{{afbeelding.src}}" id="{{afbeelding.id}}" ng-drag="true" ng-drag-data="afbeelding.id" />
         </div>
     </div>
 
@@ -16,6 +16,6 @@
             </div>
         </form>
 
-        <div id="piechart" class="col-lg-7 col-md-7 col-xs-7"></div>
+        <div id="piechart" class="col-lg-7 col-md-7 col-xs-7" ng-drop="true" ng-drop-success="onDropComplete($data, $event)"></div>
     </div>
 </div>
