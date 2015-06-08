@@ -26,7 +26,7 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, DOOD
     //Only for use on views, if you want to check if a user is logged in in a controller please call the doodservice gebruikerssessie get function.
     $scope.initGebruiker = function () {
         var sessie = DOODService.gebruikerSessie.get(function () {
-            if (sessie.doc.gebruikersnaam !== null) {
+            if (sessie.doc.gebruikersnaam !== undefined) {
                 $scope.loggedIn = true;
                 $scope.gebruikersNaam = sessie.doc.gebruikersnaam;
             } else {
@@ -62,7 +62,7 @@ myApp.controller('GebruikerLoginController', function ($scope, DOODService, $rou
     // LOGIN / LOGUIT
     $scope.inEnUitloggen = function (gebruiker) {
         var sessie = DOODService.gebruikerSessie.get(function () {
-            if (sessie.doc.gebruikersnaam !== null) {
+            if (sessie.doc.gebruikersnaam !== undefined) {
                 DOODService.gebruikerLoguit.post(function () {
                     $scope.goto('login');
                 });
@@ -137,7 +137,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
     function getTijdsduurUitDb() {
         var gebruiker;
         gebruiker = DOODService.gebruikerSessie.get(function () {
-            if (gebruiker.doc.gebruikersnaam !== null) {
+            if (gebruiker.doc.gebruikersnaam !== undefined) {
                 $scope.uitvaartSamenstellen = DOODService.uitvaartSamenstellen.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
                     if ($scope.uitvaartSamenstellen.err === null) {
                         totaleTijd = $scope.uitvaartSamenstellen.doc.tijdsduur;
