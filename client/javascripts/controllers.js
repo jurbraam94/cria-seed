@@ -8,11 +8,11 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, DOOD
         var isChromium = window.chrome,
             vendorName = window.navigator.vendor;
         if (isChromium !== null && isChromium !== undefined && vendorName === "Google Inc.") {
-            console.log("Chrome")
+            console.log("Chrome");
             $location.path(location);
             $route.reload();
         } else {
-            console.log("Internet")
+            console.log("Internet");
             $window.location.assign('#/' + location);
             $window.location.reload(true);
         }
