@@ -1,3 +1,4 @@
+/*jslint node: true */
 /*global angular, gebruikerLoginCtrl */
 
 /**
@@ -94,9 +95,11 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', '
                         var isChromium = window.chrome,
                             vendorName = window.navigator.vendor;
                         if (isChromium !== null && isChromium !== undefined && vendorName === "Google Inc.") {
+                            console.log('Chrome');
                             $location.path('login');
                             $route.reload();
                         } else {
+                            console.log('internet');
                             $window.location.assign('#/' + 'login');
                             $window.location.reload(true);
                         }
