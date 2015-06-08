@@ -339,11 +339,12 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         $scope.getAllImages();
         // data uit db laden
         getTijdsduurUitDb();
-        console.log("totale tijd: ", totaleTijd);
         if (totaleTijd === undefined) {
             totaleTijd = 90;
         }
         getDataTableUitDb();
+        berekenTijden(getTotaleTijdEnIndexVanOverigeTijd());
+        console.log("totale tijd: ", totaleTijd);
         drawChart();
     };
 
