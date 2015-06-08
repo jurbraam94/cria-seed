@@ -69,7 +69,10 @@
      */
     app.use(bodyParser.json());                                         // Configure body-parser with JSON input
     app.use(bodyParser.urlencoded({extended: true}));                   // Notice because option default will flip in next major; http://goo.gl/bXjyyz
-    app.use(session({secret: 'dUne834h3X4mn8DsLL7w'}));
+    app.use(session({secret: 'dUne834h3X4mn8DsLL7w',
+                    resave: true,
+                    saveUninitialized: true
+                    }));
 
     /**
      * Middleware to enable logging
