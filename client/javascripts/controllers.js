@@ -83,17 +83,63 @@ myApp.controller('GebruikerLoginController', function ($scope, DOODService) {
  * @param gebruikersnaamService
  * @constructor
  */
-myApp.controller('SamenstellenController', function ($scope, $routeParams, $location) {
+myApp.controller('SamenstellenController', function ($scope, DOODService, $routeParams, $location) {
     "use strict";
-    var init,
-        totaleTijd = 90,
-        dataTable = [
-            ['Segment', 'Minuten'],
-            ['Overige tijd', 1]
-        ],
-        kleuren = ['#000099'],
+    var totaleTijd = 90,
+        dataTable,
+        kleuren = ['#afafaf'],
         chart = null,
         muisOverIndex;
+
+    function stuurDataNaarDb(data) {
+        var poep;
+        $scope.segmenten = DOODService.uitvaartSegment.post(data, function () {
+            if ($scope.segmenten.err === undefined) {
+                poep = $scope.segmenten; // TODO: ff return ipv van var als t werkt
+                console.log("segmenten: ", poep);
+                return poep;
+            }
+            $scope.error = $scope.segmenten.err;
+        });
+    }
+
+    function stuurDataTableNaarDb() {
+        var i, objecten = [];
+        for (i = 1; i < dataTable.length - 1; i += 1) {
+            console.log("datatable: ", dataTable[i]);
+            objecten.push({
+                gebruikersnaam: $scope.gebruikersNaam,
+                object: dataTable[i][0],
+                percentage: dataTable[i][1],
+                volgnummer: i
+            });
+            stuurDataNaarDb(objecten[i]);
+        }
+    }
+
+    function getTijdsduurUitDb() {
+        var poep;
+        $scope.uitvaartSamenstellen = DOODService.uitvaartSamenstellen.get($scope.gebruikersNaam, function () {
+            if ($scope.uitvaartSamenstellen.err === undefined) {
+                poep = $scope.uitvaartSamenstellen.doc.tijdsduur; // TODO: ff return ipv van var als t werkt
+                console.log("tijdsduur uit uitvaartSamenstellen: ", poep);
+                return poep;
+            }
+            $scope.error = $scope.uitvaartSamenstellen.err;
+        });
+    }
+
+    function getDataTableUitDb() {
+        var poep;
+        $scope.segmenten = DOODService.uitvaartSegment.query($scope.gebruikersNaam, function () {
+            if ($scope.segmenten.err === undefined) {
+                poep = $scope.segmenten.doc; // TODO: ff return ipv van var als t werkt
+                console.log("segmenten: ", poep);
+                return poep;
+            }
+            $scope.error = $scope.segmenten.err;
+        });
+    }
 
     function getTotaleTijdEnIndexVanOverigeTijd() {
         var i, overigeTijdIndex, echteTotaleTijd = 0;
@@ -124,7 +170,7 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
     }
 
     function mouseDownOnSlice(e) {
-        chart.setSelection([{row: muisOverIndex, column: null}]);
+        chart.setSelection([{ row: muisOverIndex, column: null }]);
     }
 
     function swapArrayIndexen(array, oudeIndex, nieuweIndex) {
@@ -186,6 +232,8 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
                 var index = chart.getSelection()[0].row + 1;
                 if (nieuweWaarde === 0) {
                     dataTable[index][1] = 0;
+                    dataTable.splice(index, 1);
+                    kleuren.splice(index, 1);
                 } else {
                     dataTable[index][1] += nieuweWaarde;
                 }
@@ -197,15 +245,17 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
     function drawChart() {
         var data, options;
 
-        // data uit db laden
+        //send datatable naar db
+        stuurDataTableNaarDb();
 
         genereerKleurcodes();
         options = {
-            chartArea: {left: '5%', right: '0', width: '100%', height: '100%'},
-            legend: {position: 'right', alignment: 'center'},
+            chartArea: { left: '5%', right: '0', width: '100%', height: '100%' },
+            legend: { position: 'right', alignment: 'center' },
+            pieSliceText: "value",
             colors: kleuren,
-            tooltip: {trigger: 'selection'},
-            backgroundColor: {fill: '#48CEC2'}
+            tooltip: { trigger: 'selection' },
+            backgroundColor: { fill: '#48CEC2' }
         };
 
         // data
@@ -242,25 +292,43 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
     $scope.getAllImages = function () {
         var imgArray = [],
             padNaam = "style/images/icons/";
-        imgArray[0] = {src: padNaam + "muziek.png", id: "Muziek"};
-        imgArray[1] = {src: padNaam + "STILTE.png", id: "Stilte"};
-        imgArray[2] = {src: padNaam + "TEKST.png", id: "Berichten"};
-        imgArray[3] = {src: padNaam + "CAMERA.png", id: "Foto's"};
-        imgArray[4] = {src: padNaam + "VIDEO.png", id: "Video's"};
-        imgArray[5] = {src: padNaam + "BLOEMEN.png", id: "Bloemen"};
-        imgArray[6] = {src: padNaam + "SPREKER.png", id: "Spreker"};
-        imgArray[7] = {src: padNaam + "ETEN.png", id: "Eten"};
-        imgArray[8] = {src: padNaam + "WAGEN.png", id: "Rouwstoet"};
-        imgArray[9] = {src: padNaam + "GEENINVULLING.png", id: "Wishlist"};
+        imgArray[0] = { src: padNaam + "muziek.png", id: "Muziek" };
+        imgArray[1] = { src: padNaam + "STILTE.png", id: "Stilte" };
+        imgArray[2] = { src: padNaam + "TEKST.png", id: "Berichten" };
+        imgArray[3] = { src: padNaam + "CAMERA.png", id: "Foto's" };
+        imgArray[4] = { src: padNaam + "VIDEO.png", id: "Video's" };
+        imgArray[5] = { src: padNaam + "BLOEMEN.png", id: "Bloemen" };
+        imgArray[6] = { src: padNaam + "SPREKER.png", id: "Spreker" };
+        imgArray[7] = { src: padNaam + "ETEN.png", id: "Eten" };
+        imgArray[8] = { src: padNaam + "WAGEN.png", id: "Rouwstoet" };
+        imgArray[9] = { src: padNaam + "GEENINVULLING.png", id: "Wishlist" };
 
         $scope.afbeeldingen = imgArray;
     };
 
-    init = function () {
+    function initieeleDataTable() {
+        var i, segmenten = getDataTableUitDb();
+        console.log("segmenten: ", segmenten);
+        dataTable = [['Segment', 'Minuten']];
+        for (i = 1; i < dataTable.length - 1; i += 1) {
+            dataTable.push([segmenten[i].object, segmenten[i].percentage]);
+        }
+        dataTable.push(['Overige tijd', 1]);
+        console.log("dataTable: ", dataTable);
+    }
+
+    $scope.init = function () {
         $scope.getAllImages();
+        // data uit db laden
+        totaleTijd = getTijdsduurUitDb();
+        if (totaleTijd === undefined) {
+            totaleTijd = 90;
+        }
+        initieeleDataTable();
         drawChart();
     };
 
+<<<<<<< HEAD
     init();
 
 <<<<<<< HEAD
@@ -311,6 +379,8 @@ myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
 
 
 =======
+=======
+>>>>>>> production
     window.onresize = function () {
         drawChart();
     };
