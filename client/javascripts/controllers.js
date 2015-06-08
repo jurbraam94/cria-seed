@@ -116,21 +116,20 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
     //}
 
     function stuurDataTableNaarDb() {
-        var i, objecten = [], gebruiker;
+        var i, gebruiker;
 
         gebruiker = DOODService.gebruikerSessie.get(function () {
             if ($scope.isEmpty(gebruiker.err)) {
                 for (i = 1; i < dataTable.length - 1; i += 1) {
                     console.log("datatable: ", dataTable[i]);
-                    objecten.push({
+                    //verwijderen = { objecten[i].gebruikersnaam, objecten[i].volgnummer };
+                    //verwijderSegmentUitDb(verwijderen);
+                    stuurDataNaarDb({
                         gebruikersnaam: gebruiker.doc.gebruikersNaam,
                         object: dataTable[i][0],
                         percentage: dataTable[i][1],
                         volgnummer: i
                     });
-                    //verwijderen = { objecten[i].gebruikersnaam, objecten[i].volgnummer };
-                    //verwijderSegmentUitDb(verwijderen);
-                    stuurDataNaarDb(objecten[i]);
                 }
             }
         });
@@ -140,7 +139,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         var poep, gebruiker;
         gebruiker = DOODService.gebruikerSessie.get(function () {
             if ($scope.isEmpty(gebruiker.err)) {
-                $scope.uitvaartSamenstellen = DOODService.uitvaartSamenstellen.get(gebruiker.doc.gebruikersNaam, function () {
+                $scope.uitvaartSamenstellen = DOODService.uitvaartSamenstellen.get({gebruikersnaam: gebruiker.doc.gebruikersNaam}, function () {
                     if ($scope.uitvaartSamenstellen.err === undefined) {
                         poep = $scope.uitvaartSamenstellen.doc.tijdsduur; // TODO: ff return ipv van var als t werkt
                         console.log("tijdsduur uit uitvaartSamenstellen: ", poep);
@@ -156,7 +155,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         var poep, gebruiker;
         gebruiker = DOODService.gebruikerSessie.get(function () {
             if ($scope.isEmpty(gebruiker.err)) {
-                $scope.segmenten = DOODService.uitvaartSegment.query(gebruiker.doc.gebruikersNaam, function () {
+                $scope.segmenten = DOODService.uitvaartSegment.query({gebruikersnaam: gebruiker.doc.gebruikersNaam}, function () {
                     if ($scope.segmenten.err === undefined) {
                         poep = $scope.segmenten.doc; // TODO: ff return ipv van var als t werkt
                         console.log("segmenten: ", poep);
