@@ -12,8 +12,8 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, DOOD
     $scope.pageName = function () { return $location.path(); };
 
     $scope.userSession = function () {
-        var loggedIn = DOODService.gebruikerSessie.get({}, function () {
-            return loggedIn;
+        var session = DOODService.gebruikerSessie.get({}, function () {
+            return session;
         });
     };
 
@@ -48,16 +48,15 @@ myApp.controller('ContactController', function ($scope, DOODService) {
     };
 });
 
-myApp.controller('GebruikerLoginController', function ($scope, $window, DOODService) {
+myApp.controller('GebruikerLoginController', function ($scope, DOODService) {
     "use strict";
 
     // LOGIN / LOGUIT
     $scope.inEnUitloggen = function (gebruiker) {
-        if ($scope.userSession) {
+        if ($scope.userSession()) {
             DOODService.gebruikerLoguit.post(function () {
                 $scope.goto('login');
             });
-
         } else {
             $scope.gebruiker = DOODService.gebruikerLogin.post(gebruiker, function () {
                 if ($scope.gebruiker.err === undefined) {

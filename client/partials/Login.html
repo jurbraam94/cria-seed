@@ -1,5 +1,5 @@
 <div class="customContainer">
-    <div ng-show="userSession()" class="alert alert-info" role="alert">
+    <div ng-show="!loggedIn" class="alert alert-info" role="alert">
         <p><b>Welkom op de DOOD. app.</b></p>
 
         <p>Dit is een initiatief van Yarden om u de mogelijkheid te geven uw eigen uitvaart samen te stellen.
@@ -12,16 +12,16 @@
 
     <div class="alert alert-warning" role="alert"><img class="Tekentje"
                                                        src="style/images/I.jpg">
-        <span ng-show="!userSession()">U gaat inloggen met <b>DigiD</b>.</span>
-        <span ng-show="userSession()">Welkom, u bent ingelogd als <b>{{gebruikersNaam}}</b>.</span>
+        <span ng-show="!loggedIn">U gaat inloggen met <b>DigiD</b>.</span>
+        <span ng-show="loggedIn">Welkom, u bent ingelogd als <b>{{gebruikersNaam}}</b>.</span>
     </div>
-    <button ng-show="userSession()" type="submit" ng-click="inEnUitloggen()"
+    <button ng-show="loggedIn" type="submit" ng-click="inEnUitloggen()"
             class="center-block btn btn-primary btn-lg">
         LOG UIT
     </button>
 
 
-    <form ng-show="!userSession()" name="loginForm" novalidate class="validatie">
+    <form ng-show="!loggedIn" name="loginForm" novalidate class="validatie">
 
         <div class="inputBlok">
             <div class="form-group form-inline">
