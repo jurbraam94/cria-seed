@@ -77,20 +77,13 @@ myApp.controller('GebruikerLoginController', function ($scope, DOODService, $rou
 myApp.controller('SamenstellenController', function ($scope, DOODService, $routeParams, $location) {
     "use strict";
     var totaleTijd,
-        dataTable = [
-            ['Segment', 'Minuten'],
-            ['Overige tijd', 1]
-        ],
+        dataTable,
+        segmenten,
         kleuren = ['#afafaf'],
         chart = null,
         muisOverIndex;
 
-    //= [
-    //    ['Segment', 'Minuten'],
-    //    ['Overige tijd', 1]
-    //]
-
-    function initieeleDataTable(segmenten) {
+    function initieeleDataTable() {
         var segment;
         console.log("segmenten: ", segmenten);
         dataTable = [['Segment', 'Minuten']];
@@ -162,7 +155,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                 $scope.segmenten = DOODService.uitvaartSegment.query({gebruiker: gebruiker.doc.gebruikersnaam}, function () {
                     if ($scope.uitvaartSamenstellen.err === null) {
                         console.log("$scope.segmenten.doc: ", $scope.segmenten.doc);
-                        initieeleDataTable($scope.segmenten.doc);
+                        segmenten = $scope.segmenten.doc;
                     }
                     $scope.error = $scope.segmenten.err;
                 });
@@ -339,11 +332,11 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         $scope.getAllImages();
         // data uit db laden
         getTijdsduurUitDb();
-        berekenTijden(getTotaleTijdEnIndexVanOverigeTijd());
         if (totaleTijd === undefined) {
             totaleTijd = 90;
         }
         getDataTableUitDb();
+        initieeleDataTable();
         console.log("totale tijd: ", totaleTijd);
         drawChart();
     };
