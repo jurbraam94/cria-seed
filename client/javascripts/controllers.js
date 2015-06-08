@@ -13,10 +13,17 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, DOOD
         return $location.path();
     };
 
+    $scope.isEmpty = function (object) {
+        if (Object.keys(object).length === 0) {
+            return true;
+        }
+        return false;
+    };
+
     //Only for use on views, if you want to check if a user is logged in in a controller please call the doodservice gebruikerssessie get function.
     $scope.initGebruiker = function () {
         var session = DOODService.gebruikerSessie.get(function () {
-            if (session.err === null) {
+            if ($scope.isEmpty(session.err)) {
                 $scope.loggedIn = true;
                 $scope.gebruikersNaam = session.doc.gebruikersnaam;
             } else {
@@ -52,7 +59,7 @@ myApp.controller('GebruikerLoginController', function ($scope, DOODService) {
     // LOGIN / LOGUIT
     $scope.inEnUitloggen = function (gebruiker) {
         var sessie = DOODService.gebruikerSessie.get(function () {
-            if (sessie.err === null) {
+            if ($scope.isEmpty(sessie.err)) {
                 DOODService.gebruikerLoguit.post(function () {
                     $scope.goto('login');
                 });
