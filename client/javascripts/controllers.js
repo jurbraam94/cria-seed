@@ -102,10 +102,10 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         });
     }
 
-    function stuurDataNaarDb(data) {
+    function stuurDataNaarDb(data, callback) {
         $scope.segmenten = DOODService.uitvaartSegment.post(data, function () {
             if ($scope.segmenten.err === null) {
-                return $scope.segmenten;
+                callback();
             }
             $scope.error = $scope.segmenten.err;
         });
@@ -124,12 +124,18 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                             object: dataTable[i][0],
                             percentage: dataTable[i][1],
                             volgnummer: i
+                        },
+                            function () {
+                                console.log("gebruikersnaam: ", gebruiker.doc.gebruikersnaam);
+                                console.log("object: ", dataTable[i][0]);
+                                console.log("percentage: ", dataTable[i][1]);
+                                console.log("volgnummer: ", i);
                         })
                     );
-                    console.log("gebruikersnaam: ", gebruiker.doc.gebruikersnaam);
-                    console.log("object: ", dataTable[i][0]);
-                    console.log("percentage: ", dataTable[i][1]);
-                    console.log("volgnummer: ", i);
+                    console.log("gebruikersnaam 2: ", gebruiker.doc.gebruikersnaam);
+                    console.log("object 2: ", dataTable[i][0]);
+                    console.log("percentage 2: ", dataTable[i][1]);
+                    console.log("volgnummer 2: ", i);
                 }
             }
         });
