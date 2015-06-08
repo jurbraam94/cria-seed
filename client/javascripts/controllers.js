@@ -135,22 +135,19 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
     //}
 
     function getTijdsduurUitDb() {
-        var returnWaarde, gebruiker;
+        var gebruiker;
         gebruiker = DOODService.gebruikerSessie.get(function () {
             if (gebruiker.doc.gebruikersnaam !== null) {
                 $scope.uitvaartSamenstellen = DOODService.uitvaartSamenstellen.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
                     if ($scope.uitvaartSamenstellen.err === null) {
-                        returnWaarde = $scope.uitvaartSamenstellen.doc.tijdsduur;
+                        totaleTijd = $scope.uitvaartSamenstellen.doc.tijdsduur;
                         console.log("uitvaartSamenstellen: ", $scope.uitvaartSamenstellen);
-                        console.log("returnWaarde 1: ", returnWaarde);
-                        return returnWaarde;
+                        console.log("totaleTijd 1: ", totaleTijd);
                     }
                     $scope.error = $scope.uitvaartSamenstellen.err;
                 });
             }
         });
-        console.log("$scope.uitvaartSamenstellen: ", $scope.uitvaartSamenstellen);
-        return $scope.uitvaartSamenstellen.doc.tijdsduur;
     }
 
     //function getDataTableUitDb() {
@@ -349,7 +346,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
     $scope.init = function () {
         $scope.getAllImages();
         // data uit db laden
-        totaleTijd = getTijdsduurUitDb();
+        getTijdsduurUitDb();
         console.log("totale tijd: ", totaleTijd);
         if (totaleTijd === undefined) {
             totaleTijd = 90;
