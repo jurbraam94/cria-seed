@@ -103,17 +103,17 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         });
     }
 
-    function verwijderSegmentUitDb(data) {
-        var poep;
-        $scope.segmenten = DOODService.uitvaartSegment.delete(data, function () {
-            if ($scope.segmenten.err === undefined) {
-                poep = $scope.segmenten; // TODO: ff return ipv van var als t werkt
-                console.log("segmenten: ", poep);
-                return poep;
-            }
-            $scope.error = $scope.segmenten.err;
-        });
-    }
+    //function verwijderSegmentUitDb(data) {
+    //    var poep;
+    //    $scope.segmenten = DOODService.uitvaartSegment.delete(data, function () {
+    //        if ($scope.segmenten.err === undefined) {
+    //            poep = $scope.segmenten; // TODO: ff return ipv van var als t werkt
+    //            console.log("segmenten: ", poep);
+    //            return poep;
+    //        }
+    //        $scope.error = $scope.segmenten.err;
+    //    });
+    //}
 
     function stuurDataTableNaarDb() {
         var i, objecten = [], gebruiker;
@@ -132,8 +132,6 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                     //verwijderSegmentUitDb(verwijderen);
                     stuurDataNaarDb(objecten[i]);
                 }
-            } else {
-                //display error
             }
         });
     }
@@ -150,8 +148,6 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                     }
                     $scope.error = $scope.uitvaartSamenstellen.err;
                 });
-            } else {
-                //display error
             }
         });
     }
@@ -168,8 +164,6 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                     }
                     $scope.error = $scope.segmenten.err;
                 });
-            } else {
-                //display error
             }
         });
     }
