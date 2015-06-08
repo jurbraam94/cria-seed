@@ -5,7 +5,7 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, DOOD
     "use strict";
 
     $scope.goto = function (location) {
-        $location.path(location);
+        $location.url('/' + location);
         $route.reload();
     };
 
