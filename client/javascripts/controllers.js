@@ -96,7 +96,10 @@ myApp.controller('GebruikerLoginController', function ($scope, DOODService, $rou
 myApp.controller('SamenstellenController', function ($scope, DOODService, $routeParams, $location) {
     "use strict";
     var totaleTijd,
-        dataTable,
+        dataTable = [
+            ['Segment', 'Minuten'],
+            ['Overige tijd', 1]
+        ],
         kleuren = ['#afafaf'],
         chart = null,
         muisOverIndex;
@@ -360,6 +363,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         $scope.getAllImages();
         // data uit db laden
         totaleTijd = getTijdsduurUitDb();
+        console.log("totale tijd: ", totaleTijd);
         if (totaleTijd === undefined) {
             totaleTijd = 90;
         }
