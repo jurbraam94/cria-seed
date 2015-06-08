@@ -5,18 +5,8 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, DOOD
     "use strict";
 
     $scope.goto = function (location) {
-        var isChromium = window.chrome,
-            vendorName = window.navigator.vendor;
-        if (isChromium !== null && isChromium !== undefined && vendorName === "Google Inc.") {
-            console.log("Chrome");
-            $location.path(location);
-            $route.reload();
-        } else {
-            console.log("Internet");
-            $window.location.assign('#/' + location);
-            $window.location.reload(true);
-        }
-
+        $location.url('/' + location);
+        $route.reload();
     };
 
     $scope.pageName = function () {
@@ -43,7 +33,6 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, DOOD
 myApp.controller('ContactController', function ($scope, DOODService) {
     "use strict";
     $scope.contact = function (contactGegevens) {
-        console.log(contactGegevens);
         $scope.mail = DOODService.contact.post(contactGegevens, function () {
             if ($scope.mail.err) {
                 $scope.success = false;
@@ -64,7 +53,7 @@ myApp.controller('GebruikerLoginController', function ($scope, DOODService, $rou
         var sessie = DOODService.gebruikerSessie.get(function () {
             if (sessie.doc.gebruikersnaam !== undefined) {
                 DOODService.gebruikerLoguit.post(function () {
-                    $scope.goto('login');
+                    $scope.goto('overzicht');
                 });
             } else {
                 $scope.gebruiker = DOODService.gebruikerLogin.post(gebruiker, function () {

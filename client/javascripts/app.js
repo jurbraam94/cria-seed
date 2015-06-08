@@ -86,23 +86,13 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', '
             redirectTo: "/overzicht"
         });
     }])
-    .run(function ($rootScope, $location, DOODService, $window, $route) {
+    .run(function ($rootScope, $location, DOODService) {
         "use strict";
         $rootScope.$on("$routeChangeStart", function (event, next) {
             if (next.security) {
                 var sessie = DOODService.gebruikerSessie.get(function () {
                     if (sessie.doc.gebruikersnaam === undefined) {
-                        var isChromium = window.chrome,
-                            vendorName = window.navigator.vendor;
-                        if (isChromium !== null && isChromium !== undefined && vendorName === "Google Inc.") {
-                            console.log('Chrome');
-                            $location.path('login');
-                            $route.reload();
-                        } else {
-                            console.log('internet');
-                            $window.location.assign('#/' + 'login');
-                            $window.location.reload(true);
-                        }
+                        $location.path('login');
                     }
                 });
             }
