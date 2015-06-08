@@ -98,9 +98,8 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                 poep = $scope.segmenten; // TODO: ff return ipv van var als t werkt
                 console.log("segmenten: ", poep);
                 return poep;
-            } else if ($scope.segmenten.err) {
-                $scope.error = $scope.segmenten.err;
             }
+            $scope.error = $scope.segmenten.err;
         });
     }
 
@@ -125,9 +124,8 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                 poep = $scope.uitvaartSamenstellen.doc.tijdsduur; // TODO: ff return ipv van var als t werkt
                 console.log("tijdsduur uit uitvaartSamenstellen: ", poep);
                 return poep;
-            } else if ($scope.uitvaartSamenstellen.err) {
-                $scope.error = $scope.uitvaartSamenstellen.err;
             }
+            $scope.error = $scope.uitvaartSamenstellen.err;
         });
     }
 
@@ -138,9 +136,8 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                 poep = $scope.segmenten.doc; // TODO: ff return ipv van var als t werkt
                 console.log("segmenten: ", poep);
                 return poep;
-            } else if ($scope.segmenten.err) {
-                $scope.error = $scope.segmenten.err;
             }
+            $scope.error = $scope.segmenten.err;
         });
     }
 
@@ -323,7 +320,8 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
     $scope.init = function () {
         $scope.getAllImages();
         // data uit db laden
-        if (totaleTijd = getTijdsduurUitDb() === undefined) {
+        totaleTijd = getTijdsduurUitDb();
+        if (totaleTijd === undefined) {
             totaleTijd = 90;
         }
         initieeleDataTable();
