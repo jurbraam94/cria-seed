@@ -145,11 +145,11 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         var returnWaarde, gebruiker;
         gebruiker = DOODService.gebruikerSessie.get(function () {
             if ($scope.isEmpty(gebruiker.err)) {
-                $scope.uitvaartSamenstellen = DOODService.uitvaartSamenstellen.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
-                    if ($scope.isEmpty($scope.uitvaartSamenstellen.err)) {
-                        returnWaarde = $scope.uitvaartSamenstellen.doc.gebruikersnaam;
+                var uitvaartSamenstellen = DOODService.uitvaartSamenstellen.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
+                    if ($scope.isEmpty(uitvaartSamenstellen.err)) {
+                        returnWaarde = uitvaartSamenstellen.doc.tijdsduur;
                     }
-                    $scope.error = $scope.uitvaartSamenstellen.err;
+                    $scope.error = uitvaartSamenstellen.err;
                 });
             }
         });
