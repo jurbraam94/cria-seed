@@ -160,7 +160,7 @@ exports.loguit = function (req, res) {
             filename: __filename
         },
         doc: {}, // only the first document, not an array when using "findOne"
-        err: "Er is geen gebruiker"
+        err: "Er is geen gebruiker ingelogd of de sessie is al verlopen."
     };
     return res.send(retObj);
 };
