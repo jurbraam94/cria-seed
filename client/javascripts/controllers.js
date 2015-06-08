@@ -340,7 +340,6 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             totaleTijd = 90;
         }
         getDataTableUitDb();
-        console.log("dataTable: ", dataTable);
         drawChart();
     };
 
