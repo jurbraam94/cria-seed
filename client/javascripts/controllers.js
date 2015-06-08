@@ -90,6 +90,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         for (segment in segmenten.doc) {
             if (segmenten.doc.hasOwnProperty(segment)) { //&& segment.doc.hasOwnProperty("object") && segment.doc.hasOwnProperty("percentage")
                 dataTable.push([segment.object, segment.percentage]);
+                console.log("segment: ", segment);
             }
         }
         dataTable.push(['Overige tijd', 1]);
@@ -150,21 +151,15 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
     function getDataTableUitDb() {
         var gebruiker;
         gebruiker = DOODService.gebruikerSessie.get(function () {
-            console.log("gebruiker 1: ", gebruiker);
             if (gebruiker.doc.gebruikersnaam !== undefined) {
-                console.log("gebruiker 2: ", gebruiker);
                 var segmenten = DOODService.uitvaartSegment.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
-                    console.log("segmenten 1: ", segmenten);
                     if (segmenten.err === null) {
-                        console.log("segmenten 2: ", segmenten);
                         initieeleDataTable(segmenten);
                     }
                     $scope.error = segmenten.err;
                 });
             }
-            console.log("dataTable 1: ", dataTable);
         });
-        console.log("dataTable 2: ", dataTable);
     }
 
     function getTotaleTijdEnIndexVanOverigeTijd() {
