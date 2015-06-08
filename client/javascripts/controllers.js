@@ -151,8 +151,8 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                         console.log("uitvaartSamenstellen: ", uitvaartSamenstellen);
                         console.log("returnWaarde 1: ", returnWaarde);
                     }
-                        $scope.error = uitvaartSamenstellen.err;
-                    });
+                    $scope.error = uitvaartSamenstellen.err;
+                });
             }
         });
         console.log("returnWaarde 2: ", returnWaarde);
