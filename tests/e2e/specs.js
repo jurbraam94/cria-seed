@@ -1,11 +1,9 @@
 // Load configuration
-var env = process.env.NODE_ENV || 'development';
-var config = require('../../server/config/config.js')[env],
+var env = process.env.NODE_ENV || 'development',
+    config = require('../../server/config/config.js')[env],
     localConfig = require('./../config-test.json');
 
 console.log('>>>>>', env, '<<<<<');
-
-
 
 //describe('Vaste pagina opze0t', function(){
 //    beforeEach(function () {
