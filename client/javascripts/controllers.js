@@ -99,17 +99,17 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         chart = null,
         muisOverIndex;
 
-    function stuurDataNaarDb(data) {
-        var poep;
-        $scope.segmenten = DOODService.uitvaartSegment.post(data, function () {
-            if ($scope.segmenten.err === undefined) {
-                poep = $scope.segmenten; // TODO: ff return ipv van var als t werkt
-                console.log("segmenten: ", poep);
-                return poep;
-            }
-            $scope.error = $scope.segmenten.err;
-        });
-    }
+    //function stuurDataNaarDb(data) {
+    //    var poep;
+    //    $scope.segmenten = DOODService.uitvaartSegment.post(data, function () {
+    //        if ($scope.segmenten.err === undefined) {
+    //            poep = $scope.segmenten; // TODO: ff return ipv van var als t werkt
+    //            console.log("segmenten: ", poep);
+    //            return poep;
+    //        }
+    //        $scope.error = $scope.segmenten.err;
+    //    });
+    //}
 
     //function verwijderSegmentUitDb(data) {
     //    var poep;
@@ -123,25 +123,25 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
     //    });
     //}
 
-    function stuurDataTableNaarDb() {
-        var i, gebruiker;
-
-        gebruiker = DOODService.gebruikerSessie.get(function () {
-            if ($scope.isEmpty(gebruiker.err)) {
-                for (i = 1; i < dataTable.length - 1; i += 1) {
-                    console.log("datatable: ", dataTable[i]);
-                    //verwijderen = { objecten[i].gebruikersnaam, objecten[i].volgnummer };
-                    //verwijderSegmentUitDb(verwijderen);
-                    stuurDataNaarDb({
-                        gebruikersnaam: gebruiker.doc.gebruikersnaam,
-                        object: dataTable[i][0],
-                        percentage: dataTable[i][1],
-                        volgnummer: i
-                    });
-                }
-            }
-        });
-    }
+    //function stuurDataTableNaarDb() {
+    //    var i, gebruiker;
+    //
+    //    gebruiker = DOODService.gebruikerSessie.get(function () {
+    //        if ($scope.isEmpty(gebruiker.err)) {
+    //            for (i = 1; i < dataTable.length - 1; i += 1) {
+    //                console.log("datatable: ", dataTable[i]);
+    //                //verwijderen = { objecten[i].gebruikersnaam, objecten[i].volgnummer };
+    //                //verwijderSegmentUitDb(verwijderen);
+    //                stuurDataNaarDb({
+    //                    gebruikersnaam: gebruiker.doc.gebruikersnaam,
+    //                    object: dataTable[i][0],
+    //                    percentage: dataTable[i][1],
+    //                    volgnummer: i
+    //                });
+    //            }
+    //        }
+    //    });
+    //}
 
     function getTijdsduurUitDb() {
         var poep, gebruiker;
@@ -159,21 +159,21 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         });
     }
 
-    function getDataTableUitDb() {
-        var poep, gebruiker;
-        gebruiker = DOODService.gebruikerSessie.get(function () {
-            if ($scope.isEmpty(gebruiker.err)) {
-                $scope.segmenten = DOODService.uitvaartSegment.query({gebruiker: gebruiker.doc.gebruikersnaam}, function () {
-                    if ($scope.segmenten.err === undefined) {
-                        poep = $scope.segmenten.doc; // TODO: ff return ipv van var als t werkt
-                        console.log("segmenten: ", poep);
-                        return poep;
-                    }
-                    $scope.error = $scope.segmenten.err;
-                });
-            }
-        });
-    }
+    //function getDataTableUitDb() {
+    //    var poep, gebruiker;
+    //    gebruiker = DOODService.gebruikerSessie.get(function () {
+    //        if ($scope.isEmpty(gebruiker.err)) {
+    //            $scope.segmenten = DOODService.uitvaartSegment.query({gebruiker: gebruiker.doc.gebruikersnaam}, function () {
+    //                if ($scope.segmenten.err === undefined) {
+    //                    poep = $scope.segmenten.doc; // TODO: ff return ipv van var als t werkt
+    //                    console.log("segmenten: ", poep);
+    //                    return poep;
+    //                }
+    //                $scope.error = $scope.segmenten.err;
+    //            });
+    //        }
+    //    });
+    //}
 
     function getTotaleTijdEnIndexVanOverigeTijd() {
         var i, overigeTijdIndex, echteTotaleTijd = 0;
@@ -280,7 +280,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         var data, options;
 
         //send datatable naar db
-        stuurDataTableNaarDb();
+        //stuurDataTableNaarDb();
 
         genereerKleurcodes();
         options = {
@@ -340,23 +340,19 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         $scope.afbeeldingen = imgArray;
     };
 
-    function initieeleDataTable() {
-        var segmenten = getDataTableUitDb(); //segment
-        console.log("segmenten: ", segmenten);
-        dataTable = [['Segment', 'Minuten']];
-
-        //for (segment in segmenten) {
-        //    if (segmenten.hasOwnProperty(segment) && segment.hasOwnProperty("object") && segment.hasOwnProperty("percentage")) {
-        //        dataTable.push([segment.object, segment.percentage]);
-        //    }
-        //}
-
-        //for (i = 1; i < dataTable.length - 1; i += 1) {
-        //    dataTable.push([segmenten[i].object, segmenten[i].percentage]);
-        //}
-        dataTable.push(['Overige tijd', 1]);
-        console.log("dataTable: ", dataTable);
-    }
+    //function initieeleDataTable() {
+    //    var segment, segmenten = getDataTableUitDb();
+    //    console.log("segmenten: ", segmenten);
+    //    dataTable = [['Segment', 'Minuten']];
+    //
+    //    for (segment in segmenten) {
+    //        if (segmenten.hasOwnProperty(segment) && segment.hasOwnProperty("object") && segment.hasOwnProperty("percentage")) {
+    //            dataTable.push([segment.object, segment.percentage]);
+    //        }
+    //    }
+    //    dataTable.push(['Overige tijd', 1]);
+    //    console.log("dataTable: ", dataTable);
+    //}
 
     $scope.init = function () {
         $scope.getAllImages();
@@ -365,7 +361,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         if (totaleTijd === undefined) {
             totaleTijd = 90;
         }
-        initieeleDataTable();
+        //initieeleDataTable();
         drawChart();
     };
 
