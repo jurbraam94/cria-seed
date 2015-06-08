@@ -9,6 +9,7 @@
      */
     var fs = require('fs'),                             // Used to read files from the filesystem (__dirname)
         express = require('express'),                   // Fast, unopinionated, minimalist web framework for Node.js
+        session = require('express-session'),
         bodyParser = require("body-parser"),            // This does not handle multipart bodies, due to their complex and typically large nature. For multipart bodies, you may be interested in the following modules:
         env,
         config,
@@ -68,6 +69,7 @@
      */
     app.use(bodyParser.json());                                         // Configure body-parser with JSON input
     app.use(bodyParser.urlencoded({extended: true}));                   // Notice because option default will flip in next major; http://goo.gl/bXjyyz
+    app.use(session({secret: 'dUne834h3X4mn8DsLL7w'}));
 
     /**
      * Middleware to enable logging

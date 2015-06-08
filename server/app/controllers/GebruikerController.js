@@ -17,7 +17,8 @@ var mongoose = require('mongoose'),
                 refreshToken: "1/4ZVwpqvPdfllwN4od8BnkHqlbilkzUGorCeQuz1xc4A"
             }
         }
-    });
+    }),
+    session = require('session');
 
 var hashPassword = function (password, salt, callback) {
     // We use pbkdf2 to hash and iterate 10k times by default
