@@ -99,17 +99,17 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         chart = null,
         muisOverIndex;
 
-    function stuurDataNaarDb(data) {
-        var poep;
-        $scope.segmenten = DOODService.uitvaartSegment.post(data, function () {
-            if ($scope.segmenten.err === undefined) {
-                poep = $scope.segmenten; // TODO: ff return ipv van var als t werkt
-                console.log("segmenten: ", poep);
-                return poep;
-            }
-            $scope.error = $scope.segmenten.err;
-        });
-    }
+    //function stuurDataNaarDb(data) {
+    //    var poep;
+    //    $scope.segmenten = DOODService.uitvaartSegment.post(data, function () {
+    //        if ($scope.segmenten.err === undefined) {
+    //            poep = $scope.segmenten; // TODO: ff return ipv van var als t werkt
+    //            console.log("segmenten: ", poep);
+    //            return poep;
+    //        }
+    //        $scope.error = $scope.segmenten.err;
+    //    });
+    //}
 
     //function verwijderSegmentUitDb(data) {
     //    var poep;
