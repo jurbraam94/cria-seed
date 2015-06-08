@@ -333,7 +333,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
     };
 
     function initieeleDataTable() {
-        var segment, segmenten = getDataTableUitDb();
+        var segmenten = getDataTableUitDb(); //segment
         console.log("segmenten: ", segmenten);
         dataTable = [['Segment', 'Minuten']];
 
