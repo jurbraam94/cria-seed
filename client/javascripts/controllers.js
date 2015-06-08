@@ -1,12 +1,20 @@
 /*jslint node: true */
-/*globals myApp, google, drawChart, angular*/
+/*globals myApp, google, drawChart, angular, window*/
 
-myApp.controller('MainController', function ($scope, $rootScope, $location, DOODService, $route) {
+myApp.controller('MainController', function ($scope, $rootScope, $location, DOODService, $route, $window) {
     "use strict";
 
     $scope.goto = function (location) {
-        $location.path(location);
-        $route.reload();
+        var isChromium = window.chrome,
+            vendorName = window.navigator.vendor;
+        if (isChromium !== null && isChromium !== undefined && vendorName === "Google Inc.") {
+            $location.path(location);
+            $route.reload();
+        } else {
+            $window.location.assign('#/' + location);
+            $window.location.reload(true);
+        }
+
     };
 
     $scope.pageName = function () {
@@ -61,7 +69,7 @@ myApp.controller('GebruikerLoginController', function ($scope, DOODService, $rou
         var sessie = DOODService.gebruikerSessie.get(function () {
             if ($scope.isEmpty(sessie.err)) {
                 DOODService.gebruikerLoguit.post(function () {
-                    $route.reload();
+                    $scope.goto('login');
                 });
             } else {
                 $scope.gebruiker = DOODService.gebruikerLogin.post(gebruiker, function () {
