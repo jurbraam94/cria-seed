@@ -71,7 +71,7 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
         });
     });
 
-    describe('GET SESSIE Gebruiker', function () {
+    /*describe('GET SESSIE Gebruiker', function () {
         it('Should GET SESSIE /gebruiker/sessie', function (done) {
             request
                 .get('/gebruiker/sessie')
@@ -111,7 +111,7 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
                     done();
                 });
         });
-    });
+    });*/
 
     describe('CREATE gebruiker', function () {
         it('Should POST /gebruiker', function (done) {
