@@ -5,7 +5,7 @@ var env = process.env.NODE_ENV || 'development',
 
 console.log('>>>>>', env, '<<<<<');
 
-`/*
+/*
 describe('Vaste pagina opzet', function () {
     beforeEach(function () {
         browser.get('http://' + localConfig.host + ':' + config.port);
