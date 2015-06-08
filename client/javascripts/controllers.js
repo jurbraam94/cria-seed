@@ -361,6 +361,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         $scope.getAllImages();
         // data uit db laden
         totaleTijd = getTijdsduurUitDb();
+        console.log("totale tijd: ", totaleTijd);
         if (totaleTijd === undefined) {
             totaleTijd = 90;
         }
