@@ -3,7 +3,6 @@
 
 myApp.controller('MainController', function ($scope, $rootScope, $location, DOODService, $window) {
     "use strict";
-    var initGebruiker;
 
     $scope.goto = function (location) {
         $window.location.assign('#/' + location);
