@@ -53,7 +53,7 @@ myApp.controller('ContactController', function ($scope, DOODService) {
     };
 });
 
-myApp.controller('GebruikerLoginController', function ($scope, DOODService) {
+myApp.controller('GebruikerLoginController', function ($scope, DOODService, $route) {
     "use strict";
 
     // LOGIN / LOGUIT
@@ -61,7 +61,7 @@ myApp.controller('GebruikerLoginController', function ($scope, DOODService) {
         var sessie = DOODService.gebruikerSessie.get(function () {
             if ($scope.isEmpty(sessie.err)) {
                 DOODService.gebruikerLoguit.post(function () {
-                    $scope.goto('login');
+                    $route.reload();
                 });
             } else {
                 $scope.gebruiker = DOODService.gebruikerLogin.post(gebruiker, function () {
