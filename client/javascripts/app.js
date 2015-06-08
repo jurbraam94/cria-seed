@@ -105,13 +105,7 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', '
             if (next.security) {
                 var sessie = DOODService.gebruikerSessie.get(function () {
                     if (sessie.doc.gebruikersnaam === undefined) {
-                        var isChromium = window.chrome,
-                            vendorName = window.navigator.vendor;
-                        if (isChromium !== null && isChromium !== undefined && vendorName === "Google Inc.") {
-                            $location.path('login');
-                        } else {
-                            $window.location.assign('#/' + 'login');
-                        }
+                        $location.path('login');
                     }
                 });
             }
