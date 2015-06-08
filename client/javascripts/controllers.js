@@ -9,34 +9,20 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, DOOD
         $window.location.reload(true);
     };
 
-    $scope.pageName = function () { return $location.path(); };
-
-    $scope.userLoggedIn = function () {
-        var session = DOODService.gebruikerSessie.get({}, function () {
-            if (session.err === null) {
-                return true;
-            }
-            return false;
-        });
-    };
-
-    $scope.userName = function () {
-        var gebruiker = DOODService.gebruikerSessie.get({}, function () {
-            if (gebruiker.err === null) {
-                return gebruiker.doc.gebruikersnaam;
-            }
-            return gebruiker.err;
-        });
+    $scope.pageName = function () {
+        return $location.path();
     };
 
     //Only for use on views, if you want to check if a user is logged in in a controller please call the doodservice gebruikerssessie get function.
     $scope.initGebruiker = function () {
-        if ($scope.userLoggedIn()) {
-            $scope.loggedIn = true;
-            $scope.gebruikersNaam = $scope.userName();
-        } else {
-            $scope.loggedIn = false;
-        }
+        var session = DOODService.gebruikerSessie.get({}, function () {
+            if (session.err === null && session.doc.gebruikersnaam) {
+                $scope.loggedIn = true;
+                $scope.gebruikersNaam = session.doc.gebruikersnaam;
+            } else {
+                $scope.loggedIn = false;
+            }
+        });
     };
 
     $rootScope.$on('$routeChangeSuccess', function (e, curr, prev) {
@@ -65,19 +51,21 @@ myApp.controller('GebruikerLoginController', function ($scope, DOODService) {
 
     // LOGIN / LOGUIT
     $scope.inEnUitloggen = function (gebruiker) {
-        if ($scope.userSession()) {
-            DOODService.gebruikerLoguit.post(function () {
-                $scope.goto('login');
-            });
-        } else {
-            $scope.gebruiker = DOODService.gebruikerLogin.post(gebruiker, function () {
-                if ($scope.gebruiker.err === undefined) {
-                    $scope.goto('overzicht');
-                } else if ($scope.gebruiker.err) {
-                    $scope.error = $scope.gebruiker.err;
-                }
-            });
-        }
+        var sessie = DOODService.gebruikerSessie.get(function () {
+            if (sessie.err === null) {
+                DOODService.gebruikerLoguit.post(function () {
+                    $scope.goto('login');
+                });
+            } else {
+                $scope.gebruiker = DOODService.gebruikerLogin.post(gebruiker, function () {
+                    if ($scope.gebruiker.err === undefined) {
+                        $scope.goto('overzicht');
+                    } else if ($scope.gebruiker.err) {
+                        $scope.error = $scope.gebruiker.err;
+                    }
+                });
+            }
+        });
     };
 });
 
@@ -129,7 +117,7 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
     }
 
     function mouseDownOnSlice(e) {
-        chart.setSelection([{ row: muisOverIndex, column: null }]);
+        chart.setSelection([{row: muisOverIndex, column: null}]);
     }
 
     function swapArrayIndexen(array, oudeIndex, nieuweIndex) {
@@ -206,11 +194,11 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
 
         genereerKleurcodes();
         options = {
-            chartArea: { left: '5%', right: '0', width: '100%', height: '100%' },
-            legend: { position: 'right', alignment: 'center' },
+            chartArea: {left: '5%', right: '0', width: '100%', height: '100%'},
+            legend: {position: 'right', alignment: 'center'},
             colors: kleuren,
-            tooltip: { trigger: 'selection' },
-            backgroundColor: { fill: '#48CEC2' }
+            tooltip: {trigger: 'selection'},
+            backgroundColor: {fill: '#48CEC2'}
         };
 
         // data
@@ -247,16 +235,16 @@ myApp.controller('SamenstellenController', function ($scope, $routeParams, $loca
     $scope.getAllImages = function () {
         var imgArray = [],
             padNaam = "style/images/icons/";
-        imgArray[0] = { src: padNaam + "muziek.png", id: "Muziek" };
-        imgArray[1] = { src: padNaam + "STILTE.png", id: "Stilte" };
-        imgArray[2] = { src: padNaam + "TEKST.png", id: "Berichten" };
-        imgArray[3] = { src: padNaam + "CAMERA.png", id: "Foto's" };
-        imgArray[4] = { src: padNaam + "VIDEO.png", id: "Video's" };
-        imgArray[5] = { src: padNaam + "BLOEMEN.png", id: "Bloemen" };
-        imgArray[6] = { src: padNaam + "SPREKER.png", id: "Spreker" };
-        imgArray[7] = { src: padNaam + "ETEN.png", id: "Eten" };
-        imgArray[8] = { src: padNaam + "WAGEN.png", id: "Rouwstoet" };
-        imgArray[9] = { src: padNaam + "GEENINVULLING.png", id: "Wishlist" };
+        imgArray[0] = {src: padNaam + "muziek.png", id: "Muziek"};
+        imgArray[1] = {src: padNaam + "STILTE.png", id: "Stilte"};
+        imgArray[2] = {src: padNaam + "TEKST.png", id: "Berichten"};
+        imgArray[3] = {src: padNaam + "CAMERA.png", id: "Foto's"};
+        imgArray[4] = {src: padNaam + "VIDEO.png", id: "Video's"};
+        imgArray[5] = {src: padNaam + "BLOEMEN.png", id: "Bloemen"};
+        imgArray[6] = {src: padNaam + "SPREKER.png", id: "Spreker"};
+        imgArray[7] = {src: padNaam + "ETEN.png", id: "Eten"};
+        imgArray[8] = {src: padNaam + "WAGEN.png", id: "Rouwstoet"};
+        imgArray[9] = {src: padNaam + "GEENINVULLING.png", id: "Wishlist"};
 
         $scope.afbeeldingen = imgArray;
     };
