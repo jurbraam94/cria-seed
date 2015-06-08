@@ -1,12 +1,12 @@
 /*jslint node: true */
 /*globals myApp, google, drawChart, angular*/
 
-myApp.controller('MainController', function ($scope, $rootScope, $location, DOODService, $window) {
+myApp.controller('MainController', function ($scope, $rootScope, $location, DOODService, $route) {
     "use strict";
 
     $scope.goto = function (location) {
-        $window.location.assign('#/' + location);
-        $window.location.reload(true);
+        $route.reload();
+        $location.path(location);
     };
 
     $scope.pageName = function () {
