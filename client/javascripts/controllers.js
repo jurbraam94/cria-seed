@@ -12,12 +12,14 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, DOOD
     $scope.pageName = function () { return $location.path(); };
 
     $scope.userSession = function () {
-        $scope.loggedIn = DOODService.gebruikerSessie.get({}, function () {
-            return $scope.loggedIn;
+        var loggedIn = DOODService.gebruikerSessie.get({}, function () {
+            return loggedIn;
         });
     };
 
-
+    if ($scope.userSession()) {
+        $scope.gebruikersNaam = $scope.userSession().doc.gebruikersnaam;
+    }
 
     $rootScope.$on('$routeChangeSuccess', function (e, curr, prev) {
         $scope.menuActive = $scope.pageName().substring(1);
