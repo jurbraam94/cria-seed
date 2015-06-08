@@ -5,37 +5,19 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, DOOD
     "use strict";
 
     $scope.goto = function (location) {
-        var isChromium = window.chrome,
-            vendorName = window.navigator.vendor;
-        if (isChromium !== null && isChromium !== undefined && vendorName === "Google Inc.") {
-            console.log("Chrome");
-            $location.path(location);
-            $route.reload();
-        } else {
-            console.log("Internet");
-            $window.location.assign('#/' + location);
-            $window.location.reload(true);
-        }
-
+        $location.path('/' + location);
     };
 
     $scope.pageName = function () {
         return $location.path();
     };
 
-    $scope.isEmpty = function (object) {
-        if (Object.keys(object).length === 0) {
-            return true;
-        }
-        return false;
-    };
-
     //Only for use on views, if you want to check if a user is logged in in a controller please call the doodservice gebruikerssessie get function.
     $scope.initGebruiker = function () {
-        var session = DOODService.gebruikerSessie.get(function () {
-            if ($scope.isEmpty(session.err)) {
+        var sessie = DOODService.gebruikerSessie.get(function () {
+            if (sessie.doc.gebruikersnaam !== undefined) {
                 $scope.loggedIn = true;
-                $scope.gebruikersNaam = session.doc.gebruikersnaam;
+                $scope.gebruikersNaam = sessie.doc.gebruikersnaam;
             } else {
                 $scope.loggedIn = false;
             }
@@ -50,7 +32,6 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, DOOD
 myApp.controller('ContactController', function ($scope, DOODService) {
     "use strict";
     $scope.contact = function (contactGegevens) {
-        console.log(contactGegevens);
         $scope.mail = DOODService.contact.post(contactGegevens, function () {
             if ($scope.mail.err) {
                 $scope.success = false;
@@ -69,9 +50,9 @@ myApp.controller('GebruikerLoginController', function ($scope, DOODService, $rou
     // LOGIN / LOGUIT
     $scope.inEnUitloggen = function (gebruiker) {
         var sessie = DOODService.gebruikerSessie.get(function () {
-            if ($scope.isEmpty(sessie.err)) {
+            if (sessie.doc.gebruikersnaam !== undefined) {
                 DOODService.gebruikerLoguit.post(function () {
-                    $scope.goto('login');
+                    $scope.goto('overzicht');
                 });
             } else {
                 $scope.gebruiker = DOODService.gebruikerLogin.post(gebruiker, function () {
@@ -96,17 +77,28 @@ myApp.controller('GebruikerLoginController', function ($scope, DOODService, $rou
 myApp.controller('SamenstellenController', function ($scope, DOODService, $routeParams, $location) {
     "use strict";
     var totaleTijd,
-        dataTable = [
-            ['Segment', 'Minuten'],
-            ['Overige tijd', 1]
-        ],
+        dataTable,
         kleuren = ['#afafaf'],
         chart = null,
         muisOverIndex;
 
+    //function initieeleDataTable(segmenten) {
+    //    var segment;
+    //    console.log("segmenten: ", segmenten);
+    //    dataTable = [['Segment', 'Minuten']];
+    //
+    //    for (segment in segmenten) {
+    //        if (segmenten.hasOwnProperty(segment) && segment.hasOwnProperty("object") && segment.hasOwnProperty("percentage")) {
+    //            dataTable.push([segment.object, segment.percentage]);
+    //        }
+    //    }
+    //    dataTable.push(['Overige tijd', 1]);
+    //    console.log("dataTable: ", dataTable);
+    //}
+
     //function stuurDataNaarDb(data) {
     //    $scope.segmenten = DOODService.uitvaartSegment.post(data, function () {
-    //        if ($scope.segmenten.err === undefined) {
+    //        if ($scope.isEmpty($scope.segmenten.err)) {
     //            return $scope.segmenten;
     //        }
     //        $scope.error = $scope.segmenten.err;
@@ -115,7 +107,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
 
     //function verwijderSegmentUitDb(data) {
     //    $scope.segmenten = DOODService.uitvaartSegment.delete(data, function () {
-    //        if ($scope.segmenten.err === undefined) {
+    //        if ($scope.isEmpty($scope.segmenten.err)) {
     //            return $scope.segmenten;
     //        }
     //        $scope.error = $scope.segmenten.err;
@@ -142,33 +134,33 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
     //}
 
     function getTijdsduurUitDb() {
-        var returnWaarde, gebruiker;
+        var gebruiker;
         gebruiker = DOODService.gebruikerSessie.get(function () {
-            if ($scope.isEmpty(gebruiker.err)) {
+            if (gebruiker.doc.gebruikersnaam !== undefined) {
                 $scope.uitvaartSamenstellen = DOODService.uitvaartSamenstellen.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
-                    if ($scope.uitvaartSamenstellen.err === undefined) {
-                        returnWaarde = $scope.uitvaartSamenstellen.doc.tijdsduur;
+                    if ($scope.uitvaartSamenstellen.err === null) {
+                        totaleTijd = $scope.uitvaartSamenstellen.doc.tijdsduur;
                     }
                     $scope.error = $scope.uitvaartSamenstellen.err;
                 });
             }
         });
-        return returnWaarde;
     }
 
-    //function getDataTableUitDb() {
-    //    var gebruiker;
-    //    gebruiker = DOODService.gebruikerSessie.get(function () {
-    //        if ($scope.isEmpty(gebruiker.err)) {
-    //            $scope.segmenten = DOODService.uitvaartSegment.query({gebruiker: gebruiker.doc.gebruikersnaam}, function () {
-    //                if ($scope.segmenten.err === undefined) {
-    //                    return $scope.segmenten.doc;
-    //                }
-    //                $scope.error = $scope.segmenten.err;
-    //            });
-    //        }
-    //    });
-    //}
+    function getDataTableUitDb() {
+        var gebruiker;
+        gebruiker = DOODService.gebruikerSessie.get(function () {
+            if (gebruiker.doc.gebruikersnaam !== undefined) {
+                $scope.segmenten = DOODService.uitvaartSegment.query({gebruiker: gebruiker.doc.gebruikersnaam}, function () {
+                    if ($scope.uitvaartSamenstellen.err === null) {
+                        console.log("$scope.segmenten.doc: ", $scope.segmenten.doc);
+                        //initieeleDataTable($scope.segmenten.doc);
+                    }
+                    $scope.error = $scope.segmenten.err;
+                });
+            }
+        });
+    }
 
     function getTotaleTijdEnIndexVanOverigeTijd() {
         var i, overigeTijdIndex, echteTotaleTijd = 0;
@@ -335,29 +327,15 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         $scope.afbeeldingen = imgArray;
     };
 
-    //function initieeleDataTable() {
-    //    var segment, segmenten = getDataTableUitDb();
-    //    console.log("segmenten: ", segmenten);
-    //    dataTable = [['Segment', 'Minuten']];
-    //
-    //    for (segment in segmenten) {
-    //        if (segmenten.hasOwnProperty(segment) && segment.hasOwnProperty("object") && segment.hasOwnProperty("percentage")) {
-    //            dataTable.push([segment.object, segment.percentage]);
-    //        }
-    //    }
-    //    dataTable.push(['Overige tijd', 1]);
-    //    console.log("dataTable: ", dataTable);
-    //}
-
     $scope.init = function () {
         $scope.getAllImages();
         // data uit db laden
-        totaleTijd = getTijdsduurUitDb();
-        console.log("totale tijd: ", totaleTijd);
+        getTijdsduurUitDb();
         if (totaleTijd === undefined) {
             totaleTijd = 90;
         }
-        //initieeleDataTable();
+        getDataTableUitDb();
+        console.log("totale tijd: ", totaleTijd);
         drawChart();
     };
 

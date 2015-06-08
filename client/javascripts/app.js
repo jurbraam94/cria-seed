@@ -1,3 +1,4 @@
+/*jslint node: true */
 /*global angular, gebruikerLoginCtrl */
 
 /**
@@ -85,21 +86,13 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', '
             redirectTo: "/overzicht"
         });
     }])
-    .run(function ($rootScope, $location, DOODService, $window, $route) {
+    .run(function ($rootScope, $location, DOODService) {
         "use strict";
         $rootScope.$on("$routeChangeStart", function (event, next) {
             if (next.security) {
                 var sessie = DOODService.gebruikerSessie.get(function () {
-                    if (Object.keys(sessie.err).length !== 0) {
-                        var isChromium = window.chrome,
-                            vendorName = window.navigator.vendor;
-                        if (isChromium !== null && isChromium !== undefined && vendorName === "Google Inc.") {
-                            $location.path('login');
-                            $route.reload();
-                        } else {
-                            $window.location.assign('#/' + 'login');
-                            $window.location.reload(true);
-                        }
+                    if (sessie.doc.gebruikersnaam === undefined) {
+                        $location.path('login');
                     }
                 });
             }
