@@ -147,20 +147,20 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         });
     }
 
-    //function getDataTableUitDb() {
-    //    var gebruiker;
-    //    gebruiker = DOODService.gebruikerSessie.get(function () {
-    //        if (gebruiker.doc.gebruikersnaam !== undefined) {
-    //            $scope.segmenten = DOODService.uitvaartSegment.query({gebruiker: gebruiker.doc.gebruikersnaam}, function () {
-    //                if ($scope.uitvaartSamenstellen.err === null) {
-    //                    console.log("$scope.segmenten.doc: ", $scope.segmenten.doc);
-    //                    //initieeleDataTable($scope.segmenten.doc);
-    //                }
-    //                $scope.error = $scope.segmenten.err;
-    //            });
-    //        }
-    //    });
-    //}
+    function getDataTableUitDb() {
+        var gebruiker;
+        gebruiker = DOODService.gebruikerSessie.get(function () {
+            if (gebruiker.doc.gebruikersnaam !== undefined) {
+                $scope.segmenten = DOODService.uitvaartSegment.query({gebruiker: gebruiker.doc.gebruikersnaam}, function () {
+                    if ($scope.segmenten.err === null) {
+                        console.log("$scope.segmenten.doc: ", $scope.segmenten.doc);
+                        //initieeleDataTable($scope.segmenten.doc);
+                    }
+                    $scope.error = $scope.segmenten.err;
+                });
+            }
+        });
+    }
 
     function getTotaleTijdEnIndexVanOverigeTijd() {
         var i, overigeTijdIndex, echteTotaleTijd = 0;
