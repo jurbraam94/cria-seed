@@ -83,17 +83,19 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         muisOverIndex;
 
     function initieeleDataTable(segmenten) {
-        var segment;
-        console.log("segmenten: ", segmenten);
+        var i, segment;
+        console.log("segmenten 1: ", segmenten);
         dataTable = [['Segment', 'Minuten']];
 
-        for (segment in segmenten.doc) {
-            if (segmenten.doc.hasOwnProperty(segment)) { //&& segment.doc.hasOwnProperty("object") && segment.doc.hasOwnProperty("percentage")
-                dataTable.push([segment.object, segment.percentage]);
-                console.log("segment 0: ", segment[0]);
-                console.log("segment 1: ", segment[1]);
-            }
+        //for (segment in segmenten.doc) {
+            //if (segmenten.doc.hasOwnProperty(segment)) { //&& segment.doc.hasOwnProperty("object") && segment.doc.hasOwnProperty("percentage")
+
+        for (i = 0; i < segmenten.doc.length; i += 1) {
+            dataTable.push([segmenten.doc[i].object, segmenten.doc[i].percentage]);
+            console.log("segmenten 2: ", segmenten.doc[i]);
         }
+            //}
+        //}
         dataTable.push(['Overige tijd', 1]);
         console.log("dataTable: ", dataTable);
     }
