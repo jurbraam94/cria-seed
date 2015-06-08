@@ -83,19 +83,14 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         muisOverIndex;
 
     function initieeleDataTable(segmenten) {
-        var i, segment;
-        console.log("segmenten 1: ", segmenten);
+        var i;
         dataTable = [['Segment', 'Minuten']];
-
-        //for (segment in segmenten.doc) {
-            //if (segmenten.doc.hasOwnProperty(segment)) { //&& segment.doc.hasOwnProperty("object") && segment.doc.hasOwnProperty("percentage")
 
         for (i = 0; i < segmenten.doc.length; i += 1) {
             dataTable.push([segmenten.doc[i].object, segmenten.doc[i].percentage]);
-            console.log("segmenten 2: ", segmenten.doc[i]);
+            console.log("segmenten: ", segmenten.doc[i]);
         }
-            //}
-        //}
+
         dataTable.push(['Overige tijd', 1]);
         console.log("dataTable: ", dataTable);
     }
@@ -339,6 +334,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         }
         getDataTableUitDb();
         console.log("totale tijd: ", totaleTijd);
+        console.log("dataTable 2: ", dataTable);
         drawChart();
     };
 
