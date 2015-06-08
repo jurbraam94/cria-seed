@@ -5,6 +5,26 @@ var config = require('../../server/config/config.js')[env],
 
 console.log('>>>>>', env, '<<<<<');
 
+
+
+//describe('Vaste pagina opze0t', function(){
+//    beforeEach(function () {
+//        browser.get('http://' + localConfig.host + ':' + config.port);
+//    });
+//
+//     it('should have a topmenu, footer and body', function (){
+//         expect(browser.getTitle()).toBe('DOOD');
+//         //expect(element(by.tagName('head')).null()).toBe(false);
+//         expect(element(by.css('navbar-header')).null()).toBe(false);
+//         expect(element(by.tagName('nav')).null()).toBe(false);
+//         expect(element(by.className('container-fluid Content')).null()).toBe(false);
+//         expect(element(by.tagName('footer')).null()).toBe(false);
+//     });
+//});
+
+
+
+
 //describe('DOOD test homepage', function () {
 //
 //    beforeEach(function () {
