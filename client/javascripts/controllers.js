@@ -18,7 +18,7 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, DOOD
     };
 
     if ($scope.userSession) {
-        $scope.gebruikersNaam = $scope.userSession.doc.gebruikersnaam;
+        $scope.gebruikersNaam = $scope.userSession().doc.gebruikersnaam;
     }
 
     $rootScope.$on('$routeChangeSuccess', function (e, curr, prev) {
