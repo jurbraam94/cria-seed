@@ -78,7 +78,6 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
     "use strict";
     var totaleTijd,
         dataTable,
-        segmenten,
         kleuren = ['#afafaf'],
         chart = null,
         muisOverIndex;
