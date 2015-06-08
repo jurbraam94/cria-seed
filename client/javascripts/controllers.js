@@ -334,12 +334,10 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         // data uit db laden
         getTijdsduurUitDb();
         getDataTableUitDb(function () {
-            console.log("Test0", totaleTijd);
+            console.log("totale tijd: ", totaleTijd);
+            console.log("dataTable 2: ", dataTable);
+            drawChart();
         });
-
-        console.log("totale tijd: ", totaleTijd);
-        console.log("dataTable 2: ", dataTable);
-        drawChart();
     };
 
     window.onresize = function () {
