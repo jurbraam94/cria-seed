@@ -105,7 +105,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
     function stuurDataNaarDb(data) {
         $scope.segmenten = DOODService.uitvaartSegment.post(data, function () {
             if ($scope.segmenten.err === null) {
-                return $scope.segmenten;
+                console.log("post response: ", $scope.segmenten);
             }
             $scope.error = $scope.segmenten.err;
         });
