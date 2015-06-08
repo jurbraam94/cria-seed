@@ -158,6 +158,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             if (gebruiker.doc.gebruikersnaam !== undefined) {
                 $scope.segmenten = DOODService.uitvaartSegment.query({gebruiker: gebruiker.doc.gebruikersnaam}, function () {
                     if ($scope.uitvaartSamenstellen.err === null) {
+                        console.log("$scope.segmenten.doc: ", $scope.segmenten.doc);
                         initieeleDataTable($scope.segmenten.doc);
                     }
                     $scope.error = $scope.segmenten.err;
