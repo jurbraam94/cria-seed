@@ -5,21 +5,21 @@ var env = process.env.NODE_ENV || 'development',
 
 console.log('>>>>>', env, '<<<<<');
 
-
-//describe('Vaste pagina opze0t', function(){
-//    beforeEach(function () {
-//        browser.get('http://' + localConfig.host + ':' + config.port);
-//    });
-//
-//     it('should have a topmenu, footer and body', function (){
-//         expect(browser.getTitle()).toBe('DOOD');
-//         //expect(element(by.tagName('head')).null()).toBe(false);
-//         expect(element(by.css('navbar-header')).null()).toBe(false);
-//         expect(element(by.tagName('nav')).null()).toBe(false);
-//         expect(element(by.className('container-fluid Content')).null()).toBe(false);
-//         expect(element(by.tagName('footer')).null()).toBe(false);
-//     });
-//});
+/*
+describe('Vaste pagina opzet', function () {
+    beforeEach(function () {
+        browser.get('http://' + localConfig.host + ':' + config.port);
+    });
+    it('should have a topmenu, footer and body', function () {
+        expect(browser.getTitle()).toBe('DOOD');
+        expect(element(by.tagName('head')).get.toBe(null);
+        expect(element(by.tagName('h1')).getText()).toBe('Book demo');
+        expect(element(by.css('navbar-header')).not.toBe(null));
+        expect(element(by.tagName('nav')).not.toBe(null));
+        expect(element(by.className('container-fluid Content')).not.toBe(null));
+        expect(element(by.tagName('footer')).not.toBe(null));
+    });
+});*/
 
 
 //describe('DOOD test homepage', function () {
