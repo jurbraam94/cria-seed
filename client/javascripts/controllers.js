@@ -132,7 +132,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
     //    });
     //}
 
-    function getTijdsduurUitDb() {
+    function getTijdsduurUitDb(callback) {
         var gebruiker;
         gebruiker = DOODService.gebruikerSessie.get(function () {
             if (gebruiker.doc.gebruikersnaam !== undefined) {
@@ -142,6 +142,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                         if (totaleTijd === undefined) {
                             totaleTijd = 90;
                         }
+                        callback();
                     }
                     $scope.error = $scope.uitvaartSamenstellen.err;
                 });
@@ -331,12 +332,13 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
 
     $scope.init = function () {
         $scope.getAllImages();
-        // data uit db laden
-        getTijdsduurUitDb();
-        getDataTableUitDb(function () {
-            console.log("totale tijd: ", totaleTijd);
-            console.log("dataTable 2: ", dataTable);
-            drawChart();
+        // totale tijd uit db laden
+        getTijdsduurUitDb(function () {
+            //segmenten uit db laden
+            getDataTableUitDb(function () {
+                //piechart tekenen
+                drawChart();
+            });
         });
     };
 
