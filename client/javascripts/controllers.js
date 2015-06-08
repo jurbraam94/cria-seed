@@ -119,7 +119,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         var i, objecten = [], gebruiker;
 
         gebruiker = DOODService.gebruikerSessie.get(function () {
-            if ($scope.isEmpty(session.err)) {
+            if ($scope.isEmpty(gebruiker.err)) {
                 for (i = 1; i < dataTable.length - 1; i += 1) {
                     console.log("datatable: ", dataTable[i]);
                     objecten.push({
@@ -141,7 +141,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
     function getTijdsduurUitDb() {
         var poep, gebruiker;
         gebruiker = DOODService.gebruikerSessie.get(function () {
-            if ($scope.isEmpty(session.err)) {
+            if ($scope.isEmpty(gebruiker.err)) {
                 $scope.uitvaartSamenstellen = DOODService.uitvaartSamenstellen.get(gebruiker.doc.gebruikersNaam, function () {
                     if ($scope.uitvaartSamenstellen.err === undefined) {
                         poep = $scope.uitvaartSamenstellen.doc.tijdsduur; // TODO: ff return ipv van var als t werkt
@@ -159,7 +159,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
     function getDataTableUitDb() {
         var poep, gebruiker;
         gebruiker = DOODService.gebruikerSessie.get(function () {
-            if ($scope.isEmpty(session.err)) {
+            if ($scope.isEmpty(gebruiker.err)) {
                 $scope.segmenten = DOODService.uitvaartSegment.query(gebruiker.doc.gebruikersNaam, function () {
                     if ($scope.segmenten.err === undefined) {
                         poep = $scope.segmenten.doc; // TODO: ff return ipv van var als t werkt
