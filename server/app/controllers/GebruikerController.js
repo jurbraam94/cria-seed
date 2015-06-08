@@ -149,7 +149,7 @@ exports.loguit = function (req, res) {
                 filename: __filename
             },
             doc: "Gebruiker " + gebruiker + " is uitgelogd.", // only the first document, not an array when using "findOne"
-            err: err
+            err: {}
         };
         return res.send(retObj);
     }
@@ -179,7 +179,7 @@ exports.session = function (req, res) {
             doc: {
                 "gebruikersnaam": gebruiker
             }, // only the first document, not an array when using "findOne"
-            err: err
+            err: {}
         };
         return res.send(retObj);
     }
