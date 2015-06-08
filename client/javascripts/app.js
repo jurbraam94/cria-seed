@@ -96,10 +96,8 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', '
                             vendorName = window.navigator.vendor;
                         if (isChromium !== null && isChromium !== undefined && vendorName === "Google Inc.") {
                             $location.path('login');
-                            $route.reload();
                         } else {
                             $window.location.assign('#/' + 'login');
-                            $window.location.reload(true);
                         }
                     }
                 });
