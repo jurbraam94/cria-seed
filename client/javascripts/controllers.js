@@ -116,7 +116,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
     //}
 
     function stuurDataTableNaarDb() {
-        var i, objecten = [], gebruiker;
+        var i, gebruiker;
 
         gebruiker = DOODService.gebruikerSessie.get(function () {
             if ($scope.isEmpty(gebruiker.err)) {
