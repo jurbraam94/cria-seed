@@ -17,9 +17,11 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, DOOD
         });
     };
 
-    if ($scope.userSession()) {
-        $scope.gebruikersNaam = $scope.userSession().doc.gebruikersnaam;
-    }
+    $scope.initGebruiker = function () {
+        if ($scope.userSession()) {
+            $scope.gebruikersNaam = $scope.userSession().doc.gebruikersnaam;
+        }
+    };
 
     $rootScope.$on('$routeChangeSuccess', function (e, curr, prev) {
         $scope.menuActive = $scope.pageName().substring(1);
