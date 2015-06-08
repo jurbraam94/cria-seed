@@ -333,12 +333,16 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
     };
 
     function initieeleDataTable() {
-        var i, segmenten = getDataTableUitDb();
+        var i, segment, segmenten = getDataTableUitDb();
         console.log("segmenten: ", segmenten);
         dataTable = [['Segment', 'Minuten']];
-        for (i = 1; i < dataTable.length - 1; i += 1) {
-            dataTable.push([segmenten[i].object, segmenten[i].percentage]);
+        for (segment in segmenten) {
+            dataTable.push([segment.object, segment.percentage]);
         }
+
+        //for (i = 1; i < dataTable.length - 1; i += 1) {
+        //    dataTable.push([segmenten[i].object, segmenten[i].percentage]);
+        //}
         dataTable.push(['Overige tijd', 1]);
         console.log("dataTable: ", dataTable);
     }
