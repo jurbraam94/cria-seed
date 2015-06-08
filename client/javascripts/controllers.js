@@ -1,7 +1,7 @@
 /*jslint node: true */
 /*globals myApp, google, drawChart, angular*/
 
-myApp.controller('MainController', function ($scope, $rootScope, $location, $cookieStore, $window) {
+myApp.controller('MainController', function ($scope, $rootScope, $location, DOODService, $window) {
     "use strict";
 
     $scope.goto = function (location) {
@@ -11,11 +11,14 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, $coo
 
     $scope.pageName = function () { return $location.path(); };
 
-    if ($cookieStore.get('sessionCookie')) {
-        $scope.loggedIn = true;
-        $scope.gebruikersNaam = $cookieStore.get('sessionCookie');
-    } else {
-        $scope.loggedIn = false;
+    $scope.userSession = function () {
+        var loggedIn = DOODService.gebruikerSessie.get(function () {
+            return loggedIn;
+        });
+    };
+
+    if ($scope.userSession()) {
+        $scope.gebruikersNaam = $scope.userSession().doc.gebruikersnaam;
     }
 
     $rootScope.$on('$routeChangeSuccess', function (e, curr, prev) {
@@ -39,23 +42,19 @@ myApp.controller('ContactController', function ($scope, DOODService) {
     };
 });
 
-myApp.controller('GebruikerLoginController', function ($scope, $window, DOODService, $cookieStore) {
+myApp.controller('GebruikerLoginController', function ($scope, $window, DOODService) {
     "use strict";
 
     // LOGIN / LOGUIT
     $scope.inEnUitloggen = function (gebruiker) {
-        if ($scope.loggedIn) {
-            $cookieStore.remove('sessionCookie');
-            $scope.goto('login');
+        if ($scope.userSession()) {
+            DOODService.gebruikerLoguit.post(function () {
+                $scope.goto('login');
+            });
+
         } else {
-            if (gebruiker.gebruikersnaam === "test" && gebruiker.wachtwoord === "test") {
-                // Sets loggedin as test for local testing.
-                $cookieStore.put('sessionCookie', gebruiker.gebruikersnaam);
-                $scope.goto('overzicht');
-            }
-            $scope.gebruiker = DOODService.login.post(gebruiker, function () {
+            $scope.gebruiker = DOODService.gebruikerLogin.post(gebruiker, function () {
                 if ($scope.gebruiker.err === undefined) {
-                    $cookieStore.put('sessionCookie', $scope.gebruiker.doc.gebruikersnaam);
                     $scope.goto('overzicht');
                 } else if ($scope.gebruiker.err) {
                     $scope.error = $scope.gebruiker.err;
