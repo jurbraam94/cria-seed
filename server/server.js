@@ -9,6 +9,8 @@
      */
     var fs = require('fs'),                             // Used to read files from the filesystem (__dirname)
         express = require('express'),                   // Fast, unopinionated, minimalist web framework for Node.js
+        session = require('express-session'),
+        MongoStore = require('connect-mongo')(session),
         bodyParser = require("body-parser"),            // This does not handle multipart bodies, due to their complex and typically large nature. For multipart bodies, you may be interested in the following modules:
         env,
         config,
@@ -68,6 +70,12 @@
      */
     app.use(bodyParser.json());                                         // Configure body-parser with JSON input
     app.use(bodyParser.urlencoded({extended: true}));                   // Notice because option default will flip in next major; http://goo.gl/bXjyyz
+    app.use(session({
+        store: new MongoStore({ mongooseConnection: mongoose.connection }),
+        secret: 'dUne834h3X4mn8DsLL7w',
+        resave: true,
+        saveUninitialized: true
+    }));
 
     /**
      * Middleware to enable logging

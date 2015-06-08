@@ -85,13 +85,15 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', '
             redirectTo: "/overzicht"
         });
     }])
-    .run(function ($rootScope, $location, $cookieStore) {
+    .run(function ($rootScope, $location, DOODService) {
         "use strict";
         $rootScope.$on("$routeChangeStart", function (event, next) {
             if (next.security) {
-                if ($cookieStore.get('sessionCookie') === undefined) {
-                    $location.path('/login');
-                }
+                var sessie = DOODService.gebruikerSessie.get(function () {
+                    if (Object.keys(sessie.err).length !== 0) {
+                        $location.path('/login');
+                    }
+                });
             }
         });
     });

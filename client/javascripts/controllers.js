@@ -1,7 +1,7 @@
 /*jslint node: true */
 /*globals myApp, google, drawChart, angular*/
 
-myApp.controller('MainController', function ($scope, $rootScope, $location, $cookieStore, $window) {
+myApp.controller('MainController', function ($scope, $rootScope, $location, DOODService, $window) {
     "use strict";
 
     $scope.goto = function (location) {
@@ -9,14 +9,28 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, $coo
         $window.location.reload(true);
     };
 
-    $scope.pageName = function () { return $location.path(); };
+    $scope.pageName = function () {
+        return $location.path();
+    };
 
-    if ($cookieStore.get('sessionCookie')) {
-        $scope.loggedIn = true;
-        $scope.gebruikersNaam = $cookieStore.get('sessionCookie');
-    } else {
-        $scope.loggedIn = false;
-    }
+    $scope.isEmpty = function (object) {
+        if (Object.keys(object).length === 0) {
+            return true;
+        }
+        return false;
+    };
+
+    //Only for use on views, if you want to check if a user is logged in in a controller please call the doodservice gebruikerssessie get function.
+    $scope.initGebruiker = function () {
+        var session = DOODService.gebruikerSessie.get(function () {
+            if ($scope.isEmpty(session.err)) {
+                $scope.loggedIn = true;
+                $scope.gebruikersNaam = session.doc.gebruikersnaam;
+            } else {
+                $scope.loggedIn = false;
+            }
+        });
+    };
 
     $rootScope.$on('$routeChangeSuccess', function (e, curr, prev) {
         $scope.menuActive = $scope.pageName().substring(1);
@@ -39,29 +53,26 @@ myApp.controller('ContactController', function ($scope, DOODService) {
     };
 });
 
-myApp.controller('GebruikerLoginController', function ($scope, $window, DOODService, $cookieStore) {
+myApp.controller('GebruikerLoginController', function ($scope, DOODService) {
     "use strict";
 
     // LOGIN / LOGUIT
     $scope.inEnUitloggen = function (gebruiker) {
-        if ($scope.loggedIn) {
-            $cookieStore.remove('sessionCookie');
-            $scope.goto('login');
-        } else {
-            if (gebruiker.gebruikersnaam === "test" && gebruiker.wachtwoord === "test") {
-                // Sets loggedin as test for local testing.
-                $cookieStore.put('sessionCookie', gebruiker.gebruikersnaam);
-                $scope.goto('overzicht');
+        var sessie = DOODService.gebruikerSessie.get(function () {
+            if ($scope.isEmpty(sessie.err)) {
+                DOODService.gebruikerLoguit.post(function () {
+                    $scope.goto('login');
+                });
+            } else {
+                $scope.gebruiker = DOODService.gebruikerLogin.post(gebruiker, function () {
+                    if ($scope.gebruiker.err === undefined) {
+                        $scope.goto('overzicht');
+                    } else if ($scope.gebruiker.err) {
+                        $scope.error = $scope.gebruiker.err;
+                    }
+                });
             }
-            $scope.gebruiker = DOODService.login.post(gebruiker, function () {
-                if ($scope.gebruiker.err === undefined) {
-                    $cookieStore.put('sessionCookie', $scope.gebruiker.doc.gebruikersnaam);
-                    $scope.goto('overzicht');
-                } else if ($scope.gebruiker.err) {
-                    $scope.error = $scope.gebruiker.err;
-                }
-            });
-        }
+        });
     };
 });
 

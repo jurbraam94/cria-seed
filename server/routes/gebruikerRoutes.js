@@ -17,9 +17,16 @@ router
 router.
     post('/gebruiker/mail', controller.sendMail);
 
-// RETRIEVE
+router.
+    post('/gebruiker/loguit', controller.loguit);
+
 router
     .post('/gebruiker/login', controller.login);
+
+
+// GET
+router
+    .get('/gebruiker/sessie', controller.session);
 
 // DELETE
 router

@@ -99,6 +99,7 @@ exports.login = function (req, res) {
         if (gebruiker) {
             hashPassword(req.body.wachtwoord, gebruiker.passwordSalt, function (err, passwordHash) {
                 if (gebruiker.passwordHash === passwordHash.toString()) {
+                    req.session.gebruiker = gebruiker.gebruikersnaam;
                     retObj = {
                         meta: {
                             "action": "login",
@@ -106,7 +107,7 @@ exports.login = function (req, res) {
                             filename: __filename
                         },
                         doc: {
-                            "gebruikersnaam": gebruiker.gebruikersnaam
+                            "gebruikersnaam": req.session.gebruiker
                         }, // only the first document, not an array when using "findOne"
                         err: err
                     };
@@ -135,6 +136,65 @@ exports.login = function (req, res) {
         }
     });
 };
+
+exports.loguit = function (req, res) {
+    var retObj, gebruiker;
+    if (req.session.gebruiker) {
+        gebruiker = req.session.gebruiker;
+        delete req.session.gebruiker;
+        retObj = {
+            meta: {
+                "action": "loguit",
+                'timestamp': new Date(),
+                filename: __filename
+            },
+            doc: "Gebruiker " + gebruiker + " is uitgelogd.", // only the first document, not an array when using "findOne"
+            err: {}
+        };
+        return res.send(retObj);
+    }
+    retObj = {
+        meta: {
+            "action": "loguit",
+            'timestamp': new Date(),
+            filename: __filename
+        },
+        doc: {}, // only the first document, not an array when using "findOne"
+        err: "Er is geen gebruiker ingelogd of de sessie is al verlopen."
+    };
+    return res.send(retObj);
+};
+
+exports.session = function (req, res) {
+    var retObj, gebruiker;
+    gebruiker = req.session.gebruiker;
+
+    if (req.session.gebruiker) {
+        retObj = {
+            meta: {
+                "action": "session",
+                'timestamp': new Date(),
+                filename: __filename
+            },
+            doc: {
+                "gebruikersnaam": gebruiker
+            }, // only the first document, not an array when using "findOne"
+            err: null
+        };
+        return res.send(retObj);
+    }
+    retObj = {
+        meta: {
+            "action": "session",
+            'timestamp': new Date(),
+            filename: __filename
+        },
+        doc: {}, // only the first document, not an array when using "findOne"
+        err: "Er is geen gebruiker ingelogd of de sessie is verlopen."
+    };
+    return res.send(retObj);
+};
+
 
 
 exports.gebruikerAanmaken = function (req, res) {
