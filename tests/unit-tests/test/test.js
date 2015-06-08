@@ -47,7 +47,7 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
     });
 
     describe('LOGIN gebruiker', function () {
-        it('Should LOGIN /gebruiker/{gebruikersnaam}/{wachtwoord}', function (done) {
+        it('Should LOGIN /gebruiker/login/{gebruikersnaam}/{wachtwoord}', function (done) {
             request
                 .post('/gebruiker/login')
                 .send({
@@ -65,6 +65,48 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
                         .should.have.property('doc')
                         .and.have.property('gebruikersnaam')
                         .be.exactly('jur');
+                    res.statusCode.should.be.exactly(200);
+                    done();
+                });
+        });
+    });
+
+    describe('GET SESSIE Gebruiker', function () {
+        it('Should GET SESSIE /gebruiker/sessie', function (done) {
+            request
+                .get('/gebruiker/sessie')
+                .expect('Content-Type', /application.json/)
+                .expect(200)
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('gebruikersnaam')
+                        .be.exactly('jur');
+                    res.statusCode.should.be.exactly(200);
+                    done();
+                });
+        });
+    });
+
+    describe('LOGUIT gebruiker', function () {
+        it('Should LOGUIT /gebruiker/loguit', function (done) {
+            request
+                .post('/gebruiker/loguit')
+                .send()
+                .expect(200)                                                // supertest
+                .expect('Content-Type', /application.json/)                 // supertest
+                .expect('Content-Type', 'utf-8')
+                .end(function (err, res) {
+                    if (err) {
+                        throw err;
+                    }
+                    JSON.parse(res.text)
+                        .should.have.property('doc')
+                        .and.have.property('gebruikersnaam')
+                        .be.exactly('Gebruiker jur is uitgelogd.');
                     res.statusCode.should.be.exactly(200);
                     done();
                 });
