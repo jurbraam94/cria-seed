@@ -179,7 +179,7 @@ exports.session = function (req, res) {
             doc: {
                 "gebruikersnaam": gebruiker
             }, // only the first document, not an array when using "findOne"
-            err: {}
+            err: null
         };
         return res.send(retObj);
     }
