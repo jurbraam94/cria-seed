@@ -115,25 +115,25 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
     //    });
     //}
 
-    function stuurDataTableNaarDb() {
-        var i, gebruiker;
-
-        gebruiker = DOODService.gebruikerSessie.get(function () {
-            if ($scope.isEmpty(gebruiker.err)) {
-                for (i = 1; i < dataTable.length - 1; i += 1) {
-                    console.log("datatable: ", dataTable[i]);
-                    //verwijderen = { objecten[i].gebruikersnaam, objecten[i].volgnummer };
-                    //verwijderSegmentUitDb(verwijderen);
-                    stuurDataNaarDb({
-                        gebruikersnaam: gebruiker.doc.gebruikersnaam,
-                        object: dataTable[i][0],
-                        percentage: dataTable[i][1],
-                        volgnummer: i
-                    });
-                }
-            }
-        });
-    }
+    //function stuurDataTableNaarDb() {
+    //    var i, gebruiker;
+    //
+    //    gebruiker = DOODService.gebruikerSessie.get(function () {
+    //        if ($scope.isEmpty(gebruiker.err)) {
+    //            for (i = 1; i < dataTable.length - 1; i += 1) {
+    //                console.log("datatable: ", dataTable[i]);
+    //                //verwijderen = { objecten[i].gebruikersnaam, objecten[i].volgnummer };
+    //                //verwijderSegmentUitDb(verwijderen);
+    //                stuurDataNaarDb({
+    //                    gebruikersnaam: gebruiker.doc.gebruikersnaam,
+    //                    object: dataTable[i][0],
+    //                    percentage: dataTable[i][1],
+    //                    volgnummer: i
+    //                });
+    //            }
+    //        }
+    //    });
+    //}
 
     function getTijdsduurUitDb() {
         var poep, gebruiker;
