@@ -150,16 +150,21 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
     function getDataTableUitDb() {
         var gebruiker;
         gebruiker = DOODService.gebruikerSessie.get(function () {
+            console.log("gebruiker 1: ", gebruiker);
             if (gebruiker.doc.gebruikersnaam !== undefined) {
+                console.log("gebruiker 2: ", gebruiker);
                 var segmenten = DOODService.uitvaartSegment.query({gebruiker: gebruiker.doc.gebruikersnaam}, function () {
+                    console.log("segmenten 1: ", segmenten);
                     if (segmenten.err === null) {
-                        console.log("$scope.segmenten: ", segmenten);
+                        console.log("segmenten 2: ", segmenten);
                         initieeleDataTable(segmenten);
                     }
                     $scope.error = segmenten.err;
                 });
             }
+            console.log("dataTable 1: ", dataTable);
         });
+        console.log("dataTable 2: ", dataTable);
     }
 
     function getTotaleTijdEnIndexVanOverigeTijd() {
