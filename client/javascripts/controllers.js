@@ -88,49 +88,48 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
 
         for (i = 0; i < segmenten.doc.length; i += 1) {
             dataTable.push([segmenten.doc[i].object, segmenten.doc[i].percentage]);
-            console.log("segmenten: ", segmenten.doc[i]);
         }
 
         dataTable.push(['Overige tijd', 1]);
-        console.log("dataTable: ", dataTable);
     }
 
-    //function stuurDataNaarDb(data) {
-    //    $scope.segmenten = DOODService.uitvaartSegment.post(data, function () {
-    //        if ($scope.isEmpty($scope.segmenten.err)) {
-    //            return $scope.segmenten;
-    //        }
-    //        $scope.error = $scope.segmenten.err;
-    //    });
-    //}
+    function verwijderSegmentUitDb(data, callback) {
+        $scope.segmenten = DOODService.uitvaartSegment.delete(data, function () {
+            if ($scope.segmenten.err === null) {
+                callback();
+            }
+            $scope.error = $scope.segmenten.err;
+        });
+    }
 
-    //function verwijderSegmentUitDb(data) {
-    //    $scope.segmenten = DOODService.uitvaartSegment.delete(data, function () {
-    //        if ($scope.isEmpty($scope.segmenten.err)) {
-    //            return $scope.segmenten;
-    //        }
-    //        $scope.error = $scope.segmenten.err;
-    //    });
-    //}
+    function stuurDataNaarDb(data) {
+        $scope.segmenten = DOODService.uitvaartSegment.post(data, function () {
+            if ($scope.segmenten.err === null) {
+                return $scope.segmenten;
+            }
+            $scope.error = $scope.segmenten.err;
+        });
+    }
 
-    //function stuurDataTableNaarDb() {
-    //    var i, gebruiker;
-    //
-    //    gebruiker = DOODService.gebruikerSessie.get(function () {
-    //        if ($scope.isEmpty(gebruiker.err)) {
-    //            for (i = 1; i < dataTable.length - 1; i += 1) {
-    //                //verwijderen = { objecten[i].gebruikersnaam, objecten[i].volgnummer };
-    //                //verwijderSegmentUitDb(verwijderen);
-    //                stuurDataNaarDb({
-    //                    gebruikersnaam: gebruiker.doc.gebruikersnaam,
-    //                    object: dataTable[i][0],
-    //                    percentage: dataTable[i][1],
-    //                    volgnummer: i
-    //                });
-    //            }
-    //        }
-    //    });
-    //}
+    function stuurDataTableNaarDb() {
+        var i, gebruiker;
+
+        gebruiker = DOODService.gebruikerSessie.get(function () {
+            if (gebruiker.doc.gebruikersnaam !== undefined) {
+                for (i = 1; i < dataTable.length - 1; i += 1) {
+                    verwijderSegmentUitDb(
+                        { gebruikersnaam: gebruiker.doc.gebruikersnaam, volgnummer: i },
+                        stuurDataNaarDb({
+                            gebruikersnaam: gebruiker.doc.gebruikersnaam,
+                            object: dataTable[i][0],
+                            percentage: dataTable[i][1],
+                            volgnummer: i
+                        })
+                    );
+                }
+            }
+        });
+    }
 
     function getTijdsduurUitDb(callback) {
         var gebruiker;
@@ -270,7 +269,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         var data, options;
 
         //send datatable naar db
-        //stuurDataTableNaarDb();
+        stuurDataTableNaarDb();
 
         genereerKleurcodes();
         options = {
