@@ -53,7 +53,7 @@ myApp.controller('GebruikerLoginController', function ($scope, DOODService, $rou
         var sessie = DOODService.gebruikerSessie.get(function () {
             if (sessie.doc.gebruikersnaam !== undefined) {
                 DOODService.gebruikerLoguit.post(function () {
-                    $scope.goto('login');
+                    $scope.goto('overzicht');
                 });
             } else {
                 $scope.gebruiker = DOODService.gebruikerLogin.post(gebruiker, function () {
