@@ -17,7 +17,7 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, DOOD
         });
     };
 
-    if ($scope.userSession) {
+    if ($scope.userSession()) {
         $scope.gebruikersNaam = $scope.userSession().doc.gebruikersnaam;
     }
 
