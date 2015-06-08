@@ -333,9 +333,10 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
     };
 
     function initieeleDataTable() {
-        var i, segment, segmenten = getDataTableUitDb();
+        var segment, segmenten = getDataTableUitDb();
         console.log("segmenten: ", segmenten);
         dataTable = [['Segment', 'Minuten']];
+
         for (segment in segmenten) {
             dataTable.push([segment.object, segment.percentage]);
         }
