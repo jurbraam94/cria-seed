@@ -5,6 +5,7 @@ var env = process.env.NODE_ENV || 'development',
 
 console.log('>>>>>', env, '<<<<<');
 
+
 //describe('Vaste pagina opze0t', function(){
 //    beforeEach(function () {
 //        browser.get('http://' + localConfig.host + ':' + config.port);
@@ -19,8 +20,6 @@ console.log('>>>>>', env, '<<<<<');
 //         expect(element(by.tagName('footer')).null()).toBe(false);
 //     });
 //});
-
-
 
 
 //describe('DOOD test homepage', function () {
