@@ -141,8 +141,6 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                 $scope.uitvaartSamenstellen = DOODService.uitvaartSamenstellen.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
                     if ($scope.uitvaartSamenstellen.err === null) {
                         totaleTijd = $scope.uitvaartSamenstellen.doc.tijdsduur;
-                        console.log("uitvaartSamenstellen: ", $scope.uitvaartSamenstellen);
-                        console.log("totaleTijd 1: ", totaleTijd);
                     }
                     $scope.error = $scope.uitvaartSamenstellen.err;
                 });
@@ -150,19 +148,19 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         });
     }
 
-    //function getDataTableUitDb() {
-    //    var gebruiker;
-    //    gebruiker = DOODService.gebruikerSessie.get(function () {
-    //        if ($scope.isEmpty(gebruiker.err)) {
-    //            $scope.segmenten = DOODService.uitvaartSegment.query({gebruiker: gebruiker.doc.gebruikersnaam}, function () {
-    //                if ($scope.isEmpty($scope.segmenten.err)) {
-    //                    return $scope.segmenten.doc;
-    //                }
-    //                $scope.error = $scope.segmenten.err;
-    //            });
-    //        }
-    //    });
-    //}
+    function getDataTableUitDb() {
+        var gebruiker;
+        gebruiker = DOODService.gebruikerSessie.get(function () {
+            if (gebruiker.doc.gebruikersnaam !== undefined) {
+                $scope.segmenten = DOODService.uitvaartSegment.query({gebruiker: gebruiker.doc.gebruikersnaam}, function () {
+                    if ($scope.uitvaartSamenstellen.err === null) {
+                        initieeleDataTable($scope.segmenten.doc);
+                    }
+                    $scope.error = $scope.segmenten.err;
+                });
+            }
+        });
+    }
 
     function getTotaleTijdEnIndexVanOverigeTijd() {
         var i, overigeTijdIndex, echteTotaleTijd = 0;
@@ -329,19 +327,19 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         $scope.afbeeldingen = imgArray;
     };
 
-    //function initieeleDataTable() {
-    //    var segment, segmenten = getDataTableUitDb();
-    //    console.log("segmenten: ", segmenten);
-    //    dataTable = [['Segment', 'Minuten']];
-    //
-    //    for (segment in segmenten) {
-    //        if (segmenten.hasOwnProperty(segment) && segment.hasOwnProperty("object") && segment.hasOwnProperty("percentage")) {
-    //            dataTable.push([segment.object, segment.percentage]);
-    //        }
-    //    }
-    //    dataTable.push(['Overige tijd', 1]);
-    //    console.log("dataTable: ", dataTable);
-    //}
+    function initieeleDataTable(segmenten) {
+        var segment;
+        console.log("segmenten: ", segmenten);
+        dataTable = [['Segment', 'Minuten']];
+
+        for (segment in segmenten) {
+            if (segmenten.hasOwnProperty(segment) && segment.hasOwnProperty("object") && segment.hasOwnProperty("percentage")) {
+                dataTable.push([segment.object, segment.percentage]);
+            }
+        }
+        dataTable.push(['Overige tijd', 1]);
+        console.log("dataTable: ", dataTable);
+    }
 
     $scope.init = function () {
         $scope.getAllImages();
@@ -351,7 +349,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         if (totaleTijd === undefined) {
             totaleTijd = 90;
         }
-        //initieeleDataTable();
+        getDataTableUitDb();
         drawChart();
     };
 
