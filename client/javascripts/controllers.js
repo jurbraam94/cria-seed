@@ -12,13 +12,18 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, DOOD
     $scope.pageName = function () { return $location.path(); };
 
     $scope.userSession = function () {
-        return DOODService.gebruikerSessie.get();
+        var loggedIn = DOODService.gebruikerSessie.get({}, function () {
+            return loggedIn;
+        });
     };
 
+    //Only for use on views, if you want to check if a user is logged in in a controller please call the doodservice gebruikerssessie get function.
     $scope.initGebruiker = function () {
         if ($scope.userSession()) {
-            console.log("session");
+            $scope.loggedIn = true;
             $scope.gebruikersNaam = $scope.userSession().doc.gebruikersnaam;
+        } else {
+            $scope.loggedIn = false;
         }
     };
 
