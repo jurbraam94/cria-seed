@@ -126,6 +126,10 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                             volgnummer: i
                         })
                     );
+                    console.log("gebruikersnaam: ", gebruiker.doc.gebruikersnaam);
+                    console.log("object: ", dataTable[i][0]);
+                    console.log("percentage: ", dataTable[i][1]);
+                    console.log("volgnummer: ", i);
                 }
             }
         });
