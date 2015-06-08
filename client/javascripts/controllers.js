@@ -82,19 +82,19 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         chart = null,
         muisOverIndex;
 
-    //function initieeleDataTable(segmenten) {
-    //    var segment;
-    //    console.log("segmenten: ", segmenten);
-    //    dataTable = [['Segment', 'Minuten']];
-    //
-    //    for (segment in segmenten) {
-    //        if (segmenten.hasOwnProperty(segment) && segment.hasOwnProperty("object") && segment.hasOwnProperty("percentage")) {
-    //            dataTable.push([segment.object, segment.percentage]);
-    //        }
-    //    }
-    //    dataTable.push(['Overige tijd', 1]);
-    //    console.log("dataTable: ", dataTable);
-    //}
+    function initieeleDataTable(segmenten) {
+        var segment;
+        console.log("segmenten: ", segmenten);
+        dataTable = [['Segment', 'Minuten']];
+
+        for (segment in segmenten) {
+            if (segmenten.hasOwnProperty(segment) && segment.hasOwnProperty("object") && segment.hasOwnProperty("percentage")) {
+                dataTable.push([segment.object, segment.percentage]);
+            }
+        }
+        dataTable.push(['Overige tijd', 1]);
+        console.log("dataTable: ", dataTable);
+    }
 
     //function stuurDataNaarDb(data) {
     //    $scope.segmenten = DOODService.uitvaartSegment.post(data, function () {
@@ -154,7 +154,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                 $scope.segmenten = DOODService.uitvaartSegment.query({gebruiker: gebruiker.doc.gebruikersnaam}, function () {
                     if ($scope.segmenten.err === null) {
                         console.log("$scope.segmenten.doc: ", $scope.segmenten.doc);
-                        //initieeleDataTable($scope.segmenten.doc);
+                        initieeleDataTable($scope.segmenten.doc);
                     }
                     $scope.error = $scope.segmenten.err;
                 });
@@ -334,7 +334,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         if (totaleTijd === undefined) {
             totaleTijd = 90;
         }
-        //getDataTableUitDb();
+        getDataTableUitDb();
         console.log("totale tijd: ", totaleTijd);
         drawChart();
     };
