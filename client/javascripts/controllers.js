@@ -8,11 +8,9 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, DOOD
         var isChromium = window.chrome,
             vendorName = window.navigator.vendor;
         if (isChromium !== null && isChromium !== undefined && vendorName === "Google Inc.") {
-            console.log("Chrome");
             $location.path(location);
             $route.reload();
         } else {
-            console.log("Internet");
             $window.location.assign('#/' + location);
             $window.location.reload(true);
         }
@@ -43,7 +41,6 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, DOOD
 myApp.controller('ContactController', function ($scope, DOODService) {
     "use strict";
     $scope.contact = function (contactGegevens) {
-        console.log(contactGegevens);
         $scope.mail = DOODService.contact.post(contactGegevens, function () {
             if ($scope.mail.err) {
                 $scope.success = false;
