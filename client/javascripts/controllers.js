@@ -155,7 +155,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         var poep, gebruiker;
         gebruiker = DOODService.gebruikerSessie.get(function () {
             if ($scope.isEmpty(gebruiker.err)) {
-                $scope.segmenten = DOODService.uitvaartSegment.query({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
+                $scope.segmenten = DOODService.uitvaartSegment.query({gebruiker: gebruiker.doc.gebruikersnaam}, function () {
                     if ($scope.segmenten.err === undefined) {
                         poep = $scope.segmenten.doc; // TODO: ff return ipv van var als t werkt
                         console.log("segmenten: ", poep);
