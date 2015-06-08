@@ -88,8 +88,8 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         dataTable = [['Segment', 'Minuten']];
 
         for (segment in segmenten) {
-            if (segmenten.hasOwnProperty(segment) && segment.hasOwnProperty("object") && segment.hasOwnProperty("percentage")) {
-                dataTable.push([segment.object, segment.percentage]);
+            if (segmenten.hasOwnProperty(segment) && segment.doc.hasOwnProperty("object") && segment.doc.hasOwnProperty("percentage")) {
+                dataTable.push([segment.doc.object, segment.doc.percentage]);
             }
         }
         dataTable.push(['Overige tijd', 1]);
