@@ -17,8 +17,8 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, DOOD
         });
     };
 
-    if ($scope.userSession()) {
-        $scope.gebruikersNaam = $scope.userSession().doc.gebruikersnaam;
+    if ($scope.userSession) {
+        $scope.gebruikersNaam = $scope.userSession.doc.gebruikersnaam;
     }
 
     $rootScope.$on('$routeChangeSuccess', function (e, curr, prev) {
@@ -47,7 +47,7 @@ myApp.controller('GebruikerLoginController', function ($scope, $window, DOODServ
 
     // LOGIN / LOGUIT
     $scope.inEnUitloggen = function (gebruiker) {
-        if ($scope.userSession()) {
+        if ($scope.userSession) {
             DOODService.gebruikerLoguit.post(function () {
                 $scope.goto('login');
             });
