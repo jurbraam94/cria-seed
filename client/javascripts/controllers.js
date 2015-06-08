@@ -151,12 +151,12 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         var gebruiker;
         gebruiker = DOODService.gebruikerSessie.get(function () {
             if (gebruiker.doc.gebruikersnaam !== undefined) {
-                $scope.segmenten = DOODService.uitvaartSegment.query({gebruiker: gebruiker.doc.gebruikersnaam}, function () {
-                    if ($scope.segmenten.err === null) {
-                        console.log("$scope.segmenten: ", $scope.segmenten);
-                        initieeleDataTable($scope.segmenten);
+                var segmenten = DOODService.uitvaartSegment.query({gebruiker: gebruiker.doc.gebruikersnaam}, function () {
+                    if (segmenten.err === null) {
+                        console.log("$scope.segmenten: ", segmenten);
+                        initieeleDataTable(segmenten);
                     }
-                    $scope.error = $scope.segmenten.err;
+                    $scope.error = segmenten.err;
                 });
             }
         });
