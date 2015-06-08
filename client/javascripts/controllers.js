@@ -337,8 +337,8 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         console.log("segmenten: ", segmenten);
         dataTable = [['Segment', 'Minuten']];
 
-            for (segment in segmenten) {
-                if (segmenten.hasOwnProperty(segment) && segment.hasOwnProperty("object") && segment.hasOwnProperty("percentage")) {
+        for (segment in segmenten) {
+            if (segmenten.hasOwnProperty(segment) && segment.hasOwnProperty("object") && segment.hasOwnProperty("percentage")) {
                 dataTable.push([segment.object, segment.percentage]);
             }
         }
