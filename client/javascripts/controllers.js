@@ -78,13 +78,29 @@ myApp.controller('GebruikerLoginController', function ($scope, DOODService, $rou
 myApp.controller('SamenstellenController', function ($scope, DOODService, $routeParams, $location) {
     "use strict";
     var totaleTijd,
-        dataTable = [
-            ['Segment', 'Minuten'],
-            ['Overige tijd', 1]
-        ],
+        dataTable,
         kleuren = ['#afafaf'],
         chart = null,
         muisOverIndex;
+
+    //= [
+    //    ['Segment', 'Minuten'],
+    //    ['Overige tijd', 1]
+    //]
+
+    function initieeleDataTable(segmenten) {
+        var segment;
+        console.log("segmenten: ", segmenten);
+        dataTable = [['Segment', 'Minuten']];
+
+        for (segment in segmenten) {
+            if (segmenten.hasOwnProperty(segment) && segment.hasOwnProperty("object") && segment.hasOwnProperty("percentage")) {
+                dataTable.push([segment.object, segment.percentage]);
+            }
+        }
+        dataTable.push(['Overige tijd', 1]);
+        console.log("dataTable: ", dataTable);
+    }
 
     //function stuurDataNaarDb(data) {
     //    $scope.segmenten = DOODService.uitvaartSegment.post(data, function () {
@@ -315,20 +331,6 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
 
         $scope.afbeeldingen = imgArray;
     };
-
-    function initieeleDataTable(segmenten) {
-        var segment;
-        console.log("segmenten: ", segmenten);
-        dataTable = [['Segment', 'Minuten']];
-
-        for (segment in segmenten) {
-            if (segmenten.hasOwnProperty(segment) && segment.hasOwnProperty("object") && segment.hasOwnProperty("percentage")) {
-                dataTable.push([segment.object, segment.percentage]);
-            }
-        }
-        dataTable.push(['Overige tijd', 1]);
-        console.log("dataTable: ", dataTable);
-    }
 
     $scope.init = function () {
         $scope.getAllImages();
