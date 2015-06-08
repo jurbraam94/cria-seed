@@ -11,11 +11,7 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, DOOD
 
     $scope.pageName = function () { return $location.path(); };
 
-    $scope.userSession = function () {
-        $scope.loggedIn = DOODService.gebruikerSessie.get({}, function () {
-            return $scope.loggedIn;
-        });
-    };
+    $scope.userSession = DOODService.gebruikerSessie.get();
 
 
 
