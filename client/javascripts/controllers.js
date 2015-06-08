@@ -150,6 +150,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                         returnWaarde = uitvaartSamenstellen.doc.tijdsduur;
                         console.log("uitvaartSamenstellen: ", uitvaartSamenstellen);
                         console.log("returnWaarde 1: ", returnWaarde);
+                        return returnWaarde;
                     }
                     $scope.error = uitvaartSamenstellen.err;
                 });
