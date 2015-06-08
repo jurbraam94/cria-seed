@@ -18,7 +18,7 @@
             db.gebruikerLoguit = $resource('/api/gebruiker/loguit', {}, actions);
             db.gebruikerSessie = $resource('/api/gebruiker/sessie', {}, actions);
             db.uitvaartSamenstellen = $resource('/api/uitvaartSamenstellen/:gebruikersnaam', {"gebruikersnaam": "gebruikersnaam"}, actions);
-            db.uitvaartSegment = $resource('/api/segment/:gebruiker', {"gebruikersnaam": "gebruiker"}, actions);
+            db.uitvaartSegment = $resource('/api/segment/:gebruiker', {"gebruiker": "gebruikersnaam"}, actions);
             db.contact = $resource('/api/gebruiker/mail', {}, actions);
             return db;
         }]);
