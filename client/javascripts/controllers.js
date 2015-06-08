@@ -125,7 +125,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                     //verwijderen = { objecten[i].gebruikersnaam, objecten[i].volgnummer };
                     //verwijderSegmentUitDb(verwijderen);
                     stuurDataNaarDb({
-                        gebruikersnaam: gebruiker.doc.gebruikersNaam,
+                        gebruikersnaam: gebruiker.doc.gebruikersnaam,
                         object: dataTable[i][0],
                         percentage: dataTable[i][1],
                         volgnummer: i
@@ -139,7 +139,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         var poep, gebruiker;
         gebruiker = DOODService.gebruikerSessie.get(function () {
             if ($scope.isEmpty(gebruiker.err)) {
-                $scope.uitvaartSamenstellen = DOODService.uitvaartSamenstellen.get({gebruikersnaam: gebruiker.doc.gebruikersNaam}, function () {
+                $scope.uitvaartSamenstellen = DOODService.uitvaartSamenstellen.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
                     if ($scope.uitvaartSamenstellen.err === undefined) {
                         poep = $scope.uitvaartSamenstellen.doc.tijdsduur; // TODO: ff return ipv van var als t werkt
                         console.log("tijdsduur uit uitvaartSamenstellen: ", poep);
@@ -155,7 +155,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         var poep, gebruiker;
         gebruiker = DOODService.gebruikerSessie.get(function () {
             if ($scope.isEmpty(gebruiker.err)) {
-                $scope.segmenten = DOODService.uitvaartSegment.query({gebruikersnaam: gebruiker.doc.gebruikersNaam}, function () {
+                $scope.segmenten = DOODService.uitvaartSegment.query({gebruiker: gebruiker.doc.gebruikersnaam}, function () {
                     if ($scope.segmenten.err === undefined) {
                         poep = $scope.segmenten.doc; // TODO: ff return ipv van var als t werkt
                         console.log("segmenten: ", poep);
