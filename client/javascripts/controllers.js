@@ -151,21 +151,21 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         });
     }
 
-    function getDataTableUitDb() {
-        var poep, gebruiker;
-        gebruiker = DOODService.gebruikerSessie.get(function () {
-            if ($scope.isEmpty(gebruiker.err)) {
-                $scope.segmenten = DOODService.uitvaartSegment.query({gebruiker: gebruiker.doc.gebruikersnaam}, function () {
-                    if ($scope.segmenten.err === undefined) {
-                        poep = $scope.segmenten.doc; // TODO: ff return ipv van var als t werkt
-                        console.log("segmenten: ", poep);
-                        return poep;
-                    }
-                    $scope.error = $scope.segmenten.err;
-                });
-            }
-        });
-    }
+    //function getDataTableUitDb() {
+    //    var poep, gebruiker;
+    //    gebruiker = DOODService.gebruikerSessie.get(function () {
+    //        if ($scope.isEmpty(gebruiker.err)) {
+    //            $scope.segmenten = DOODService.uitvaartSegment.query({gebruiker: gebruiker.doc.gebruikersnaam}, function () {
+    //                if ($scope.segmenten.err === undefined) {
+    //                    poep = $scope.segmenten.doc; // TODO: ff return ipv van var als t werkt
+    //                    console.log("segmenten: ", poep);
+    //                    return poep;
+    //                }
+    //                $scope.error = $scope.segmenten.err;
+    //            });
+    //        }
+    //    });
+    //}
 
     function getTotaleTijdEnIndexVanOverigeTijd() {
         var i, overigeTijdIndex, echteTotaleTijd = 0;
@@ -332,19 +332,19 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         $scope.afbeeldingen = imgArray;
     };
 
-    function initieeleDataTable() {
-        var segment, segmenten = getDataTableUitDb();
-        console.log("segmenten: ", segmenten);
-        dataTable = [['Segment', 'Minuten']];
-
-        for (segment in segmenten) {
-            if (segmenten.hasOwnProperty(segment) && segment.hasOwnProperty("object") && segment.hasOwnProperty("percentage")) {
-                dataTable.push([segment.object, segment.percentage]);
-            }
-        }
-        dataTable.push(['Overige tijd', 1]);
-        console.log("dataTable: ", dataTable);
-    }
+    //function initieeleDataTable() {
+    //    var segment, segmenten = getDataTableUitDb();
+    //    console.log("segmenten: ", segmenten);
+    //    dataTable = [['Segment', 'Minuten']];
+    //
+    //    for (segment in segmenten) {
+    //        if (segmenten.hasOwnProperty(segment) && segment.hasOwnProperty("object") && segment.hasOwnProperty("percentage")) {
+    //            dataTable.push([segment.object, segment.percentage]);
+    //        }
+    //    }
+    //    dataTable.push(['Overige tijd', 1]);
+    //    console.log("dataTable: ", dataTable);
+    //}
 
     $scope.init = function () {
         $scope.getAllImages();
