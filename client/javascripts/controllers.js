@@ -77,7 +77,7 @@ myApp.controller('GebruikerLoginController', function ($scope, DOODService, $rou
 myApp.controller('SamenstellenController', function ($scope, DOODService, $routeParams, $location) {
     "use strict";
     var totaleTijd,
-        dataTable= [
+        dataTable = [
             ['Segment', 'Minuten'],
             ['Overige tijd', 1]
         ],
