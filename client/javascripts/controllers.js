@@ -11,7 +11,7 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, DOOD
 
     $scope.pageName = function () { return $location.path(); };
 
-    $scope.userSession = function () {
+    $scope.userLoggedIn = function () {
         var session = DOODService.gebruikerSessie.get({}, function () {
             if (session.err === null) {
                 return true;
@@ -20,11 +20,20 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, DOOD
         });
     };
 
+    $scope.userName = function () {
+        var gebruiker = DOODService.gebruikerSessie.get({}, function () {
+            if (gebruiker.err === null) {
+                return gebruiker.doc.gebruikersnaam;
+            }
+            return gebruiker.err;
+        });
+    };
+
     //Only for use on views, if you want to check if a user is logged in in a controller please call the doodservice gebruikerssessie get function.
     $scope.initGebruiker = function () {
-        if ($scope.userSession().err === null) {
+        if ($scope.userLoggedIn()) {
             $scope.loggedIn = true;
-            $scope.gebruikersNaam = $scope.userSession().doc.gebruikersnaam;
+            $scope.gebruikersNaam = $scope.userName();
         } else {
             $scope.loggedIn = false;
         }
