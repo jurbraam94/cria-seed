@@ -103,24 +103,18 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         muisOverIndex;
 
     //function stuurDataNaarDb(data) {
-    //    var poep;
     //    $scope.segmenten = DOODService.uitvaartSegment.post(data, function () {
     //        if ($scope.segmenten.err === undefined) {
-    //            poep = $scope.segmenten; // TODO: ff return ipv van var als t werkt
-    //            console.log("segmenten: ", poep);
-    //            return poep;
+    //            return $scope.segmenten;
     //        }
     //        $scope.error = $scope.segmenten.err;
     //    });
     //}
 
     //function verwijderSegmentUitDb(data) {
-    //    var poep;
     //    $scope.segmenten = DOODService.uitvaartSegment.delete(data, function () {
     //        if ($scope.segmenten.err === undefined) {
-    //            poep = $scope.segmenten; // TODO: ff return ipv van var als t werkt
-    //            console.log("segmenten: ", poep);
-    //            return poep;
+    //            return $scope.segmenten;
     //        }
     //        $scope.error = $scope.segmenten.err;
     //    });
@@ -132,7 +126,6 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
     //    gebruiker = DOODService.gebruikerSessie.get(function () {
     //        if ($scope.isEmpty(gebruiker.err)) {
     //            for (i = 1; i < dataTable.length - 1; i += 1) {
-    //                console.log("datatable: ", dataTable[i]);
     //                //verwijderen = { objecten[i].gebruikersnaam, objecten[i].volgnummer };
     //                //verwijderSegmentUitDb(verwijderen);
     //                stuurDataNaarDb({
@@ -147,14 +140,12 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
     //}
 
     function getTijdsduurUitDb() {
-        var poep, gebruiker;
+        var gebruiker;
         gebruiker = DOODService.gebruikerSessie.get(function () {
             if ($scope.isEmpty(gebruiker.err)) {
                 $scope.uitvaartSamenstellen = DOODService.uitvaartSamenstellen.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
                     if ($scope.uitvaartSamenstellen.err === undefined) {
-                        poep = $scope.uitvaartSamenstellen.doc.tijdsduur; // TODO: ff return ipv van var als t werkt
-                        console.log("tijdsduur uit uitvaartSamenstellen: ", poep);
-                        return poep;
+                        return $scope.uitvaartSamenstellen.doc.tijdsduur;
                     }
                     $scope.error = $scope.uitvaartSamenstellen.err;
                 });
@@ -163,14 +154,12 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
     }
 
     //function getDataTableUitDb() {
-    //    var poep, gebruiker;
+    //    var gebruiker;
     //    gebruiker = DOODService.gebruikerSessie.get(function () {
     //        if ($scope.isEmpty(gebruiker.err)) {
     //            $scope.segmenten = DOODService.uitvaartSegment.query({gebruiker: gebruiker.doc.gebruikersnaam}, function () {
     //                if ($scope.segmenten.err === undefined) {
-    //                    poep = $scope.segmenten.doc; // TODO: ff return ipv van var als t werkt
-    //                    console.log("segmenten: ", poep);
-    //                    return poep;
+    //                    return $scope.segmenten.doc;
     //                }
     //                $scope.error = $scope.segmenten.err;
     //            });
