@@ -5,16 +5,8 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, DOOD
     "use strict";
 
     $scope.goto = function (location) {
-        var isChromium = window.chrome,
-            vendorName = window.navigator.vendor;
-        if (isChromium !== null && isChromium !== undefined && vendorName === "Google Inc.") {
-            $location.path(location);
-            $route.reload();
-        } else {
-            $window.location.assign('#/' + location);
-            $window.location.reload(true);
-        }
-
+        $location.path(location);
+        $route.reload();
     };
 
     $scope.pageName = function () {
