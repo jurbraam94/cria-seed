@@ -135,7 +135,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
     //}
 
     function getTijdsduurUitDb() {
-        var returnWaarde, gebruiker;
+        var gebruiker;
         gebruiker = DOODService.gebruikerSessie.get(function () {
             if (gebruiker.doc.gebruikersnaam !== null) {
                 $scope.uitvaartSamenstellen = DOODService.uitvaartSamenstellen.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
