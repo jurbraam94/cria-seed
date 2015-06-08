@@ -95,7 +95,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
 
     function verwijderSegmentUitDb(data, callback) {
         $scope.segmenten = DOODService.uitvaartSegment.delete(data, function () {
-            if (gebruiker.doc.gebruikersnaam !== undefined) {
+            if ($scope.segmenten.err === null) {
                 callback();
             }
             $scope.error = $scope.segmenten.err;
@@ -104,7 +104,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
 
     function stuurDataNaarDb(data) {
         $scope.segmenten = DOODService.uitvaartSegment.post(data, function () {
-            if (gebruiker.doc.gebruikersnaam !== undefined) {
+            if ($scope.segmenten.err === null) {
                 return $scope.segmenten;
             }
             $scope.error = $scope.segmenten.err;
