@@ -334,7 +334,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         // data uit db laden
         getTijdsduurUitDb();
         getDataTableUitDb(function () {
-            console.log("Test0", totaleTijd)
+            console.log("Test0", totaleTijd);
         });
 
         console.log("totale tijd: ", totaleTijd);
