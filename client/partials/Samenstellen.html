@@ -1,11 +1,9 @@
-<div class="samenstellenPagina" ng-init="init()">
-    <div class="leftmenubar col-lg-2 col-md-2 col-xs-2">
+    <div ng-init="init()" class="leftmenubar col-lg-2 col-md-2 col-xs-2">
         <div class="boxje" ng-repeat="afbeelding in afbeeldingen">
             <img data-ng-src="{{afbeelding.src}}" id="{{afbeelding.id}}" ng-drag="true" ng-drag-data="afbeelding.id" />
         </div>
     </div>
 
-    <div class="row">
         <form name="tijdForm" class="col-lg-5 col-md-5 col-xs-5 tijdsduurForm">
             <div class="form-group inputMargin">
                 <label class="inputLabel witteText">Totale tijd in minuten</label>
@@ -17,5 +15,3 @@
         </form>
 
         <div id="piechart" class="col-lg-5 col-md-5 col-xs-5 pull-right" ng-drop="true" ng-drop-success="onDropComplete($data, $event)"></div>
-    </div>
-</div>
