@@ -157,7 +157,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             var gebruiker;
             gebruiker = DOODService.gebruikerSessie.get(function () {
                 if (gebruiker.doc.gebruikersnaam !== undefined) {
-                    var segmenten = DOODService.uitvaartSegmentLijst.get({gebruiker: gebruiker.doc.gebruikersnaam}, function () {
+                    var segmenten = DOODService.uitvaartSegmentLijst.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
                         if (segmenten.err === null) {
                             initieeleDataTable(segmenten);
                             callback();
