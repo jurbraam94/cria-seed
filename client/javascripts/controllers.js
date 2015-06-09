@@ -93,28 +93,22 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             dataTable.push(['Overige tijd', 1]);
         },
 
-        verwijderEnMaakObject = function (gebruikersnaam, i, callback) {
-            $scope.segmenten = DOODService.uitvaartSegmentDetailsEnVerwijderen.delete({gebruikersnaam: gebruikersnaam, volgnummer: i}, function () { //, gebruikersnaam: data.gebruikersnaam, object: data.object, percentage: data.percentage,  volgnummer: data.volgnummer
-                if ($scope.segmenten.err === null) {
-                    console.log("Verwijderen voor " + i + "gelukt.");
-                    $scope.segmenten = DOODService.uitvaartSegmentPost.post({gebruikersnaam: gebruikersnaam, object: dataTable[i][0], percentage: dataTable[i][1], volgnummer: i},
-                        function () {
-                            if ($scope.segmenten.err === null) {
-                                console.log("Post voor " + i + "gelukt.");
-                                //belt terug als het segment verwijderd en opnieuw gepost is
-                                callback();
-                            }
-                            $scope.error = $scope.segmenten.err;
-                        });
-                }
-                $scope.error = $scope.segmenten.err;
-            });
+        maakObject = function (gebruikersnaam, i, callback) {
+            $scope.segmenten = DOODService.uitvaartSegmentPost.post({gebruikersnaam: gebruikersnaam, object: dataTable[i][0], percentage: dataTable[i][1], volgnummer: i},
+                function () {
+                    if ($scope.segmenten.err === null) {
+                        console.log("Post voor " + i + "gelukt.");
+                        //belt terug als het segment verwijderd en opnieuw gepost is
+                        callback();
+                    }
+                    $scope.error = $scope.segmenten.err;
+                });
         },
 
         stuurDataTableNaarDb = function () {
             var i = 1,
                 stuurDataLoop = function (gebruikersnaam) {
-                    verwijderEnMaakObject(gebruikersnaam, i, function () {
+                    maakObject(gebruikersnaam, i, function () {
                         i += 1;
                         if (i < dataTable.length - 1) {
                             stuurDataLoop(gebruikersnaam);
@@ -123,7 +117,12 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                 },
                 gebruiker = DOODService.gebruikerSessie.get(function () {
                     if (gebruiker.doc.gebruikersnaam !== undefined) {
-                        stuurDataLoop(gebruiker.doc.gebruikersnaam);
+                        $scope.verwijderAlleSegmenten = DOODService.uitvaartSegmentenVerwijderen.delete({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
+                            if ($scope.verwijderAlleSegmenten.err === null) {
+                                console.log("Alle segmenten zijn verwijderd.");
+                                stuurDataLoop(gebruiker.doc.gebruikersnaam);
+                            }
+                        });
                     }
                 });
         },
