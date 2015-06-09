@@ -117,7 +117,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                     verwijderEnMaakObject(gebruikersnaam, i, function () {
                         i += 1;
                         if (i < dataTable.length - 2) {
-                            stuurDataLoop();
+                            stuurDataLoop(gebruikersnaam);
                         }
                     });
                 },
