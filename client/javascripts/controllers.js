@@ -350,11 +350,15 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
 
 
 myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
-    "use strict"
+    "use strict";
+
+    var voegLiedjeToe = function (titel, artiest) {
+        $scope.zoekResultaat.push({artiest: artiest, titel: titel});
+    };
 
     $scope.muziekDb =  [
         {artiest: "Coon", titel: "Million miles"},
-        {artiest: "Adele",titel:  "Rain"},
+        {artiest: "Adele", titel:  "Rain"},
         {artiest: "Diggy Dex", titel: "De vallende sterren"},
         {artiest: "one republic", titel: "Counting stars"}
     ];
@@ -362,18 +366,15 @@ myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
     $scope.zoekResultaat = [];
     $scope.afspeellijst = [];
 
-    function voegLiedjeToe(titel, artiest){
-        $scope.zoekResultaat.push({artiest: artiest, titel: titel});
-    }
+
 
     $scope.voegToeBijAfspeellijst = function (liedje) {
         $scope.afspeellijst.push(liedje);
     };
 
-    $scope.zoek = function(zoekopdracht) {
-        var i, log = [];
+    $scope.zoek = function (zoekopdracht) {
         $scope.error = "Vul een titel";
-        if (zoekopdracht !== "" ) {
+        if (zoekopdracht !== "") {
             if ($scope.zoekResultaat !== null) {
                 $scope.zoekResultaat = [];
             }
