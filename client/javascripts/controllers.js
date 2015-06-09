@@ -94,7 +94,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         },
 
         verwijderSegmentUitDb = function (data, callback) {
-            $scope.segmenten = DOODService.uitvaartSegment.delete(data, function () {
+            $scope.segmenten = DOODService.uitvaartSegment.delete({gebruiker: data.gebruikersnaam, gebruikersnaam: data.gebruikersnaam, object: data.object, percentage: data.percentage, volgnummer: data.volgnummer}, function () {
                 if ($scope.segmenten.err === null) {
                     callback();
                 }
