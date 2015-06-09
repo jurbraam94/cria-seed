@@ -20,7 +20,7 @@
             db.uitvaartSamenstellen = $resource('/api/uitvaartSamenstellen/:gebruikersnaam', {"gebruikersnaam": "gebruikersnaam"}, actions);
 
             db.uitvaartSegmentPost = $resource('/api/segment/', {}, actions);
-            db.uitvaartSegmentLijst = $resource('/api/segment/:gebruikersnaam', {}, actions);
+            db.uitvaartSegmentLijst = $resource('/api/segment/:gebruikersnaam', {"gebruikersnaam": "@gebruikersnaam"}, actions);
             db.uitvaartSegmentDetailsEnVerwijderen = $resource('/api/segment/:gebruikersnaam/:volgnummer', {"gebruikersnaam": "@gebruikersnaam", "volgnummer": "@volgnummer"}, actions);
 
             db.contact = $resource('/api/gebruiker/mail', {}, actions);

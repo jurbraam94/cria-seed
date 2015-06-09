@@ -93,40 +93,20 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             dataTable.push(['Overige tijd', 1]);
         },
 
-        verwijderSegmentUitDb = function (data, callback) {
-            $scope.segmenten = DOODService.uitvaartSegmentDetailsEnVerwijderen.delete({gebruikersnaam: data.gebruikersnaam, volgnummer: data.volgnummer}, function () { //, gebruikersnaam: data.gebruikersnaam, object: data.object, percentage: data.percentage,  volgnummer: data.volgnummer
+        verwijderEnMaakObject = function (gebruikersnaam, i) {
+            $scope.segmenten = DOODService.uitvaartSegmentDetailsEnVerwijderen.delete({gebruikersnaam: gebruikersnaam, volgnummer: i}, function () { //, gebruikersnaam: data.gebruikersnaam, object: data.object, percentage: data.percentage,  volgnummer: data.volgnummer
                 if ($scope.segmenten.err === null) {
-                    callback();
+                    console.log("Verwijderen voor " + i + "gelukt.");
+                    $scope.segmenten = DOODService.uitvaartSegmentPost.post({gebruikersnaam: gebruikersnaam.doc.gebruikersnaam, object: dataTable[i][0], percentage: dataTable[i][1], volgnummer: i},
+                        function () {
+                            if ($scope.segmenten.err === null) {
+                                console.log("Post voor " + i + "gelukt.");
+                            }
+                            $scope.error = $scope.segmenten.err;
+                        });
                 }
                 $scope.error = $scope.segmenten.err;
             });
-        },
-
-        stuurDataNaarDb = function (data) {
-            $scope.segmenten = DOODService.uitvaartSegmentPost.post(data, function () {
-                if ($scope.segmenten.err === null) {
-                    console.log("post response: ", $scope.segmenten);
-                }
-                $scope.error = $scope.segmenten.err;
-            });
-        },
-
-        ikKanGeenNaamBedenkenVoorDezeFuckingKankerFunctieDieTotaalNietWerktGodverWTF = function (gebruiker, i) {
-            verwijderSegmentUitDb(
-                {gebruikersnaam: gebruiker.doc.gebruikersnaam, volgnummer: i},
-                function () {
-                    stuurDataNaarDb({
-                        gebruikersnaam: gebruiker.doc.gebruikersnaam,
-                        object: dataTable[i][0],
-                        percentage: dataTable[i][1],
-                        volgnummer: i
-                    });
-                    console.log("gebruikersnaam 1: ", gebruiker.doc.gebruikersnaam);
-                    console.log("object 1: ", dataTable[i][0]);
-                    console.log("percentage 1: ", dataTable[i][1]);
-                    console.log("volgnummer 1: ", i);
-                }
-            );
         },
 
         stuurDataTableNaarDb = function () {
@@ -135,11 +115,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             gebruiker = DOODService.gebruikerSessie.get(function () {
                 if (gebruiker.doc.gebruikersnaam !== undefined) {
                     for (i = 1; i < dataTable.length - 1; i += 1) {
-                        ikKanGeenNaamBedenkenVoorDezeFuckingKankerFunctieDieTotaalNietWerktGodverWTF(gebruiker, i);
-                        console.log("gebruikersnaam 2: ", gebruiker.doc.gebruikersnaam);
-                        console.log("object 2: ", dataTable[i][0]);
-                        console.log("percentage 2: ", dataTable[i][1]);
-                        console.log("volgnummer 2: ", i);
+                        verwijderEnMaakObject(gebruiker.doc.gebruikersnaam, i);
                     }
                 }
             });
