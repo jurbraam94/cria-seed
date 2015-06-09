@@ -322,8 +322,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             getDataTableUitDb(function () {
                 // Dit moet van google. Waarom? Goeie vraag
                 google.setOnLoadCallback(drawChart());
-
-                window.onbeforeunload = stuurDataTableNaarDb;
+                window.addEventListener("beforeunload", stuurDataTableNaarDb);
             });
         });
     };
