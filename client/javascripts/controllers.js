@@ -119,12 +119,14 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                     for (i = 1; i < dataTable.length - 1; i += 1) {
                         verwijderSegmentUitDb(
                             { gebruikersnaam: gebruiker.doc.gebruikersnaam, volgnummer: i },
-                            function () {stuurDataNaarDb({
-                                gebruikersnaam: gebruiker.doc.gebruikersnaam,
-                                object: dataTable[i][0],
-                                percentage: dataTable[i][1],
-                                volgnummer: i
-                            })}
+                            function () {
+                                stuurDataNaarDb({
+                                    gebruikersnaam: gebruiker.doc.gebruikersnaam,
+                                    object: dataTable[i][0],
+                                    percentage: dataTable[i][1],
+                                    volgnummer: i
+                                })
+                            }
                         );
                         console.log("gebruikersnaam: ", gebruiker.doc.gebruikersnaam);
                         console.log("object: ", dataTable[i][0]);
