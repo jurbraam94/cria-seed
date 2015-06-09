@@ -104,15 +104,13 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                 });
         },
 
-        stuurDataTableNaarDb = function (callback) {
+        stuurDataTableNaarDb = function () {
             var i = 1,
                 stuurDataLoop = function (gebruikersnaam) {
                     maakObject(gebruikersnaam, i, function () {
                         i += 1;
                         if (i < dataTable.length - 1) {
                             stuurDataLoop(gebruikersnaam);
-                        } else {
-                            callback();
                         }
                     });
                 },
@@ -325,7 +323,8 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                 // Dit moet van google. Waarom? Goeie vraag
                 google.setOnLoadCallback(drawChart());
                 window.onbeforeunload = function () {
-                    return stuurDataTableNaarDb();
+                    stuurDataTableNaarDb();
+                    return 'Wilt u de pagina echt verlaten? We hebben uw data voor de zekerheid opgeslagen.';
                 };
             });
         });
