@@ -118,7 +118,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                 if (gebruiker.doc.gebruikersnaam !== undefined) {
                     for (i = 1; i < dataTable.length - 1; i += 1) {
                         verwijderSegmentUitDb(
-                            { gebruikersnaam: gebruiker.doc.gebruikersnaam, volgnummer: i },
+                            { gebruikersnaam: gebruiker.doc.gebruikersnaam, volgnr: i },
                             function () {
                                 stuurDataNaarDb({
                                     gebruikersnaam: gebruiker.doc.gebruikersnaam,
