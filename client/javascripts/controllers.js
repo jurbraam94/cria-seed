@@ -111,21 +111,27 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             });
         },
 
+        ikKanGeenNaamBedenkenVoorDezeFunctie = function (gebruiker, i) {
+            verwijderSegmentUitDb(
+                {gebruikersnaam: gebruiker.doc.gebruikersnaam, volgnummer: i},
+                function () {
+                    stuurDataNaarDb({
+                        gebruikersnaam: gebruiker.doc.gebruikersnaam,
+                        object: dataTable[i][0],
+                        percentage: dataTable[i][1],
+                        volgnummer: i
+                    });
+                }
+            );
+        },
+
         stuurDataTableNaarDb = function () {
             var i, gebruiker;
 
             gebruiker = DOODService.gebruikerSessie.get(function () {
                 if (gebruiker.doc.gebruikersnaam !== undefined) {
                     for (i = 1; i < dataTable.length - 1; i += 1) {
-                        verwijderSegmentUitDb(
-                            { gebruikersnaam: gebruiker.doc.gebruikersnaam, volgnummer: i },
-                            stuurDataNaarDb({
-                                gebruikersnaam: gebruiker.doc.gebruikersnaam,
-                                object: dataTable[i][0],
-                                percentage: dataTable[i][1],
-                                volgnummer: i
-                            })
-                        );
+                        ikKanGeenNaamBedenkenVoorDezeFunctie(gebruiker, i);
                         console.log("gebruikersnaam: ", gebruiker.doc.gebruikersnaam);
                         console.log("object: ", dataTable[i][0]);
                         console.log("percentage: ", dataTable[i][1]);
