@@ -93,7 +93,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             dataTable.push(['Overige tijd', 1]);
         },
 
-        verwijderEnMaakObject = function (gebruikersnaam, i) {
+        verwijderEnMaakObject = function (gebruikersnaam, i, callback) {
             $scope.segmenten = DOODService.uitvaartSegmentDetailsEnVerwijderen.delete({gebruikersnaam: gebruikersnaam, volgnummer: i}, function () { //, gebruikersnaam: data.gebruikersnaam, object: data.object, percentage: data.percentage,  volgnummer: data.volgnummer
                 if ($scope.segmenten.err === null) {
                     console.log("Verwijderen voor " + i + "gelukt.");
@@ -101,6 +101,8 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                         function () {
                             if ($scope.segmenten.err === null) {
                                 console.log("Post voor " + i + "gelukt.");
+                                //belt terug als het segment verwijderd en opnieuw gepost is
+                                callback();
                             }
                             $scope.error = $scope.segmenten.err;
                         });
@@ -110,17 +112,20 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         },
 
         stuurDataTableNaarDb = function () {
-            var i, gebruiker;
-            console.log(dataTable);
-
-            gebruiker = DOODService.gebruikerSessie.get(function () {
-                if (gebruiker.doc.gebruikersnaam !== undefined) {
-                    for (i = 1; i < dataTable.length - 1; i += 1) {
-                        console.log(gebruiker.doc.gebruikersnaam, i);
-                        verwijderEnMaakObject(gebruiker.doc.gebruikersnaam, i);
+            var i = 1,
+                stuurDataLoop = function (gebruikersnaam) {
+                    verwijderEnMaakObject(gebruikersnaam, i, function () {
+                        i += 1;
+                        if (i < dataTable.length - 1) {
+                            stuurDataLoop();
+                        }
+                    });
+                },
+                gebruiker = DOODService.gebruikerSessie.get(function () {
+                    if (gebruiker.doc.gebruikersnaam !== undefined) {
+                        stuurDataLoop(gebruiker.doc.gebruikersnaam);
                     }
-                }
-            });
+                });
         },
 
         getTijdsduurUitDb = function (callback) {
