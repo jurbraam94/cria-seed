@@ -11,6 +11,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', 'spotify'])
 =======
 var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', 'ngDragDrop', 'ngAnimate'])
@@ -20,6 +21,9 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', '
 >>>>>>> production
 =======
 var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', 'ngAnimate', 'ngDraggable'])
+>>>>>>> production
+=======
+var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', 'ngAnimate', 'ngDraggable', 'spotify'])
 >>>>>>> production
     .config(['$routeProvider', function ($routeProvider) {
         "use strict";

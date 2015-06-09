@@ -80,155 +80,221 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         dataTable,
         kleuren = ['#afafaf'],
         chart = null,
-        muisOverIndex;
+        muisOverIndex,
 
-    function initieeleDataTable(segmenten) {
-        var i;
-        dataTable = [['Segment', 'Minuten']];
+        initieeleDataTable = function (segmenten) {
+            var i;
+            dataTable = [['Segment', 'Minuten']];
 
-        for (i = 0; i < segmenten.doc.length; i += 1) {
-            dataTable.push([segmenten.doc[i].object, segmenten.doc[i].percentage]);
-        }
-
-        dataTable.push(['Overige tijd', 1]);
-    }
-
-    function verwijderSegmentUitDb(data, callback) {
-        $scope.segmenten = DOODService.uitvaartSegment.delete(data, function () {
-            if ($scope.segmenten.err === null) {
-                callback();
+            for (i = 0; i < segmenten.doc.length; i += 1) {
+                dataTable.push([segmenten.doc[i].object, segmenten.doc[i].percentage]);
             }
-            $scope.error = $scope.segmenten.err;
-        });
-    }
 
-    function stuurDataNaarDb(data) {
-        $scope.segmenten = DOODService.uitvaartSegment.post(data, function () {
-            if ($scope.segmenten.err === null) {
-                console.log("post response: ", $scope.segmenten);
-            }
-            $scope.error = $scope.segmenten.err;
-        });
-    }
+            dataTable.push(['Overige tijd', 1]);
+        },
 
-    function stuurDataTableNaarDb() {
-        var i, gebruiker;
+        verwijderSegmentUitDb = function (data, callback) {
+            $scope.segmenten = DOODService.uitvaartSegment.delete(data, function () {
+                if ($scope.segmenten.err === null) {
+                    callback();
+                }
+                $scope.error = $scope.segmenten.err;
+            });
+        },
 
-        gebruiker = DOODService.gebruikerSessie.get(function () {
-            if (gebruiker.doc.gebruikersnaam !== undefined) {
-                for (i = 1; i < dataTable.length - 1; i += 1) {
-                    verwijderSegmentUitDb(
-                        { gebruikersnaam: gebruiker.doc.gebruikersnaam, volgnummer: i },
-                        stuurDataNaarDb({
-                            gebruikersnaam: gebruiker.doc.gebruikersnaam,
-                            object: dataTable[i][0],
-                            percentage: dataTable[i][1],
-                            volgnummer: i
-                        })
-                    );
-                    console.log("gebruikersnaam: ", gebruiker.doc.gebruikersnaam);
-                    console.log("object: ", dataTable[i][0]);
-                    console.log("percentage: ", dataTable[i][1]);
-                    console.log("volgnummer: ", i);
+        stuurDataNaarDb = function (data) {
+            $scope.segmenten = DOODService.uitvaartSegment.post(data, function () {
+                if ($scope.segmenten.err === null) {
+                    console.log("post response: ", $scope.segmenten);
+                }
+                $scope.error = $scope.segmenten.err;
+            });
+        },
+
+        stuurDataTableNaarDb = function () {
+            var i, gebruiker;
+
+            gebruiker = DOODService.gebruikerSessie.get(function () {
+                if (gebruiker.doc.gebruikersnaam !== undefined) {
+                    for (i = 1; i < dataTable.length - 1; i += 1) {
+                        verwijderSegmentUitDb(
+                            { gebruikersnaam: gebruiker.doc.gebruikersnaam, volgnummer: i },
+                            stuurDataNaarDb({
+                                gebruikersnaam: gebruiker.doc.gebruikersnaam,
+                                object: dataTable[i][0],
+                                percentage: dataTable[i][1],
+                                volgnummer: i
+                            })
+                        );
+                        console.log("gebruikersnaam: ", gebruiker.doc.gebruikersnaam);
+                        console.log("object: ", dataTable[i][0]);
+                        console.log("percentage: ", dataTable[i][1]);
+                        console.log("volgnummer: ", i);
+                    }
+                }
+            });
+        },
+
+        getTijdsduurUitDb = function (callback) {
+            var gebruiker;
+            gebruiker = DOODService.gebruikerSessie.get(function () {
+                if (gebruiker.doc.gebruikersnaam !== undefined) {
+                    $scope.uitvaartSamenstellen = DOODService.uitvaartSamenstellen.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
+                        if ($scope.uitvaartSamenstellen.err === null) {
+                            totaleTijd = $scope.uitvaartSamenstellen.doc.tijdsduur;
+                            if (totaleTijd === undefined) {
+                                totaleTijd = 90;
+                            }
+                            callback();
+                        }
+                        $scope.error = $scope.uitvaartSamenstellen.err;
+                    });
+                }
+            });
+        },
+
+        getDataTableUitDb = function getDataTableUitDb(callback) {
+            var gebruiker;
+            gebruiker = DOODService.gebruikerSessie.get(function () {
+                if (gebruiker.doc.gebruikersnaam !== undefined) {
+                    var segmenten = DOODService.uitvaartSegment.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
+                        if (segmenten.err === null) {
+                            initieeleDataTable(segmenten);
+                            callback();
+                        }
+                        $scope.error = segmenten.err;
+                    });
+                }
+            });
+        },
+
+        getTotaleTijdEnIndexVanOverigeTijd = function () {
+            var i, overigeTijdIndex, echteTotaleTijd = 0;
+            for (i = 1; i < dataTable.length; i += 1) {
+                if (dataTable[i][0] !== "Overige tijd") {
+                    echteTotaleTijd += dataTable[i][1];
+                } else {
+                    overigeTijdIndex = i;
                 }
             }
-        });
-    }
-
-    function getTijdsduurUitDb(callback) {
-        var gebruiker;
-        gebruiker = DOODService.gebruikerSessie.get(function () {
-            if (gebruiker.doc.gebruikersnaam !== undefined) {
-                $scope.uitvaartSamenstellen = DOODService.uitvaartSamenstellen.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
-                    if ($scope.uitvaartSamenstellen.err === null) {
-                        totaleTijd = $scope.uitvaartSamenstellen.doc.tijdsduur;
-                        if (totaleTijd === undefined) {
-                            totaleTijd = 90;
-                        }
-                        callback();
-                    }
-                    $scope.error = $scope.uitvaartSamenstellen.err;
-                });
-            }
-        });
-    }
-
-    function getDataTableUitDb(callback) {
-        var gebruiker;
-        gebruiker = DOODService.gebruikerSessie.get(function () {
-            if (gebruiker.doc.gebruikersnaam !== undefined) {
-                var segmenten = DOODService.uitvaartSegment.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
-                    if (segmenten.err === null) {
-                        initieeleDataTable(segmenten);
-                        callback();
-                    }
-                    $scope.error = segmenten.err;
-                });
-            }
-        });
-    }
-
-    function getTotaleTijdEnIndexVanOverigeTijd() {
-        var i, overigeTijdIndex, echteTotaleTijd = 0;
-        for (i = 1; i < dataTable.length; i += 1) {
-            if (dataTable[i][0] !== "Overige tijd") {
-                echteTotaleTijd += dataTable[i][1];
-            } else {
-                overigeTijdIndex = i;
-            }
-        }
-
-        return [echteTotaleTijd, overigeTijdIndex];
-    }
+            return [echteTotaleTijd, overigeTijdIndex];
+        },
 
     // deze functie aanroepen om de totale tijd en overige tijd te regelen
     // op deze manier: berekenTijden(getTotaleTijdEnIndexVanOverigeTijd());
-    function berekenTijden(tijden) {
-        if (totaleTijd < tijden[0]) {
-            totaleTijd = tijden[0];
-        }
+        berekenTijden = function (tijden) {
+            if (totaleTijd < tijden[0]) {
+                totaleTijd = tijden[0];
+            }
+            dataTable[tijden[1]][1] = totaleTijd - tijden[0];
+            $scope.totaleTijd = totaleTijd;
+        },
 
-        dataTable[tijden[1]][1] = totaleTijd - tijden[0];
-        $scope.totaleTijd = totaleTijd;
-    }
+        getSliceIndex = function (e) {
+            muisOverIndex = e.row;
+        },
 
-    function getSliceIndex(e) {
-        muisOverIndex = e.row;
-    }
+        mouseDownOnSlice = function (e) {
+            chart.setSelection([{ row: muisOverIndex, column: null }]);
+        },
 
-    function mouseDownOnSlice(e) {
-        chart.setSelection([{ row: muisOverIndex, column: null }]);
-    }
+        swapArrayIndexen = function (array, oudeIndex, nieuweIndex) {
+            var temp;
 
-    function swapArrayIndexen(array, oudeIndex, nieuweIndex) {
-        var temp;
+            temp = array[oudeIndex];
+            array[oudeIndex] = array[nieuweIndex];
+            array[nieuweIndex] = temp;
 
-        temp = array[oudeIndex];
-        array[oudeIndex] = array[nieuweIndex];
-        array[nieuweIndex] = temp;
+            return array;
+        },
 
-        return array;
-    }
+        redrawNaHerordenen = function (oudeIndex, nieuweIndex) {
+            //swap indexen in dataTable
+            dataTable = swapArrayIndexen(dataTable, oudeIndex, nieuweIndex);
 
-    function redrawNaHerordenen(oudeIndex, nieuweIndex) {
-        //swap indexen in dataTable
-        dataTable = swapArrayIndexen(dataTable, oudeIndex, nieuweIndex);
+            //kleuren ook swappen
+            kleuren = swapArrayIndexen(kleuren, oudeIndex - 1, nieuweIndex - 1);
 
-        //kleuren ook swappen
-        kleuren = swapArrayIndexen(kleuren, oudeIndex - 1, nieuweIndex - 1);
+            //chart opnieuw tekenen
+            drawChart();
+        },
 
-        //chart opnieuw tekenen
-        drawChart();
-    }
+        verplaatsSlice = function (e) {
+            var oudeIndex = chart.getSelection()[0].row + 1, nieuweIndex = muisOverIndex + 1;
 
-    function verplaatsSlice(e) {
-        var oudeIndex = chart.getSelection()[0].row + 1, nieuweIndex = muisOverIndex + 1;
+            //check index != gelijk aan oude index
+            if (nieuweIndex !== oudeIndex) {
+                redrawNaHerordenen(oudeIndex, nieuweIndex);
+            }
+        },
 
-        //check index != gelijk aan oude index
-        if (nieuweIndex !== oudeIndex) {
-            redrawNaHerordenen(oudeIndex, nieuweIndex);
-        }
-    }
+        genereerKleurcodes = function () {
+            var i;
+            for (i = 0; i < (dataTable.length - 1); i += 1) {
+                if (kleuren[i] === null || kleuren[i] === undefined) {
+                    kleuren[i] = '#' + Math.random().toString(16).slice(2, 8);
+                }
+            }
+        },
+
+        chartActies = function (id, nieuweWaarde) {
+            chart.setAction({
+                id: id,
+                text: id,
+                action: function () {
+                    var index = chart.getSelection()[0].row + 1;
+                    if (nieuweWaarde === 0) {
+                        dataTable[index][1] = 0;
+                        dataTable.splice(index, 1);
+                        kleuren.splice(index, 1);
+                    } else {
+                        dataTable[index][1] += nieuweWaarde;
+                    }
+                    drawChart();
+                }
+            });
+        },
+        drawChart = function () {
+            var data, options;
+
+            //send datatable naar db
+            stuurDataTableNaarDb();
+
+            genereerKleurcodes();
+            options = {
+                chartArea: { left: '5%', right: '0', width: '100%', height: '100%' },
+                legend: { position: 'right', alignment: 'center' },
+                pieSliceText: "value",
+                colors: kleuren,
+                tooltip: { trigger: 'selection' },
+                backgroundColor: { fill: '#48CEC2' }
+            };
+
+            // data
+            berekenTijden(getTotaleTijdEnIndexVanOverigeTijd());
+            data = google.visualization.arrayToDataTable(dataTable);
+
+            if (chart !== null) {
+                chart = document.getElementById("piechart");
+                chart.removeChild(chart.firstChild);
+            }
+
+            chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            // Event listeners
+            google.visualization.events.addListener(chart, 'onmousedown', mouseDownOnSlice);
+            google.visualization.events.addListener(chart, 'onmouseover', getSliceIndex);
+            google.visualization.events.addListener(chart, 'onmouseup', verplaatsSlice);
+
+            chartActies("verhoog", 1);
+            chartActies("verlaag", -1);
+            chartActies("verwijder", 0);
+
+            chart.draw(data, options);
+        };
+
+    // Dit moet van google. Waarom? Goeie vraag
+    google.setOnLoadCallback(drawChart);
 
     // bron: https://github.com/fatlinesofcode/ngDraggable
     // wordt aangeroepen als er een segment op de piechart word gedropt:
@@ -241,75 +307,6 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         }
         redrawNaHerordenen(dataTable.length - 1, dataTable.length - 2);
     };
-
-    function genereerKleurcodes() {
-        var i;
-        for (i = 0; i < (dataTable.length - 1); i += 1) {
-            if (kleuren[i] === null || kleuren[i] === undefined) {
-                kleuren[i] = '#' + Math.random().toString(16).slice(2, 8);
-            }
-        }
-    }
-
-    function chartActies(id, nieuweWaarde) {
-        chart.setAction({
-            id: id,
-            text: id,
-            action: function () {
-                var index = chart.getSelection()[0].row + 1;
-                if (nieuweWaarde === 0) {
-                    dataTable[index][1] = 0;
-                    dataTable.splice(index, 1);
-                    kleuren.splice(index, 1);
-                } else {
-                    dataTable[index][1] += nieuweWaarde;
-                }
-                drawChart();
-            }
-        });
-    }
-
-    function drawChart() {
-        var data, options;
-
-        //send datatable naar db
-        stuurDataTableNaarDb();
-
-        genereerKleurcodes();
-        options = {
-            chartArea: { left: '5%', right: '0', width: '100%', height: '100%' },
-            legend: { position: 'right', alignment: 'center' },
-            pieSliceText: "value",
-            colors: kleuren,
-            tooltip: { trigger: 'selection' },
-            backgroundColor: { fill: '#48CEC2' }
-        };
-
-        // data
-        berekenTijden(getTotaleTijdEnIndexVanOverigeTijd());
-        data = google.visualization.arrayToDataTable(dataTable);
-
-        if (chart !== null) {
-            chart = document.getElementById("piechart");
-            chart.removeChild(chart.firstChild);
-        }
-
-        chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-        // Event listeners
-        google.visualization.events.addListener(chart, 'onmousedown', mouseDownOnSlice);
-        google.visualization.events.addListener(chart, 'onmouseover', getSliceIndex);
-        google.visualization.events.addListener(chart, 'onmouseup', verplaatsSlice);
-
-        chartActies("verhoog", 1);
-        chartActies("verlaag", -1);
-        chartActies("verwijder", 0);
-
-        chart.draw(data, options);
-    }
-
-    // Dit moet van google. Waarom? Goeie vraag
-    google.setOnLoadCallback(drawChart);
 
     $scope.totaleTijdAanpassen = function (tijd) {
         totaleTijd = tijd;
@@ -402,4 +399,52 @@ myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
         drawChart();
     };
 });
+<<<<<<< HEAD
+>>>>>>> production
+=======
+
+
+
+myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
+    "use strict";
+
+    var voegLiedjeToe = function (titel, artiest) {
+        $scope.zoekResultaat.push({artiest: artiest, titel: titel});
+    };
+
+    $scope.muziekDb =  [
+        {artiest: "Coon", titel: "Million miles"},
+        {artiest: "Adele", titel:  "Rain"},
+        {artiest: "Diggy Dex", titel: "De vallende sterren"},
+        {artiest: "one republic", titel: "Counting stars"}
+    ];
+
+    $scope.zoekResultaat = [];
+    $scope.afspeellijst = [];
+
+
+
+    $scope.voegToeBijAfspeellijst = function (liedje) {
+        $scope.afspeellijst.push(liedje);
+    };
+
+    $scope.zoek = function (zoekopdracht) {
+        $scope.error = "Vul een titel";
+        if (zoekopdracht !== "") {
+            if ($scope.zoekResultaat !== null) {
+                $scope.zoekResultaat = [];
+            }
+            Spotify.search(zoekopdracht, 'track', {limit: 20}).then(function (data) {
+                angular.forEach(data.tracks.items, function (items) {
+                    voegLiedjeToe(items.name, items.artists[0].name);
+                });
+            });
+            console.log($scope.zoekResultaat, "-------------");
+        } else {
+            $scope.error = "Vul een titel in";
+        }
+    };
+
+});
+
 >>>>>>> production
