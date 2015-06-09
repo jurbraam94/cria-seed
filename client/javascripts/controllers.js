@@ -97,7 +97,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             $scope.segmenten = DOODService.uitvaartSegmentDetailsEnVerwijderen.delete({gebruikersnaam: gebruikersnaam, volgnummer: i}, function () { //, gebruikersnaam: data.gebruikersnaam, object: data.object, percentage: data.percentage,  volgnummer: data.volgnummer
                 if ($scope.segmenten.err === null) {
                     console.log("Verwijderen voor " + i + "gelukt.");
-                    $scope.segmenten = DOODService.uitvaartSegmentPost.post({gebruikersnaam: gebruikersnaam.doc.gebruikersnaam, object: dataTable[i][0], percentage: dataTable[i][1], volgnummer: i},
+                    $scope.segmenten = DOODService.uitvaartSegmentPost.post({gebruikersnaam: gebruikersnaam, object: dataTable[i][0], percentage: dataTable[i][1], volgnummer: i},
                         function () {
                             if ($scope.segmenten.err === null) {
                                 console.log("Post voor " + i + "gelukt.");
@@ -115,6 +115,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             gebruiker = DOODService.gebruikerSessie.get(function () {
                 if (gebruiker.doc.gebruikersnaam !== undefined) {
                     for (i = 1; i < dataTable.length - 1; i += 1) {
+                        console.log(gebruiker.doc.gebruikersnaam, i);
                         verwijderEnMaakObject(gebruiker.doc.gebruikersnaam, i);
                     }
                 }
