@@ -115,7 +115,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
 
             gebruiker = DOODService.gebruikerSessie.get(function () {
                 if (gebruiker.doc.gebruikersnaam !== undefined) {
-                    for (i = 1; i < dataTable.length - 1; i += 1) {
+                    for (i = 1; i < dataTable.length - 2; i += 1) {
                         console.log(gebruiker.doc.gebruikersnaam, i);
                         verwijderEnMaakObject(gebruiker.doc.gebruikersnaam, i);
                     }
