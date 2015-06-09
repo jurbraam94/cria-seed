@@ -280,8 +280,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             chart.draw(data, options);
         };
 
-    // Dit moet van google. Waarom? Goeie vraag
-    google.setOnLoadCallback(drawChart);
+
 
     // bron: https://github.com/fatlinesofcode/ngDraggable
     // wordt aangeroepen als er een segment op de piechart word gedropt:
@@ -323,8 +322,8 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         getTijdsduurUitDb(function () {
             //segmenten uit db laden
             getDataTableUitDb(function () {
-                //piechart tekenen
-                drawChart();
+                // Dit moet van google. Waarom? Goeie vraag
+                google.setOnLoadCallback(drawChart());
             });
         });
     };
