@@ -8,7 +8,7 @@
  * @see https://github.com/angular/angular.js/wiki/Writing-AngularJS-Documentation
  * @see http://docs.angularjs.org/guide/concepts
  */
-var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', 'ngAnimate', 'ngDraggable'])
+var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', 'ngAnimate', 'ngDraggable', 'spotify'])
     .config(['$routeProvider', function ($routeProvider) {
         "use strict";
 
@@ -48,6 +48,7 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', '
         // Get Muziek
         $routeProvider.when('/muziek', {
             templateUrl: 'partials/muziek.html',
+            controller: 'muziekController',
             security: true
         });
 

@@ -258,3 +258,51 @@ footer a:hover, a:active{
     flex-shrink: 1;
     margin-top: -25px;
 }
+
+.muziekZoeklijst {
+    width: 16.5%;
+    border: 5px;
+    border-color: black;
+    height: auto;
+
+}
+
+#rijLiedje {
+    padding: auto;
+    padding-top: 10px;
+    color: white;
+}
+
+
+.buttonPlusje {
+    font-family: "Source Sans Pro Semi-Bold 600" , sans-serif;
+    font-weight: 600;
+    font-size: 100%;
+    background-color: #48cec2;
+    background: none;
+    padding: 0;
+    border: none;
+    float: left;
+    margin: auto;
+    outline: none;
+
+}
+.buttonPlusje img {
+    width: 12px;
+    height: auto;
+}
+
+#zoekKnop {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    position: relative;
+    left: -22px;
+    top: 3px;
+}
+
+.liedjeContainer {
+    margin-right: 20px;
+    float: right;
+
+}
