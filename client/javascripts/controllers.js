@@ -206,7 +206,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             kleuren = swapArrayIndexen(kleuren, oudeIndex - 1, nieuweIndex - 1);
 
             //chart opnieuw tekenen
-            drawChart();
+            drawChart(true);
         },
 
         verplaatsSlice = function (e) {
@@ -240,11 +240,11 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                     } else {
                         dataTable[index][1] += nieuweWaarde;
                     }
-                    drawChart();
+                    drawChart(true);
                 }
             });
         },
-        drawChart = function () {
+        drawChart = function (changed) {
             var data, options;
 
             genereerKleurcodes();
@@ -278,6 +278,11 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             chartActies("verwijder", 0);
 
             chart.draw(data, options);
+
+            if (changed) {
+                //send datatable naar db als er iets veranderd is.
+                stuurDataTableNaarDb();
+            }
         };
 
     // bron: https://github.com/fatlinesofcode/ngDraggable
@@ -294,7 +299,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
 
     $scope.totaleTijdAanpassen = function (tijd) {
         totaleTijd = tijd;
-        drawChart();
+        drawChart(true);
     };
 
     $scope.getAllImages = function () {
@@ -322,10 +327,6 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             getDataTableUitDb(function () {
                 // Dit moet van google. Waarom? Goeie vraag
                 google.setOnLoadCallback(drawChart());
-                window.onbeforeunload = function () {
-                    stuurDataTableNaarDb();
-                    return 'Wilt u de pagina echt verlaten? We hebben uw data voor de zekerheid opgeslagen.';
-                };
             });
         });
     };
