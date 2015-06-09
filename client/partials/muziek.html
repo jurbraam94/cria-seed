@@ -1,23 +1,22 @@
-<hr>
-<div class="customContainer witteText">
-    <div class="row">
-        <div class="alert alert-warning" role="alert"><img class="Tekentje"
-                                                           src="style/images/I.jpg">
 
-    <div class="leftmenubar">
-        <form name="contactForm" novalidate class="validatie"> <input type="text"> </form>
-            <div class="muziekZoeklijst">
-            <div class="muzieklijst">
-                Adaro - Natural Born Killer <img src="./style/images/iconPlusje.png">
+<div class="col-xs-2 col-md-2 col-lg-2" >
+
+    <form name="contactForm" novalidate class="validatie"> <input ng-model="zoekopdracht" type="text">
+        <input type="image" src="style/images/loep.png" id = "zoekKnop" ng-click="zoek(zoekopdracht)" >
+    </form>
+    <div class="liedjeContainer">
+        <div class="row" id ="rijLiedje" value="{{error}}" ng-repeat="item in zoekResultaat">
+            <div class=" col-lg-6">
+                {{item.artiest}} - {{item.titel}}
+            </div>
+            <div class="muzieklijst col-lg-6">
+                <button  class = "link buttonPlusje">+</button>
             </div>
         </div>
     </div>
-    <br>
+</div>
+<div class="col-xs-10 col-md-10 col-lg-10 minicontent">
+    <div class="row">
 
-    <div class="row text-center">
-        <img class="wiezijnwijplaatje" src="style/images/overheidthumb.jpg">
-        <img class="wiezijnwijplaatje" src="style/images/yardenthumb.jpg">
-        <img class="wiezijnwijplaatje" src="style/images/doodthumb.jpg">
     </div>
 </div>
-
