@@ -94,7 +94,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         },
 
         verwijderSegmentUitDb = function (data, callback) {
-            $scope.segmenten = DOODService.uitvaartSegment.delete({gebruiker: data.gebruikersnaam, volgnr: data.volgnummer, gebruikersnaam: data.gebruikersnaam, object: data.object, percentage: data.percentage,  volgnummer: data.volgnummer}, function () {
+            $scope.segmenten = DOODService.uitvaartSegmentDetailsEnVerwijderen.delete({gebruiker: data.gebruikersnaam, volgnr: data.volgnummer, gebruikersnaam: data.gebruikersnaam, object: data.object, percentage: data.percentage,  volgnummer: data.volgnummer}, function () {
                 if ($scope.segmenten.err === null) {
                     callback();
                 }
@@ -103,7 +103,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         },
 
         stuurDataNaarDb = function (data) {
-            $scope.segmenten = DOODService.uitvaartSegment.post(data, function () {
+            $scope.segmenten = DOODService.uitvaartSegmentPost.post(data, function () {
                 if ($scope.segmenten.err === null) {
                     console.log("post response: ", $scope.segmenten);
                 }
@@ -157,7 +157,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             var gebruiker;
             gebruiker = DOODService.gebruikerSessie.get(function () {
                 if (gebruiker.doc.gebruikersnaam !== undefined) {
-                    var segmenten = DOODService.uitvaartSegment.get({gebruiker: gebruiker.doc.gebruikersnaam}, function () {
+                    var segmenten = DOODService.uitvaartSegmentLijst.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
                         if (segmenten.err === null) {
                             initieeleDataTable(segmenten);
                             callback();
