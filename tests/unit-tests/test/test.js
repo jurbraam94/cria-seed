@@ -867,7 +867,7 @@ describe('API Routing for CRUD operations on Segment', function () {
     describe('DELETE All Segment', function () {
         it('Should DELETE All /segment/{gebruikersnaam}', function (done) {
             request
-                .del('/segment/' + 'Createusertest/')
+                .del('/segment/' + 'Createusertest')
                 .expect(200)                                                // supertest
                 .expect('Content-Type', /application.json/)                 // supertest
                 .expect('Content-Type', 'utf-8')                            // supertest
