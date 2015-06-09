@@ -325,9 +325,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                 // Dit moet van google. Waarom? Goeie vraag
                 google.setOnLoadCallback(drawChart());
                 window.onbeforeunload = function () {
-                    stuurDataTableNaarDb(function () {
-                        return 'Wilt u de samenstellen pagina echt sluiten? We hebben uw data opgeslagen.';
-                    });
+                    return stuurDataTableNaarDb();
                 };
             });
         });
