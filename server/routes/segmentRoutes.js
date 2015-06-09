@@ -28,6 +28,6 @@ router
 
 // DELETE
 router
-    .delete('/segment/:_gebruikersnaam/:_volgnummer', controller.segmentVerwijderen);
+    .delete('/segment/:_gebruikersnaam/', controller.segmentenVerwijderen);
 
 module.exports = router;

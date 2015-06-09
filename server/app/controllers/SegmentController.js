@@ -118,10 +118,10 @@ exports.updateSegment = function (req, res) {
  * @param req
  * @param res
  */
-exports.segmentVerwijderen = function (req, res) {
+exports.segmentenVerwijderen = function (req, res) {
     var conditions, callback, retObj;
 
-    conditions = {gebruikersnaam: req.params._gebruikersnaam, volgnummer: req.params._volgnummer};
+    conditions = {gebruikersnaam: req.params._gebruikersnaam};
 
     callback = function (err, doc) {
         retObj = {
