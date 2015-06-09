@@ -111,7 +111,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             });
         },
 
-        ikKanGeenNaamBedenkenVoorDezeFunctie = function (gebruiker, i) {
+        ikKanGeenNaamBedenkenVoorDezeFuckingKankerFunctieDieTotaalNietWerktGodverWTF = function (gebruiker, i) {
             verwijderSegmentUitDb(
                 {gebruikersnaam: gebruiker.doc.gebruikersnaam, volgnummer: i},
                 function () {
@@ -121,6 +121,10 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                         percentage: dataTable[i][1],
                         volgnummer: i
                     });
+                    console.log("gebruikersnaam 1: ", gebruiker.doc.gebruikersnaam);
+                    console.log("object 1: ", dataTable[i][0]);
+                    console.log("percentage 1: ", dataTable[i][1]);
+                    console.log("volgnummer 1: ", i);
                 }
             );
         },
@@ -131,11 +135,11 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             gebruiker = DOODService.gebruikerSessie.get(function () {
                 if (gebruiker.doc.gebruikersnaam !== undefined) {
                     for (i = 1; i < dataTable.length - 1; i += 1) {
-                        ikKanGeenNaamBedenkenVoorDezeFunctie(gebruiker, i);
-                        console.log("gebruikersnaam: ", gebruiker.doc.gebruikersnaam);
-                        console.log("object: ", dataTable[i][0]);
-                        console.log("percentage: ", dataTable[i][1]);
-                        console.log("volgnummer: ", i);
+                        ikKanGeenNaamBedenkenVoorDezeFuckingKankerFunctieDieTotaalNietWerktGodverWTF(gebruiker, i);
+                        console.log("gebruikersnaam 2: ", gebruiker.doc.gebruikersnaam);
+                        console.log("object 2: ", dataTable[i][0]);
+                        console.log("percentage 2: ", dataTable[i][1]);
+                        console.log("volgnummer 2: ", i);
                     }
                 }
             });
