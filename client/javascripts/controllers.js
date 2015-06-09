@@ -244,9 +244,6 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         drawChart = function () {
             var data, options;
 
-            //send datatable naar db
-            stuurDataTableNaarDb();
-
             genereerKleurcodes();
             options = {
                 chartArea: { left: '5%', right: '0', width: '100%', height: '100%' },
@@ -278,6 +275,9 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             chartActies("verwijder", 0);
 
             chart.draw(data, options);
+
+            //send datatable naar db
+            stuurDataTableNaarDb();
         };
 
 
@@ -324,6 +324,9 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             getDataTableUitDb(function () {
                 // Dit moet van google. Waarom? Goeie vraag
                 google.setOnLoadCallback(drawChart());
+
+                //send datatable naar db
+                stuurDataTableNaarDb();
             });
         });
     };
