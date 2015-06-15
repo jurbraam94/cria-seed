@@ -321,12 +321,12 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
 
     $scope.init = function () {
         $scope.getAllImages();
-        // totale tijd uit db laden
+        //totale tijd uit db laden
         getTijdsduurUitDb(function () {
             //segmenten uit db laden
             getDataTableUitDb(function () {
-                // Dit moet van google. Waarom? Goeie vraag
-                google.setOnLoadCallback(drawChart);
+                //pie chart tekenen
+                drawChart();
             });
         });
     };
