@@ -83,7 +83,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
     "use strict";
     var totaleTijd,
         dataTable,
-        kleuren = ['#afafaf'],
+        kleuren = [], // = ['#afafaf']
         chart = null,
         muisOverIndex,
 
@@ -95,7 +95,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                 dataTable.push([segmenten.doc[i].object, segmenten.doc[i].percentage]);
             }
 
-            dataTable.push(['Overige tijd', 1]);
+            dataTable.push(['Overige tijd', 0]);
         },
 
         maakObject = function (gebruikersnaam, i, callback) {
@@ -208,7 +208,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             dataTable = swapArrayIndexen(dataTable, oudeIndex, nieuweIndex);
 
             //kleuren ook swappen
-            kleuren = swapArrayIndexen(kleuren, oudeIndex - 1, nieuweIndex - 1);
+            kleuren = swapArrayIndexen(kleuren, oudeIndex, nieuweIndex);
 
             //chart opnieuw tekenen
             drawChart(true);
@@ -224,10 +224,16 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         },
 
         genereerKleurcodes = function () {
-            var i;
-            for (i = 0; i < (dataTable.length - 1); i += 1) {
-                if (kleuren[i] === null || kleuren[i] === undefined) {
-                    kleuren[i] = '#' + Math.random().toString(16).slice(2, 8);
+            var i, j;
+
+            for (i = 1; i < dataTable.length; i += 1) {
+                j = i - 1;
+                if ((kleuren[j] === null) && (dataTable[i][0] !== 'Overige tijd')) {
+                    kleuren[j] = '#' + Math.random().toString(16).slice(2, 8);
+                    console.log("kleur van ", dataTable[i][0], " is nu ", kleuren[j]);
+                } else {
+                    kleuren[j] = '#afafaf';
+                    console.log("Overige tijd(?) kleur van ", dataTable[i][0], " is nu ", kleuren[j]);
                 }
             }
         },
@@ -249,6 +255,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                 }
             });
         },
+
         drawChart = function (changed) {
             var data, options;
 
@@ -303,8 +310,18 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
     };
 
     $scope.totaleTijdAanpassen = function (tijd) {
+        var gebruiker;
         totaleTijd = tijd;
-        drawChart(true);
+
+        gebruiker = DOODService.gebruikerSessie.get(function () {
+            if (gebruiker.doc.gebruikersnaam !== undefined) {
+                $scope.updateTijdsduur = DOODService.uitvaartSamenstellen.update({gebruikersnaam: gebruiker.doc.gebruikersnaam, tijdsduur: tijd}, function () {
+                    if ($scope.updateTijdsduur.err === null) {
+                        drawChart();
+                    }
+                });
+            }
+        });
     };
 
     $scope.getAllImages = function () {
