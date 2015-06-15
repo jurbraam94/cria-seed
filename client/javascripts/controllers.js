@@ -298,8 +298,18 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
     };
 
     $scope.totaleTijdAanpassen = function (tijd) {
+        var gebruiker;
         totaleTijd = tijd;
-        drawChart(true);
+
+        gebruiker = DOODService.gebruikerSessie.get(function () {
+            if (gebruiker.doc.gebruikersnaam !== undefined) {
+                $scope.updateTijdsduur = DOODService.uitvaartSamenstellen.update({gebruikersnaam: gebruiker.doc.gebruikersnaam, tijdsduur: tijd}, function () {
+                    if ($scope.updateTijdsduur.err === null) {
+                        drawChart();
+                    }
+                });
+            }
+        });
     };
 
     $scope.getAllImages = function () {
