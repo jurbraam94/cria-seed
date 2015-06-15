@@ -239,15 +239,15 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         },
 
         chartActies = function (id, nieuweWaarde) {
-            console.log("getSelection[0] = ", chart.getSelection()[0]);
-            if (chart.getSelection()[0] === "Overige tijd") {
-                return;
-            }
             chart.setAction({
                 id: id,
                 text: id,
                 action: function () {
                     var index = chart.getSelection()[0].row + 1;
+                    console.log("getSelection[0] = ", chart.getSelection()[0]);
+                    if (chart.getSelection()[0] === "Overige tijd") {
+                        return;
+                    }
                     if (nieuweWaarde === 0) {
                         dataTable[index][1] = 0;
                         dataTable.splice(index, 1);
