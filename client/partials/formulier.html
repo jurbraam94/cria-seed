@@ -1,20 +1,43 @@
 <div class="col-xs-2 col-md-2 col-lg-2" >
 
     <div class="formulierKnop formulierKnopText">
-        <a ng-click="formulierPagina = 'locatie'">
-            <span ng-class="{rodeText: menuActive == 'notificatie'}">LOCATIE</span>
+        <a href="" ng-click="formulierPagina = 'locatie'">
+            <span ng-class="{rodeText: formulierPagina == 'locatie'}">LOCATIE</span>
         </a>
     </div>
 
-    <div class="formulierKnop formulierKnopText">OPBARING</div>
-    <div class="formulierKnop formulierKnopText">GEGEVENS</div>
-    <div class="formulierKnop formulierKnopText">GELOOF</div>
+    <div class="formulierKnop formulierKnopText">
+        <a href="" ng-click="formulierPagina = 'opbaring'">
+            <span ng-class="{rodeText: formulierPagina == 'opbaring'}">OPBARING</span>
+        </a>
+    </div>
+
+    <div class="formulierKnop formulierKnopText">
+        <a href="" ng-click="formulierPagina = 'gegevens'">
+            <span ng-class="{rodeText: formulierPagina == 'gegevens'}">GEGEVENS</span>
+        </a>
+    </div>
+
+    <div class="formulierKnop formulierKnopText">
+        <a href="" ng-click="formulierPagina = 'geloof'">
+            <span ng-class="{rodeText: formulierPagina == 'geloof'}">GELOOF</span>
+        </a>
+    </div>
 
 </div>
 <div class="col-xs-10 col-md-10 col-lg-10 minicontent">
     <div ng-switch on="formulierPagina">
         <div ng-switch-when="locatie">
             Locatie
+        </div>
+        <div ng-switch-when="opbaring">
+            opbaring
+        </div>
+        <div ng-switch-when="gegevens">
+            gegevens
+        </div>
+        <div ng-switch-when="geloof">
+            geloof
         </div>
     </div>
 </div>
