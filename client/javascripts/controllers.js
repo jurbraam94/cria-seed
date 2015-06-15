@@ -78,7 +78,7 @@ myApp.controller('formulierController', function ($scope) {
         places_changed: function (searchBox) {
 
             var place = searchBox.getPlaces();
-            if (!place || place == 'undefined' || place.length == 0) {
+            if (!place || place === 'undefined' || place.length === 0) {
                 console.log('no place data :(');
                 return;
             }
