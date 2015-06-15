@@ -208,7 +208,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             dataTable = swapArrayIndexen(dataTable, oudeIndex, nieuweIndex);
 
             //kleuren ook swappen
-            kleuren = swapArrayIndexen(kleuren, oudeIndex, nieuweIndex);
+            kleuren = swapArrayIndexen(kleuren, oudeIndex - 1, nieuweIndex - 1);
 
             //chart opnieuw tekenen
             drawChart(true);
