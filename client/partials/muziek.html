@@ -10,13 +10,20 @@
                 {{item.artiest}} - {{item.titel}}
             </div>
             <div class="muzieklijst col-lg-6">
-                <button  class = "link buttonPlusje">+</button>
+                <button ng-click="voegToeBijAfspeellijst(item.artiest, item.titel)"  class = "link buttonPlusje">+</button>
             </div>
         </div>
     </div>
 </div>
+
 <div class="col-xs-10 col-md-10 col-lg-10 minicontent">
     <div class="row">
-
+        <div>
+            <div ng-repeat="liedje in afspeellijst">
+                <h3>
+                    {{liedje[0].artiest}} - {{liedje[0].titel}}
+                </h3>
+            </div>
+        </div>
     </div>
 </div>

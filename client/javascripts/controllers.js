@@ -263,7 +263,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             dataTable = swapArrayIndexen(dataTable, oudeIndex, nieuweIndex);
 
             //kleuren ook swappen
-            kleuren = swapArrayIndexen(kleuren, oudeIndex, nieuweIndex);
+            kleuren = swapArrayIndexen(kleuren, oudeIndex - 1, nieuweIndex - 1);
 
             //chart opnieuw tekenen
             drawChart(true);
@@ -278,17 +278,17 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             }
         },
 
-        genereerKleurcodes = function (changed) {
+        genereerKleurcodes = function () {
             var i, j;
 
             for (i = 1; i < dataTable.length; i += 1) {
                 j = i - 1;
-                if ((changed === false) && (dataTable[i][0] !== 'Overige tijd')) {
-                    kleuren[j] = '#' + Math.random().toString(16).slice(2, 8);
-                    console.log("kleur van ", dataTable[i][0], " is nu ", kleuren[j]);
-                } else {
+                if (dataTable[i][0] === 'Overige tijd') {
                     kleuren[j] = '#afafaf';
                     console.log("Overige tijd(?) kleur van ", dataTable[i][0], " is nu ", kleuren[j]);
+                } else if ((kleuren[j] === undefined) || (kleuren[j] === null)) {
+                    kleuren[j] = '#' + Math.random().toString(16).slice(2, 8);
+                    console.log("kleur van ", dataTable[i][0], " is nu ", kleuren[j]);
                 }
             }
         },
@@ -299,6 +299,10 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                 text: id,
                 action: function () {
                     var index = chart.getSelection()[0].row + 1;
+                    console.log("getSelection = ", chart.getSelection());
+                    if (chart.getSelection()[0].row === getTotaleTijdEnIndexVanOverigeTijd()[1]) {
+                        return;
+                    }
                     if (nieuweWaarde === 0) {
                         dataTable[index][1] = 0;
                         dataTable.splice(index, 1);
@@ -432,10 +436,15 @@ myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
     $scope.zoekResultaat = [];
     $scope.afspeellijst = [];
 
+    $scope.voegToeBijAfspeellijst = function (artiest, titel) {
+        var liedInAfspeelLijst = [];
+        liedInAfspeelLijst = [{
+            artiest: artiest,
+            titel: titel
+        }];
 
-
-    $scope.voegToeBijAfspeellijst = function (liedje) {
-        $scope.afspeellijst.push(liedje);
+        console.log(liedInAfspeelLijst, artiest, titel);
+        $scope.afspeellijst.unshift(liedInAfspeelLijst);
     };
 
     $scope.zoek = function (zoekopdracht) {
