@@ -44,10 +44,37 @@ myApp.controller('ContactController', function ($scope, DOODService) {
     };
 });
 
-myApp.controller('formulierController', function ($scope) {
+myApp.controller('formulierController', function ($scope, DOODService) {
     "use strict";
-    $scope.formulierData = {};
+    var gebruiker;
+    $scope.formulierData = {aanvullendeGegevens: {}, algemeneGegevens: {}, uitvaart: {}};
 
+    gebruiker = DOODService.gebruikerSessie.get(function () {
+        if (gebruiker.doc.gebruikersnaam !== undefined) {
+            $scope.aanvullendeGegevens = DOODService.aanvullendeGegevens.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
+                if ($scope.aanvullendeGegevens.doc !== null) {
+                    $scope.formulierData.aanvullendeGegevens = $scope.aanvullendeGegevens.doc;
+                }
+            });
+            $scope.algemeneGegevens = DOODService.algemeneGegevens.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
+                if ($scope.algemeneGegevens.doc !== null) {
+                    $scope.formulierData.algemeneGegevens = $scope.algemeneGegevens.doc;
+                }
+            });
+            $scope.uitvaart = DOODService.uitvaart.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
+                if ($scope.uitvaart.doc !== null) {
+                    $scope.formulierData.uitvaart = $scope.uitvaart.doc;
+                }
+            });
+        }
+    });
+
+    $scope.opslaan = function () {
+        console.log($scope.formulierData);
+    };
+
+
+    //google maps stuff
     $scope.map = {
         "center": {
             latitude: 52.00494,
