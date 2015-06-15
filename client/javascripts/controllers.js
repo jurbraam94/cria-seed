@@ -47,7 +47,7 @@ myApp.controller('ContactController', function ($scope, DOODService) {
 myApp.controller('formulierController', function ($scope, DOODService) {
     "use strict";
     var gebruiker, aanvullendeGegevens, algemeneGegevens, uitvaart, events;
-    $scope.formulierData = {aanvullendeGegevens: {}, algemeneGegevens: {}, uitvaart: {}};
+    $scope.formulierData = {};
 
     gebruiker = DOODService.gebruikerSessie.get(function () {
         if (gebruiker.doc.gebruikersnaam !== undefined) {
@@ -72,19 +72,19 @@ myApp.controller('formulierController', function ($scope, DOODService) {
     });
 
     $scope.opslaan = function () {
-        if ($scope.formulierDataOrigineel.aanvullendeGegevens !== null) {
+        if ($scope.formulierDataOrigineel.aanvullendeGegevens === undefined) {
             console.log("Post aanvullendegegevens");
         } else if ($scope.formulierData.aanvullendeGegevens !== $scope.formulierDataOrigineel.aanvullendeGegevens) {
             console.log("Update aanvullendegegevens");
         }
 
-        if ($scope.formulierDataOrigineel.algemeneGegevens !== null) {
+        if ($scope.formulierDataOrigineel.algemeneGegevens === undefined) {
             console.log("Post algemeneGegevens");
         } else if ($scope.formulierData.algemeneGegevens !== $scope.formulierDataOrigineel.algemeneGegevens) {
             console.log("Update algemeneGegevens");
         }
 
-        if ($scope.formulierDataOrigineel.uitvaart !== null) {
+        if ($scope.formulierDataOrigineel.uitvaart === undefined) {
             console.log("Post uitvaart");
         } else if ($scope.formulierData.uitvaart !== $scope.formulierDataOrigineel.uitvaart) {
             console.log("Update uitvaart");
