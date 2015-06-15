@@ -365,10 +365,14 @@ myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
     $scope.zoekResultaat = [];
     $scope.afspeellijst = [];
 
+    $scope.voegToeBijAfspeellijst = function (artiest, titel) {
+        var liedInAfspeelLijst = [];
+        liedInAfspeelLijst = [{
+            artiest: artiest, titel: titel
+        }];
 
-
-    $scope.voegToeBijAfspeellijst = function (liedje) {
-        $scope.afspeellijst.push(liedje);
+        console.log(liedInAfspeelLijst, artiest, titel );
+        $scope.afspeellijst.unshift(liedInAfspeelLijst);
     };
 
     $scope.zoek = function (zoekopdracht) {
