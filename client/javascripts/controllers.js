@@ -54,23 +54,41 @@ myApp.controller('formulierController', function ($scope, DOODService) {
             aanvullendeGegevens = DOODService.aanvullendeGegevens.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
                 if (aanvullendeGegevens.doc !== null) {
                     $scope.formulierData.aanvullendeGegevens = aanvullendeGegevens.doc;
+                    algemeneGegevens = DOODService.algemeneGegevens.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
+                        if (algemeneGegevens.doc !== null) {
+                            $scope.formulierData.algemeneGegevens = algemeneGegevens.doc;
+                            uitvaart = DOODService.uitvaart.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
+                                if (uitvaart.doc !== null) {
+                                    $scope.formulierData.uitvaart = uitvaart.doc;
+                                    $scope.formulierDataOrigineel = $scope.formulierData;
+                                }
+                            });
+                        }
+                    });
                 }
             });
-            algemeneGegevens = DOODService.algemeneGegevens.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
-                if (algemeneGegevens.doc !== null) {
-                    $scope.formulierData.algemeneGegevens = algemeneGegevens.doc;
-                }
-            });
-            uitvaart = DOODService.uitvaart.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
-                if (uitvaart.doc !== null) {
-                    $scope.formulierData.uitvaart = uitvaart.doc;
-                }
-            });
+
         }
     });
 
     $scope.opslaan = function () {
-        console.log($scope.formulierData);
+        if ($scope.formulierDataOrigineel.aanvullendeGegevens !== null) {
+            console.log("Post aanvullendegegevens");
+        } else if ($scope.formulierData.aanvullendeGegevens !== $scope.formulierDataOrigineel.aanvullendeGegevens) {
+            console.log("Update aanvullendegegevens");
+        }
+
+        if ($scope.formulierDataOrigineel.algemeneGegevens !== null) {
+            console.log("Post algemeneGegevens");
+        } else if ($scope.formulierData.algemeneGegevens !== $scope.formulierDataOrigineel.algemeneGegevens) {
+            console.log("Update algemeneGegevens");
+        }
+
+        if ($scope.formulierDataOrigineel.uitvaart !== null) {
+            console.log("Post uitvaart");
+        } else if ($scope.formulierData.uitvaart !== $scope.formulierDataOrigineel.uitvaart) {
+            console.log("Update uitvaart");
+        }
     };
 
 
