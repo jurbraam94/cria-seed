@@ -303,7 +303,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
 
         gebruiker = DOODService.gebruikerSessie.get(function () {
             if (gebruiker.doc.gebruikersnaam !== undefined) {
-                $scope.updateTijdsduur = DOODService.uitvaartSamenstellen.update({gebruikersnaam: gebruiker.doc.gebruikersnaam, tijdsduur: 120}, function () {
+                $scope.updateTijdsduur = DOODService.uitvaartSamenstellen.update({gebruikersnaam: gebruiker.doc.gebruikersnaam, tijdsduur: tijd}, function () {
                     if ($scope.updateTijdsduur.err === null) {
                         drawChart();
                     }
