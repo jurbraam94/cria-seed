@@ -226,6 +226,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                         kleuren[i] = '#' + Math.random().toString(16).slice(2, 8);
                     } else {
                         kleuren[i] = '#afafaf';
+                        console.log("kleur van ", dataTable[i][0], " is nu ", kleuren[i]);
                     }
                 }
             }
