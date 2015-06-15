@@ -46,24 +46,24 @@ myApp.controller('ContactController', function ($scope, DOODService) {
 
 myApp.controller('formulierController', function ($scope, DOODService) {
     "use strict";
-    var gebruiker;
+    var gebruiker, aanvullendeGegevens, algemeneGegevens, uitvaart, events;
     $scope.formulierData = {aanvullendeGegevens: {}, algemeneGegevens: {}, uitvaart: {}};
 
     gebruiker = DOODService.gebruikerSessie.get(function () {
         if (gebruiker.doc.gebruikersnaam !== undefined) {
-            $scope.aanvullendeGegevens = DOODService.aanvullendeGegevens.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
-                if ($scope.aanvullendeGegevens.doc !== null) {
-                    $scope.formulierData.aanvullendeGegevens = $scope.aanvullendeGegevens.doc;
+            aanvullendeGegevens = DOODService.aanvullendeGegevens.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
+                if (aanvullendeGegevens.doc !== null) {
+                    $scope.formulierData.aanvullendeGegevens = aanvullendeGegevens.doc;
                 }
             });
-            $scope.algemeneGegevens = DOODService.algemeneGegevens.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
-                if ($scope.algemeneGegevens.doc !== null) {
-                    $scope.formulierData.algemeneGegevens = $scope.algemeneGegevens.doc;
+            algemeneGegevens = DOODService.algemeneGegevens.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
+                if (algemeneGegevens.doc !== null) {
+                    $scope.formulierData.algemeneGegevens = algemeneGegevens.doc;
                 }
             });
-            $scope.uitvaart = DOODService.uitvaart.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
-                if ($scope.uitvaart.doc !== null) {
-                    $scope.formulierData.uitvaart = $scope.uitvaart.doc;
+            uitvaart = DOODService.uitvaart.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
+                if (uitvaart.doc !== null) {
+                    $scope.formulierData.uitvaart = uitvaart.doc;
                 }
             });
         }
@@ -101,7 +101,7 @@ myApp.controller('formulierController', function ($scope, DOODService) {
             }
         }
     };
-    var events = {
+    events = {
         places_changed: function (searchBox) {
 
             var place = searchBox.getPlaces();
@@ -131,7 +131,7 @@ myApp.controller('formulierController', function ($scope, DOODService) {
     $scope.searchbox = { template: 'searchbox.tpl.html', events: events };
 });
 
-myApp.controller('GebruikerLoginController', function ($scope, DOODService, $route) {
+myApp.controller('GebruikerLoginController', function ($scope, DOODService) {
     "use strict";
 
     // LOGIN / LOGUIT
