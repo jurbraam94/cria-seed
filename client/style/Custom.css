@@ -304,5 +304,15 @@ footer a:hover, a:active{
 .liedjeContainer {
     margin-right: 20px;
     float: right;
+}
 
+.formulierKnop {
+    padding:2.5%;
+    margin-bottom:1%;
+    width:100%;
+    font-weight:bold;
+    font-size: 1.2vw;
+    color: #fff;
+    background-color: #3E464F;
+    text-align: center;
 }
