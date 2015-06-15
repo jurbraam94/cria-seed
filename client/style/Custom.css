@@ -307,12 +307,17 @@ footer a:hover, a:active{
 }
 
 .formulierKnop {
-    padding:2.5%;
-    margin-bottom:1%;
+    padding:10px;
+    margin-bottom:3px;
     width:100%;
-    font-weight:bold;
-    font-size: 1.2vw;
+    height:50px;
+    font-size: 16px;
     color: #fff;
     background-color: #3E464F;
     text-align: center;
+}
+
+.formulierKnopText {
+    line-height:35px;
+    font-weight: bold;
 }
