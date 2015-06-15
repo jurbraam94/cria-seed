@@ -59,23 +59,11 @@
 </nav>
 
 <div class="container-fluid Content">
-    <div ng-switch on="pageName()">
-        <div ng-switch-when="/samenstellen">
+    <div ng-switch on="pageName() == '/formulier' || pageName() == '/muziek' ||pageName() == '/foto' ||pageName() == '/notificatie' ||pageName() == '/wishlist'">
+        <div ng-switch-when="false">
             <div ng-view></div>
         </div>
-        <div ng-switch-when="/login">
-            <div ng-view></div>
-        </div>
-        <div ng-switch-when="/contact">
-            <div ng-view></div>
-        </div>
-        <div ng-switch-when="/wiezijnwij">
-            <div ng-view></div>
-        </div>
-        <div ng-switch-when="/overzicht">
-            <div ng-view></div>
-        </div>
-        <div ng-switch-default class="mainApp">
+        <div ng-switch-when="true" class="mainApp">
             <div class="row">
                 <div class="col-xs-2 col-md-2 col-lg-2" ></div>
                 <div class="col-xs-10 col-md-10 col-lg-10 pull-right">
@@ -102,7 +90,7 @@
                             </div>
                             <div class="mininavbarbutton mininavbarbutton5">
                                 <a href="#/wishlist">
-                                    <span ng-class="{rodeText: menuActive == 'wishlist'}">&nbsp; &nbsp; &nbsp; 5. WISHLIST</span>
+                                    <span ng-class="{rodeText: menuActive == 'wishlist'}">&nbsp;&nbsp; 5. WISHLIST</span>
                                 </a>
                             </div>
                             <div class="mininavbarbutton mininavbarbutton6">

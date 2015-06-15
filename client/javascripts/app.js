@@ -42,6 +42,7 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', '
         // Get formulier
         $routeProvider.when('/formulier', {
             templateUrl: 'partials/formulier.html',
+            controller: 'formulierController',
             security: true
         });
 

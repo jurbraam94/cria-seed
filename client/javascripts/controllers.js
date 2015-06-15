@@ -44,6 +44,11 @@ myApp.controller('ContactController', function ($scope, DOODService) {
     };
 });
 
+myApp.controller('formulierController', function ($scope) {
+    "use strict";
+    console.log('formuliercontroller geladen');
+});
+
 myApp.controller('GebruikerLoginController', function ($scope, DOODService, $route) {
     "use strict";
 
@@ -78,7 +83,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
     "use strict";
     var totaleTijd,
         dataTable,
-        kleuren = ['#afafaf'],
+        kleuren = [], // = ['#afafaf']
         chart = null,
         muisOverIndex,
 
@@ -203,7 +208,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             dataTable = swapArrayIndexen(dataTable, oudeIndex, nieuweIndex);
 
             //kleuren ook swappen
-            kleuren = swapArrayIndexen(kleuren, oudeIndex - 1, nieuweIndex - 1);
+            kleuren = swapArrayIndexen(kleuren, oudeIndex, nieuweIndex);
 
             //chart opnieuw tekenen
             drawChart(true);
@@ -218,11 +223,17 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             }
         },
 
-        genereerKleurcodes = function () {
-            var i;
-            for (i = 0; i < (dataTable.length - 1); i += 1) {
-                if (kleuren[i] === null || kleuren[i] === undefined) {
-                    kleuren[i] = '#' + Math.random().toString(16).slice(2, 8);
+        genereerKleurcodes = function (changed) {
+            var i, j;
+
+            for (i = 1; i < dataTable.length; i += 1) {
+                j = i - 1;
+                if ((changed === false) && (dataTable[i][0] !== 'Overige tijd')) {
+                    kleuren[j] = '#' + Math.random().toString(16).slice(2, 8);
+                    console.log("kleur van ", dataTable[i][0], " is nu ", kleuren[j]);
+                } else {
+                    kleuren[j] = '#afafaf';
+                    console.log("Overige tijd(?) kleur van ", dataTable[i][0], " is nu ", kleuren[j]);
                 }
             }
         },
@@ -244,10 +255,11 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                 }
             });
         },
+
         drawChart = function (changed) {
             var data, options;
 
-            genereerKleurcodes();
+            genereerKleurcodes(changed);
             options = {
                 chartArea: { left: '5%', right: '0', width: '100%', height: '100%' },
                 legend: { position: 'right', alignment: 'center' },
@@ -336,7 +348,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             //segmenten uit db laden
             getDataTableUitDb(function () {
                 //pie chart tekenen
-                drawChart();
+                drawChart(false);
             });
         });
     };
