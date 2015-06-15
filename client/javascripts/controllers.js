@@ -239,6 +239,10 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         },
 
         chartActies = function (id, nieuweWaarde) {
+            console.log("getSelection[0] = ", chart.getSelection()[0]);
+            if (chart.getSelection()[0] === "Overige tijd") {
+                return;
+            }
             chart.setAction({
                 id: id,
                 text: id,
