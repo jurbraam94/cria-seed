@@ -380,10 +380,11 @@ myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
     $scope.voegToeBijAfspeellijst = function (artiest, titel) {
         var liedInAfspeelLijst = [];
         liedInAfspeelLijst = [{
-            artiest: artiest, titel: titel
+            artiest: artiest,
+            titel: titel
         }];
 
-        console.log(liedInAfspeelLijst, artiest, titel );
+        console.log(liedInAfspeelLijst, artiest, titel);
         $scope.afspeellijst.unshift(liedInAfspeelLijst);
     };
 
