@@ -224,6 +224,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                 if (kleuren[i] === null || kleuren[i] === undefined) {
                     if (dataTable[i][0] !== 'Overige tijd') {
                         kleuren[i] = '#' + Math.random().toString(16).slice(2, 8);
+                        console.log("kleur van ", dataTable[i][0], " is nu ", kleuren[i]);
                     } else {
                         kleuren[i] = '#afafaf';
                         console.log("kleur van ", dataTable[i][0], " is nu ", kleuren[i]);
