@@ -44,6 +44,11 @@ myApp.controller('ContactController', function ($scope, DOODService) {
     };
 });
 
+myApp.controller('formulierController', function ($scope) {
+    "use strict";
+    console.log('formuliercontroller geladen');
+});
+
 myApp.controller('GebruikerLoginController', function ($scope, DOODService, $route) {
     "use strict";
 
