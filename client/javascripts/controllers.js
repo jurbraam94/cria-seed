@@ -227,7 +227,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                         console.log("kleur van ", dataTable[i][0], " is nu ", kleuren[i]);
                     } else {
                         kleuren[i] = '#afafaf';
-                        console.log("kleur van ", dataTable[i][0], " is nu ", kleuren[i]);
+                        console.log("Overige tijd(?) kleur van ", dataTable[i][0], " is nu ", kleuren[i]);
                     }
                 }
             }
