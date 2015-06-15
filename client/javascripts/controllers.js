@@ -244,7 +244,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                 text: id,
                 action: function () {
                     var index = chart.getSelection()[0].row + 1;
-                    console.log("getSelection[0] = ", chart.getSelection()[0]);
+                    console.log("getSelection = ", chart.getSelection());
                     if (chart.getSelection()[0] === "Overige tijd") {
                         return;
                     }
