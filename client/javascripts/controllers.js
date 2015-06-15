@@ -220,7 +220,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
 
         genereerKleurcodes = function () {
             var i;
-            for (i = 0; i < (dataTable.length - 1); i += 1) {
+            for (i = 1; i < dataTable.length; i += 1) {
                 if (kleuren[i] === null || kleuren[i] === undefined) {
                     kleuren[i] = '#' + Math.random().toString(16).slice(2, 8);
                     console.log("kleur van ", dataTable[i][0], " is nu ", kleuren[i]);
