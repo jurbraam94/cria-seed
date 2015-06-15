@@ -21,8 +21,8 @@
 
     aanvullendeGegevens = new Schema({
         gebruikersnaam: {type: String, required: true, unique: true},
-        religie: {type: String, required: true, validator: [stringLengteValidatie, 'De naam van uw religie is niet lang genoeg']},
-        donor: {type: String, required: true, enum: ['ja', 'nee']}
+        religie: {type: String, required: false, validator: [stringLengteValidatie, 'De naam van uw religie is niet lang genoeg']},
+        donor: {type: String, required: false, enum: ['ja', 'nee']}
     },
         { collection: 'AanvullendeGegevens' });
 

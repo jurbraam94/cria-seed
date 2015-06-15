@@ -1,5 +1,5 @@
 /*jslint node: true */
-/*globals myApp, google, drawChart, angular, window*/
+/*globals myApp, document, place, google, drawChart, angular, window*/
 
 myApp.controller('MainController', function ($scope, $rootScope, $location, DOODService, $route, $window) {
     "use strict";
@@ -46,7 +46,62 @@ myApp.controller('ContactController', function ($scope, DOODService) {
 
 myApp.controller('formulierController', function ($scope) {
     "use strict";
-    console.log('formuliercontroller geladen');
+    $scope.formulierData = {};
+
+    $scope.map = {
+        "center": {
+            latitude: 52.00494,
+            longitude: 5.91968
+        },
+        "zoom": 15
+    };
+    $scope.marker = {
+        id: 0,
+        coords: {
+            latitude: 52.00494,
+            longitude: 5.91968
+        },
+        options: { draggable: true },
+        events: {
+            dragend: function (marker, eventName, args) {
+
+                $scope.marker.options = {
+                    draggable: true,
+                    labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
+                    labelAnchor: "100 0",
+                    labelClass: "marker-labels"
+                };
+            }
+        }
+    };
+    var events = {
+        places_changed: function (searchBox) {
+
+            var place = searchBox.getPlaces();
+            if (!place || place == 'undefined' || place.length == 0) {
+                console.log('no place data :(');
+                return;
+            }
+
+            $scope.formulierData.plaats = place[0].geometry.location.lat() + "," + place[0].geometry.location.lng();
+
+            $scope.map = {
+                "center": {
+                    "latitude": place[0].geometry.location.lat(),
+                    "longitude": place[0].geometry.location.lng()
+                },
+                "zoom": 18
+            };
+            $scope.marker = {
+                id: 0,
+                coords: {
+                    latitude: place[0].geometry.location.lat(),
+                    longitude: place[0].geometry.location.lng()
+                }
+            };
+        }
+    };
+    $scope.searchbox = { template: 'searchbox.tpl.html', events: events };
 });
 
 myApp.controller('GebruikerLoginController', function ($scope, DOODService, $route) {
