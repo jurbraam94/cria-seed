@@ -326,7 +326,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             //segmenten uit db laden
             getDataTableUitDb(function () {
                 // Dit moet van google. Waarom? Goeie vraag
-                google.setOnLoadCallback(drawChart());
+                google.setOnLoadCallback(drawChart);
             });
         });
     };
