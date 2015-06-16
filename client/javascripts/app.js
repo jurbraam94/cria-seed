@@ -90,11 +90,11 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', '
 
     }], function (SpotifyProvider) {
         "use strict";
-        SpotifyProvider.setClientId('ABC123DEF456GHI789JKL');
+        SpotifyProvider.setClientId('d6ee6453e5404c698a8fe8e064bb92aa');
         SpotifyProvider.setRedirectUri('http://www.example.com/callback.html');
         SpotifyProvider.setScope('user-read-private playlist-read-private playlist-modify-private playlist-modify-public');
         // If you already have an auth token
-        SpotifyProvider.setAuthToken('zoasliu1248sdfuiknuha7882iu4rnuwehifskmkiuwhjg23');
+        SpotifyProvider.setAuthToken('289764cf8aaa4102af36c6da72575837');
 
     })
     .run(function ($rootScope, $location, DOODService) {
