@@ -149,7 +149,7 @@ myApp.controller('formulierController', function ($scope, DOODService, $timeout,
         "zoom": 100
     };
 
-    events = {
+    $scope.events = {
         places_changed: function (searchBox) {
 
             var place = searchBox.getPlaces();
@@ -178,12 +178,9 @@ myApp.controller('formulierController', function ($scope, DOODService, $timeout,
         dragend: function (marker) {
             $rootScope.$apply(function () {
                 $scope.formulierData.uitvaart.locatie = marker.position.lat() + "," + marker.position.lng();
-                console.log(marker.position.lat());
-                console.log(marker.position.lng());
             });
         }
     };
-    $scope.searchbox = { template: 'searchbox.tpl.html', events: events };
 });
 
 myApp.controller('GebruikerLoginController', function ($scope, DOODService) {
