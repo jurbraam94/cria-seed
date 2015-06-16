@@ -486,7 +486,6 @@ myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
 
     function maakSpotifyPlaylist(){
         Spotify.createPlaylist()
-
     };
 
 
