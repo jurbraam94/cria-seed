@@ -231,6 +231,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                 if (i === (segmenten.doc[i].volgnummer - 1)) {
                     dataTable.push([segmenten.doc[i].object, segmenten.doc[i].percentage]);
                     console.log("volgnummer = ", segmenten.doc[i].volgnummer);
+                    console.log("pushed to table = ", [segmenten.doc[i].object, segmenten.doc[i].percentage]);
                 }
 
                 if (i === segmenten.doc.length) {
@@ -241,6 +242,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             }
 
             if (dataTable.length === 1) {
+                console.log("I fukt it lolz");
                 dataTable.push(['Overige tijd', 0]);
             }
 
