@@ -58,10 +58,8 @@ myApp.controller('formulierController', function ($scope, DOODService) {
                     if (aanvullendeGegevensGet.doc !== null) {
                         $scope.formulierData.aanvullendeGegevens = aanvullendeGegevensGet.doc;
                         formulierDataOrigineel.aanvullendeGegevens = aanvullendeGegevensGet.doc;
-                        console.log("Aanvullende gegevens opgehaald");
                     } else {
                         DOODService.aanvullendeGegevensPost.post({gebruikersnaam: gebruiker.doc.gebruikersnaam});
-                        console.log("Aanvullende gegevens aangemaakt");
                     }
                 });
 
@@ -69,10 +67,8 @@ myApp.controller('formulierController', function ($scope, DOODService) {
                     if (algemeneGegevensGet.doc !== null) {
                         $scope.formulierData.algemeneGegevens = algemeneGegevensGet.doc;
                         formulierDataOrigineel.algemeneGegevens = algemeneGegevensGet.doc;
-                        console.log("Algemene gegevens opgehaald");
                     } else {
                         DOODService.algemeneGegevensPost.post({gebruikersnaam: gebruiker.doc.gebruikersnaam});
-                        console.log("Algemene gegevens aangemaakt");
                     }
                 });
 
@@ -80,10 +76,8 @@ myApp.controller('formulierController', function ($scope, DOODService) {
                     if (uitvaartGet.doc !== null) {
                         $scope.formulierData.uitvaart = uitvaartGet.doc;
                         formulierDataOrigineel.uitvaart = uitvaartGet.doc;
-                        console.log("Uitvaart opgehaald");
                     } else {
                         DOODService.uitvaartPost.post({gebruikersnaam: gebruiker.doc.gebruikersnaam});
-                        console.log("Uitvaart aangemaakt");
                     }
                 });
             }
@@ -91,7 +85,6 @@ myApp.controller('formulierController', function ($scope, DOODService) {
     };
 
     $scope.opslaan = function () {
-
         gebruiker = DOODService.gebruikerSessie.get(function () {
             console.log(formulierDataOrigineel);
             if (gebruiker.doc.gebruikersnaam !== undefined) {
