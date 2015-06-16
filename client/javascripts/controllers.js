@@ -499,14 +499,6 @@ myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
     $scope.zoekResultaat = [];
     $scope.afspeellijst = [];
 
-
-
-    function maakSpotifyPlaylist(){
-        Spotify.createPlaylist()
-
-    };
-
-
     $scope.voegToeBijAfspeellijst = function (artiest, titel) {
         var liedInAfspeelLijst = [];
 
