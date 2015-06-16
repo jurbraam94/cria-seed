@@ -18,17 +18,22 @@
 
 <div class="col-xs-10 col-md-10 col-lg-10 minicontent ">
     <div class="row">
-        <div class=" col-md-4 text-center afspeelLijst">
-            <div class="" ng-repeat="liedje in afspeellijst">
-                <div>
-                    {{liedje[0].nummer}}   {{liedje[0].artiest}} - {{liedje[0].titel}}
-                </div>
-                <div>
-                    <button class="buttonPlusje"> X </button>
-                </div>
+        <div class="col-md-4 text-center afspeellijst">
+            <div ng-repeat="liedje in afspeellijst">
+                <div class="liedje">
+                    <div >
+                        <button ng-click="verwijderUitLijst(liedje[0].index)" class="buttonPlusje"> X </button>
+                    </div>
 
+                    <div>
+                        {{liedje[0].nummer}}   {{liedje[0].artiest}} - {{liedje[0].titel}}
+                        <button ng-click="createPlaylist()"> knopje om een playlist te maken</button>
+                    </div>
+
+                </div>
 
             </div>
         </div>
+        <button ng-click="login()"> </button>
     </div>
 </div>

@@ -346,3 +346,17 @@ footer a:hover, a:active{
 .formulierContainer {
     background-color: #48CEC2;
 }
+
+.afspeellijst {
+    background-color: #48cec2;
+    height: 30%;
+
+}
+
+.liedje {
+    color: red;
+    background-color: #48cec2;
+    padding-bottom: 10px;
+    padding-top: auto;
+
+}
