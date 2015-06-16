@@ -46,7 +46,7 @@ myApp.controller('ContactController', function ($scope, DOODService) {
 
 myApp.controller('formulierController', function ($scope, DOODService) {
     "use strict";
-    var gebruiker, aanvullendeGegevensGet, algemeneGegevensGet, uitvaartGet, events;
+    var gebruiker, aanvullendeGegevensGet, algemeneGegevensGet, uitvaartGet, events, latitude, longitude;
     $scope.formulierData = {aanvullendeGegevens: {}, algemeneGegevens: {}, uitvaart: {}};
     $scope.formulierPagina = "gegevens";
 
@@ -70,8 +70,12 @@ myApp.controller('formulierController', function ($scope, DOODService) {
                 });
 
                 uitvaartGet = DOODService.uitvaart.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
+                    var locatie;
                     if (uitvaartGet.doc !== null) {
                         $scope.formulierData.uitvaart = uitvaartGet.doc;
+                        locatie = uitvaartGet.doc.locatie.split(",");
+                        latitude = locatie[0];
+                        longitude = locatie[1];
                     } else {
                         DOODService.uitvaartPost.post({gebruikersnaam: gebruiker.doc.gebruikersnaam});
                     }
@@ -116,16 +120,16 @@ myApp.controller('formulierController', function ($scope, DOODService) {
     //google maps stuff
     $scope.map = {
         "center": {
-            latitude: 52.00494,
-            longitude: 5.91968
+            latitude: latitude || 52.00494,
+            longitude: longitude || 5.91968
         },
         "zoom": 15
     };
     $scope.marker = {
         id: 0,
         coords: {
-            latitude: 52.00494,
-            longitude: 5.91968
+            latitude: latitude || 52.00494,
+            longitude: longitude || 5.91968
         },
         options: { draggable: true },
         events: {
