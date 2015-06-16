@@ -223,14 +223,6 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             return array;
         },
 
-        sorteerDataTable = function (array) {
-            var i;
-            for (i = 1; i < array.length; i += 1) {
-                dataTable = swapArrayIndexen(dataTable, i, array[i].volgnummer);
-            }
-            console.log("dataTable = ", dataTable);
-        },
-
         initieeleDataTable = function (segmenten) {
             var i = 0;
             dataTable = [['Segment', 'Minuten']];
