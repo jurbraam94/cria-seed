@@ -210,6 +210,16 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         chart = null,
         muisOverIndex,
 
+        swapArrayIndexen = function (array, oudeIndex, nieuweIndex) {
+            var temp;
+
+            temp = array[oudeIndex];
+            array[oudeIndex] = array[nieuweIndex];
+            array[nieuweIndex] = temp;
+
+            return array;
+        },
+
         sorteerDataTable = function (array) {
             var i;
             for (i = 1; i < array.length; i += 1) {
@@ -332,15 +342,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             chart.setSelection([{ row: muisOverIndex, column: null }]);
         },
 
-        swapArrayIndexen = function (array, oudeIndex, nieuweIndex) {
-            var temp;
-
-            temp = array[oudeIndex];
-            array[oudeIndex] = array[nieuweIndex];
-            array[nieuweIndex] = temp;
-
-            return array;
-        },
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         redrawNaHerordenen = function (oudeIndex, nieuweIndex) {
             //swap indexen in dataTable
