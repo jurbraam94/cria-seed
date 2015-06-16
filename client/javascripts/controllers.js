@@ -374,6 +374,17 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             });
         },
 
+        tooltips = function () {
+            var i;
+            for (i = 1; i < dataTable.length; i += 1) {
+                if (dataTable[i][0] !== "Overige tijd") {
+                    chartActies("verhoog", 1);
+                    chartActies("verlaag", -1);
+                    chartActies("verwijder", 0);
+                }
+            }
+        },
+
         drawChart = function (changed) {
             var data, options;
 
@@ -403,11 +414,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             google.visualization.events.addListener(chart, 'onmouseover', getSliceIndex);
             google.visualization.events.addListener(chart, 'onmouseup', verplaatsSlice);
 
-            if (chart.getSelection()[0].row !== getTotaleTijdEnIndexVanOverigeTijd()[1]) {
-                chartActies("verhoog", 1);
-                chartActies("verlaag", -1);
-                chartActies("verwijder", 0);
-            }
+            tooltips();
 
             chart.draw(data, options);
 
