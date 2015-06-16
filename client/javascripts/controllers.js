@@ -243,6 +243,8 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             if (dataTable.length === 1) {
                 dataTable.push(['Overige tijd', 0]);
             }
+
+            console.log("dataTable = ", dataTable);
         },
 
         maakObject = function (gebruikersnaam, i, callback) {
