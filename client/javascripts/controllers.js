@@ -83,6 +83,7 @@ myApp.controller('formulierController', function ($scope, DOODService) {
     $scope.opslaan = function () {
         var uitvaart, algemeneGegevens, aanvullendeGegevens;
         gebruiker = DOODService.gebruikerSessie.get(function () {
+            console.log($scope.formulierData);
             if (gebruiker.doc.gebruikersnaam !== undefined) {
                 uitvaart = DOODService.uitvaart.update($scope.formulierData.uitvaart, function () {
                     if (uitvaart.err !== null) {
