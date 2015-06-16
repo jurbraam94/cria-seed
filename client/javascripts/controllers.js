@@ -51,63 +51,61 @@ myApp.controller('formulierController', function ($scope, DOODService) {
     $scope.formulierPagina = "gegevens";
     formulierDataOrigineel = {};
 
-    gebruiker = DOODService.gebruikerSessie.get(function () {
-        if (gebruiker.doc.gebruikersnaam !== undefined) {
-            aanvullendeGegevensGet = DOODService.aanvullendeGegevens.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
-                if (aanvullendeGegevensGet.doc !== null) {
-                    $scope.formulierData.aanvullendeGegevens = aanvullendeGegevensGet.doc;
-                    formulierDataOrigineel.aanvullendeGegevens = aanvullendeGegevensGet.doc;
-                    algemeneGegevensGet = DOODService.algemeneGegevens.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
-                        if (algemeneGegevensGet.doc !== null) {
-                            $scope.formulierData.algemeneGegevens = algemeneGegevensGet.doc;
-                            formulierDataOrigineel.algemeneGegevens = algemeneGegevensGet.doc;
-                            uitvaartGet = DOODService.uitvaart.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
-                                if (uitvaartGet.doc !== null) {
-                                    $scope.formulierData.uitvaart = uitvaartGet.doc;
-                                    formulierDataOrigineel.uitvaart = uitvaartGet.doc;
-                                }
-                            });
-                        }
-                    });
-                }
-            });
+    $scope.initFormulierGegevens = function () {
+        gebruiker = DOODService.gebruikerSessie.get(function () {
+            if (gebruiker.doc.gebruikersnaam !== undefined) {
+                aanvullendeGegevensGet = DOODService.aanvullendeGegevens.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
+                    if (aanvullendeGegevensGet.doc !== null) {
+                        $scope.formulierData.aanvullendeGegevens = aanvullendeGegevensGet.doc;
+                        formulierDataOrigineel.aanvullendeGegevens = aanvullendeGegevensGet.doc;
+                        console.log("Aanvullende gegevens opgehaald");
+                    } else {
+                        DOODService.aanvullendeGegevensPost.post({gebruikersnaam: gebruiker.doc.gebruikersnaam});
+                        console.log("Aanvullende gegevens aangemaakt");
+                    }
+                });
 
-        }
-    });
+                algemeneGegevensGet = DOODService.algemeneGegevens.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
+                    if (algemeneGegevensGet.doc !== null) {
+                        $scope.formulierData.algemeneGegevens = algemeneGegevensGet.doc;
+                        formulierDataOrigineel.algemeneGegevens = algemeneGegevensGet.doc;
+                        console.log("Algemene gegevens opgehaald");
+                    } else {
+                        DOODService.algemeneGegevensPost.post({gebruikersnaam: gebruiker.doc.gebruikersnaam});
+                        console.log("Algemene gegevens aangemaakt");
+                    }
+                });
+
+                uitvaartGet = DOODService.uitvaart.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
+                    if (uitvaartGet.doc !== null) {
+                        $scope.formulierData.uitvaart = uitvaartGet.doc;
+                        formulierDataOrigineel.uitvaart = uitvaartGet.doc;
+                        console.log("Uitvaart opgehaald");
+                    } else {
+                        DOODService.uitvaartPost.post({gebruikersnaam: gebruiker.doc.gebruikersnaam});
+                        console.log("Uitvaart aangemaakt");
+                    }
+                });
+            }
+        });
+    };
 
     $scope.opslaan = function () {
-        var uitvaart;
 
         gebruiker = DOODService.gebruikerSessie.get(function () {
             console.log(formulierDataOrigineel);
             if (gebruiker.doc.gebruikersnaam !== undefined) {
-                if (formulierDataOrigineel.aanvullendeGegevens === undefined) {
-                    console.log("Post aanvullendegegevens");
-                } else if ($scope.formulierData.aanvullendeGegevens !== formulierDataOrigineel.aanvullendeGegevens) {
+                if ($scope.formulierData.aanvullendeGegevens !== formulierDataOrigineel.aanvullendeGegevens) {
                     console.log("Update aanvullendegegevens");
                 }
 
-                if (formulierDataOrigineel.algemeneGegevens === undefined) {
-                    console.log("Post algemeneGegevens");
-                } else if ($scope.formulierData.algemeneGegevens !== formulierDataOrigineel.algemeneGegevens) {
+                if ($scope.formulierData.algemeneGegevens !== formulierDataOrigineel.algemeneGegevens) {
                     console.log("Update algemeneGegevens");
                 }
 
-                if (formulierDataOrigineel.uitvaart === undefined) {
-                    uitvaart = DOODService.uitvaartPost.post({gebruikersnaam: gebruiker.doc.gebruikersnaam, duurOpbaring: $scope.formulierData.uitvaart.duurOpbaring, locatie: $scope.formulierData.uitvaart.locatie}, function () {
-                        if (uitvaart.err === null) {
-                            $scope.success = "Uitvaart opgeslagen";
-                            console.log("Post uitvaart");
-                        } else {
-                            $scope.error = uitvaart.err;
-                        }
-                    });
-
-                } else if ($scope.formulierData.uitvaart !== formulierDataOrigineel.uitvaart) {
+                if ($scope.formulierData.uitvaart !== formulierDataOrigineel.uitvaart) {
                     console.log("Update uitvaart");
                 }
-            } else {
-                $scope.error = "De gebruiker is niet meer ingelogd of de sessie is verlopen.";
             }
         });
     };
