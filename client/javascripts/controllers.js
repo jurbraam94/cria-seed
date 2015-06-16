@@ -349,10 +349,8 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                 j = i - 1;
                 if (dataTable[i][0] === 'Overige tijd') {
                     kleuren[j] = '#afafaf';
-                    console.log("Overige tijd(?) kleur van ", dataTable[i][0], " is nu ", kleuren[j]);
                 } else if ((kleuren[j] === undefined) || (kleuren[j] === null)) {
                     kleuren[j] = '#' + Math.random().toString(16).slice(2, 8);
-                    console.log("kleur van ", dataTable[i][0], " is nu ", kleuren[j]);
                 }
             }
         },
@@ -373,6 +371,18 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                     drawChart(true);
                 }
             });
+        },
+
+        tooltips = function () {
+            var i;
+            for (i = 1; i < dataTable.length; i += 1) {
+                if (dataTable[i][0] !== "Overige tijd") {
+                    console.log("dataTable[i][0] = ", dataTable[i][0]);
+                    chartActies("verhoog", 1);
+                    chartActies("verlaag", -1);
+                    chartActies("verwijder", 0);
+                }
+            }
         },
 
         drawChart = function (changed) {
@@ -404,11 +414,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             google.visualization.events.addListener(chart, 'onmouseover', getSliceIndex);
             google.visualization.events.addListener(chart, 'onmouseup', verplaatsSlice);
 
-            if (chart.getSelection()[0].row !== getTotaleTijdEnIndexVanOverigeTijd()[1]) {
-                chartActies("verhoog", 1);
-                chartActies("verlaag", -1);
-                chartActies("verwijder", 0);
-            }
+            tooltips();
 
             chart.draw(data, options);
 
