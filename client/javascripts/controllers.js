@@ -226,7 +226,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         sorteerDataTable = function (array) {
             var i;
             for (i = 1; i < array.length; i += 1) {
-                dataTable = swapArrayIndexen(dataTable, i, array.volgnummer);
+                dataTable = swapArrayIndexen(dataTable, i, array[i].volgnummer);
             }
             console.log("dataTable = ", dataTable);
         },
@@ -237,6 +237,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
 
             for (i = 0; i < segmenten.doc.length; i += 1) {
                 dataTable.push([segmenten.doc[i].object, segmenten.doc[i].percentage]);
+                console.log("volgnummer = ", segmenten.doc[i].volgnummer);
             }
 
             if (dataTable.length === 1) {
