@@ -44,7 +44,7 @@ myApp.controller('ContactController', function ($scope, DOODService) {
     };
 });
 
-myApp.controller('formulierController', function ($scope, DOODService) {
+myApp.controller('formulierController', function ($scope, DOODService, $timeout) {
     "use strict";
     var gebruiker, aanvullendeGegevensGet, algemeneGegevensGet, uitvaartGet, events;
     $scope.formulierData = {aanvullendeGegevens: {}, algemeneGegevens: {}, uitvaart: {}};
@@ -127,6 +127,9 @@ myApp.controller('formulierController', function ($scope, DOODService) {
                                         $scope.error = "Fout: " + aanvullendeGegevens.err;
                                     } else {
                                         $scope.success = "Alle data is succesvol opgeslagen.";
+                                        $timeout(function () {
+                                            $scope.success = null;
+                                        }, 5000);
                                     }
                                 });
                             }

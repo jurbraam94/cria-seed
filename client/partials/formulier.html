@@ -28,17 +28,21 @@
         <button type="submit" ng-click="opslaan()"
                 class="center-block btn btn-primary btn-lg formOpslaan">
             OPSLAAN
-        </button>
+
+
+        <br>
 
         <div ng-show="error" class="alert alert-danger" role="alert">
             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            <span class="sr-only">Error:</span>
+            <span class="sr-only">Error</span>
             {{error}}
         </div>
 
+        <br>
+
         <div ng-show="success" class="alert alert-success" role="alert">
             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            <span class="sr-only">Success:</span>
+            <span class="sr-only">Success</span>
             {{success}}
         </div>
 
