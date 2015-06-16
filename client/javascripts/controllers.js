@@ -116,7 +116,7 @@ myApp.controller('formulierController', function ($scope, DOODService) {
         });
     };
 
-
+    console.log(latitude || "hoi", longitude || "hoi");
     //google maps stuff
     $scope.map = {
         "center": {
