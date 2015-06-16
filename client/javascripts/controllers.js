@@ -214,7 +214,9 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                 dataTable.push([segmenten.doc[i].object, segmenten.doc[i].percentage]);
             }
 
-            dataTable.push(['Overige tijd', 0]);
+            if (dataTable.length < 2) {
+                dataTable.push(['Overige tijd', 0]);
+            }
         },
 
         maakObject = function (gebruikersnaam, i, callback) {
@@ -233,7 +235,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                 stuurDataLoop = function (gebruikersnaam) {
                     maakObject(gebruikersnaam, i, function () {
                         i += 1;
-                        if (i < dataTable.length - 1) {
+                        if (i < dataTable.length) {
                             stuurDataLoop(gebruikersnaam);
                         }
                     });
@@ -373,18 +375,6 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             });
         },
 
-        tooltips = function () {
-            var i;
-            for (i = 0; i < dataTable.length; i += 1) {
-                if (dataTable[i][0] !== "Overige tijd") {
-                    console.log("dataTable[i][0] = ", dataTable[i][0]);
-                    chartActies("verhoog", 1);
-                    chartActies("verlaag", -1);
-                    chartActies("verwijder", 0);
-                }
-            }
-        },
-
         drawChart = function (changed) {
             var data, options;
 
@@ -414,7 +404,9 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             google.visualization.events.addListener(chart, 'onmouseover', getSliceIndex);
             google.visualization.events.addListener(chart, 'onmouseup', verplaatsSlice);
 
-            tooltips();
+            chartActies("verhoog", 1);
+            chartActies("verlaag", -1);
+            chartActies("verwijder", 0);
 
             chart.draw(data, options);
 
