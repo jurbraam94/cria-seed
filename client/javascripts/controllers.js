@@ -139,8 +139,8 @@ myApp.controller('formulierController', function ($scope, DOODService) {
 
     $scope.map = {
         "center": {
-            latitude: 51.98891	,
-            longitude:  5.94929
+            latitude: 51.98891,
+            longitude: 5.94929
         },
         "zoom": 100
     };
