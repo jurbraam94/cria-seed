@@ -61,14 +61,14 @@ exports.algGegevensDetails = function (req, res) {
 exports.updateAlgGegevens = function (req, res) {
     var conditions = {gebruikersnaam: req.params._gebruikersnaam},
         update = {
-            voornaam: req.body.voornaam,
-            achternaam: req.body.achternaam,
-            woonplaats: req.body.woonplaats,
-            postcode: req.body.postcode,
-            adres: req.body.adres,
-            huisnummer: req.body.huisnummer,
-            telefoon: req.body.telefoon,
-            email: req.body.email
+            voornaam: req.body.voornaam || "",
+            achternaam: req.body.achternaam || "",
+            woonplaats: req.body.woonplaats || "",
+            postcode: req.body.postcode || "",
+            adres: req.body.adres || "",
+            huisnummer: req.body.huisnummer || "",
+            telefoon: req.body.telefoon || "",
+            email: req.body.email || ""
         },
         options = {multi: false},
         callback = function (err, doc) {
