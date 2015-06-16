@@ -1,7 +1,7 @@
 /*jslint node: true */
 /*globals myApp, document, place, google, drawChart, angular, window*/
 
-myApp.controller('MainController', function ($scope, $rootScope, $location, DOODService, $window) {
+myApp.controller('MainController', function ($scope, $rootScope, $location, DOODService, $route, $window) {
     "use strict";
 
     $scope.goto = function (location) {
@@ -46,7 +46,7 @@ myApp.controller('ContactController', function ($scope, DOODService) {
 
 myApp.controller('formulierController', function ($scope, DOODService, $timeout, $route, $rootScope) {
     "use strict";
-    var gebruiker, aanvullendeGegevensGet, algemeneGegevensGet, uitvaartGet;
+    var gebruiker, aanvullendeGegevensGet, algemeneGegevensGet, uitvaartGet, events;
     $scope.formulierData = {aanvullendeGegevens: {}, algemeneGegevens: {}, uitvaart: {}};
     $scope.formulierPagina = "gegevens";
 
@@ -149,7 +149,7 @@ myApp.controller('formulierController', function ($scope, DOODService, $timeout,
         "zoom": 100
     };
 
-    $scope.events = {
+    events = {
         places_changed: function (searchBox) {
 
             var place = searchBox.getPlaces();
@@ -181,6 +181,7 @@ myApp.controller('formulierController', function ($scope, DOODService, $timeout,
             });
         }
     };
+    $scope.searchbox = { template: 'searchbox.tpl.html', events: events };
 });
 
 myApp.controller('GebruikerLoginController', function ($scope, DOODService) {
@@ -533,7 +534,7 @@ myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
     $scope.afspeellijst = [];
 
     $scope.voegToeBijAfspeellijst = function (artiest, titel) {
-        var liedInAfspeelLijst;
+        var liedInAfspeelLijst = [];
 
         liedInAfspeelLijst = [{
             artiest: artiest,
@@ -543,29 +544,6 @@ myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
         console.log(liedInAfspeelLijst, artiest, titel);
         $scope.afspeellijst.push(liedInAfspeelLijst);
     };
-
-    $scope.createPlaylist =  function () {
-        Spotify.createPlaylist('jurbraam94', {name: 'nice songs', public: false }).then(function () {
-            console.log("je hebt er één gemaakt");
-        });
-    };
-
-    $scope.login = function () {
-        Spotify.login();
-    };
-
-    /*function verwijderUitLijst(artiest, titel) {
-        var i;
-        for(i = 0; i < $scope.afspeellijst.length; i ++){
-            if($scope.afspeellijst[i].artiest === artiest){
-                if($scope.afspeellijst[i].titel === titel ){
-                    console.log($scope.afspeellijst[i].indexOf());
-                }
-            }
-        }
-        $scope.afspeellijst.indexOf(artiest, titel)
-
-    }*/
 
     $scope.zoek = function (zoekopdracht) {
         $scope.error = "Vul een titel";
