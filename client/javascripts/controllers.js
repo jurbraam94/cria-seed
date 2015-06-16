@@ -377,7 +377,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
 
         tooltips = function () {
             var i;
-            for (i = 1; i < dataTable.length; i += 1) {
+            for (i = 0; i < dataTable.length; i += 1) {
                 if (dataTable[i][0] !== "Overige tijd") {
                     console.log("dataTable[i][0] = ", dataTable[i][0]);
                     chartActies("verhoog", 1);
