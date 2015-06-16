@@ -46,7 +46,7 @@ myApp.controller('ContactController', function ($scope, DOODService) {
 
 myApp.controller('formulierController', function ($scope, DOODService) {
     "use strict";
-    var gebruiker, aanvullendeGegevensGet, algemeneGegevensGet, uitvaartGet, events, latitude, longitude;
+    var gebruiker, aanvullendeGegevensGet, algemeneGegevensGet, uitvaartGet, events;
     $scope.formulierData = {aanvullendeGegevens: {}, algemeneGegevens: {}, uitvaart: {}};
     $scope.formulierPagina = "gegevens";
 
