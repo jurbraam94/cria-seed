@@ -22,14 +22,14 @@
 
     algemeneGegevens = new Schema({
         gebruikersnaam: {type: String, required: true, unique: true},
-        voornaam: {type: String, required: true, validator: [stringLengteValidatie, 'Voornaam is niet lang genoeg']},
-        achternaam: {type: String, required: true, validator: [stringLengteValidatie, 'Achternaam is niet lang genoeg']},
-        woonplaats: {type: String, required: true, validator: [stringLengteValidatie, 'Woonplaats is niet lang genoeg']},
-        postcode: {type: String, required: true, validator: [stringLengteValidatie, 'Postcode is niet lang genoeg'], validate: /^[1-9]\d{3}[A-Z]{2}$/},
-        adres: {type: String, required: true, validator: [stringLengteValidatie, 'Adres is niet lang genoeg']},
-        huisnummer: {type: Number, required: true, min: 1},
-        telefoon: {type: String, required: true, min: 1000000000},
-        email: {type: String, required: true, match: [emailRegex, 'E-mail adres is onjuist']}
+        voornaam: {type: String, required: false, validator: [stringLengteValidatie, 'Voornaam is niet lang genoeg']},
+        achternaam: {type: String, required: false, validator: [stringLengteValidatie, 'Achternaam is niet lang genoeg']},
+        woonplaats: {type: String, required: false, validator: [stringLengteValidatie, 'Woonplaats is niet lang genoeg']},
+        postcode: {type: String, required: false, validator: [stringLengteValidatie, 'Postcode is niet lang genoeg'], validate: /^[1-9]\d{3}[A-Z]{2}$/},
+        adres: {type: String, required: false, validator: [stringLengteValidatie, 'Adres is niet lang genoeg']},
+        huisnummer: {type: Number, required: false, min: 1},
+        telefoon: {type: String, required: false, min: 1000000000},
+        email: {type: String, required: false, match: [emailRegex, 'E-mail adres is onjuist']}
     },
         { collection: 'AlgemeneGegevens' });
 
