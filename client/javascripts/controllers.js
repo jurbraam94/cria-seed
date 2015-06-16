@@ -223,27 +223,30 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             return array;
         },
 
-        sorteerDataTable = function (array) {
-            var i;
-            for (i = 1; i < array.length; i += 1) {
-                dataTable = swapArrayIndexen(dataTable, i, array.volgnummer);
-            }
-            console.log("dataTable = ", dataTable);
-        },
-
         initieeleDataTable = function (segmenten) {
-            var i;
+            var i = 0;
             dataTable = [['Segment', 'Minuten']];
 
-            for (i = 0; i < segmenten.doc.length; i += 1) {
-                dataTable.push([segmenten.doc[i].object, segmenten.doc[i].percentage]);
+            while (dataTable.length <= segmenten.doc.length) {
+                if (i === (segmenten.doc[i].volgnummer - 1)) {
+                    dataTable.push([segmenten.doc[i].object, segmenten.doc[i].percentage]);
+                    console.log("volgnummer = ", segmenten.doc[i].volgnummer);
+                    console.log("pushed to table = ", [segmenten.doc[i].object, segmenten.doc[i].percentage]);
+                }
+
+                if (i === segmenten.doc.length) {
+                    i = 0;
+                } else {
+                    i += 1;
+                }
             }
 
             if (dataTable.length === 1) {
+                console.log("I fukt it lolz");
                 dataTable.push(['Overige tijd', 0]);
             }
 
-            sorteerDataTable(segmenten.doc);
+            console.log("dataTable = ", dataTable);
         },
 
         maakObject = function (gebruikersnaam, i, callback) {
