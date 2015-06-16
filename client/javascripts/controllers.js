@@ -47,9 +47,9 @@ myApp.controller('ContactController', function ($scope, DOODService) {
 myApp.controller('formulierController', function ($scope, DOODService) {
     "use strict";
     var gebruiker, aanvullendeGegevensGet, algemeneGegevensGet, uitvaartGet, events, formulierDataOrigineel;
-    $scope.formulierData = {};
+    $scope.formulierData = {aanvullendeGegevens: {}, algemeneGegevens: {}, uitvaart: {}};
     $scope.formulierPagina = "gegevens";
-    formulierDataOrigineel = {};
+    formulierDataOrigineel = {aanvullendeGegevens: {}, algemeneGegevens: {}, uitvaart: {}};
 
     $scope.initFormulierGegevens = function () {
         gebruiker = DOODService.gebruikerSessie.get(function () {
@@ -73,9 +73,14 @@ myApp.controller('formulierController', function ($scope, DOODService) {
                 });
 
                 uitvaartGet = DOODService.uitvaart.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
+                    var property;
                     if (uitvaartGet.doc !== null) {
                         $scope.formulierData.uitvaart = uitvaartGet.doc;
-                        formulierDataOrigineel.uitvaart = uitvaartGet.doc;
+                        for (property in $scope.formulierData.uitvaart) {
+                            if ($scope.formulierData.uitvaart.hasOwnProperty(property)) {
+                                formulierDataOrigineel.uitvaart.push(property);
+                            }
+                        }
                     } else {
                         DOODService.uitvaartPost.post({gebruikersnaam: gebruiker.doc.gebruikersnaam});
                     }
