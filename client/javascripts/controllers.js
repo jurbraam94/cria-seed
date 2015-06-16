@@ -76,6 +76,7 @@ myApp.controller('formulierController', function ($scope, DOODService) {
                         locatie = uitvaartGet.doc.locatie.split(",");
                         latitude = locatie[0];
                         longitude = locatie[1];
+                        console.log(latitude, longitude);
                     } else {
                         DOODService.uitvaartPost.post({gebruikersnaam: gebruiker.doc.gebruikersnaam});
                     }
