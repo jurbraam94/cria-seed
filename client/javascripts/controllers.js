@@ -357,9 +357,6 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         },
 
         chartActies = function (id, nieuweWaarde) {
-            if (chart.getSelection()[0].row === getTotaleTijdEnIndexVanOverigeTijd()[1]) {
-                return;
-            }
             chart.setAction({
                 id: id,
                 text: id,
@@ -406,9 +403,11 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             google.visualization.events.addListener(chart, 'onmouseover', getSliceIndex);
             google.visualization.events.addListener(chart, 'onmouseup', verplaatsSlice);
 
-            chartActies("verhoog", 1);
-            chartActies("verlaag", -1);
-            chartActies("verwijder", 0);
+            if (chart.getSelection()[0].row !== getTotaleTijdEnIndexVanOverigeTijd()[1]) {
+                chartActies("verhoog", 1);
+                chartActies("verlaag", -1);
+                chartActies("verwijder", 0);
+            }
 
             chart.draw(data, options);
 
