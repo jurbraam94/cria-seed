@@ -87,7 +87,15 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', '
         $routeProvider.otherwise({
             redirectTo: "/overzicht"
         });
-    }])
+
+    }], function(SpotifyProvider){
+        SpotifyProvider.setClientId('ABC123DEF456GHI789JKL');
+        SpotifyProvider.setRedirectUri('http://www.example.com/callback.html');
+        SpotifyProvider.setScope('user-read-private playlist-read-private playlist-modify-private playlist-modify-public');
+        // If you already have an auth token
+        SpotifyProvider.setAuthToken('zoasliu1248sdfuiknuha7882iu4rnuwehifskmkiuwhjg23');
+
+    })
     .run(function ($rootScope, $location, DOODService) {
         "use strict";
         $rootScope.$on("$routeChangeStart", function (event, next) {

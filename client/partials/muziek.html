@@ -16,13 +16,12 @@
     </div>
 </div>
 
-<div class="col-xs-10 col-md-10 col-lg-10 minicontent">
+<div class="col-xs-10 col-md-10 col-lg-10 minicontent ">
     <div class="row">
-        <div>
-            <div ng-repeat="liedje in afspeellijst">
-                <h3>
-                    {{liedje[0].artiest}} - {{liedje[0].titel}}
-                </h3>
+        <div class=" text-center afspeelLijst">
+            <div class="" ng-repeat="liedje in afspeellijst">
+                   {{liedje[0].nummer}}   {{liedje[0].artiest}} - {{liedje[0].titel}}
+
             </div>
         </div>
     </div>
