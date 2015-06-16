@@ -42,10 +42,6 @@
             {{success}}
         </div>
 
-        <span ng-show="error">{{error}}</span>
-
-        <span ng-show="success">{{success}}</span>
-
     </div>
     <div class="col-xs-10 col-md-10 col-lg-10 minicontent">
         <div ng-switch on="formulierPagina">
@@ -57,8 +53,8 @@
                             <label class="inputLabel">Voornaam*</label>
                             <div class="input-group">
                                 <input placeholder="Jan" class="form-control" type="text"
-                                       ng-model="formulierData.aanvullendeGegevens.voornaam" id="voornaam"
-                                       value="formulierData.aanvullendeGegevens.voornaam" required=""/>
+                                       ng-model="formulierData.algemeneGegevens.voornaam" id="voornaam"
+                                       value="formulierData.algemeneGegevens.voornaam" required=""/>
                             </div>
                         </div>
 
@@ -66,8 +62,8 @@
                             <label class="inputLabel">Achternaam*</label>
                             <div class="input-group">
                                 <input placeholder="Janssen" class="form-control" type="text"
-                                       ng-model="formulierData.aanvullendeGegevens.achternaam" id="achternaam"
-                                       value="formulierData.aanvullendeGegevens.achternaam" required=""/>
+                                       ng-model="formulierData.algemeneGegevens.achternaam" id="achternaam"
+                                       value="formulierData.algemeneGegevens.achternaam" required=""/>
                             </div>
                         </div>
 
@@ -75,8 +71,8 @@
                             <label class="inputLabel">Woonplaats*</label>
                             <div class="input-group">
                                 <input placeholder="Arnhem" class="form-control" type="text"
-                                       ng-model="formulierData.aanvullendeGegevens.woonplaats" id="woonplaats"
-                                       value="formulierData.aanvullendeGegevens.woonplaats" required=""/>
+                                       ng-model="formulierData.algemeneGegevens.woonplaats" id="woonplaats"
+                                       value="formulierData.algemeneGegevens.woonplaats" required=""/>
                             </div>
                         </div>
 
@@ -84,8 +80,8 @@
                             <label class="inputLabel">Postcode*</label>
                             <div class="input-group">
                                 <input placeholder="4829ER" class="form-control" type="text"
-                                       ng-model="formulierData.aanvullendeGegevens.postcode" id="postcode"
-                                       value="formulierData.aanvullendeGegevens.postcode" required=""/>
+                                       ng-model="formulierData.algemeneGegevens.postcode" id="postcode"
+                                       value="formulierData.algemeneGegevens.postcode" required=""/>
                             </div>
                         </div>
 
@@ -93,8 +89,8 @@
                             <label class="inputLabel">Adres*</label>
                             <div class="input-group">
                                 <input placeholder="Dorpsstraat" class="form-control" type="text"
-                                       ng-model="formulierData.aanvullendeGegevens.adres" id="adres"
-                                       value="formulierData.aanvullendeGegevens.adres" required=""/>
+                                       ng-model="formulierData.algemeneGegevens.adres" id="adres"
+                                       value="formulierData.algemeneGegevens.adres" required=""/>
                             </div>
                         </div>
 
@@ -102,8 +98,8 @@
                             <label class="inputLabel">Huisnummer*</label>
                             <div class="input-group">
                                 <input placeholder="5" class="form-control" type="number"
-                                       ng-model="formulierData.aanvullendeGegevens.huisnummer" id="huisnummer"
-                                       value="formulierData.aanvullendeGegevens.huisnummer" required=""/>
+                                       ng-model="formulierData.algemeneGegevens.huisnummer" id="huisnummer"
+                                       value="formulierData.algemeneGegevens.huisnummer" required=""/>
                             </div>
                         </div>
 
@@ -111,8 +107,8 @@
                             <label class="inputLabel">Telefoon*</label>
                             <div class="input-group">
                                 <input placeholder="0612345678" class="form-control" type="number"
-                                       ng-model="formulierData.aanvullendeGegevens.telefoon" id="telefoon"
-                                       value="formulierData.aanvullendeGegevens.telefoon" required=""/>
+                                       ng-model="formulierData.algemeneGegevens.telefoon" id="telefoon"
+                                       value="formulierData.algemeneGegevens.telefoon" required=""/>
                             </div>
                         </div>
 
@@ -120,8 +116,8 @@
                             <label class="inputLabel">Email*</label>
                             <div class="input-group">
                                 <input placeholder="email@email.com" class="form-control" type="email"
-                                       ng-model="formulierData.aanvullendeGegevens.email" id="email"
-                                       value="formulierData.aanvullendeGegevens.email" required=""/>
+                                       ng-model="formulierData.algemeneGegevens.email" id="email"
+                                       value="formulierData.algemeneGegevens.email" required=""/>
                             </div>
                         </div>
 
