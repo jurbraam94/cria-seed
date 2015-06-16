@@ -44,99 +44,111 @@ myApp.controller('ContactController', function ($scope, DOODService) {
     };
 });
 
-myApp.controller('formulierController', function ($scope, DOODService) {
+myApp.controller('formulierController', function ($scope, DOODService, $timeout, $route) {
     "use strict";
-    var gebruiker, aanvullendeGegevensGet, algemeneGegevensGet, uitvaartGet, events, formulierDataOrigineel;
-    $scope.formulierData = {};
+    var gebruiker, aanvullendeGegevensGet, algemeneGegevensGet, uitvaartGet, events;
+    $scope.formulierData = {aanvullendeGegevens: {}, algemeneGegevens: {}, uitvaart: {}};
     $scope.formulierPagina = "gegevens";
-    formulierDataOrigineel = {};
 
-    gebruiker = DOODService.gebruikerSessie.get(function () {
-        if (gebruiker.doc.gebruikersnaam !== undefined) {
-            aanvullendeGegevensGet = DOODService.aanvullendeGegevens.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
-                if (aanvullendeGegevensGet.doc !== null) {
-                    $scope.formulierData.aanvullendeGegevens = aanvullendeGegevensGet.doc;
-                    algemeneGegevensGet = DOODService.algemeneGegevens.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
-                        if (algemeneGegevensGet.doc !== null) {
-                            $scope.formulierData.algemeneGegevens = algemeneGegevensGet.doc;
-                            uitvaartGet = DOODService.uitvaart.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
-                                if (uitvaartGet.doc !== null) {
-                                    $scope.formulierData.uitvaart = uitvaartGet.doc;
-                                    formulierDataOrigineel = $scope.formulierData;
-                                }
-                            });
-                        }
-                    });
-                }
-            });
-
-        }
-    });
-
-    $scope.opslaan = function () {
-        var uitvaart;
-
+    $scope.initFormulierGegevens = function () {
         gebruiker = DOODService.gebruikerSessie.get(function () {
             if (gebruiker.doc.gebruikersnaam !== undefined) {
-                if (formulierDataOrigineel.aanvullendeGegevens === undefined) {
-                    console.log("Post aanvullendegegevens");
-                } else if ($scope.formulierData.aanvullendeGegevens !== formulierDataOrigineel.aanvullendeGegevens) {
-                    console.log("Update aanvullendegegevens");
-                }
+                aanvullendeGegevensGet = DOODService.aanvullendeGegevens.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
+                    if (aanvullendeGegevensGet.doc !== null) {
+                        $scope.formulierData.aanvullendeGegevens = aanvullendeGegevensGet.doc;
+                    } else {
+                        DOODService.aanvullendeGegevensPost.post({gebruikersnaam: gebruiker.doc.gebruikersnaam});
+                    }
+                });
 
-                if (formulierDataOrigineel.algemeneGegevens === undefined) {
-                    console.log("Post algemeneGegevens");
-                } else if ($scope.formulierData.algemeneGegevens !== formulierDataOrigineel.algemeneGegevens) {
-                    console.log("Update algemeneGegevens");
-                }
+                algemeneGegevensGet = DOODService.algemeneGegevens.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
+                    if (algemeneGegevensGet.doc !== null) {
+                        $scope.formulierData.algemeneGegevens = algemeneGegevensGet.doc;
+                    } else {
+                        DOODService.algemeneGegevensPost.post({gebruikersnaam: gebruiker.doc.gebruikersnaam});
+                    }
+                });
 
-                if (formulierDataOrigineel.uitvaart === undefined) {
-                    uitvaart = DOODService.uitvaartPost.post({gebruikersnaam: gebruiker.doc.gebruikersnaam, duurOpbaring: $scope.formulierData.uitvaart.duurOpbaring, locatie: $scope.formulierData.uitvaart.locatie}, function () {
-                        if (uitvaart.err === null) {
-                            $scope.success = "Uitvaart opgeslagen";
-                            console.log("Post uitvaart");
-                        } else {
-                            $scope.error = uitvaart.err;
-                        }
-                    });
+                uitvaartGet = DOODService.uitvaart.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
+                    var locatie;
+                    if (uitvaartGet.doc !== null) {
+                        $scope.formulierData.uitvaart = uitvaartGet.doc;
+                        locatie = uitvaartGet.doc.locatie.split(",");
 
-                } else if ($scope.formulierData.uitvaart !== formulierDataOrigineel.uitvaart) {
-                    console.log("Update uitvaart");
-                }
-            } else {
-                $scope.error = "De gebruiker is niet meer ingelogd of de sessie is verlopen.";
+                        //google maps stuff
+                        $scope.map = {
+                            "center": {
+                                latitude: locatie[0],
+                                longitude:  locatie[1]
+                            },
+                            "zoom": 15
+                        };
+                        $scope.marker = {
+                            id: 0,
+                            coords: {
+                                latitude: locatie[0],
+                                longitude: locatie[1]
+                            },
+                            options: { draggable: true },
+                            events: {
+                                dragend: function (marker, eventName, args) {
+
+                                    $scope.marker.options = {
+                                        draggable: true,
+                                        labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
+                                        labelAnchor: "100 0",
+                                        labelClass: "marker-labels"
+                                    };
+                                }
+                            }
+                        };
+                    } else {
+                        DOODService.uitvaartPost.post({gebruikersnaam: gebruiker.doc.gebruikersnaam});
+                    }
+                });
             }
         });
     };
 
+    $scope.opslaan = function () {
+        var uitvaart, algemeneGegevens, aanvullendeGegevens;
+        gebruiker = DOODService.gebruikerSessie.get(function () {
+            if (gebruiker.doc.gebruikersnaam !== undefined) {
+                uitvaart = DOODService.uitvaart.update($scope.formulierData.uitvaart, function () {
+                    if (uitvaart.err !== null) {
+                        $scope.error = "Fout: " + uitvaart.err;
+                    } else {
+                        algemeneGegevens = DOODService.algemeneGegevens.update($scope.formulierData.algemeneGegevens, function () {
+                            if (algemeneGegevens.err !== null) {
+                                $scope.error =  "Fout: " + algemeneGegevens.err;
+                            } else {
+                                aanvullendeGegevens = DOODService.aanvullendeGegevens.update($scope.formulierData.aanvullendeGegevens, function () {
+                                    if (aanvullendeGegevens.err !== null) {
+                                        $scope.error = "Fout: " + aanvullendeGegevens.err;
+                                    } else {
+                                        $scope.success = "Alle data is succesvol opgeslagen.";
+                                        $timeout(function () {
+                                            $scope.success = null;
+                                            $route.reload();
+                                        }, 3000);
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    };
 
-    //google maps stuff
     $scope.map = {
         "center": {
-            latitude: 52.00494,
-            longitude: 5.91968
+            latitude: 51.98891,
+            longitude: 5.94929
         },
-        "zoom": 15
+        "zoom": 100
     };
-    $scope.marker = {
-        id: 0,
-        coords: {
-            latitude: 52.00494,
-            longitude: 5.91968
-        },
-        options: { draggable: true },
-        events: {
-            dragend: function (marker, eventName, args) {
 
-                $scope.marker.options = {
-                    draggable: true,
-                    labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
-                    labelAnchor: "100 0",
-                    labelClass: "marker-labels"
-                };
-            }
-        }
-    };
     events = {
         places_changed: function (searchBox) {
 
@@ -205,15 +217,42 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         chart = null,
         muisOverIndex,
 
+        swapArrayIndexen = function (array, oudeIndex, nieuweIndex) {
+            var temp;
+
+            temp = array[oudeIndex];
+            array[oudeIndex] = array[nieuweIndex];
+            array[nieuweIndex] = temp;
+
+            return array;
+        },
+
         initieeleDataTable = function (segmenten) {
-            var i;
+            var i = 0;
             dataTable = [['Segment', 'Minuten']];
 
-            for (i = 0; i < segmenten.doc.length; i += 1) {
-                dataTable.push([segmenten.doc[i].object, segmenten.doc[i].percentage]);
+            while (dataTable.length <= segmenten.doc.length) {
+                if (i === (segmenten.doc[i].volgnummer - 1)) {
+                    dataTable.push([segmenten.doc[i].object, segmenten.doc[i].percentage]);
+                    console.log("volgnummer = ", segmenten.doc[i].volgnummer);
+                    console.log("pushed to table = ", [segmenten.doc[i].object, segmenten.doc[i].percentage]);
+                }
+
+                if (i === segmenten.doc.length) {
+                    i = 0;
+                } else {
+                    i += 1;
+                }
             }
 
-            dataTable.push(['Overige tijd', 0]);
+            console.log("dataTable 1 = ", dataTable);
+
+            if (dataTable.length === 1) {
+                console.log("I fukt it lolz");
+                dataTable.push(['Overige tijd', 0]);
+            }
+
+            console.log("dataTable 2 = ", dataTable);
         },
 
         maakObject = function (gebruikersnaam, i, callback) {
@@ -232,7 +271,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                 stuurDataLoop = function (gebruikersnaam) {
                     maakObject(gebruikersnaam, i, function () {
                         i += 1;
-                        if (i < dataTable.length - 1) {
+                        if (i < dataTable.length) {
                             stuurDataLoop(gebruikersnaam);
                         }
                     });
@@ -293,13 +332,17 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             return [echteTotaleTijd, overigeTijdIndex];
         },
 
-    // deze functie aanroepen om de totale tijd en overige tijd te regelen
-    // op deze manier: berekenTijden(getTotaleTijdEnIndexVanOverigeTijd());
+        // deze functie aanroepen om de totale tijd en overige tijd te regelen
+        // op deze manier: berekenTijden(getTotaleTijdEnIndexVanOverigeTijd());
         berekenTijden = function (tijden) {
             if (totaleTijd < tijden[0]) {
                 totaleTijd = tijden[0];
             }
-            dataTable[tijden[1]][1] = totaleTijd - tijden[0];
+            if (tijden[1] === undefined) {
+                dataTable.push(['Overige tijd', totaleTijd - tijden[0]]);
+            } else {
+                dataTable[tijden[1]][1] = totaleTijd - tijden[0];
+            }
             $scope.totaleTijd = totaleTijd;
         },
 
@@ -311,15 +354,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             chart.setSelection([{ row: muisOverIndex, column: null }]);
         },
 
-        swapArrayIndexen = function (array, oudeIndex, nieuweIndex) {
-            var temp;
-
-            temp = array[oudeIndex];
-            array[oudeIndex] = array[nieuweIndex];
-            array[nieuweIndex] = temp;
-
-            return array;
-        },
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         redrawNaHerordenen = function (oudeIndex, nieuweIndex) {
             //swap indexen in dataTable
@@ -348,10 +383,8 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                 j = i - 1;
                 if (dataTable[i][0] === 'Overige tijd') {
                     kleuren[j] = '#afafaf';
-                    console.log("Overige tijd(?) kleur van ", dataTable[i][0], " is nu ", kleuren[j]);
                 } else if ((kleuren[j] === undefined) || (kleuren[j] === null)) {
                     kleuren[j] = '#' + Math.random().toString(16).slice(2, 8);
-                    console.log("kleur van ", dataTable[i][0], " is nu ", kleuren[j]);
                 }
             }
         },
@@ -403,11 +436,9 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             google.visualization.events.addListener(chart, 'onmouseover', getSliceIndex);
             google.visualization.events.addListener(chart, 'onmouseup', verplaatsSlice);
 
-            if (chart.getSelection()[0].row !== getTotaleTijdEnIndexVanOverigeTijd()[1]) {
-                chartActies("verhoog", 1);
-                chartActies("verlaag", -1);
-                chartActies("verwijder", 0);
-            }
+            chartActies("verhoog", 1);
+            chartActies("verlaag", -1);
+            chartActies("verwijder", 0);
 
             chart.draw(data, options);
 
