@@ -70,8 +70,38 @@ myApp.controller('formulierController', function ($scope, DOODService) {
                 });
 
                 uitvaartGet = DOODService.uitvaart.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
+                    var locatie;
                     if (uitvaartGet.doc !== null) {
                         $scope.formulierData.uitvaart = uitvaartGet.doc;
+                        locatie = uitvaartGet.doc.locatie.split(",");
+
+                        //google maps stuff
+                        $scope.map = {
+                            "center": {
+                                latitude: locatie[0],
+                                longitude:  locatie[1]
+                            },
+                            "zoom": 15
+                        };
+                        $scope.marker = {
+                            id: 0,
+                            coords: {
+                                latitude: locatie[0],
+                                longitude: locatie[1]
+                            },
+                            options: { draggable: true },
+                            events: {
+                                dragend: function (marker, eventName, args) {
+
+                                    $scope.marker.options = {
+                                        draggable: true,
+                                        labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
+                                        labelAnchor: "100 0",
+                                        labelClass: "marker-labels"
+                                    };
+                                }
+                            }
+                        };
                     } else {
                         DOODService.uitvaartPost.post({gebruikersnaam: gebruiker.doc.gebruikersnaam});
                     }
@@ -112,34 +142,6 @@ myApp.controller('formulierController', function ($scope, DOODService) {
         });
     };
 
-
-    //google maps stuff
-    $scope.map = {
-        "center": {
-            latitude: 52.00494,
-            longitude: 5.91968
-        },
-        "zoom": 15
-    };
-    $scope.marker = {
-        id: 0,
-        coords: {
-            latitude: 52.00494,
-            longitude: 5.91968
-        },
-        options: { draggable: true },
-        events: {
-            dragend: function (marker, eventName, args) {
-
-                $scope.marker.options = {
-                    draggable: true,
-                    labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
-                    labelAnchor: "100 0",
-                    labelClass: "marker-labels"
-                };
-            }
-        }
-    };
     events = {
         places_changed: function (searchBox) {
 
