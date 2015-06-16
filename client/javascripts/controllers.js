@@ -300,7 +300,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             if (totaleTijd < tijden[0]) {
                 totaleTijd = tijden[0];
             }
-            if (tijden[1] !== undefined) {
+            if (tijden[1] === undefined) {
                 dataTable.push(['Overige tijd', totaleTijd - tijden[0]]);
             } else {
                 dataTable[tijden[1]][1] = totaleTijd - tijden[0];
