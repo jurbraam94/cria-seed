@@ -77,6 +77,7 @@ myApp.controller('formulierController', function ($scope, DOODService) {
         var uitvaart;
 
         gebruiker = DOODService.gebruikerSessie.get(function () {
+            console.log(formulierDataOrigineel);
             if (gebruiker.doc.gebruikersnaam !== undefined) {
                 if (formulierDataOrigineel.aanvullendeGegevens === undefined) {
                     console.log("Post aanvullendegegevens");
