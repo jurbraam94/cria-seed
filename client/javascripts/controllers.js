@@ -1,5 +1,5 @@
 /*jslint node: true */
-/*globals myApp, google, drawChart, angular, window*/
+/*globals myApp, document, place, google, drawChart, angular, window*/
 
 myApp.controller('MainController', function ($scope, $rootScope, $location, DOODService, $route, $window) {
     "use strict";
@@ -44,12 +44,113 @@ myApp.controller('ContactController', function ($scope, DOODService) {
     };
 });
 
-myApp.controller('formulierController', function ($scope) {
+myApp.controller('formulierController', function ($scope, DOODService) {
     "use strict";
-    console.log('formuliercontroller geladen');
+    var gebruiker, aanvullendeGegevens, algemeneGegevens, uitvaart, events, formulierDataOrigineel;
+    $scope.formulierData = {};
+    formulierDataOrigineel = {};
+
+    gebruiker = DOODService.gebruikerSessie.get(function () {
+        if (gebruiker.doc.gebruikersnaam !== undefined) {
+            aanvullendeGegevens = DOODService.aanvullendeGegevens.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
+                if (aanvullendeGegevens.doc !== null) {
+                    $scope.formulierData.aanvullendeGegevens = aanvullendeGegevens.doc;
+                    algemeneGegevens = DOODService.algemeneGegevens.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
+                        if (algemeneGegevens.doc !== null) {
+                            $scope.formulierData.algemeneGegevens = algemeneGegevens.doc;
+                            uitvaart = DOODService.uitvaart.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
+                                if (uitvaart.doc !== null) {
+                                    $scope.formulierData.uitvaart = uitvaart.doc;
+                                    formulierDataOrigineel = $scope.formulierData;
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+
+        }
+    });
+
+    $scope.opslaan = function () {
+        if (formulierDataOrigineel.aanvullendeGegevens === undefined) {
+            console.log("Post aanvullendegegevens");
+        } else if ($scope.formulierData.aanvullendeGegevens !== formulierDataOrigineel.aanvullendeGegevens) {
+            console.log("Update aanvullendegegevens");
+        }
+
+        if (formulierDataOrigineel.algemeneGegevens === undefined) {
+            console.log("Post algemeneGegevens");
+        } else if ($scope.formulierData.algemeneGegevens !== formulierDataOrigineel.algemeneGegevens) {
+            console.log("Update algemeneGegevens");
+        }
+
+        if (formulierDataOrigineel.uitvaart === undefined) {
+            console.log("Post uitvaart");
+        } else if ($scope.formulierData.uitvaart !== formulierDataOrigineel.uitvaart) {
+            console.log("Update uitvaart");
+        }
+    };
+
+
+    //google maps stuff
+    $scope.map = {
+        "center": {
+            latitude: 52.00494,
+            longitude: 5.91968
+        },
+        "zoom": 15
+    };
+    $scope.marker = {
+        id: 0,
+        coords: {
+            latitude: 52.00494,
+            longitude: 5.91968
+        },
+        options: { draggable: true },
+        events: {
+            dragend: function (marker, eventName, args) {
+
+                $scope.marker.options = {
+                    draggable: true,
+                    labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
+                    labelAnchor: "100 0",
+                    labelClass: "marker-labels"
+                };
+            }
+        }
+    };
+    events = {
+        places_changed: function (searchBox) {
+
+            var place = searchBox.getPlaces();
+            if (!place || place === 'undefined' || place.length === 0) {
+                console.log('no place data :(');
+                return;
+            }
+
+            $scope.formulierData.plaats = place[0].geometry.location.lat() + "," + place[0].geometry.location.lng();
+
+            $scope.map = {
+                "center": {
+                    "latitude": place[0].geometry.location.lat(),
+                    "longitude": place[0].geometry.location.lng()
+                },
+                "zoom": 18
+            };
+            $scope.marker = {
+                id: 0,
+                coords: {
+                    latitude: place[0].geometry.location.lat(),
+                    longitude: place[0].geometry.location.lng()
+                }
+            };
+        }
+    };
+    $scope.searchbox = { template: 'searchbox.tpl.html', events: events };
 });
 
-myApp.controller('GebruikerLoginController', function ($scope, DOODService, $route) {
+myApp.controller('GebruikerLoginController', function ($scope, DOODService) {
     "use strict";
 
     // LOGIN / LOGUIT
@@ -208,7 +309,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             dataTable = swapArrayIndexen(dataTable, oudeIndex, nieuweIndex);
 
             //kleuren ook swappen
-            kleuren = swapArrayIndexen(kleuren, oudeIndex, nieuweIndex);
+            kleuren = swapArrayIndexen(kleuren, oudeIndex - 1, nieuweIndex - 1);
 
             //chart opnieuw tekenen
             drawChart(true);
@@ -223,17 +324,17 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             }
         },
 
-        genereerKleurcodes = function (changed) {
+        genereerKleurcodes = function () {
             var i, j;
 
             for (i = 1; i < dataTable.length; i += 1) {
                 j = i - 1;
-                if ((changed === false) && (dataTable[i][0] !== 'Overige tijd')) {
-                    kleuren[j] = '#' + Math.random().toString(16).slice(2, 8);
-                    console.log("kleur van ", dataTable[i][0], " is nu ", kleuren[j]);
-                } else {
+                if (dataTable[i][0] === 'Overige tijd') {
                     kleuren[j] = '#afafaf';
                     console.log("Overige tijd(?) kleur van ", dataTable[i][0], " is nu ", kleuren[j]);
+                } else if ((kleuren[j] === undefined) || (kleuren[j] === null)) {
+                    kleuren[j] = '#' + Math.random().toString(16).slice(2, 8);
+                    console.log("kleur van ", dataTable[i][0], " is nu ", kleuren[j]);
                 }
             }
         },
@@ -244,6 +345,10 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                 text: id,
                 action: function () {
                     var index = chart.getSelection()[0].row + 1;
+                    console.log("getSelection = ", chart.getSelection());
+                    if (chart.getSelection()[0].row === getTotaleTijdEnIndexVanOverigeTijd()[1]) {
+                        return;
+                    }
                     if (nieuweWaarde === 0) {
                         dataTable[index][1] = 0;
                         dataTable.splice(index, 1);
