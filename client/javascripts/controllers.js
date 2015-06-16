@@ -232,19 +232,24 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         },
 
         initieeleDataTable = function (segmenten) {
-            var i;
+            var i = 0;
             dataTable = [['Segment', 'Minuten']];
 
-            for (i = 0; i < segmenten.doc.length; i += 1) {
-                dataTable.push([segmenten.doc[i].object, segmenten.doc[i].percentage]);
-                console.log("volgnummer = ", segmenten.doc[i].volgnummer);
+            while(dataTable.length < segmenten.doc.length) {
+                if (i === (segmenten.doc[i].volgnummer - 1)) {
+                    dataTable.push([segmenten.doc[i].object, segmenten.doc[i].percentage]);
+                    console.log("volgnummer = ", segmenten.doc[i].volgnummer);
+                }
+                if (i === segmenten.doc.length) {
+                    i = 0;
+                } else {
+                    i += 1;
+                }
             }
 
             if (dataTable.length === 1) {
                 dataTable.push(['Overige tijd', 0]);
             }
-
-            sorteerDataTable(segmenten.doc);
         },
 
         maakObject = function (gebruikersnaam, i, callback) {
