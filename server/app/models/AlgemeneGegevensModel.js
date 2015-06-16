@@ -28,7 +28,7 @@
         postcode: {type: String, required: false, validator: [stringLengteValidatie, 'Postcode is niet lang genoeg'], validate: /^[1-9]\d{3}[A-Z]{2}$/},
         adres: {type: String, required: false, validator: [stringLengteValidatie, 'Adres is niet lang genoeg']},
         huisnummer: {type: Number, required: false, min: 1},
-        telefoon: {type: Number, required: false},
+        telefoon: {type: String, required: false, validate: /^$|^\d{10}$/ },
         email: {type: String, required: false, match: [emailRegex, 'E-mail adres is onjuist']}
     },
         { collection: 'AlgemeneGegevens' });
