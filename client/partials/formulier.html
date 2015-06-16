@@ -1,6 +1,12 @@
 <div class="col-xs-2 col-md-2 col-lg-2" >
 
     <div class="formulierKnop formulierKnopText">
+        <a href="" ng-click="formulierPagina = 'gegevens'">
+            <span ng-class="{rodeText: formulierPagina == 'gegevens'}">GEGEVENS</span>
+        </a>
+    </div>
+
+    <div class="formulierKnop formulierKnopText">
         <a href="" ng-click="formulierPagina = 'locatie'">
             <span ng-class="{rodeText: formulierPagina == 'locatie'}">LOCATIE</span>
         </a>
@@ -9,12 +15,6 @@
     <div class="formulierKnop formulierKnopText">
         <a href="" ng-click="formulierPagina = 'opbaring'">
             <span ng-class="{rodeText: formulierPagina == 'opbaring'}">OPBARING</span>
-        </a>
-    </div>
-
-    <div class="formulierKnop formulierKnopText">
-        <a href="" ng-click="formulierPagina = 'gegevens'">
-            <span ng-class="{rodeText: formulierPagina == 'gegevens'}">GEGEVENS</span>
         </a>
     </div>
 
@@ -29,9 +29,17 @@
         OPSLAAN
     </button>
 
+    <span ng-show="error">{{error}}</span>
+
+    <span ng-show="success">{{success}}</span>
+
 </div>
 <div class="col-xs-10 col-md-10 col-lg-10 minicontent">
     <div ng-switch on="formulierPagina">
+        <form name="formulierPaginaForm" novalidate class="validatie">
+        <div ng-switch-when="gegevens">
+            gegevens
+        </div>
         <div ng-switch-when="locatie" ng-init="init()">
             <div id="map_canvas">
                 <script type="text/ng-template" id="searchbox.tpl.html">
@@ -44,13 +52,20 @@
             </div>
         </div>
         <div ng-switch-when="opbaring">
-            opbaring
-        </div>
-        <div ng-switch-when="gegevens">
-            gegevens
+            <div class="customContainer formulierContainer">
+                    <div class="form-group form-inline">
+                        <label class="inputLabel">Duur opbaring (dagen)*</label>
+
+                        <div class="input-group">
+                            <input placeholder="5" class="form-control" type="text"
+                                   ng-model="formulierData.uitvaart.duurOpbaring" id="duurOpbaring" value="formulierData.uitvaart.duurOpbaring" required=""/>
+                        </div>
+                    </div>
+            </div>
         </div>
         <div ng-switch-when="geloof">
             geloof
         </div>
+            </form>
     </div>
 </div>
