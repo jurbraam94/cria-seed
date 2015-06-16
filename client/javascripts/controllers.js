@@ -241,12 +241,14 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                 }
             }
 
+            console.log("dataTable 1 = ", dataTable);
+
             if (dataTable.length === 1) {
                 console.log("I fukt it lolz");
                 dataTable.push(['Overige tijd', 0]);
             }
 
-            console.log("dataTable = ", dataTable);
+            console.log("dataTable 2 = ", dataTable);
         },
 
         maakObject = function (gebruikersnaam, i, callback) {
