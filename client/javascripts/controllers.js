@@ -44,7 +44,7 @@ myApp.controller('ContactController', function ($scope, DOODService) {
     };
 });
 
-myApp.controller('formulierController', function ($scope, DOODService, $timeout, $route) {
+myApp.controller('formulierController', function ($scope, DOODService, $timeout, $route, $rootScope) {
     "use strict";
     var gebruiker, aanvullendeGegevensGet, algemeneGegevensGet, uitvaartGet, events;
     $scope.formulierData = {aanvullendeGegevens: {}, algemeneGegevens: {}, uitvaart: {}};
@@ -174,6 +174,13 @@ myApp.controller('formulierController', function ($scope, DOODService, $timeout,
                     longitude: place[0].geometry.location.lng()
                 }
             };
+        },
+        dragend: function (marker) {
+            $rootScope.$apply(function () {
+                $scope.formulierData.uitvaart.locatie = marker.position.lat() + "," + marker.position.lng();
+                console.log(marker.position.lat());
+                console.log(marker.position.lng());
+            });
         }
     };
     $scope.searchbox = { template: 'searchbox.tpl.html', events: events };
