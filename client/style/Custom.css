@@ -324,3 +324,13 @@ footer a:hover, a:active{
     font-weight: bold;
 }
 
+.afspeelLijst {
+    background-color: #48CEC2;
+    margin-top: 50px;
+    color: #f0f0f0;
+}
+
+.track {
+    background: #48CEC2;
+
+}
