@@ -46,7 +46,7 @@ myApp.controller('ContactController', function ($scope, DOODService) {
 
 myApp.controller('formulierController', function ($scope, DOODService, $timeout, $route, $rootScope) {
     "use strict";
-    var gebruiker, aanvullendeGegevensGet, algemeneGegevensGet, uitvaartGet, events;
+    var gebruiker, aanvullendeGegevensGet, algemeneGegevensGet, uitvaartGet;
     $scope.formulierData = {aanvullendeGegevens: {}, algemeneGegevens: {}, uitvaart: {}};
     $scope.formulierPagina = "gegevens";
 
@@ -544,8 +544,8 @@ myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
         $scope.afspeellijst.push(liedInAfspeelLijst);
     };
 
-    $scope.createPlaylist =  function() {
-        Spotify.createPlaylist('jurbraam94', {name: 'nice songs', public: false }).then(function() {
+    $scope.createPlaylist =  function () {
+        Spotify.createPlaylist('jurbraam94', {name: 'nice songs', public: false }).then(function () {
             console.log("je hebt er één gemaakt");
         });
     };
