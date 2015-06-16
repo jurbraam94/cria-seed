@@ -47,9 +47,9 @@ myApp.controller('ContactController', function ($scope, DOODService) {
 myApp.controller('formulierController', function ($scope, DOODService) {
     "use strict";
     var gebruiker, aanvullendeGegevensGet, algemeneGegevensGet, uitvaartGet, events, formulierDataOrigineel;
-    $scope.formulierData = {};
+    $scope.formulierData = {aanvullendeGegevens: {}, algemeneGegevens: {}, uitvaart: {}};
     $scope.formulierPagina = "gegevens";
-    formulierDataOrigineel = {};
+    formulierDataOrigineel = {aanvullendeGegevens: {}, algemeneGegevens: {}, uitvaart: {}};
 
     $scope.initFormulierGegevens = function () {
         gebruiker = DOODService.gebruikerSessie.get(function () {
