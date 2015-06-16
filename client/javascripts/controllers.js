@@ -208,6 +208,14 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
         chart = null,
         muisOverIndex,
 
+        sorteerDataTable = function (array) {
+            var i;
+            for (i = 1; i < array.length; i += 1) {
+                dataTable = swapArrayIndexen(dataTable, i, array.volgnummer);
+            }
+            console.log("dataTable = ", dataTable);
+        },
+
         initieeleDataTable = function (segmenten) {
             var i;
             dataTable = [['Segment', 'Minuten']];
@@ -215,10 +223,12 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             for (i = 0; i < segmenten.doc.length; i += 1) {
                 dataTable.push([segmenten.doc[i].object, segmenten.doc[i].percentage]);
             }
-            console.log("dataTable.length = ", dataTable.length);
+
             if (dataTable.length === 1) {
                 dataTable.push(['Overige tijd', 0]);
             }
+
+            sorteerDataTable(segmenten.doc);
         },
 
         maakObject = function (gebruikersnaam, i, callback) {
@@ -298,8 +308,8 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             return [echteTotaleTijd, overigeTijdIndex];
         },
 
-    // deze functie aanroepen om de totale tijd en overige tijd te regelen
-    // op deze manier: berekenTijden(getTotaleTijdEnIndexVanOverigeTijd());
+        // deze functie aanroepen om de totale tijd en overige tijd te regelen
+        // op deze manier: berekenTijden(getTotaleTijdEnIndexVanOverigeTijd());
         berekenTijden = function (tijden) {
             if (totaleTijd < tijden[0]) {
                 totaleTijd = tijden[0];
