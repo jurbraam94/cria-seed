@@ -2,26 +2,26 @@
     <div class="col-xs-2 col-md-2 col-lg-2">
 
         <div class="formulierKnop formulierKnopText">
-            <a href="" ng-click="formulierPagina = 'gegevens'">
-                <span ng-class="{rodeText: formulierPagina == 'gegevens'}">GEGEVENS</span>
+            <a href="" ng-click="formulierData.pagina = 'gegevens'">
+                <span ng-class="{rodeText: formulierData.pagina == 'gegevens'}">GEGEVENS</span>
             </a>
         </div>
 
         <div class="formulierKnop formulierKnopText">
-            <a href="" ng-click="formulierPagina = 'locatie'">
-                <span ng-class="{rodeText: formulierPagina == 'locatie'}">LOCATIE</span>
+            <a href="" ng-click="formulierData.pagina = 'opbaring'">
+                <span ng-class="{rodeText: formulierData.pagina == 'opbaring'}">OPBARING</span>
             </a>
         </div>
 
         <div class="formulierKnop formulierKnopText">
-            <a href="" ng-click="formulierPagina = 'opbaring'">
-                <span ng-class="{rodeText: formulierPagina == 'opbaring'}">OPBARING</span>
+            <a href="" ng-click="formulierData.pagina = 'geloof'">
+                <span ng-class="{rodeText: formulierData.pagina == 'geloof'}">GELOOF</span>
             </a>
         </div>
 
         <div class="formulierKnop formulierKnopText">
-            <a href="" ng-click="formulierPagina = 'geloof'">
-                <span ng-class="{rodeText: formulierPagina == 'geloof'}">GELOOF</span>
+            <a href="" ng-click="formulierData.pagina = 'locatie'">
+                <span ng-class="{rodeText: formulierData.pagina == 'locatie'}">LOCATIE</span>
             </a>
         </div>
 
@@ -49,14 +49,13 @@
 
     </div>
     <div class="col-xs-10 col-md-10 col-lg-10 minicontent">
-        <div ng-switch on="formulierPagina">
+        <div ng-switch on="formulierData.pagina">
             <form name="formulierPaginaForm" novalidate class="validatie">
                 <div ng-switch-when="gegevens">
                     <div class="formulierHeaderFooter text-center">
                         <h2>GEGEVENS</h2>
                     </div>
                     <div class="customContainer formulierContainer">
-                        <br>
                         <div class="form-group form-inline">
                             <label class="inputLabel">Voornaam*</label>
                             <div class="input-group">
@@ -139,24 +138,13 @@
                         </div>
                     </div>
                     <div class="formulierHeaderFooter">
-                    <div class="vorigeKnop pull-left"></div>
-                    <div class="volgendeKnop pull-right"></div>
-                    </div>
-                </div>
-                <div ng-switch-when="locatie" ng-init="init()">
-                    <div id="map_canvas">
-                        <script type="text/ng-template" id="searchbox.tpl.html">
-                            <input class="form-control googleMapSearchBox" type="text" placeholder="Adres">
-                        </script>
-                        <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true">
-                            <ui-gmap-search-box template="searchbox.template" events="searchbox.events"
-                                                position="'TOP_LEFT'"></ui-gmap-search-box>
-                            <ui-gmap-marker coords="marker.coords" options="marker.options" events="searchbox.events"
-                                            idkey="marker.id"></ui-gmap-marker>
-                        </ui-gmap-google-map>
+                        <a href="" class="volgendeKnop pull-right"  ng-click="formulierData.pagina = 'opbaring'"></a>
                     </div>
                 </div>
                 <div ng-switch-when="opbaring">
+                    <div class="formulierHeaderFooter text-center">
+                        <h2>OPBARING</h2>
+                    </div>
                     <div class="customContainer formulierContainer">
                         <div class="form-group form-inline">
                             <label class="inputLabel">Duur opbaring (dagen)*</label>
@@ -167,8 +155,16 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="formulierHeaderFooter">
+                        <a href="" class="vorigeKnop pull-left"  ng-click="formulierData.pagina = 'gegevens'"></a>
+                        <a href="" class="volgendeKnop pull-right"  ng-click="formulierData.pagina = 'geloof'"></a>
+                    </div>
                 </div>
                 <div ng-switch-when="geloof">
+                    <div class="formulierHeaderFooter text-center">
+                        <h2>GELOOF</h2>
+                    </div>
                     <div class="customContainer formulierContainer">
                         <div class="form-group form-inline">
                             <label class="inputLabel">Religie*</label>
@@ -180,8 +176,26 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="formulierHeaderFooter">
+                        <a href="" class="vorigeKnop pull-left"  ng-click="formulierData.pagina = 'opbaring'"></a>
+                        <a href="" class="volgendeKnop pull-right"  ng-click="formulierData.pagina = 'locatie'"></a>
+                    </div>
                 </div>
             </form>
+            <div ng-switch-when="locatie" ng-init="init()">
+                <div id="map_canvas">
+                    <script type="text/ng-template" id="searchbox.tpl.html">
+                        <input class="form-control googleMapSearchBox" type="text" placeholder="Adres">
+                    </script>
+                    <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true">
+                        <ui-gmap-search-box template="searchbox.template" events="searchbox.events"
+                                            position="'TOP_LEFT'"></ui-gmap-search-box>
+                        <ui-gmap-marker coords="marker.coords" options="marker.options" events="searchbox.events"
+                                        idkey="marker.id"></ui-gmap-marker>
+                    </ui-gmap-google-map>
+                </div>
+            </div>
         </div>
     </div>
 </div>

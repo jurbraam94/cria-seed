@@ -48,7 +48,7 @@ myApp.controller('formulierController', function ($scope, DOODService, $timeout,
     "use strict";
     var gebruiker, aanvullendeGegevensGet, algemeneGegevensGet, uitvaartGet, events;
     $scope.formulierData = {aanvullendeGegevens: {}, algemeneGegevens: {}, uitvaart: {}};
-    $scope.formulierPagina = "gegevens";
+    $scope.formulierData.pagina = "gegevens";
 
     $scope.initFormulierGegevens = function () {
         gebruiker = DOODService.gebruikerSessie.get(function () {
