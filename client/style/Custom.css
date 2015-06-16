@@ -345,8 +345,32 @@ footer a:hover, a:active{
 
 .formulierContainer {
     background-color: #48CEC2;
+    width:380px;
 }
 
 .formulierContainer .form-group {
-    margin:5px;
+    margin-bottom:5px;
+}
+
+.formulierHeaderFooter {
+    width:380px;
+    margin:0 auto;
+    font-weight: 900;
+    color: #ED5F54;
+}
+
+.vorigeKnop {
+    background:url("images/driehoeklinks.png") no-repeat center center;
+    background-color: #48CEC2;
+    width:100px;
+    height:25px;
+    padding:10px;
+}
+
+.volgendeKnop {
+    background:url("images/driehoekrechts.png") no-repeat center center;
+    background-color: #48CEC2;
+    width:100px;
+    height:25px;
+    padding:10px;
 }
