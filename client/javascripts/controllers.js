@@ -499,15 +499,24 @@ myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
     $scope.zoekResultaat = [];
     $scope.afspeellijst = [];
 
+
+
+    function maakSpotifyPlaylist(){
+        Spotify.createPlaylist()
+
+    };
+
+
     $scope.voegToeBijAfspeellijst = function (artiest, titel) {
         var liedInAfspeelLijst = [];
+
         liedInAfspeelLijst = [{
             artiest: artiest,
             titel: titel
         }];
 
         console.log(liedInAfspeelLijst, artiest, titel);
-        $scope.afspeellijst.unshift(liedInAfspeelLijst);
+        $scope.afspeellijst.push(liedInAfspeelLijst);
     };
 
     $scope.zoek = function (zoekopdracht) {
