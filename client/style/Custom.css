@@ -346,3 +346,7 @@ footer a:hover, a:active{
 .formulierContainer {
     background-color: #48CEC2;
 }
+
+.formulierContainer .form-group {
+    margin:5px;
+}

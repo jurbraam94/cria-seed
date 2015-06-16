@@ -30,6 +30,18 @@
             OPSLAAN
         </button>
 
+        <div ng-show="error" class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            {{error}}
+        </div>
+
+        <div ng-show="success" class="alert alert-success" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Success:</span>
+            {{success}}
+        </div>
+
         <span ng-show="error">{{error}}</span>
 
         <span ng-show="success">{{success}}</span>
@@ -39,7 +51,89 @@
         <div ng-switch on="formulierPagina">
             <form name="formulierPaginaForm" novalidate class="validatie">
                 <div ng-switch-when="gegevens">
-                    gegevens
+                    <div class="customContainer formulierContainer">
+                        <br>
+                        <div class="form-group form-inline">
+                            <label class="inputLabel">Voornaam*</label>
+                            <div class="input-group">
+                                <input placeholder="Jan" class="form-control" type="text"
+                                       ng-model="formulierData.aanvullendeGegevens.voornaam" id="voornaam"
+                                       value="formulierData.aanvullendeGegevens.voornaam" required=""/>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-inline">
+                            <label class="inputLabel">Achternaam*</label>
+                            <div class="input-group">
+                                <input placeholder="Janssen" class="form-control" type="text"
+                                       ng-model="formulierData.aanvullendeGegevens.achternaam" id="achternaam"
+                                       value="formulierData.aanvullendeGegevens.achternaam" required=""/>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-inline">
+                            <label class="inputLabel">Woonplaats*</label>
+                            <div class="input-group">
+                                <input placeholder="Arnhem" class="form-control" type="text"
+                                       ng-model="formulierData.aanvullendeGegevens.woonplaats" id="woonplaats"
+                                       value="formulierData.aanvullendeGegevens.woonplaats" required=""/>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-inline">
+                            <label class="inputLabel">Postcode*</label>
+                            <div class="input-group">
+                                <input placeholder="4829ER" class="form-control" type="text"
+                                       ng-model="formulierData.aanvullendeGegevens.postcode" id="postcode"
+                                       value="formulierData.aanvullendeGegevens.postcode" required=""/>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-inline">
+                            <label class="inputLabel">Adres*</label>
+                            <div class="input-group">
+                                <input placeholder="Dorpsstraat" class="form-control" type="text"
+                                       ng-model="formulierData.aanvullendeGegevens.adres" id="adres"
+                                       value="formulierData.aanvullendeGegevens.adres" required=""/>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-inline">
+                            <label class="inputLabel">Huisnummer*</label>
+                            <div class="input-group">
+                                <input placeholder="5" class="form-control" type="number"
+                                       ng-model="formulierData.aanvullendeGegevens.huisnummer" id="huisnummer"
+                                       value="formulierData.aanvullendeGegevens.huisnummer" required=""/>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-inline">
+                            <label class="inputLabel">Telefoon*</label>
+                            <div class="input-group">
+                                <input placeholder="0612345678" class="form-control" type="number"
+                                       ng-model="formulierData.aanvullendeGegevens.telefoon" id="telefoon"
+                                       value="formulierData.aanvullendeGegevens.telefoon" required=""/>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-inline">
+                            <label class="inputLabel">Email*</label>
+                            <div class="input-group">
+                                <input placeholder="email@email.com" class="form-control" type="email"
+                                       ng-model="formulierData.aanvullendeGegevens.email" id="email"
+                                       value="formulierData.aanvullendeGegevens.email" required=""/>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-inline">
+                            <label class="inputLabel">Donor*</label>
+                            <div class="input-group">
+                                <input placeholder="ja" class="form-control" type="text"
+                                       ng-model="formulierData.aanvullendeGegevens.donor" id="donor"
+                                       value="formulierData.aanvullendeGegevens.donor" required=""/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div ng-switch-when="locatie" ng-init="init()">
                     <div id="map_canvas">
@@ -58,9 +152,8 @@
                     <div class="customContainer formulierContainer">
                         <div class="form-group form-inline">
                             <label class="inputLabel">Duur opbaring (dagen)*</label>
-
                             <div class="input-group">
-                                <input placeholder="5" class="form-control" type="text"
+                                <input placeholder="5" class="form-control" type="number"
                                        ng-model="formulierData.uitvaart.duurOpbaring" id="duurOpbaring"
                                        value="formulierData.uitvaart.duurOpbaring" required=""/>
                             </div>
@@ -68,7 +161,17 @@
                     </div>
                 </div>
                 <div ng-switch-when="geloof">
-                    geloof
+                    <div class="customContainer formulierContainer">
+                        <div class="form-group form-inline">
+                            <label class="inputLabel">Religie*</label>
+
+                            <div class="input-group">
+                                <input placeholder="Christelijk" class="form-control" type="text"
+                                       ng-model="formulierData.aanvullendeGegevens.religie" id="religie"
+                                       value="formulierData.aanvullendeGegevens.religie" required=""/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
