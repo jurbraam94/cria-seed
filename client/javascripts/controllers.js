@@ -207,7 +207,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                 dataTable.push([segmenten.doc[i].object, segmenten.doc[i].percentage]);
             }
 
-            if (dataTable.length < 2) {
+            if (dataTable.length === 1) {
                 dataTable.push(['Overige tijd', 0]);
             }
         },
