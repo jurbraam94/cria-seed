@@ -70,7 +70,6 @@ myApp.controller('formulierController', function ($scope, DOODService) {
                 });
 
                 uitvaartGet = DOODService.uitvaart.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
-                    var property;
                     if (uitvaartGet.doc !== null) {
                         $scope.formulierData.uitvaart = uitvaartGet.doc;
                     } else {
