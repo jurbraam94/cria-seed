@@ -235,11 +235,12 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             var i = 0;
             dataTable = [['Segment', 'Minuten']];
 
-            while(dataTable.length < segmenten.doc.length) {
+            while (dataTable.length <= segmenten.doc.length) {
                 if (i === (segmenten.doc[i].volgnummer - 1)) {
                     dataTable.push([segmenten.doc[i].object, segmenten.doc[i].percentage]);
                     console.log("volgnummer = ", segmenten.doc[i].volgnummer);
                 }
+
                 if (i === segmenten.doc.length) {
                     i = 0;
                 } else {
