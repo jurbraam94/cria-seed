@@ -113,33 +113,36 @@ myApp.controller('formulierController', function ($scope, DOODService) {
     $scope.opslaan = function () {
         var uitvaart, algemeneGegevens, aanvullendeGegevens;
         gebruiker = DOODService.gebruikerSessie.get(function () {
-            console.log($scope.formulierData);
             if (gebruiker.doc.gebruikersnaam !== undefined) {
                 uitvaart = DOODService.uitvaart.update($scope.formulierData.uitvaart, function () {
                     if (uitvaart.err !== null) {
-                        $scope.error = $scope.error + uitvaart.err;
+                        $scope.error = "Fout: " + uitvaart.err;
                     } else {
-                        console.log("Update uitvaart");
-                    }
-                });
-
-                algemeneGegevens = DOODService.algemeneGegevens.update($scope.formulierData.algemeneGegevens, function () {
-                    if (algemeneGegevens.err !== null) {
-                        $scope.error = $scope.error + uitvaart.err;
-                    } else {
-                        console.log("Update algemene gegevens");
-                    }
-                });
-
-                aanvullendeGegevens = DOODService.aanvullendeGegevens.update($scope.formulierData.aanvullendeGegevens, function () {
-                    if (aanvullendeGegevens.err !== null) {
-                        $scope.error = $scope.error + uitvaart.err;
-                    } else {
-                        console.log("Update aanvullende gegevens");
+                        algemeneGegevens = DOODService.algemeneGegevens.update($scope.formulierData.algemeneGegevens, function () {
+                            if (algemeneGegevens.err !== null) {
+                                $scope.error =  "Fout: " + algemeneGegevens.err;
+                            } else {
+                                aanvullendeGegevens = DOODService.aanvullendeGegevens.update($scope.formulierData.aanvullendeGegevens, function () {
+                                    if (aanvullendeGegevens.err !== null) {
+                                        $scope.error = "Fout: " + aanvullendeGegevens.err;
+                                    } else {
+                                        $scope.success = "Alle data is succesvol opgeslagen.";
+                                    }
+                                });
+                            }
+                        });
                     }
                 });
             }
         });
+    };
+
+    $scope.map = {
+        "center": {
+            latitude: 51.98891	,
+            longitude:  5.94929
+        },
+        "zoom": 100
     };
 
     events = {
