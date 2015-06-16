@@ -56,13 +56,15 @@ myApp.controller('formulierController', function ($scope, DOODService) {
             aanvullendeGegevensGet = DOODService.aanvullendeGegevens.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
                 if (aanvullendeGegevensGet.doc !== null) {
                     $scope.formulierData.aanvullendeGegevens = aanvullendeGegevensGet.doc;
+                    formulierDataOrigineel.aanvullendeGegegevens = aanvullendeGegevensGet.doc;
                     algemeneGegevensGet = DOODService.algemeneGegevens.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
                         if (algemeneGegevensGet.doc !== null) {
                             $scope.formulierData.algemeneGegevens = algemeneGegevensGet.doc;
+                            formulierDataOrigineel.algemeneGegevens = algemeneGegevensGet.doc;
                             uitvaartGet = DOODService.uitvaart.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
                                 if (uitvaartGet.doc !== null) {
                                     $scope.formulierData.uitvaart = uitvaartGet.doc;
-                                    formulierDataOrigineel = $scope.formulierData;
+                                    formulierDataOrigineel.uitvaart = uitvaartGet.doc;
                                 }
                             });
                         }
