@@ -1,40 +1,38 @@
 
 <div class="col-xs-2 col-md-2 col-lg-2" >
-<div class="">
-    <form name="contactForm" novalidate class="validatie"> <input ng-model="zoekopdracht" type="text">
-        <input type="image" src="style/images/loep.png" id = "zoekKnop" ng-click="zoek(zoekopdracht)" >
-    </form>
-</div>
-    <div class="liedjeContainer">
-        <div class="row" id ="rijLiedje" value="{{error}}" ng-repeat="item in zoekResultaat">
-            <div class=" col-lg-6">
-                {{item.artiest}} - {{item.titel}}
-            </div>
-            <div class="muzieklijst col-lg-6">
-                <button ng-click="voegToeBijAfspeellijst(item.artiest, item.titel)"  class = "link buttonPlusje">+</button>
+    <div class="">
+        <div class="searchBoxPosition">
+            <form name="contactForm" novalidate class="validatie"> <input ng-model="zoekopdracht" type="text">
+                <input type="image" src="style/images/loep.png" id = "zoekKnop" ng-click="zoek(zoekopdracht)" >
+            </form>
+        </div>
+        <div class="liedjeContainer">
+            <div class="row" id ="rijLiedje" value="{{error}}" ng-repeat="item in zoekResultaat">
+                <div class="col-lg-6">
+                    {{item.artiest}} - {{item.titel}}
+                </div>
+                <div class="muzieklijst col-lg-6">
+                    <button ng-click="voegToeBijAfspeellijst(item.artiest, item.titel)"  class = "link buttonPlusje">+</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
+  </div>
 <div class="col-xs-10 col-md-10 col-lg-10 minicontent ">
     <div class="row">
         <div class="col-md-4 text-center afspeellijst">
             <div ng-repeat="liedje in afspeellijst">
                 <div class="liedje">
                     <div >
-                        <button ng-click="verwijderUitLijst(liedje[0].index)" class="buttonPlusje"> X </button>
+                        <button ng-click="verwijderUitLijst(liedje[0].artiest, liedje[0].titel)" class="buttonPlusje"> X </button>
                     </div>
-
-                    <div>
                         {{liedje[0].nummer}}   {{liedje[0].artiest}} - {{liedje[0].titel}}
-                        <button ng-click="createPlaylist()"> knopje om een playlist te maken</button>
+                        <!--  <button ng-click="createPlaylist()"> knopje om een playlist te maken</button> -->
                     </div>
 
                 </div>
 
             </div>
         </div>
-        <button ng-click="login()"> </button>
     </div>
 </div>
