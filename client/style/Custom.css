@@ -272,7 +272,10 @@ footer a:hover, a:active{
     padding: auto;
     padding-top: 10px;
     color: white;
-    border-bottom: 2px;
+    border-bottom-width: 1px;
+    border-bottom-color: white;
+    border-bottom-style: solid;
+
 }
 
 
@@ -284,9 +287,10 @@ footer a:hover, a:active{
     background: none;
     padding: 0;
     border: none;
-    float: left;
     margin: auto;
     outline: none;
+    float: left;
+    margin-left: 20px;
 
 }
 .buttonPlusje img {
@@ -304,8 +308,9 @@ footer a:hover, a:active{
 }
 
 .liedjeContainer {
-    margin-right: 20px;
-    float: right;
+    margin-left: 30px;
+    width: 80%;
+    font-size: 17px;
 }
 
 .formulierKnop {
@@ -415,5 +420,22 @@ footer a:hover, a:active{
 }
 
 .searchBoxPosition {
+    margin: 0px auto;
+    width: 80%;
+    margin-left: 50px;
+}
 
+.searchMenu{
+    margin-left: 8px;
+
+}
+.afspeellijst {
+    margin: 0 auto;
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 50px;
+}
+
+.liedje {
+    background-color: #48CEC2;
 }
