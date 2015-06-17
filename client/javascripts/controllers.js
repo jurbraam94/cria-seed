@@ -303,14 +303,11 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                 if (gebruiker.doc.gebruikersnaam !== undefined) {
                     $scope.uitvaartSamenstellen = DOODService.uitvaartSamenstellen.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
                         if ($scope.uitvaartSamenstellen.doc !== null) {
-                            console.log("opgehaald");
                             totaleTijd = $scope.uitvaartSamenstellen.doc.tijdsduur;
                             callback();
                         } else if ($scope.uitvaartSamenstellen.doc === null) {
-                            console.log("posten");
                             totaleTijd = 60; // default value
                             DOODService.uitvaartSamenstellenPost({gebruikersnaam: gebruiker.doc.gebruikersnaam, tijdsduur: totaleTijd}, function () {
-                                console.log("post gedaan");
                                 callback();
                             });
                         }
