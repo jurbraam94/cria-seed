@@ -132,7 +132,7 @@ myApp.controller('formulierController', function ($scope, DOODService, $timeout,
                                         $scope.success = "Alle data is succesvol opgeslagen.";
                                         $timeout(function () {
                                             $scope.success = null;
-                                        }, 3000);
+                                        }, 4000);
                                     }
                                 });
                             }
