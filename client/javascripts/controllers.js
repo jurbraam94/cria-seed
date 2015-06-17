@@ -542,6 +542,7 @@ myApp.controller('wishlistController', function ($scope, DOODService, $timeout) 
             if (gebruiker.doc.gebruikersnaam !== undefined) {
                 bericht = DOODService.wishlistPost.post({gebruikersnaam: gebruiker.doc.gebruikersnaam, titel: wishlist.titel, wens: wishlist.wens}, function () {
                     if (bericht.doc !== null) {
+                        $scope.init();
                         $scope.wishlistForm.$setPristine();
                         $scope.success = "Bericht succesvol opgeslagen.";
                         $timeout(function () {
