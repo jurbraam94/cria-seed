@@ -149,17 +149,23 @@ export TEST_FAILURUES=`grep -ci '"failures": 0' unit-tests-results.log`
 if [ -z "$TEST_FAILURUES" ]; then
     echo "`date` >>>>> ERRORS ERRORS ERRORS" | tee -a "$DIR/$CUR_SCRIPT"
 	echo "`date` >>>>>   Could not execute the tests. Variable is not set TEST_FAILURUES=$TEST_FAILURUES" | tee -a "$DIR/$CUR_SCRIPT"
+	git checkout $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
+    exit 1
 fi
 
 if [ $TEST_FAILURUES -ne 1 ]; then
     echo "`date` >>>>> ERRORS ERRORS ERRORS" | tee -a "$DIR/$CUR_SCRIPT"
 	echo "`date` >>>>>   Did not pass the unit-tests with $TEST_FAILURUES errors" | tee -a "$DIR/$CUR_SCRIPT"
 	echo "`date` >>>>>   Fix the erros in unit-tests-results.log" | tee -a "$DIR/$CUR_SCRIPT"
+	git checkout $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
+	exit 1
 fi
 
 if [ -f ./test/static-analyzer/error_log.txt ]; then
 	echo ">>>>> ERRORS: No commit for branch 'test' was performed." | tee -a "$DIR/$CUR_SCRIPT"
 	echo ">>>>>   Resolve the conflicts before continuing." | tee -a "$DIR/$CUR_SCRIPT"
+	git checkout $STAGE0 | tee -a "$DIR/$CUR_SCRIPT"
+	exit 1
 fi
 
 git checkout $STAGE2 | tee -a "$DIR/$CUR_SCRIPT"
