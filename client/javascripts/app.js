@@ -91,7 +91,7 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', '
     }], function (SpotifyProvider) {
         "use strict";
         SpotifyProvider.setClientId('d6ee6453e5404c698a8fe8e064bb92aa');
-        SpotifyProvider.setRedirectUri('http://www.example.com/callback.html');
+        SpotifyProvider.setRedirectUri('http://localhost:63342/cria-seed/client/#/muziek');
         SpotifyProvider.setScope('user-read-private playlist-read-private playlist-modify-private playlist-modify-public');
         // If you already have an auth token
         SpotifyProvider.setAuthToken('289764cf8aaa4102af36c6da72575837');
