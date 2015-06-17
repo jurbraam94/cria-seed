@@ -520,11 +520,22 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
     };
 });
 
-myApp.controller('notificatieController', function ($scope) {
+myApp.controller('notificatieController', function ($scope, DOODService) {
     "use strict";
 
     $scope.opslaan = function (notificatie) {
-        console.log(notificatie);
+        var gebruiker, bericht;
+
+        gebruiker = DOODService.gebruikerSessie.get(function () {
+            if (gebruiker.doc.gebruikersnaam !== undefined) {
+                bericht = DOODService.wishlistPost({gebruikersnaam: gebruiker.doc.gebruikersnaam, titel: notificatie.titel, bericht: notificatie.bericht}, function () {
+                    if (bericht.doc !== null) {
+                        console.log("Succesvol");
+                    }
+                });
+            }
+        });
+
     };
 });
 
