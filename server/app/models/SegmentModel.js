@@ -23,7 +23,7 @@
         gebruikersnaam: {type: String, required: true},
         object: {type: String, required: true, validator: [stringLengteValidatie, 'Bestandsnaam is niet lang genoeg']},
         percentage: {type: Number, required: true, min: 1},
-        volgnummer: {type: Number, required: false, min: 0}
+        volgnummer: {type: Number, required: true, min: 0}
     },
         { collection: 'Segment' });
 
