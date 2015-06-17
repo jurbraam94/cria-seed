@@ -74,7 +74,7 @@ myApp.controller('formulierController', function ($scope, DOODService, $timeout,
                 uitvaartGet = DOODService.uitvaart.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
                     var locatie;
                     if (uitvaartGet.doc !== null) {
-                        if (uitvaartGet.doc.locatie !== null) {
+                        if (uitvaartGet.doc.locatie !== undefined) {
                             $scope.formulierData.uitvaart = uitvaartGet.doc;
                             locatie = uitvaartGet.doc.locatie.split(",");
 
