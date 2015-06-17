@@ -8,7 +8,7 @@
                        ng-model="notificatie.titel" id="titel" required=""/>
             </div>
             <div class="memoBody">
-                <textarea placeholder="Bericht" class="transparanteTextbox" rows="4" type="text" ng-model="notificatie.bericht"
+                <textarea placeholder="Wens" class="transparanteTextbox" rows="4" type="text" ng-model="notificatie.wens"
                           id="bericht" required=""></textarea>
             </div>
         </div>
@@ -37,7 +37,7 @@
 
 
 </div>
-<div class="col-xs-10 col-md-10 col-lg-10 minicontent">
+<div class="col-xs-10 col-md-10 col-lg-10 minicontent" ng-init="init()">
     <div class="memo">
         <div class="memoHeader">
             Titel

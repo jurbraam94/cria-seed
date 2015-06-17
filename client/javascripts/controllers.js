@@ -522,14 +522,24 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
 
 myApp.controller('wishlistController', function ($scope, DOODService) {
     "use strict";
-    console.log("controller");
+    var gebruiker;
+    $scope.init = function () {
+        var berichten;
+        if (gebruiker.doc.gebruikersnaam !== undefined) {
+            berichten = DOODService.wishlist.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
+                if (berichten.doc !== null) {
+                    console.log(berichten.doc);
+                }
+            });
+        }
+    };
     $scope.opslaan = function (notificatie) {
-        var gebruiker, bericht;
+        var bericht;
         console.log("opslaan");
         gebruiker = DOODService.gebruikerSessie.get(function () {
             console.log("sessie opgehaald");
             if (gebruiker.doc.gebruikersnaam !== undefined) {
-                bericht = DOODService.wishlistPost.post({gebruikersnaam: gebruiker.doc.gebruikersnaam, titel: notificatie.titel, bericht: notificatie.bericht}, function () {
+                bericht = DOODService.wishlistPost.post({gebruikersnaam: gebruiker.doc.gebruikersnaam, titel: notificatie.titel, wens: notificatie.wens}, function () {
                     if (bericht.doc !== null) {
                         $scope.success = "Uw bericht is succesvol opgeslagen.";
                     } else if (bericht.err !== null) {
