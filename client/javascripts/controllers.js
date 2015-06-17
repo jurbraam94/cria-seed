@@ -525,7 +525,11 @@ myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
     "use strict";
 
     var voegLiedjeToe = function (titel, artiest) {
-        $scope.zoekResultaat.push({artiest: artiest, titel: titel});
+        if($scope.zoekResultaat.length < 15 ){
+            $scope.zoekResultaat.push({artiest: artiest, titel: titel});
+        } else {
+            return;
+        }
     };
 
     $scope.muziekDb =  [
@@ -540,14 +544,29 @@ myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
 
     $scope.voegToeBijAfspeellijst = function (artiest, titel) {
         var liedInAfspeelLijst = [];
-
         liedInAfspeelLijst = [{
             artiest: artiest,
             titel: titel
         }];
 
-        console.log(liedInAfspeelLijst, artiest, titel);
         $scope.afspeellijst.push(liedInAfspeelLijst);
+        console.log($scope.afspeellijst[0][0]);
+    };
+
+    $scope.remove = function () {
+        var tempArray;
+
+
+    };
+
+    $scope.verwijderUitLijst = function (artiest, titel) {
+        var i, n;
+        for (i = 0; i < $scope.afspeellijst.length; i++) {
+            if ($scope.afspeellijst[i][0].artiest === artiest && $scope.afspeellijst[i][0].titel === titel) {
+                $scope.afspeellijst.splice(i,1);
+                return;
+            }
+        }
     };
 
     $scope.zoek = function (zoekopdracht) {
@@ -561,7 +580,6 @@ myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
                     voegLiedjeToe(items.name, items.artists[0].name);
                 });
             });
-            console.log($scope.zoekResultaat, "-------------");
         } else {
             $scope.error = "Vul een titel in";
         }
