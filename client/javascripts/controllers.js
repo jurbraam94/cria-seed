@@ -308,7 +308,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                             totaleTijd = $scope.uitvaartSamenstellen.doc.tijdsduur;
                             callback();
                         } else if ($scope.uitvaartSamenstellen.doc === null) {
-                            DOODService.uitvaartSamenstellenPost({gebruikersnaam: gebruiker.doc.gebruikersnaam, tijdsduur: 60}, function () {
+                            DOODService.uitvaartSamenstellenPost.post({gebruikersnaam: gebruiker.doc.gebruikersnaam, tijdsduur: 60}, function () {
                                 totaleTijd = 60;//default
                                 callback();
                             });
