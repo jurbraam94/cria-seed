@@ -19,6 +19,22 @@
         </button>
     </form>
 
+    <br>
+
+    <div ng-show="error" class="alert alert-danger animate-show" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error</span>
+        {{error}}
+    </div>
+
+    <br>
+
+    <div ng-show="success" class="alert alert-success animate-show" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Success</span>
+        {{success}}
+    </div>
+
 
 </div>
 <div class="col-xs-10 col-md-10 col-lg-10 minicontent">

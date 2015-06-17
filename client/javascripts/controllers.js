@@ -530,7 +530,7 @@ myApp.controller('notificatieController', function ($scope, DOODService) {
             if (gebruiker.doc.gebruikersnaam !== undefined) {
                 bericht = DOODService.wishlistPost.post({gebruikersnaam: gebruiker.doc.gebruikersnaam, titel: notificatie.titel, bericht: notificatie.bericht}, function () {
                     if (bericht.doc !== null) {
-                        console.log("Succesvol");
+                        $scope.success = "Uw bericht is succesvol opgeslagen.";
                     }
                 });
             }
