@@ -1,19 +1,19 @@
 <div class="col-xs-2 col-md-2 col-lg-2" >
 
-    <form name="notificatieForm" novalidate class="validatie">
+    <form name="wishlistForm" novalidate class="validatie">
 
         <div class="memo memoInput">
             <div class="memoHeader">
                 <input placeholder="Titel" class="transparanteTextbox" type="text"
-                       ng-model="notificatie.titel" id="titel" required=""/>
+                       ng-model="wishlist.titel" id="titel" required=""/>
             </div>
             <div class="memoBody">
-                <textarea placeholder="Wens" class="transparanteTextbox" rows="4" type="text" ng-model="notificatie.wens"
+                <textarea placeholder="Wens" class="transparanteTextbox" rows="4" type="text" ng-model="wishlist.wens"
                           id="bericht" required=""></textarea>
             </div>
         </div>
 
-        <button ng-disabled="notificatieForm.$invalid" type="button" ng-click="opslaan(notificatie)"
+        <button ng-disabled="wishlistForm.$invalid" type="button" ng-click="opslaan(wishlist)"
                 class="center-block btn btn-primary btn-lg formOpslaan">
             TOEVOEGEN
         </button>

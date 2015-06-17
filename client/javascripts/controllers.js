@@ -520,7 +520,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
     };
 });
 
-myApp.controller('wishlistController', function ($scope, DOODService) {
+myApp.controller('wishlistController', function ($scope, DOODService, $timeout) {
     "use strict";
     var gebruiker;
     $scope.init = function () {
@@ -536,12 +536,17 @@ myApp.controller('wishlistController', function ($scope, DOODService) {
             }
         });
     };
-    $scope.opslaan = function (notificatie) {
+    $scope.opslaan = function (wishlist) {
         var bericht;
         gebruiker = DOODService.gebruikerSessie.get(function () {
             if (gebruiker.doc.gebruikersnaam !== undefined) {
-                bericht = DOODService.wishlistPost.post({gebruikersnaam: gebruiker.doc.gebruikersnaam, titel: notificatie.titel, wens: notificatie.wens}, function () {
+                bericht = DOODService.wishlistPost.post({gebruikersnaam: gebruiker.doc.gebruikersnaam, titel: wishlist.titel, wens: wishlist.wens}, function () {
                     if (bericht.doc !== null) {
+                        $scope.wishlistForm.$setPristine();
+                        $scope.success = "Bericht succesvol opgeslagen.";
+                        $timeout(function () {
+                            $scope.success = null;
+                        }, 3000);
                     } else if (bericht.err !== null) {
                         $scope.error = bericht.err;
                     }
