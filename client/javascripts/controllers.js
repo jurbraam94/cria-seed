@@ -527,11 +527,10 @@ myApp.controller('wishlistController', function ($scope, DOODService) {
         var berichten;
 
         gebruiker = DOODService.gebruikerSessie.get(function () {
-            console.log("sessie opgehaald");
             if (gebruiker.doc.gebruikersnaam !== undefined) {
                 berichten = DOODService.wishlist.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
                     if (berichten.doc !== null) {
-                        console.log(berichten.doc);
+                        $scope.berichten = berichten.doc;
                     }
                 });
             }
@@ -539,13 +538,10 @@ myApp.controller('wishlistController', function ($scope, DOODService) {
     };
     $scope.opslaan = function (notificatie) {
         var bericht;
-        console.log("opslaan");
         gebruiker = DOODService.gebruikerSessie.get(function () {
-            console.log("sessie opgehaald");
             if (gebruiker.doc.gebruikersnaam !== undefined) {
                 bericht = DOODService.wishlistPost.post({gebruikersnaam: gebruiker.doc.gebruikersnaam, titel: notificatie.titel, wens: notificatie.wens}, function () {
                     if (bericht.doc !== null) {
-                        $scope.success = "Uw bericht is succesvol opgeslagen.";
                     } else if (bericht.err !== null) {
                         $scope.error = bericht.err;
                     }

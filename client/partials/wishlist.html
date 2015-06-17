@@ -38,12 +38,14 @@
 
 </div>
 <div class="col-xs-10 col-md-10 col-lg-10 minicontent" ng-init="init()">
-    <div class="memo">
+
+
+    <div class="memo" ng-repeat="bericht in berichten">>
         <div class="memoHeader">
-            Titel
+            {{bericht.titel}}
         </div>
         <div class="memoBody">
-            Bericht
+            {{bericht.wens}}
         </div>
     </div>
 </div>
