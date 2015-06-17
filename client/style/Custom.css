@@ -454,10 +454,10 @@ footer a:hover, a:active{
 }
 
 .memoInput {
-    width:80%;
+    width:60%;
     height:40%;
     margin-top:0;
-    margin-bottom:2%;
+    margin-bottom:5%;
     margin-right:10%;
     margin-left:10%;
 }
