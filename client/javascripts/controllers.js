@@ -225,19 +225,9 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
     "use strict";
     var totaleTijd,
         dataTable,
-        kleuren = [], // = ['#afafaf']
+        kleuren = [],
         chart = null,
         muisOverIndex,
-
-        swapArrayIndexen = function (array, oudeIndex, nieuweIndex) {
-            var temp;
-
-            temp = array[oudeIndex];
-            array[oudeIndex] = array[nieuweIndex];
-            array[nieuweIndex] = temp;
-
-            return array;
-        },
 
         initieeleDataTable = function (segmenten) {
             var i = 0;
@@ -367,7 +357,15 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             chart.setSelection([{ row: muisOverIndex, column: null }]);
         },
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        swapArrayIndexen = function (array, oudeIndex, nieuweIndex) {
+            var temp;
+
+            temp = array[oudeIndex];
+            array[oudeIndex] = array[nieuweIndex];
+            array[nieuweIndex] = temp;
+
+            return array;
+        },
 
         redrawNaHerordenen = function (oudeIndex, nieuweIndex) {
             //swap indexen in dataTable
