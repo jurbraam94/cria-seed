@@ -345,8 +345,71 @@ footer a:hover, a:active{
 
 .formulierContainer {
     background-color: #48CEC2;
+    width:370px;
+    padding:15px;
+    padding-right:5px;
 }
 
 .formulierContainer .form-group {
-    margin:5px;
+    margin-bottom:5px;
+    overflow:hidden;
+}
+
+.formulierHeaderFooter {
+    width:370px;
+    margin:0 auto;
+    font-weight: 900;
+    color: #ED5F54;
+}
+
+.vorigeKnop {
+    background:url("images/driehoeklinks.png") no-repeat center center;
+    background-color: #48CEC2;
+    width:100px;
+    height:25px;
+    padding:10px;
+}
+
+.volgendeKnop {
+    background:url("images/driehoekrechts.png") no-repeat center center;
+    background-color: #48CEC2;
+    width:100px;
+    height:25px;
+    padding:10px;
+}
+
+.animate-switch.ng-leave, .animate-switch.ng-enter{
+    -webkit-transition: 1025ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -moz-transition: 1025ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -ms-transition: 1025ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -o-transition: 1025ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    transition: 1025ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+
+    position:absolute;
+    top:20px;
+    left:0;
+    right:0;
+    bottom:0;
+}
+
+
+.animate-switch.ng-leave.ng-leave-active,
+.animate-switch.ng-enter {
+    right:-2000px;
+}
+.animate-switch.ng-leave,
+.animate-switch.ng-enter.ng-enter-active {
+    right:0;
+}
+
+.animate-show.ng-hide-add.ng-hide-add-active,
+.animate-show.ng-hide-remove.ng-hide-remove-active {
+    -webkit-transition: all linear 0.5s;
+    transition: all linear 0.5s;
+}
+
+.animate-show.ng-hide {
+    line-height: 0;
+    opacity: 0;
+    padding: 0 10px;
 }

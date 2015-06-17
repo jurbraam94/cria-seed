@@ -1,7 +1,7 @@
 /*jslint node: true */
 /*globals myApp, document, place, google, drawChart, angular, window*/
 
-myApp.controller('MainController', function ($scope, $rootScope, $location, DOODService, $window) {
+myApp.controller('MainController', function ($scope, $rootScope, $location, DOODService, $route, $window) {
     "use strict";
 
     $scope.goto = function (location) {
@@ -29,16 +29,18 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, DOOD
     });
 });
 
-myApp.controller('ContactController', function ($scope, DOODService) {
+myApp.controller('ContactController', function ($scope, DOODService, $timeout) {
     "use strict";
     $scope.contact = function (contactGegevens) {
         $scope.mail = DOODService.contact.post(contactGegevens, function () {
             if ($scope.mail.err) {
-                $scope.success = false;
                 $scope.error = $scope.mail.err;
             } else if ($scope.mail.doc !== null) {
                 $scope.contactForm.$setPristine();
-                $scope.success = true;
+                $scope.success = "Bedankt, we hebben uw mail succesvol ontvangen.";
+                $timeout(function () {
+                    $scope.success = null;
+                }, 3000);
             }
         });
     };
@@ -48,7 +50,7 @@ myApp.controller('formulierController', function ($scope, DOODService, $timeout,
     "use strict";
     var gebruiker, aanvullendeGegevensGet, algemeneGegevensGet, uitvaartGet, events;
     $scope.formulierData = {aanvullendeGegevens: {}, algemeneGegevens: {}, uitvaart: {}};
-    $scope.formulierPagina = "gegevens";
+    $scope.formulierData.pagina = "gegevens";
 
     $scope.initFormulierGegevens = function () {
         gebruiker = DOODService.gebruikerSessie.get(function () {
@@ -126,11 +128,11 @@ myApp.controller('formulierController', function ($scope, DOODService, $timeout,
                                     if (aanvullendeGegevens.err !== null) {
                                         $scope.error = "Fout: " + aanvullendeGegevens.err;
                                     } else {
+                                        $scope.formulierPaginaForm.$setPristine();
                                         $scope.success = "Alle data is succesvol opgeslagen.";
                                         $timeout(function () {
                                             $scope.success = null;
-                                            $route.reload();
-                                        }, 3000);
+                                        }, 4000);
                                     }
                                 });
                             }
@@ -178,15 +180,13 @@ myApp.controller('formulierController', function ($scope, DOODService, $timeout,
         dragend: function (marker) {
             $rootScope.$apply(function () {
                 $scope.formulierData.uitvaart.locatie = marker.position.lat() + "," + marker.position.lng();
-                console.log(marker.position.lat());
-                console.log(marker.position.lng());
             });
         }
     };
     $scope.searchbox = { template: 'searchbox.tpl.html', events: events };
 });
 
-myApp.controller('GebruikerLoginController', function ($scope, DOODService) {
+myApp.controller('GebruikerLoginController', function ($scope, DOODService, $timeout) {
     "use strict";
 
     // LOGIN / LOGUIT
@@ -202,6 +202,9 @@ myApp.controller('GebruikerLoginController', function ($scope, DOODService) {
                         $scope.goto('overzicht');
                     } else if ($scope.gebruiker.err) {
                         $scope.error = $scope.gebruiker.err;
+                        $timeout(function () {
+                            $scope.error = null;
+                        }, 3000);
                     }
                 });
             }
@@ -536,7 +539,7 @@ myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
     $scope.afspeellijst = [];
 
     $scope.voegToeBijAfspeellijst = function (artiest, titel) {
-        var liedInAfspeelLijst;
+        var liedInAfspeelLijst = [];
 
         liedInAfspeelLijst = [{
             artiest: artiest,
@@ -546,29 +549,6 @@ myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
         console.log(liedInAfspeelLijst, artiest, titel);
         $scope.afspeellijst.push(liedInAfspeelLijst);
     };
-
-    $scope.createPlaylist =  function() {
-        Spotify.createPlaylist('jurbraam94', {name: 'nice songs', public: false }).then(function() {
-            console.log("je hebt er één gemaakt");
-        });
-    };
-
-    $scope.login = function () {
-        Spotify.login();
-    };
-
-    /*function verwijderUitLijst(artiest, titel) {
-        var i;
-        for(i = 0; i < $scope.afspeellijst.length; i ++){
-            if($scope.afspeellijst[i].artiest === artiest){
-                if($scope.afspeellijst[i].titel === titel ){
-                    console.log($scope.afspeellijst[i].indexOf());
-                }
-            }
-        }
-        $scope.afspeellijst.indexOf(artiest, titel)
-
-    }*/
 
     $scope.zoek = function (zoekopdracht) {
         $scope.error = "Vul een titel";
