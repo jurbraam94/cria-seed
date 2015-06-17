@@ -531,6 +531,8 @@ myApp.controller('notificatieController', function ($scope, DOODService) {
                 bericht = DOODService.wishlistPost.post({gebruikersnaam: gebruiker.doc.gebruikersnaam, titel: notificatie.titel, bericht: notificatie.bericht}, function () {
                     if (bericht.doc !== null) {
                         $scope.success = "Uw bericht is succesvol opgeslagen.";
+                    } else if (bericht.err !== null) {
+                        $scope.error = bericht.err;
                     }
                 });
             }
