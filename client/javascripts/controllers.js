@@ -74,36 +74,38 @@ myApp.controller('formulierController', function ($scope, DOODService, $timeout,
                 uitvaartGet = DOODService.uitvaart.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
                     var locatie;
                     if (uitvaartGet.doc !== null) {
-                        $scope.formulierData.uitvaart = uitvaartGet.doc;
-                        locatie = uitvaartGet.doc.locatie.split(",");
+                        if (uitvaartGet.doc.locatie !== undefined) {
+                            $scope.formulierData.uitvaart = uitvaartGet.doc;
+                            locatie = uitvaartGet.doc.locatie.split(",");
 
-                        //google maps stuff
-                        $scope.map = {
-                            "center": {
-                                latitude: locatie[0],
-                                longitude:  locatie[1]
-                            },
-                            "zoom": 15
-                        };
-                        $scope.marker = {
-                            id: 0,
-                            coords: {
-                                latitude: locatie[0],
-                                longitude: locatie[1]
-                            },
-                            options: { draggable: true },
-                            events: {
-                                dragend: function (marker, eventName, args) {
+                            //google maps stuff
+                            $scope.map = {
+                                "center": {
+                                    latitude: locatie[0],
+                                    longitude:  locatie[1]
+                                },
+                                "zoom": 15
+                            };
+                            $scope.marker = {
+                                id: 0,
+                                coords: {
+                                    latitude: locatie[0],
+                                    longitude: locatie[1]
+                                },
+                                options: { draggable: true },
+                                events: {
+                                    dragend: function (marker, eventName, args) {
 
-                                    $scope.marker.options = {
-                                        draggable: true,
-                                        labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
-                                        labelAnchor: "100 0",
-                                        labelClass: "marker-labels"
-                                    };
+                                        $scope.marker.options = {
+                                            draggable: true,
+                                            labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
+                                            labelAnchor: "100 0",
+                                            labelClass: "marker-labels"
+                                        };
+                                    }
                                 }
-                            }
-                        };
+                            };
+                        }
                     } else {
                         DOODService.uitvaartPost.post({gebruikersnaam: gebruiker.doc.gebruikersnaam});
                     }
@@ -223,19 +225,9 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
     "use strict";
     var totaleTijd,
         dataTable,
-        kleuren = [], // = ['#afafaf']
+        kleuren = [],
         chart = null,
         muisOverIndex,
-
-        swapArrayIndexen = function (array, oudeIndex, nieuweIndex) {
-            var temp;
-
-            temp = array[oudeIndex];
-            array[oudeIndex] = array[nieuweIndex];
-            array[nieuweIndex] = temp;
-
-            return array;
-        },
 
         initieeleDataTable = function (segmenten) {
             var i = 0;
@@ -302,14 +294,15 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             gebruiker = DOODService.gebruikerSessie.get(function () {
                 if (gebruiker.doc.gebruikersnaam !== undefined) {
                     $scope.uitvaartSamenstellen = DOODService.uitvaartSamenstellen.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
-                        if ($scope.uitvaartSamenstellen.err === null) {
+                        if ($scope.uitvaartSamenstellen.doc !== null) {
                             totaleTijd = $scope.uitvaartSamenstellen.doc.tijdsduur;
-                            if (totaleTijd === undefined) {
-                                totaleTijd = 90;
-                            }
                             callback();
+                        } else if ($scope.uitvaartSamenstellen.doc === null) {
+                            DOODService.uitvaartSamenstellenPost.post({gebruikersnaam: gebruiker.doc.gebruikersnaam, tijdsduur: 60}, function () {
+                                totaleTijd = 60;//default
+                                callback();
+                            });
                         }
-                        $scope.error = $scope.uitvaartSamenstellen.err;
                     });
                 }
             });
@@ -364,7 +357,15 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
             chart.setSelection([{ row: muisOverIndex, column: null }]);
         },
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        swapArrayIndexen = function (array, oudeIndex, nieuweIndex) {
+            var temp;
+
+            temp = array[oudeIndex];
+            array[oudeIndex] = array[nieuweIndex];
+            array[nieuweIndex] = temp;
+
+            return array;
+        },
 
         redrawNaHerordenen = function (oudeIndex, nieuweIndex) {
             //swap indexen in dataTable
