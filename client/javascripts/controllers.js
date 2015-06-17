@@ -186,7 +186,7 @@ myApp.controller('formulierController', function ($scope, DOODService, $timeout,
     $scope.searchbox = { template: 'searchbox.tpl.html', events: events };
 });
 
-myApp.controller('GebruikerLoginController', function ($scope, DOODService) {
+myApp.controller('GebruikerLoginController', function ($scope, DOODService, $timeout) {
     "use strict";
 
     // LOGIN / LOGUIT
@@ -202,6 +202,9 @@ myApp.controller('GebruikerLoginController', function ($scope, DOODService) {
                         $scope.goto('overzicht');
                     } else if ($scope.gebruiker.err) {
                         $scope.error = $scope.gebruiker.err;
+                        $timeout(function () {
+                            $scope.error = null;
+                        }, 3000);
                     }
                 });
             }
