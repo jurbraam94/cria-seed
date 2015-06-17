@@ -520,7 +520,13 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
     };
 });
 
+myApp.controller('notificatieController', function ($scope) {
+    "use strict";
 
+    $scope.opslaan = function (notificatie) {
+        console.log(notificatie);
+    };
+});
 
 myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
     "use strict";

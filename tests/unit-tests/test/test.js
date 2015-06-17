@@ -1109,10 +1109,8 @@ describe('API Routing for CRUD operations on Wishlist', function () {
                 .post('/wishlist')
                 .send({
                     "gebruikersnaam": "Createusertest",
-                    "bestandsnaam": "plaatje.JPG",
-                    "beschrijving" : "Mooi plaatje",
-                    "content" : "mp4",
-                    "volgnummer" : 1337
+                    "titel": "Bloemen",
+                    "wens" : "Mooi bosje bloemen"
                 })
                 .expect(200)                                                // supertest
                 .expect('Content-Type', /application.json/)                 // supertest
@@ -1135,8 +1133,8 @@ describe('API Routing for CRUD operations on Wishlist', function () {
                         .be.exactly('Createusertest')
                     JSON.parse(res.text)
                         .should.have.property('doc')
-                        .and.have.property('content')
-                        .be.exactly('mp4')
+                        .and.have.property('titel')
+                        .be.exactly('Bloemen')
                     done();
                 });
         });

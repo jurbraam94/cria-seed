@@ -62,6 +62,7 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', '
         // Get Notificatie
         $routeProvider.when('/notificatie', {
             templateUrl: 'partials/notificatie.html',
+            controller: 'notificatieController',
             security: true
         });
 

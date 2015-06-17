@@ -442,3 +442,37 @@ footer a:hover, a:active{
 .searchBoxPosition {
 
 }
+
+.memo {
+    background-color: #9DE0DA;
+    min-height:50px;
+    min-width:50px;
+    width: 15%;
+    height: 25%;
+}
+
+.memoInput {
+    width:80%;
+    height:40%;
+    margin-right:10%;
+    margin-left:10%;
+}
+
+.memoHeader {
+    font-size: 1vw;
+    padding:10px;
+    height: 20%;
+    border-bottom: 3px solid #B5E5E0;
+    font-weight: bold;
+}
+
+.memoBody {
+    padding:10px;
+    height:80%;
+}
+
+.transparanteTextbox {
+    background: transparent;
+    width: 100%;
+    min-width:0;
+}
