@@ -449,7 +449,8 @@ footer a:hover, a:active{
     min-width:50px;
     width: 15%;
     height: 25%;
-    margin:5%;
+    margin:1%;
+    float:left;
 }
 
 .memoInput {
