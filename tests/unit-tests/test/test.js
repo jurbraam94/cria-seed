@@ -8,7 +8,7 @@ var env = process.env.NODE_ENV || 'development',
 var should = require('should'),
     supertest = require('supertest');
 
-/*
+/
 describe('API Routing for CRUD operations on Gebruiker', function () {
 
     var request = supertest(localConfig.host + ":" + config.port + "/" + localConfig.api_path);
@@ -113,7 +113,7 @@ describe('API Routing for CRUD operations on Gebruiker', function () {
                 });
         });
     });*/
-/*
+
     describe('CREATE gebruiker', function () {
         it('Should POST /gebruiker', function (done) {
             request
@@ -1193,5 +1193,3 @@ describe('API Routing for CRUD operations on Wishlist', function () {
         });
     });
 });
-
-    */
