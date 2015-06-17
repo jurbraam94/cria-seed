@@ -23,6 +23,6 @@ router
 
 // DELETE
 router
-    .delete('/wishlist/:_gebruikersnaam/:_volgnummer', controller.wishlistVerwijderen);
+    .delete('/wishlist/:_gebruikersnaam/:_titel', controller.wishlistVerwijderen);
 
 module.exports = router;

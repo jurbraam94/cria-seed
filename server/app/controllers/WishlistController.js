@@ -64,7 +64,7 @@ exports.alleWishlists = function (req, res) {
 exports.wishlistVerwijderen = function (req, res) {
     var conditions, callback, retObj;
 
-    conditions = {gebruikersnaam: req.params._gebruikersnaam, volgnummer: req.params._volgnummer};
+    conditions = {gebruikersnaam: req.params._gebruikersnaam, bericht: req.params._titel};
 
     callback = function (err, doc) {
         retObj = {
