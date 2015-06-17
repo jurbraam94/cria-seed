@@ -313,7 +313,6 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
                                 callback();
                             });
                         }
-                        $scope.error = $scope.uitvaartSamenstellen.err;
                     });
                 }
             });
