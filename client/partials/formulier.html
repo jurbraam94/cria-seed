@@ -51,7 +51,7 @@
     <div class="col-xs-10 col-md-10 col-lg-10 minicontent">
         <div ng-switch on="formulierData.pagina">
             <form name="formulierPaginaForm" novalidate class="validatie">
-                <div ng-switch-when="gegevens">
+                <div ng-switch-when="gegevens" class="animate-switch">
                     <div class="formulierHeaderFooter text-center">
                         <h2>GEGEVENS</h2>
                     </div>
@@ -141,7 +141,7 @@
                         <a href="" class="volgendeKnop pull-right"  ng-click="formulierData.pagina = 'opbaring'"></a>
                     </div>
                 </div>
-                <div ng-switch-when="opbaring">
+                <div ng-switch-when="opbaring" class="animate-switch">
                     <div class="formulierHeaderFooter text-center">
                         <h2>OPBARING</h2>
                     </div>
@@ -161,7 +161,7 @@
                         <a href="" class="volgendeKnop pull-right"  ng-click="formulierData.pagina = 'geloof'"></a>
                     </div>
                 </div>
-                <div ng-switch-when="geloof">
+                <div ng-switch-when="geloof" class="animate-switch">
                     <div class="formulierHeaderFooter text-center">
                         <h2>GELOOF</h2>
                     </div>
