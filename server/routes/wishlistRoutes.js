@@ -20,7 +20,6 @@ router
 // RETRIEVE
 router
     .get('/wishlist/:_gebruikersnaam', controller.alleWishlists)
-    .get('/wishlist/:_gebruikersnaam/:_volgnummer', controller.wishlistDetails);
 
 // DELETE
 router

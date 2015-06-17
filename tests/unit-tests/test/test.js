@@ -1163,30 +1163,6 @@ describe('API Routing for CRUD operations on Wishlist', function () {
         });
     });
 
-    describe('RETRIEVE 1 Wishlist', function () {
-        it('Should GET /wishlist/{gebruikersnaam}/{volgnummer}', function (done) {
-            request
-                .get('/wishlist/' + 'jur/' + 1)
-                .expect('Content-Type', /application.json/)
-                .expect(200)
-                .end(function (err, res) {
-                    if (err) {
-                        throw err;
-                    }
-                    JSON.parse(res.text)
-                        .should.have.property('doc')
-                        .and.have.property('gebruikersnaam')
-                        .be.exactly('jur');
-                    JSON.parse(res.text)
-                        .should.have.property('doc')
-                        .and.have.property('beschrijving')
-                        .be.exactly('beschrijving');
-                    res.statusCode.should.be.exactly(200);
-                    done();
-                });
-        });
-    });
-
     describe('DELETE 1 Wishlist', function () {
         it('Should DELETE /wishlist/{gebruikersnaam}/{volgnummer}', function (done) {
             request
