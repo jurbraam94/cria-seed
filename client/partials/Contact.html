@@ -43,14 +43,14 @@
 
     <br>
 
-    <div ng-show="success == false" class="alert alert-danger" role="alert">
+    <div ng-show="error" class="alert alert-danger animate-show" role="alert">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
         {{error}}
     </div>
 
-    <div ng-show="success == true" class="alert alert-success" role="alert">
+    <div ng-show="success" class="alert alert-success animate-show" role="alert">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        <span>Bedankt, we hebben uw mail succesvol ontvangen.</span>
+        <span>{{success}}</span>
     </div>
 </div>
 

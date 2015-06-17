@@ -29,16 +29,18 @@ myApp.controller('MainController', function ($scope, $rootScope, $location, DOOD
     });
 });
 
-myApp.controller('ContactController', function ($scope, DOODService) {
+myApp.controller('ContactController', function ($scope, DOODService, $timeout) {
     "use strict";
     $scope.contact = function (contactGegevens) {
         $scope.mail = DOODService.contact.post(contactGegevens, function () {
             if ($scope.mail.err) {
-                $scope.success = false;
                 $scope.error = $scope.mail.err;
             } else if ($scope.mail.doc !== null) {
                 $scope.contactForm.$setPristine();
-                $scope.success = true;
+                $scope.success = "Bedankt, we hebben uw mail succesvol ontvangen.";
+                $timeout(function () {
+                    $scope.success = null;
+                }, 3000);
             }
         });
     };
@@ -126,11 +128,11 @@ myApp.controller('formulierController', function ($scope, DOODService, $timeout,
                                     if (aanvullendeGegevens.err !== null) {
                                         $scope.error = "Fout: " + aanvullendeGegevens.err;
                                     } else {
+                                        $scope.formulierPaginaForm.$setPristine();
                                         $scope.success = "Alle data is succesvol opgeslagen.";
                                         $timeout(function () {
                                             $scope.success = null;
                                         }, 3000);
-                                        $route.reload();
                                     }
                                 });
                             }
