@@ -413,3 +413,28 @@ footer a:hover, a:active{
     opacity: 0;
     padding: 0 10px;
 }
+
+
+.view-animate.ng-leave, .view-animate.ng-enter{
+    -webkit-transition: 1025ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -moz-transition: 1025ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -ms-transition: 1025ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -o-transition: 1025ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    transition: 1025ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+}
+
+
+.view-animate.ng-leave.ng-leave-active,
+.view-animate.ng-enter {
+    top:-17000px;
+}
+.view-animate.ng-leave,
+.view-animate.ng-enter.ng-enter-active {
+    top:0;
+}
