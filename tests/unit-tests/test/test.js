@@ -1164,9 +1164,9 @@ describe('API Routing for CRUD operations on Wishlist', function () {
     });
 
     describe('DELETE 1 Wishlist', function () {
-        it('Should DELETE /wishlist/{gebruikersnaam}/{volgnummer}', function (done) {
+        it('Should DELETE /wishlist/{gebruikersnaam}/{titel}', function (done) {
             request
-                .del('/wishlist/' + 'Createusertest/' + 1337)
+                .del('/wishlist/' + 'Createusertest/' + 'Bloemen')
                 .expect(200)                                                // supertest
                 .expect('Content-Type', /application.json/)                 // supertest
                 .expect('Content-Type', 'utf-8')                            // supertest
