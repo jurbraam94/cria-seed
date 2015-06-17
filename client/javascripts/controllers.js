@@ -528,7 +528,7 @@ myApp.controller('notificatieController', function ($scope, DOODService) {
 
         gebruiker = DOODService.gebruikerSessie.get(function () {
             if (gebruiker.doc.gebruikersnaam !== undefined) {
-                bericht = DOODService.wishlistPost({gebruikersnaam: gebruiker.doc.gebruikersnaam, titel: notificatie.titel, bericht: notificatie.bericht}, function () {
+                bericht = DOODService.wishlistPost.post({gebruikersnaam: gebruiker.doc.gebruikersnaam, titel: notificatie.titel, bericht: notificatie.bericht}, function () {
                     if (bericht.doc !== null) {
                         console.log("Succesvol");
                     }
