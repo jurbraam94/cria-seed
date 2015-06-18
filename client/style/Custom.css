@@ -444,19 +444,20 @@ footer a:hover, a:active{
 
 .memo {
     background-color: #9DE0DA;
-    width:200px;
-    height:200px;
+    width:175px;
+    height:175px;
     margin:0.5%;
     float:left;
 }
 
 .memoInput {
-    width:60%;
+    width:70%;
     height:40%;
+    min-height: 100px;
     margin-top:0;
     margin-bottom:5%;
-    margin-right:20%;
-    margin-left:20%;
+    margin-right:15%;
+    margin-left:15%;
 }
 
 .memoHeader {
