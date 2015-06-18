@@ -540,7 +540,7 @@ myApp.controller('wishlistController', function ($scope, DOODService, $timeout) 
     $scope.verwijderen = function (titel) {
         gebruiker = DOODService.gebruikerSessie.get(function () {
             if (gebruiker.doc.gebruikersnaam !== undefined) {
-                bericht = DOODService.wishlist.delete({gebruikersnaam: gebruiker.doc.gebruikersnaam, titel: titel}, function () {
+                bericht = DOODService.wishlistVerwijderen.delete({gebruikersnaam: gebruiker.doc.gebruikersnaam, titel: titel}, function () {
                     if (bericht.doc.n > 0) {
                         $scope.success = "Bericht succesvol verwijderd.";
                     } else {
