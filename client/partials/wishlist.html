@@ -42,6 +42,7 @@
     <div class="memo" ng-repeat="bericht in berichten">
         <div class="memoHeader">
             {{bericht.titel}}
+            <span class="text-right" ng-click="verwijderen(bericht.titel)">X</span>
         </div>
         <div class="memoBody">
             {{bericht.wens}}

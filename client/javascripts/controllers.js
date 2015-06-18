@@ -522,7 +522,7 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
 
 myApp.controller('wishlistController', function ($scope, DOODService, $timeout) {
     "use strict";
-    var gebruiker;
+    var gebruiker, bericht;
     $scope.init = function () {
         var berichten;
 
@@ -536,8 +536,22 @@ myApp.controller('wishlistController', function ($scope, DOODService, $timeout) 
             }
         });
     };
+
+    $scope.verwijderen = function (titel) {
+        gebruiker = DOODService.gebruikerSessie.get(function () {
+            if (gebruiker.doc.gebruikersnaam !== undefined) {
+                bericht = DOODService.wishlist.delete({gebruikersnaam: gebruiker.doc.gebruikersnaam, titel: titel}, function () {
+                    if (bericht.doc.n > 0) {
+                        $scope.success = "Bericht succesvol verwijderd.";
+                    } else {
+                        $scope.error = "Er is iets foutgegaan. Probeer het opnieuw";
+                    }
+                });
+            }
+        });
+    };
+
     $scope.opslaan = function (wishlist) {
-        var bericht;
         gebruiker = DOODService.gebruikerSessie.get(function () {
             if (gebruiker.doc.gebruikersnaam !== undefined) {
                 bericht = DOODService.wishlistPost.post({gebruikersnaam: gebruiker.doc.gebruikersnaam, titel: wishlist.titel, wens: wishlist.wens}, function () {
