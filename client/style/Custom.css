@@ -516,3 +516,8 @@ footer a:hover, a:active{
     font-size: 1.2vw;
     color: #ED5F54;
 }
+
+label.uploadButton input[type="file"] {
+    height: 0;
+    overflow: hidden;
+}

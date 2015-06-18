@@ -56,6 +56,7 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', '
         // Get Foto
         $routeProvider.when('/foto', {
             templateUrl: 'partials/foto.html',
+            controller: 'FotoController',
             security: true
         });
 

@@ -666,3 +666,72 @@ myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
     };
 });
 
+myApp.controller('FotoController', function ($scope, DOODService, $timeout) {
+    "use strict";
+    var gebruiker, ingevoerdeFoto, uploadFile;
+
+    $scope.setFiles = function(element) {
+        $scope.$apply(function() {
+            console.log('files:', element.files);
+            // Turn the FileList object into an Array
+            $scope.files = [];
+            for (var i = 0; i < element.files.length; i += 1) {
+                $scope.files.push(element.files[i]);
+            }
+        });
+    };
+
+    uploadFile = function() {
+        var fd = new FormData(), i;
+        console.log('Begin uploaden');
+        for (i in $scope.files) {
+            if ($scope.files.hasOwnProperty(i)) {
+                fd.append("uploadedFile", $scope.files[i]);
+            }
+        }
+        var xhr = new XMLHttpRequest();
+        //xhr.addEventListener("load", uploadComplete, false);
+        //xhr.addEventListener("error", uploadFailed, false);
+        xhr.open("POST", "/uploadedImages", true);
+        xhr.send(fd);
+        console.log('Einde uploaden');
+    };
+
+    $scope.init = function () {
+        var fotos;
+        gebruiker = DOODService.gebruikerSessie.get(function () {
+            if (gebruiker.doc.gebruikersnaam !== undefined) {
+                fotos = DOODService.foto.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
+                    if (fotos.doc !== null) {
+                        $scope.fotos = fotos.doc;
+                    }
+                });
+            }
+        });
+    };
+
+    $scope.opslaan = function (foto) {
+        var fotoPost;
+        ingevoerdeFoto = document.getElementById('fotoUploaden').files[0];
+        if (ingevoerdeFoto === null) {
+            return;
+        }
+        gebruiker = DOODService.gebruikerSessie.get(function () {
+            if (gebruiker.doc.gebruikersnaam !== undefined) {
+                fotoPost = DOODService.fotoPost.post({gebruikersnaam: gebruiker.doc.gebruikersnaam, bestandsnaam: foto.bestandsnaam, volgnummer: 1}, function () {
+                    if (fotoPost.doc !== null) {
+                        $scope.init();
+                        uploadFile();
+                        $scope.fotoForm.$setPristine();
+                        $scope.success = "Foto succesvol opgeslagen.";
+                        $timeout(function () {
+                            $scope.success = null;
+                        }, 3000);
+                    } else if (fotoPost.err !== null) {
+                        $scope.error = fotoPost.err;
+                    }
+                });
+            }
+        });
+    };
+});

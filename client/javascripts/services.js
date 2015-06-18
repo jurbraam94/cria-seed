@@ -31,6 +31,8 @@
             db.wishlist = $resource('/api/wishlist/:gebruikersnaam', {"gebruikersnaam": "@gebruikersnaam"}, actions);
             db.wishlistVerwijderen = $resource('/api/wishlist/:gebruikersnaam/:titel', {"gebruikersnaam": "@gebruikersnaam", "titel" : "@titel"}, actions);
             db.wishlistPost = $resource('/api/wishlist', {}, actions);
+            db.foto = $resource('/api/wishlist/:gebruikersnaam', {"gebruikersnaam": "@gebruikersnaam"}, actions);
+            db.fotoPost = $resource('/api/wishlist', {}, actions);
 
             db.muziekLijstPost = $resource('/api/muziek/', {}, actions);
             db.contact = $resource('/api/gebruiker/mail', {}, actions);
