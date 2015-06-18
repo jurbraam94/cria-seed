@@ -444,10 +444,8 @@ footer a:hover, a:active{
 
 .memo {
     background-color: #9DE0DA;
-    min-height:50px;
-    min-width:50px;
-    width: 15%;
-    height: 25%;
+    width:200px;
+    height:200px;
     margin:0.5%;
     float:left;
 }
