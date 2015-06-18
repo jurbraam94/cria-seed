@@ -13,7 +13,7 @@
     muziek = new Schema({
         gebruikersnaam: {type: String, required: true, unique: true},
         titel: {type: String, required: true},
-            artiest: {type: String, required: true}
+        artiest: {type: String, required: true}
     },
         { collection: 'Muziek' });
 

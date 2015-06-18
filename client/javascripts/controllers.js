@@ -598,7 +598,7 @@ myApp.controller('wishlistController', function ($scope, DOODService, $timeout) 
 myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
     "use strict";
     var voegLiedjeToe = function (titel, artiest) {
-        if($scope.zoekResultaat.length < 9 ){
+        if ($scope.zoekResultaat.length < 9) {
             $scope.zoekResultaat.push({artiest: artiest, titel: titel});
         } else {
             return;
