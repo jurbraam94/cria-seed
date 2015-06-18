@@ -122,11 +122,11 @@ myApp.controller('formulierController', function ($scope, DOODService, $timeout,
                     if (uitvaart.err !== null) {
                         $scope.error = "Fout: " + uitvaart.err;
                     } else {
-                        algemeneGegevens = DOODService.algemeneGegevens.update($scope.formulierData.algemeneGegevens, function () {
+                        algemeneGegevens = DOODService.algemeneGegevens.update({gebruikersnaam: gebruiker.doc.gebruikersnaam, voornaam: $scope.formulierData.algemeneGegevens.voornaam, achternaam: $scope.formulierData.algemeneGegevens.achternaam, woonplaats: $scope.formulierData.algemeneGegevens.woonplaats, postcode: $scope.formulierData.algemeneGegevens.postcode, adres: $scope.formulierData.algemeneGegevens.adres, huisnummer: $scope.formulierData.algemeneGegevens.huisnummer, telefoon: $scope.formulierData.algemeneGegevens.telefoon, email: $scope.formulierData.algemeneGegevens.email}, function () {
                             if (algemeneGegevens.err !== null) {
                                 $scope.error =  "Fout: " + algemeneGegevens.err;
                             } else {
-                                aanvullendeGegevens = DOODService.aanvullendeGegevens.update($scope.formulierData.aanvullendeGegevens, function () {
+                                aanvullendeGegevens = DOODService.aanvullendeGegevens.update({gebruikersnaam: gebruiker.doc.gebruikersnaam, religie: $scope.formulierData.aanvullendeGegevens.religie, donor: $scope.formulierData.aanvullendeGegevens.donor}, function () {
                                     if (aanvullendeGegevens.err !== null) {
                                         $scope.error = "Fout: " + aanvullendeGegevens.err;
                                     } else {
