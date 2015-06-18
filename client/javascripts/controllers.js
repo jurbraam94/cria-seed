@@ -118,7 +118,7 @@ myApp.controller('formulierController', function ($scope, DOODService, $timeout,
         var uitvaart, algemeneGegevens, aanvullendeGegevens;
         gebruiker = DOODService.gebruikerSessie.get(function () {
             if (gebruiker.doc.gebruikersnaam !== undefined) {
-                uitvaart = DOODService.uitvaart.update($scope.formulierData.uitvaart, function () {
+                uitvaart = DOODService.uitvaart.update({gebruikersnaam: gebruiker.doc.gebruikersnaam, duurOpbaring: $scope.formulierData.uitvaart.duurOpbaring, locatie: $scope.formulierData.uitvaart.locatie, beschrijvingOpbaring: $scope.formulierData.uitvaart.beschrijvingOpbaring}, function () {
                     if (uitvaart.err !== null) {
                         $scope.error = "Fout: " + uitvaart.err;
                     } else {
