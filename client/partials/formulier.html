@@ -113,7 +113,7 @@
                         <div class="form-group form-inline">
                             <label class="inputLabel">Telefoon*</label>
                             <div class="input-group">
-                                <input placeholder="0612345678" class="form-control" type="text" min="0"
+                                <input placeholder="0612345678" class="form-control" type="text" min="0" max="9999999999"
                                        ng-model="formulierData.algemeneGegevens.telefoon" id="telefoon"
                                        value="formulierData.algemeneGegevens.telefoon" required=""/>
                             </div>
@@ -150,7 +150,7 @@
                             <label class="inputLabel">Duur (dagen)*</label>
                             <div class="input-group">
                                 <input placeholder="5" class="form-control" type="number"
-                                       min="0" ng-model="formulierData.uitvaart.duurOpbaring" id="duurOpbaring"
+                                       min="0" max="20" ng-model="formulierData.uitvaart.duurOpbaring" id="duurOpbaring"
                                        value="formulierData.uitvaart.duurOpbaring" required="" rows="4"/>
                             </div>
                         </div>
@@ -158,7 +158,7 @@
                         <div class="form-group form-inline">
                             <label class="inputLabel">Beschrijving*</label>
                             <div class="input-group">
-                                <textarea placeholder="5" class="form-control" type="text"
+                                <textarea placeholder="Beschrijf hier hoe u opgebaard wilt worden." class="form-control" type="text"
                                           ng-model="formulierData.uitvaart.beschrijvingOpbaring" id="beschrijvingOpbaring"
                                           value="formulierData.uitvaart.beschrijvingOpbaring" required="" rows="4"></textarea>
                             </div>
