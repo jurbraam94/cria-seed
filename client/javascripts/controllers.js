@@ -606,15 +606,16 @@ myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
         console.log(".");
     };
 
-    $scope.gebruiker = DOODService.gebruikerSessie.get(function () {
+   /* $scope.gebruiker = DOODService.gebruikerSessie.get(function () {
         if (gebruiker.doc.gebruikersnaam !== undefined) {
             $scope.verwijderAlleSegmenten = DOODService.uitvaartSegmentenVerwijderen.delete({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
                 if ($scope.verwijderAlleSegmenten.err === null) {
                     //stuurDataLoop(gebruiker.doc.gebruikersnaam);
+                    console.log(".");
                 }
             });
         }
-    });
+    });*/
 
     $scope.muziekDb =  [
         {artiest: "Coon", titel: "Million miles"},
@@ -637,25 +638,6 @@ myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
         console.log($scope.afspeellijst[0][0]);
     };
 
-
-    $scope.slaOp = function() {
-        var i;
-        if(false == true){
-            for(i = 0; i < $scope.afspeellijst.length; i++){
-                $scope.opslaan = DOODService.muziekLijstPost.post({
-                    artiest:$scope.afspeellijst[i][0].artiest,
-                    titel: $scope.afspeellijst[i][0].titel
-                },
-                function() {
-                    if($scope.opslaan.err === null){
-                        console.log("gelukt")
-                    }
-                    $scope.error = $scope.opslaan.err;
-                }
-                )
-            }
-        }
-    };
 
     $scope.verwijderUitLijst = function (artiest, titel) {
         var i;
