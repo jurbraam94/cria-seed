@@ -643,7 +643,7 @@ myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
         var i;
         for (i = 0; i < $scope.afspeellijst.length; i++) {
             if ($scope.afspeellijst[i][0].artiest === artiest && $scope.afspeellijst[i][0].titel === titel) {
-                $scope.afspeellijst.splice(i,1);
+                $scope.afspeellijst.splice(i, 1);
                 return;
             }
         }
