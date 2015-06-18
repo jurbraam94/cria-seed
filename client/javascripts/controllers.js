@@ -152,6 +152,25 @@ myApp.controller('formulierController', function ($scope, DOODService, $timeout,
         },
         "zoom": 100
     };
+    $scope.marker = {
+        id: 0,
+        coords: {
+            latitude: 51.98891,
+            longitude: 5.94929
+        },
+        options: { draggable: true },
+        events: {
+            dragend: function (marker, eventName, args) {
+
+                $scope.marker.options = {
+                    draggable: true,
+                    labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
+                    labelAnchor: "100 0",
+                    labelClass: "marker-labels"
+                };
+            }
+        }
+    };
 
     events = {
         places_changed: function (searchBox) {
