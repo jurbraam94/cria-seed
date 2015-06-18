@@ -118,15 +118,15 @@ myApp.controller('formulierController', function ($scope, DOODService, $timeout,
         var uitvaart, algemeneGegevens, aanvullendeGegevens;
         gebruiker = DOODService.gebruikerSessie.get(function () {
             if (gebruiker.doc.gebruikersnaam !== undefined) {
-                uitvaart = DOODService.uitvaart.update($scope.formulierData.uitvaart, function () {
+                uitvaart = DOODService.uitvaart.update({gebruikersnaam: gebruiker.doc.gebruikersnaam, duurOpbaring: $scope.formulierData.uitvaart.duurOpbaring, locatie: $scope.formulierData.uitvaart.locatie, beschrijvingOpbaring: $scope.formulierData.uitvaart.beschrijvingOpbaring}, function () {
                     if (uitvaart.err !== null) {
                         $scope.error = "Fout: " + uitvaart.err;
                     } else {
-                        algemeneGegevens = DOODService.algemeneGegevens.update($scope.formulierData.algemeneGegevens, function () {
+                        algemeneGegevens = DOODService.algemeneGegevens.update({gebruikersnaam: gebruiker.doc.gebruikersnaam, voornaam: $scope.formulierData.algemeneGegevens.voornaam, achternaam: $scope.formulierData.algemeneGegevens.achternaam, woonplaats: $scope.formulierData.algemeneGegevens.woonplaats, postcode: $scope.formulierData.algemeneGegevens.postcode, adres: $scope.formulierData.algemeneGegevens.adres, huisnummer: $scope.formulierData.algemeneGegevens.huisnummer, telefoon: $scope.formulierData.algemeneGegevens.telefoon, email: $scope.formulierData.algemeneGegevens.email}, function () {
                             if (algemeneGegevens.err !== null) {
                                 $scope.error =  "Fout: " + algemeneGegevens.err;
                             } else {
-                                aanvullendeGegevens = DOODService.aanvullendeGegevens.update($scope.formulierData.aanvullendeGegevens, function () {
+                                aanvullendeGegevens = DOODService.aanvullendeGegevens.update({gebruikersnaam: gebruiker.doc.gebruikersnaam, religie: $scope.formulierData.aanvullendeGegevens.religie, donor: $scope.formulierData.aanvullendeGegevens.donor}, function () {
                                     if (aanvullendeGegevens.err !== null) {
                                         $scope.error = "Fout: " + aanvullendeGegevens.err;
                                     } else {
@@ -151,6 +151,25 @@ myApp.controller('formulierController', function ($scope, DOODService, $timeout,
             longitude: 5.94929
         },
         "zoom": 100
+    };
+    $scope.marker = {
+        id: 0,
+        coords: {
+            latitude: 51.98891,
+            longitude: 5.94929
+        },
+        options: { draggable: true },
+        events: {
+            dragend: function (marker, eventName, args) {
+
+                $scope.marker.options = {
+                    draggable: true,
+                    labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
+                    labelAnchor: "100 0",
+                    labelClass: "marker-labels"
+                };
+            }
+        }
     };
 
     events = {
@@ -520,7 +539,61 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
     };
 });
 
+myApp.controller('wishlistController', function ($scope, DOODService, $timeout) {
+    "use strict";
+    var gebruiker, bericht;
+    $scope.init = function () {
+        var berichten;
 
+        gebruiker = DOODService.gebruikerSessie.get(function () {
+            if (gebruiker.doc.gebruikersnaam !== undefined) {
+                berichten = DOODService.wishlist.get({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
+                    if (berichten.doc !== null) {
+                        $scope.berichten = berichten.doc;
+                    }
+                });
+            }
+        });
+    };
+
+    $scope.verwijderen = function (titel) {
+        gebruiker = DOODService.gebruikerSessie.get(function () {
+            if (gebruiker.doc.gebruikersnaam !== undefined) {
+                bericht = DOODService.wishlistVerwijderen.delete({gebruikersnaam: gebruiker.doc.gebruikersnaam, titel: titel}, function () {
+                    if (bericht.doc.n > 0) {
+                        $scope.init();
+                        $scope.success = "Bericht succesvol verwijderd.";
+                        $timeout(function () {
+                            $scope.success = null;
+                        }, 3000);
+                    } else {
+                        $scope.error = "Er is iets foutgegaan. Probeer het opnieuw";
+                    }
+                });
+            }
+        });
+    };
+
+    $scope.opslaan = function (wishlist) {
+        gebruiker = DOODService.gebruikerSessie.get(function () {
+            if (gebruiker.doc.gebruikersnaam !== undefined) {
+                bericht = DOODService.wishlistPost.post({gebruikersnaam: gebruiker.doc.gebruikersnaam, titel: wishlist.titel, wens: wishlist.wens}, function () {
+                    if (bericht.doc !== null) {
+                        $scope.init();
+                        $scope.wishlistForm.$setPristine();
+                        $scope.success = "Bericht succesvol opgeslagen.";
+                        $timeout(function () {
+                            $scope.success = null;
+                        }, 3000);
+                    } else if (bericht.err !== null) {
+                        $scope.error = bericht.err;
+                    }
+                });
+            }
+        });
+
+    };
+});
 
 myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
     "use strict";

@@ -19,11 +19,10 @@ router
 
 // RETRIEVE
 router
-    .get('/wishlist/:_gebruikersnaam', controller.alleWishlists)
-    .get('/wishlist/:_gebruikersnaam/:_volgnummer', controller.wishlistDetails);
+    .get('/wishlist/:_gebruikersnaam', controller.alleWishlists);
 
 // DELETE
 router
-    .delete('/wishlist/:_gebruikersnaam/:_volgnummer', controller.wishlistVerwijderen);
+    .delete('/wishlist/:_gebruikersnaam/:_titel', controller.wishlistVerwijderen);
 
 module.exports = router;

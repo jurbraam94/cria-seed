@@ -57,29 +57,6 @@ exports.alleWishlists = function (req, res) {
 };
 
 /**
- * retrieve one function
- * @param req
- * @param res
- */
-exports.wishlistDetails = function (req, res) {
-    var conditions = {gebruikersnaam: req.params._gebruikersnaam, volgnummer: req.params._volgnummer}, fields = {};
-
-    Wishlist.findOne(conditions, fields)
-        .exec(function (err, doc) {
-            var retObj = {
-                meta: {
-                    "action": "detail",
-                    'timestamp': new Date(),
-                    filename: __filename
-                },
-                doc: doc, // only the first document, not an array when using "findOne"
-                err: err
-            };
-            return res.send(retObj);
-        });
-};
-
-/**
  * delete function
  * @param req
  * @param res
@@ -87,7 +64,7 @@ exports.wishlistDetails = function (req, res) {
 exports.wishlistVerwijderen = function (req, res) {
     var conditions, callback, retObj;
 
-    conditions = {gebruikersnaam: req.params._gebruikersnaam, volgnummer: req.params._volgnummer};
+    conditions = {gebruikersnaam: req.params._gebruikersnaam, titel: req.params._titel};
 
     callback = function (err, doc) {
         retObj = {

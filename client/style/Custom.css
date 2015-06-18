@@ -450,6 +450,43 @@ footer a:hover, a:active{
     margin-left: 50px;
 }
 
+.memo {
+    background-color: #9DE0DA;
+    width:175px;
+    height:175px;
+    margin:0.5%;
+    float:left;
+}
+
+.memoInput {
+    width:70%;
+    height:40%;
+    min-height: 100px;
+    margin-top:0;
+    margin-bottom:5%;
+    margin-right:15%;
+    margin-left:15%;
+}
+
+.memoHeader {
+    font-size: 1vw;
+    padding:10px;
+    height: 20%;
+    border-bottom: 3px solid #B5E5E0;
+    font-weight: bold;
+}
+
+.memoBody {
+    padding:10px;
+    height:80%;
+}
+
+.transparanteTextbox {
+    background: transparent;
+    width: 100%;
+    min-width: 0;
+}
+
 .searchMenu{
     margin-left: 8px;
 
@@ -460,7 +497,7 @@ footer a:hover, a:active{
     margin: 0 auto;
     width: 30%;
     margin-left: 35%;
-    margin-top: 0px;
+    margin-top: 0;
     background-color: #48CEC2;
     height: 500px;
 }

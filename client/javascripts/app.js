@@ -68,6 +68,7 @@ var myApp = angular.module('myApp', ['myApp.services', 'ngRoute', 'ngCookies', '
         // Get Wishlist
         $routeProvider.when('/wishlist', {
             templateUrl: 'partials/wishlist.html',
+            controller: 'wishlistController',
             security: true
         });
 

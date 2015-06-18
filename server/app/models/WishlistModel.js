@@ -21,10 +21,8 @@
 
     wishlist = new Schema({
         gebruikersnaam: {type: String, required: true},
-        bestandsnaam: {type: String, required: true, validator: [stringLengteValidatie, 'Bestandsnaam is niet lang genoeg']},
-        beschrijving: {type: String, required: true, validator: [stringLengteValidatie, 'Beschrijving is niet lang genoeg']},
-        content: {type: String, required: true, enum: ['mp4', 'mp3', 'mkv', 'avi', 'jpg', 'png', 'bmp', 'pdf', 'txt', 'doc', 'docx']},
-        volgnummer: {type: Number, required: true, unique: true, min: 0}
+        titel: {type: String, required: true, validator: [stringLengteValidatie, 'Titel is niet lang genoeg']},
+        wens: {type: String, required: true, validator: [stringLengteValidatie, 'Bericht is niet lang genoeg']}
     },
         { collection: 'Wishlist' });
 

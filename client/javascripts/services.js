@@ -28,6 +28,10 @@
             db.uitvaartSegmentPost = $resource('/api/segment/', {}, actions);
             db.uitvaartSegmentLijst = $resource('/api/segment/:gebruikersnaam', {"gebruikersnaam": "@gebruikersnaam"}, actions);
             db.uitvaartSegmentenVerwijderen = $resource('/api/segment/:gebruikersnaam', {"gebruikersnaam": "@gebruikersnaam"}, actions);
+            db.wishlist = $resource('/api/wishlist/:gebruikersnaam', {"gebruikersnaam": "@gebruikersnaam"}, actions);
+            db.wishlistVerwijderen = $resource('/api/wishlist/:gebruikersnaam/:titel', {"gebruikersnaam": "@gebruikersnaam", "titel" : "@titel"}, actions);
+            db.wishlistPost = $resource('/api/wishlist', {}, actions);
+
             db.muziekLijstPost = $resource('/api/muziek/', {}, actions);
             db.contact = $resource('/api/gebruiker/mail', {}, actions);
             return db;
