@@ -1,8 +1,11 @@
 
 <div class="col-xs-2 col-md-2 col-lg-2" >
+    <div class="muziekZoekHeader text-center">
+        <h2>Zoek nummer</h2>
+    </div>
     <div class="">
         <div class="searchBoxPosition">
-            <form name="contactForm" novalidate class="validatie"> <input ng-model="zoekopdracht" type="text">
+            <form name="contactForm" novalidate class="validatie"> <input ng-model="zoekopdracht" placeholder= "Titel" type="text">
                 <input type="image" src="style/images/loep.png" id = "zoekKnop" ng-click="zoek(zoekopdracht)" >
             </form>
         </div>
@@ -18,8 +21,12 @@
         </div>
     </div>
   </div>
+
 <div class="col-xs-10 col-md-10 col-lg-10 minicontent ">
     <div class="row">
+        <div class="formulierHeaderFooter text-center">
+            <h1> Gekozen nummers </h1>
+        </div>
         <div class="col-md-4 text-center afspeellijst">
             <div ng-repeat="liedje in afspeellijst">
                 <div class="liedje">
@@ -31,7 +38,8 @@
                     </div>
 
                 </div>
-
+            <div>
+            </div>
             </div>
         </div>
     </div>

@@ -445,7 +445,7 @@ footer a:hover, a:active{
 }
 
 .searchBoxPosition {
-    margin: 0px auto;
+    margin: 0 auto;
     width: 80%;
     margin-left: 50px;
 }
@@ -455,16 +455,29 @@ footer a:hover, a:active{
 
 }
 .afspeellijst {
-    font-size: 30px;
+    font-size: 20px;
     color: white;
     margin: 0 auto;
     width: 30%;
-    margin-left: 34%;
-    margin-top: 50px;
+    margin-left: 35%;
+    margin-top: 0px;
     background-color: #48CEC2;
     height: 500px;
 }
 
 .liedje {
     background-color: #48CEC2;
+    border-bottom-width: 2px;
+    border-bottom-color: white;
+    padding: auto;
+    padding-top: 10px;
+    color: white;
+    border-bottom-style: solid;
+}
+.muziekZoekHeader {
+    width:250px;
+    margin:0 auto;
+    margin-top: -26px;
+    font-weight: 100;
+    color: #ED5F54;
 }

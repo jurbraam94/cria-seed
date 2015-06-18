@@ -524,14 +524,24 @@ myApp.controller('SamenstellenController', function ($scope, DOODService, $route
 
 myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
     "use strict";
-
     var voegLiedjeToe = function (titel, artiest) {
-        if($scope.zoekResultaat.length < 15 ){
+        if($scope.zoekResultaat.length < 9 ){
             $scope.zoekResultaat.push({artiest: artiest, titel: titel});
         } else {
             return;
         }
+        console.log(".");
     };
+
+    $scope.gebruiker = DOODService.gebruikerSessie.get(function () {
+        if (gebruiker.doc.gebruikersnaam !== undefined) {
+            $scope.verwijderAlleSegmenten = DOODService.uitvaartSegmentenVerwijderen.delete({gebruikersnaam: gebruiker.doc.gebruikersnaam}, function () {
+                if ($scope.verwijderAlleSegmenten.err === null) {
+                    //stuurDataLoop(gebruiker.doc.gebruikersnaam);
+                }
+            });
+        }
+    });
 
     $scope.muziekDb =  [
         {artiest: "Coon", titel: "Million miles"},
@@ -544,7 +554,7 @@ myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
     $scope.afspeellijst = [];
 
     $scope.voegToeBijAfspeellijst = function (artiest, titel) {
-        var liedInAfspeelLijst = [];
+        var liedInAfspeelLijst;
         liedInAfspeelLijst = [{
             artiest: artiest,
             titel: titel
@@ -554,14 +564,28 @@ myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
         console.log($scope.afspeellijst[0][0]);
     };
 
-    $scope.remove = function () {
-        var tempArray;
 
-
+    $scope.slaOp = function() {
+        var i;
+        if(false == true){
+            for(i = 0; i < $scope.afspeellijst.length; i++){
+                $scope.opslaan = DOODService.muziekLijstPost.post({
+                    artiest:$scope.afspeellijst[i][0].artiest,
+                    titel: $scope.afspeellijst[i][0].titel
+                },
+                function() {
+                    if($scope.opslaan.err === null){
+                        console.log("gelukt")
+                    }
+                    $scope.error = $scope.opslaan.err;
+                }
+                )
+            }
+        }
     };
 
     $scope.verwijderUitLijst = function (artiest, titel) {
-        var i, n;
+        var i;
         for (i = 0; i < $scope.afspeellijst.length; i++) {
             if ($scope.afspeellijst[i][0].artiest === artiest && $scope.afspeellijst[i][0].titel === titel) {
                 $scope.afspeellijst.splice(i,1);
@@ -585,6 +609,5 @@ myApp.controller('muziekController', function ($scope, DOODService, Spotify) {
             $scope.error = "Vul een titel in";
         }
     };
-
 });
 
