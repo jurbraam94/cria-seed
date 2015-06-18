@@ -527,8 +527,7 @@ describe('API Routing for CRUD operations on Muziek', function () {
                 .post('/muziek')
                 .send({
                     "gebruikersnaam": "Createusertest",
-                    "titel": "Titel",
-                    "artiest": "Artiest"
+                    "playlistId": 1337
                 })
                 .expect(200)                                                // supertest
                 .expect('Content-Type', /application.json/)                 // supertest
@@ -551,8 +550,8 @@ describe('API Routing for CRUD operations on Muziek', function () {
                         .be.exactly('Createusertest')
                     JSON.parse(res.text)
                         .should.have.property('doc')
-                        .and.have.property('titel')
-                        .be.exactly("Titel")
+                        .and.have.property('playlistId')
+                        .be.exactly(1337)
                     done();
                 });
         });
@@ -574,7 +573,7 @@ describe('API Routing for CRUD operations on Muziek', function () {
                         .be.exactly('jur');
                     JSON.parse(res.text)
                         .should.have.property('doc')
-                        .and.have.property('titel')
+                        .and.have.property('playlistId')
                         .be.exactly(3);
                     res.statusCode.should.be.exactly(200);
                     done();
